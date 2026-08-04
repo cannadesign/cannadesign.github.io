@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canna Design · Genial App case study</title>
+<meta name="description" content="How a forgotten app became the tool 62% of families open every day: the Genial Care family app, from 8% to 62% daily active users in one year.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0c0c0d">
+
+<!-- Social preview. NOTE: replace https://your-domain.com with your real deployed URL after publishing. -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Guilherme Cannalonga">
+<meta property="og:title" content="Genial App case study · from 8% to 62% daily active users">
+<meta property="og:description" content="How a forgotten app became the tool 62% of families open every day, by fixing a scheduling bottleneck instead of redesigning the app.">
+<meta property="og:url" content="https://your-domain.com/genial-case.html">
+<meta property="og:image" content="https://your-domain.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Genial App case study · from 8% to 62% daily active users">
+<meta name="twitter:description" content="How a forgotten app became the tool 62% of families open every day.">
+<meta name="twitter:image" content="https://your-domain.com/assets/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c0d; --bg-alt:#141416; --card:#18181b; --border:#27272a;
+    --text:#f2f2f0; --text-dim:#a6a6ab; --text-faint:#808085;
+    --gold:#f2a93b; --gold-dim:#c98f2e; --purple:#7c6fe0;
+    --max:1120px; --text-col:740px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--text); font-family:'Inter', -apple-system, sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.02em;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  .col{max-width:var(--text-col); margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--gold); color:#141414;}
+  @media (prefers-reduced-motion:reduce){
+    *, *::before, *::after{
+      animation-duration:0.01ms !important; animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important; scroll-behavior:auto !important;
+    }
+  }
+
+  /* NAV */
+  nav{
+    position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:100;
+    width:min(880px, calc(100% - 32px));
+    background:rgba(20,20,22,0.6); backdrop-filter:blur(16px) saturate(140%);
+    border:1px solid var(--border); border-radius:100px; box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    transition:background .3s ease;
+  }
+  nav.scrolled{background:rgba(14,14,15,0.85);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px; max-width:none; padding:0 10px 0 22px;}
+  .nav-cta{
+    position:relative; overflow:hidden; will-change:transform;
+    font-size:13px; padding:9px 18px; border:1px solid var(--border); border-radius:100px;
+    background:rgba(255,255,255,0.03); transition:all .2s;
+  }
+  .nav-cta:hover{border-color:var(--gold); color:var(--gold); background:rgba(242,169,59,0.08);}
+  .nav-cta::after{
+    content:'→'; display:inline-block; width:0; opacity:0; margin-left:0; transform:translateX(-4px);
+    transition:width .25s cubic-bezier(.16,1,.3,1), opacity .2s ease, transform .25s cubic-bezier(.16,1,.3,1), margin .25s ease;
+    overflow:hidden; white-space:nowrap; vertical-align:middle;
+  }
+  .nav-cta:hover::after{width:12px; opacity:1; margin-left:6px; transform:translateX(0);}
+  .back-link{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--text-dim); transition:color .2s;}
+  .back-link:hover{color:var(--text);}
+  .back-link:hover svg{transform:translateX(-3px);}
+  .back-link svg{transition:transform .25s cubic-bezier(.16,1,.3,1);}
+
+  .lang-toggle{display:flex; align-items:center; gap:2px; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:100px; padding:3px; flex-shrink:0;}
+  .lang-toggle button{font-family:'Space Grotesk'; font-size:11px; font-weight:600; padding:5px 10px; border-radius:100px; color:var(--text-faint); background:transparent; border:none; cursor:pointer; transition:all .2s;}
+  .lang-toggle button.active{background:var(--gold); color:#141414;}
+  .lang-toggle button:not(.active):hover{color:var(--text);}
+
+  /* HERO */
+  .article-hero{padding:150px 0 60px; border-bottom:1px solid var(--border);}
+  .kicker{font-size:12.5px; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); margin-bottom:20px; display:block;}
+  .article-hero h1{font-size:clamp(30px,5vw,52px); line-height:1.12; margin-bottom:24px; max-width:820px;}
+  .article-hero .dek{font-size:clamp(16px,1.8vw,19px); color:var(--text-dim); max-width:640px; margin-bottom:36px;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:28px; padding-top:28px; border-top:1px solid var(--border);}
+  .meta-item .k{font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint); margin-bottom:6px;}
+  .meta-item .v{font-size:14px; color:var(--text);}
+
+  /* ARTICLE BODY */
+  .article-body{padding:64px 0;}
+  .article-body p{font-size:17px; color:var(--text-dim); margin-bottom:22px;}
+  .article-body h2{font-size:clamp(22px,3vw,28px); margin:56px 0 20px;}
+  .article-body h2:first-child{margin-top:0;}
+  .lead{font-size:19px !important; color:var(--text) !important;}
+  .pull{
+    font-family:'Space Grotesk'; font-size:clamp(20px,2.6vw,26px); line-height:1.4; color:var(--text);
+    border-left:2px solid var(--gold); padding-left:24px; margin:40px 0; max-width:640px;
+  }
+  .article-body ul{margin:0 0 22px 20px;}
+  .article-body li{font-size:17px; color:var(--text-dim); margin-bottom:10px;}
+  .article-body li strong{color:var(--text); font-weight:600;}
+
+  /* IMAGE BREAKOUTS — phone shots sit in a centered row */
+  .shot{width:100%; max-width:740px; margin:48px auto; padding:0 32px;}
+  .shot .frame{
+    border-radius:12px; overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 30px 60px rgba(0,0,0,0.5); background:var(--bg-alt);
+  }
+  .shot img{display:block; width:100%; height:auto;}
+  .shot .caption{text-align:center; font-size:13px; color:var(--text-faint); margin-top:14px;}
+
+  /* phone-mockup variant: transparent, no frame, centered, capped height */
+  .shot-phone{max-width:640px;}
+  .shot-phone .phone-row{
+    display:flex; justify-content:center; align-items:center; gap:24px; flex-wrap:wrap;
+  }
+  .shot-phone .phone-row img{
+    width:100%; max-width:480px; height:auto; display:block;
+    filter:drop-shadow(0 30px 50px rgba(0,0,0,0.55));
+  }
+
+  /* placeholder shown when an asset hasn't been uploaded yet */
+  .img-pending{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    min-height:280px; padding:32px; text-align:center;
+    background:repeating-linear-gradient(45deg, #141416, #141416 12px, #17171a 12px, #17171a 24px);
+    border:1px dashed var(--border); border-radius:12px;
+  }
+  .img-pending .t{font-family:'Space Grotesk'; font-size:14px; color:var(--text-dim);}
+  .img-pending .s{font-size:12.5px; color:var(--text-faint); max-width:340px;}
+
+  /* metrics strip */
+  .metrics-strip{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+    margin:40px 0;
+  }
+  .metrics-strip .m{background:var(--bg-alt); padding:22px 20px;}
+  .metrics-strip .num{font-family:'Space Grotesk'; font-size:24px; font-weight:700; color:var(--gold); margin-bottom:4px;}
+  .metrics-strip .label{font-size:12px; color:var(--text-faint); line-height:1.4;}
+
+  .callout-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin:32px 0;}
+  .callout{background:var(--bg-alt); padding:26px;}
+  .callout h4{font-size:15.5px; margin-bottom:8px;}
+  .callout p{font-size:14px; color:var(--text-dim); margin:0;}
+
+  /* PROCESS STEPS */
+  .process{list-style:none; counter-reset:step; margin:32px 0; display:grid; gap:14px;}
+  .process li{
+    counter-increment:step; position:relative; padding:20px 24px 20px 66px;
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:14px;
+  }
+  .process li::before{
+    content:counter(step,decimal-leading-zero); position:absolute; left:22px; top:20px;
+    font-family:'Space Grotesk'; font-size:15px; font-weight:700; color:var(--gold);
+  }
+  .process li h4{font-size:15.5px; margin-bottom:5px; color:var(--text);}
+  .process li p{font-size:14px; color:var(--text-dim); margin:0;}
+  .note{
+    font-size:13px; color:var(--text-faint); line-height:1.6;
+    border-left:2px solid var(--border); padding:4px 0 4px 16px; margin:22px 0; max-width:640px;
+  }
+  .note strong{color:var(--text-dim); font-weight:600;}
+
+  /* GROWTH CHART — wipes in on scroll while the real figure counts up alongside it */
+  .growth-readout{
+    display:flex; align-items:baseline; gap:12px; margin-bottom:14px; flex-wrap:wrap;
+  }
+  .growth-readout .gr-num{
+    font-family:'Space Grotesk'; font-size:clamp(30px,5vw,44px); font-weight:700;
+    color:var(--gold); line-height:1; font-variant-numeric:tabular-nums;
+  }
+  .growth-readout .gr-lab{font-size:12.5px; color:var(--text-faint); letter-spacing:0.02em;}
+  .growth-frame{position:relative;}
+  .growth-veil{
+    position:absolute; inset:0; z-index:2; pointer-events:none;
+    background:var(--bg);
+    transform-origin:right center;
+    transform:scaleX(1);
+    transition:transform 2.1s cubic-bezier(.22,1,.36,1);
+  }
+  .growth-veil::before{
+    content:''; position:absolute; top:0; bottom:0; left:-1px; width:2px;
+    background:var(--gold); box-shadow:0 0 14px 2px rgba(242,169,59,0.6);
+    opacity:0; transition:opacity .4s ease;
+  }
+  #growthShot.drawing .growth-veil::before{opacity:1;}
+  #growthShot.drawn .growth-veil{transform:scaleX(0);}
+  #growthShot.drawn .growth-veil::before{opacity:0; transition-delay:1.7s;}
+  @media (prefers-reduced-motion:reduce){
+    .growth-veil{display:none;}
+  }
+
+  /* ARTIFACT ROW — abstract, futuristic support visuals for the process narrative */
+  .artifact-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0 8px;}
+  .artifact-tile{
+    border:1px solid var(--border); border-radius:14px; padding:20px 18px 16px; background:var(--bg-alt);
+    display:flex; flex-direction:column; gap:16px; min-height:118px;
+  }
+  .artifact-tile .a-label{font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint);}
+  .artifact-tile .a-visual{flex:1; display:flex; align-items:center; justify-content:center;}
+  .a-journey{display:flex; align-items:center; width:100%; gap:0;}
+  .a-journey .seg{flex:1; height:2px; background:var(--border);}
+  .a-journey .dot{width:9px; height:9px; border-radius:50%; background:var(--border); flex-shrink:0; position:relative;}
+  .a-journey .dot.on{background:var(--purple);}
+  .a-journey .dot.on::after{content:''; position:absolute; inset:-4px; border:1px solid var(--purple); border-radius:50%; opacity:0.5;}
+  .a-wire{display:flex; flex-direction:column; gap:6px; width:100%;}
+  .a-wire .row{height:7px; border-radius:3px; background:rgba(255,255,255,0.08);}
+  .a-wire .row.w70{width:70%;} .a-wire .row.w100{width:100%;} .a-wire .row.w45{width:45%;}
+  .a-wire .block{height:26px; border-radius:6px; background:rgba(255,255,255,0.05); border:1px dashed var(--border); margin-top:2px;}
+  .a-chat{position:relative; width:100%; height:60px;}
+  .a-chat .bub{position:absolute; border-radius:10px; height:16px;}
+  .a-chat .bub1{top:0; left:0; width:62%; background:rgba(255,255,255,0.08);}
+  .a-chat .bub2{top:24px; left:22%; width:70%; background:rgba(124,111,224,0.18); border:1px solid rgba(124,111,224,0.5);}
+  .a-chat .bub3{top:44px; left:0; width:40%; background:rgba(255,255,255,0.08);}
+  @media (max-width:640px){ .artifact-row{grid-template-columns:1fr 1fr; } .artifact-row .artifact-tile:last-child{grid-column:1 / -1;} }
+
+  /* CLOSING */
+  .article-close{padding:80px 0 120px; border-top:1px solid var(--border); text-align:center;}
+  .article-close h2{font-size:clamp(24px,3.6vw,34px); margin-bottom:20px;}
+  .article-close p{color:var(--text-dim); font-size:16px; margin-bottom:32px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:500;
+    padding:12px 22px; border-radius:10px; transition:all .2s; will-change:transform;
+  }
+  .btn-primary{background:var(--gold); color:#141414;}
+  .btn-primary:hover{background:#ffc766; transform:translateY(-1px); box-shadow:0 10px 28px rgba(242,169,59,0.25);}
+  .btn-ghost{border:1px solid var(--border); color:var(--text);}
+  .close-ctas{display:inline-flex; gap:14px; flex-wrap:wrap; justify-content:center;}
+  .btn-ghost:hover{border-color:var(--text-dim); transform:translateY(-1px);}
+  .btn::after{
+    content:'→'; display:inline-block; width:0; opacity:0; transform:translateX(-4px);
+    transition:width .25s cubic-bezier(.16,1,.3,1), opacity .2s ease, transform .25s cubic-bezier(.16,1,.3,1);
+    overflow:hidden; white-space:nowrap;
+  }
+  .btn:hover::after{width:14px; opacity:1; transform:translateX(0);}
+
+  footer{border-top:1px solid var(--border); padding:40px 0;}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    font-size:13px; color:var(--text-faint);
+  }
+  .foot-links{display:flex; gap:24px;}
+  .foot-links a:hover{color:var(--text-dim);}
+
+  /* CONTACT MODAL */
+  .contact-modal{
+    position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center;
+    padding:20px; background:rgba(8,8,9,0.82); backdrop-filter:blur(6px);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .contact-modal.open{display:flex;}
+  .contact-modal.show{opacity:1;}
+  .contact-modal-card{
+    position:relative; width:100%; max-width:420px; background:var(--bg-alt); border:1px solid var(--border);
+    border-radius:16px; padding:32px; box-shadow:0 30px 70px rgba(0,0,0,0.6);
+    transform:translateY(12px) scale(0.98); transition:transform .25s ease;
+  }
+  .contact-modal.show .contact-modal-card{transform:translateY(0) scale(1);}
+  .contact-modal-card h3{font-size:20px; margin:4px 0 6px;}
+  .contact-modal-card > p{font-size:14px; color:var(--text-dim); margin-bottom:24px;}
+  .contact-modal-close{
+    position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%;
+    background:rgba(255,255,255,0.05); border:1px solid var(--border); color:var(--text-dim);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;
+  }
+  .contact-modal-close:hover{background:rgba(255,255,255,0.12); color:var(--text);}
+  .contact-modal-options{display:flex; flex-direction:column; gap:10px;}
+  .contact-option{
+    display:flex; align-items:center; gap:14px; padding:16px; border-radius:12px;
+    border:1px solid var(--border); background:var(--card); transition:all .2s ease;
+  }
+  .contact-option:hover{border-color:var(--gold); background:rgba(242,169,59,0.06); transform:translateX(2px);}
+  .contact-option .co-icon{
+    width:38px; height:38px; border-radius:10px; background:rgba(242,169,59,0.1); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .contact-option .co-body{flex:1; display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .contact-option .co-title{font-size:14.5px; font-weight:500; color:var(--text);}
+  .contact-option .co-sub{font-size:12.5px; color:var(--text-faint); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .contact-option .co-arrow{color:var(--text-faint); transition:transform .2s, color .2s; flex-shrink:0;}
+  .contact-option:hover .co-arrow{transform:translateX(3px); color:var(--gold);}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:860px){
+    .callout-grid{grid-template-columns:1fr;}
+    .meta-row{gap:20px;}
+    .shot-phone .phone-row{gap:20px;}
+  }
+  @media (max-width:640px){
+    .wrap, .col{padding:0 20px;}
+    .shot{padding:0 20px;}
+    .article-hero{padding:120px 0 44px;}
+    .close-ctas{flex-direction:column; align-items:stretch; width:100%; gap:10px;}
+    .close-ctas .btn{justify-content:center; text-align:center;}
+  }
+
+  /* FIGMA-STYLE POINTER — the visitor's own cursor, rendered as a collaborator cursor */
+  .fig-pointer{
+    position:fixed; top:0; left:0; z-index:2000; pointer-events:none;
+    display:flex; align-items:flex-start; opacity:0; transition:opacity .25s ease;
+    will-change:transform;
+  }
+  .fig-pointer.on{opacity:1;}
+  .fig-pointer svg{width:20px; height:20px; display:block; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.45));}
+  .fig-pointer .tag{
+    margin:11px 0 0 -1px; padding:3px 8px; border-radius:7px; white-space:nowrap;
+    font-family:'Space Grotesk'; font-size:11px; font-weight:600; color:#0c0c0d;
+    background:var(--gold); box-shadow:0 4px 12px rgba(0,0,0,0.35);
+    transform-origin:left center; transition:transform .18s cubic-bezier(.16,1,.3,1);
+  }
+  .fig-pointer.tap .tag{transform:scale(0.9);}
+  body.fig-cursor-on, body.fig-cursor-on *{cursor:none !important;}
+  @media (prefers-reduced-motion:reduce){ .fig-pointer{display:none;} }
+</style>
+</head>
+<body>
+
+<nav id="siteNav">
+  <div class="wrap">
+    <a class="back-link" href="index.html#work">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span data-i18n="nav.back">Back to portfolio</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="lang-toggle">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <a class="nav-cta" href="index.html#contact" data-contact-trigger data-i18n="nav.cta">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article-hero">
+  <div class="col">
+    <span class="kicker" data-i18n="hero.kicker">Case study · Healthcare · Product Growth</span>
+    <h1 data-i18n="hero.h1">Turning a forgotten app into the tool 62% of families open every day</h1>
+    <p class="dek" data-i18n="hero.dek">The Genial Care family app went from an 8% daily-active rate to 62% in a year, not through a redesign, but by fixing a scheduling bottleneck that was overloading operations, then letting usage decide what came next.</p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="k" data-i18n="meta.role">Role</div><div class="v">Senior Product Designer</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.team">Team</div><div class="v">PM · Ops lead · Eng squad · Clinical</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.company">Company</div><div class="v">Genial Care</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.timeline">Timeline</div><div class="v">2022 – 2024</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.outcome">Outcome</div><div class="v">8% → 62% DAU</div></div>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+  <div class="col reveal">
+    <p class="lead" data-i18n="g.lead1">I joined Genial Care, Brazil's leading platform for autism care, as its first Senior Product Designer, brought in to build the Atípico design system from scratch, improve the family-facing app, and stand up the clinical panel therapists use to run sessions (the same panel LIAM would later live inside). This case is about the app half of that mandate.</p>
+    <p data-i18n="g.lead2">When I joined, the app was a one-way channel: articles and content cards to read, with no direct interaction of any kind. You couldn't do anything in it. You could only look at things. About 8% of families opened it on a given day, which is roughly what you'd expect from a digital pamphlet.</p>
+
+    <h2 data-i18n="g.h2.bottleneck">The bottleneck wasn't the app. It was scheduling.</h2>
+    <p data-i18n="g.bottleneck.p1">Instead of starting from the app, we started by mapping the biggest process gaps across Genial Care as a whole. One stood out immediately: session scheduling. Every family's weekly schedule, dozens of therapists and dozens of time slots, was built by hand by the operations team. The moment anything changed, a reschedule, a cancellation, that manual process broke. Information about who knew what lived across phone calls and spreadsheets, nothing was centralized, and keeping everyone aligned consumed a disproportionate share of the team's time every single week.</p>
+    <p data-i18n="g.bottleneck.p2">That was the actual opportunity: not a content problem, but an operations problem wearing a UX costume.</p>
+    <p class="pull" data-i18n="g.bottleneck.pull">It wasn't a content problem. It was an operations problem wearing a UX costume.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="g.h2.howworked">How I worked: continuous discovery, not a big-bang redesign</h2>
+    <p data-i18n="g.howworked.p">I didn't run this as a single project with a launch date. I ran it as a loop: talk to people, ship the smallest useful thing, watch what they actually do, decide the next bet from that. That's the reason the app kept climbing instead of spiking once and flattening.</p>
+    <div class="artifact-row reveal">
+      <div class="artifact-tile">
+        <div class="a-visual">
+          <div class="a-journey">
+            <div class="dot on"></div><div class="seg"></div>
+            <div class="dot"></div><div class="seg"></div>
+            <div class="dot"></div><div class="seg"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+        <span class="a-label" data-i18n="g.artifact1">Journey mapping</span>
+      </div>
+      <div class="artifact-tile">
+        <div class="a-visual">
+          <div class="a-wire">
+            <div class="row w45"></div>
+            <div class="block"></div>
+            <div class="row w100"></div>
+            <div class="row w70"></div>
+          </div>
+        </div>
+        <span class="a-label" data-i18n="g.artifact2">Wireframes &amp; prototypes</span>
+      </div>
+      <div class="artifact-tile">
+        <div class="a-visual">
+          <div class="a-chat">
+            <div class="bub bub1"></div>
+            <div class="bub bub2"></div>
+            <div class="bub bub3"></div>
+          </div>
+        </div>
+        <span class="a-label" data-i18n="g.artifact3">User interviews</span>
+      </div>
+    </div>
+    <ol class="process">
+      <li>
+        <h4 data-i18n="g.proc1.h">Talked to both sides of the problem</h4>
+        <p data-i18n="g.proc1.p">Interviews with families to understand why they weren't opening the app, and with the operations team to map where their week actually went. The insight that scheduling was the shared pain came from listening to ops, not from looking at the app.</p>
+      </li>
+      <li>
+        <h4 data-i18n="g.proc2.h">Tied every decision to one metric</h4>
+        <p data-i18n="g.proc2.p">We set daily engagement as the north star and filtered every idea through a single question: would this give a family a reason to open the app on a day they otherwise wouldn't? Ideas that couldn't answer it didn't get built.</p>
+      </li>
+      <li>
+        <h4 data-i18n="g.proc3.h">Prototyped and tested before building</h4>
+        <p data-i18n="g.proc3.p">Each feature started as a clickable prototype run past a handful of real families, so we caught the confusing parts of a flow before engineering time went into it.</p>
+      </li>
+      <li>
+        <h4 data-i18n="g.proc4.h">Shipped narrow, then read the behavior</h4>
+        <p data-i18n="g.proc4.p">Small releases into real usage, measured against the metric, with the analytics telling us where people entered, what they used, and where they still dropped, which set the next release instead of a roadmap written up front.</p>
+      </li>
+    </ol>
+    <div class="callout-grid">
+      <div class="callout">
+        <h4 data-i18n="g.role.h">My role</h4>
+        <p data-i18n="g.role.p">Senior product designer end to end: discovery, research, interaction and UI, prototype, and working alongside engineering through launch, across iOS, Android, and web.</p>
+      </div>
+      <div class="callout">
+        <h4 data-i18n="g.team.h">The team</h4>
+        <p data-i18n="g.team.p">Worked directly with a product manager, the operations lead, and a small engineering squad, plus the clinical team as domain experts on what families needed to see.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="g.h2.opening">The opening move: let families act, not just read</h2>
+    <p data-i18n="g.opening.p1">We scoped an MVP around the two actions responsible for most of the manual back-and-forth: showing each child's upcoming sessions inside the app, and letting families cancel a session themselves instead of routing it through a phone call. Discovery, prototype, and build: one month, start to finish, deliberately small so we'd get a real answer fast instead of a better guess slowly.</p>
+    <p data-i18n="g.opening.p2">It launched, and the result wasn't ambiguous. Families used it immediately, cancellations started coming through the app instead of the phone, and operations felt the relief right away: the manual, repetitive core of their week had a real alternative.</p>
+    <p data-i18n="g.opening.p3">That first release proved something bigger than the feature itself: give families a reason to <em>act</em>, not just read, and they'll show up. From there, we kept adding to it, each new feature earning its place by giving someone another reason to open the app, and each one pulling another manual task off operations so the team could focus on higher-value work instead of rebuilding the same schedule by hand every week.</p>
+  </div>
+
+  <div class="shot shot-phone reveal">
+    <div class="phone-row">
+      <img src="assets/genial-sessions.webp" alt="Genial Care app home screen with upcoming sessions, and session detail showing therapists and the child's evolution note">
+    </div>
+    <p class="caption" data-i18n="g.cap1">The result of that first MVP: upcoming sessions and a therapist's note on the home screen, with cancellation now handled in-app instead of by phone.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="g.h2.longterm">Then: make the long-term visible, not just the next appointment</h2>
+    <p data-i18n="g.longterm.p1">Sessions answer "what happened this week." They don't answer the question underneath every parent's week, which is "is my child actually progressing?" The PEI, the individualized education plan, already existed as a clinical document, but it lived where families couldn't see it. I brought it into the app as a plain-language list of the skills being worked on, each with a start date: <em>Gabriel will play with different toys. Gabriel will be able to climb the ball pit.</em></p>
+    <p data-i18n="g.longterm.p2">This is a different kind of move than the scheduling MVP: not a new capability, but taking something the clinical side already produces and putting it where the family can see their child inside it.</p>
+  </div>
+
+  <div class="shot shot-phone reveal">
+    <div class="phone-row">
+      <img src="assets/genial-pei.webp" alt="Genial Care app, PEI screen showing the child's individualized plan and the specific skills being worked on in sessions">
+    </div>
+    <p class="caption" data-i18n="g.cap2">The PEI, translated from clinical document into something a parent can read: concrete skills, in plain language, with dates.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="g.h2.between">And then: the moment between sessions</h2>
+    <p data-i18n="g.between.p1">The hardest moments for these families don't happen during a session. They happen at 8pm on a Tuesday when a child bites someone and a parent has no idea what to do. <em>Genial Junto</em> opened a direct line to a Genial advisor for exactly that: describe the difficult situation, get a real, specific answer back within a stated response window.</p>
+    <p data-i18n="g.between.p2">Design-wise, the decision I care about here is the visible response-time badge. An open-ended "we'll get back to you" invites people to check obsessively and then lose trust. Stating "up to 2 business days" up front sets the expectation once, honestly, and lets the parent put the phone down.</p>
+  </div>
+
+  <div class="shot shot-phone reveal">
+    <div class="phone-row">
+      <img src="assets/genial-chat.webp" alt="Genial Junto support request flow and a conversation with a Genial advisor about a challenging behavior situation">
+    </div>
+    <p class="caption" data-i18n="g.cap3">Genial Junto: support for the moments between sessions, with the response-time expectation stated before the parent writes anything.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2>The curve is the argument</h2>
+    <p data-i18n="g.curve.p1">None of the above launched as one release. Each was a small bet against the same bar (<em>does this give someone a reason to come back?</em>), shipped narrow, then measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn't a hockey stick, it's a staircase with visible dips, where each step up follows a release and each dip taught us something before the next one.</p>
+    <p class="pull" data-i18n="g.curve.pull">It isn't one redesign that worked. It's a staircase, each step a bet that had to prove itself before the next one started.</p>
+  </div>
+
+  <div class="shot reveal" id="growthShot">
+    <div class="growth-readout" aria-hidden="true">
+      <span class="gr-num" id="growthNum">8.59%</span>
+      <span class="gr-lab" data-i18n="g.growth.label">weekly average daily active users</span>
+    </div>
+    <div class="frame growth-frame">
+      <img src="assets/genial-growth.jpg" alt="Weekly average daily-active-user chart for the Genial Care app, rising from 8.59% in June 2023 to 62.3% in July 2024, with release markers along the timeline">
+      <span class="growth-veil" id="growthVeil"></span>
+    </div>
+    <p class="caption" data-i18n="g.growth.caption">Weekly average DAU, Jun 2023 → Jul 2024: 8.59% to 62.3%. Star markers are releases: the growth tracks them, which is the point.</p>
+  </div>
+
+  <div class="col reveal">
+    <div class="metrics-strip">
+      <div class="m"><div class="num">8.59% → 62.3%</div><div class="label" data-i18n="g.m1">Weekly average daily active users</div></div>
+      <div class="m"><div class="num">+675%</div><div class="label" data-i18n="g.m2">Year-over-year engagement growth</div></div>
+      <div class="m"><div class="num">13 months</div><div class="label" data-i18n="g.m3">From first release to peak</div></div>
+      <div class="m"><div class="num">500th</div><div class="label" data-i18n="g.m4">Family onboarded to the platform</div></div>
+    </div>
+    <p class="note" data-i18n="g.note"><strong>How it was measured:</strong> daily active users tracked in the product analytics platform as a weekly average of unique families opening the app, from the first release baseline through peak. The chart above is the raw weekly series over that period.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="g.h2.defend">What I'd defend in a design review</h2>
+    <p data-i18n="g.defend.p1">The number people react to is 62%. The decision I'd actually defend is the one that came before it: we didn't start in the app at all. We started by mapping process gaps across the whole company, and the biggest one turned out to be a scheduling problem, not a content problem. A redesign brief would never have surfaced that: it takes looking at operations, not just at screens, to find it.</p>
+    <p data-i18n="g.defend.p2">The second is scoping the MVP around actions, not features. Showing a schedule and enabling cancellation are unglamorous compared to a full engagement suite, but they were the two things actually driving operations' manual workload, so they were the two things worth building first, in a month, to get a real answer instead of a better guess.</p>
+    <p data-i18n="g.defend.p3">The third is what happened after the MVP proved itself: the PEI and Genial Junto additions were a different kind of move, not fixing an operational bottleneck, but surfacing clinical value Genial Care already produced and simply wasn't showing families. Knowing which of those two levers to pull, and when, is most of what this case is actually about.</p>
+
+    <h2 data-i18n="g.h2.next">What came next</h2>
+    <p data-i18n="g.next.p">Once families were opening the app daily, the constraint moved to the other side of the platform: the therapists. Their bottleneck was documentation: up to two hours after every session, reconstructing what happened from memory for mandatory clinical reports. That became the next project, LIAM.</p>
+    <div class="callout-grid">
+      <div class="callout">
+        <h4 data-i18n="g.liam.h">LIAM: AI clinical documentation</h4>
+        <p data-i18n="g.liam.p">An assistant that lets therapists narrate a session out loud as it happens, then drafts the required report fields for review. Session documentation went from ~2 hours to ~25 minutes. <a href="liam-case.html" style="color:var(--gold); font-weight:500;">Read the case →</a></p>
+      </div>
+      <div class="callout">
+        <h4 data-i18n="g.through.h">The through-line</h4>
+        <p data-i18n="g.through.p">Both projects are the same instinct: find the moment where a person is spending effort on something that isn't the actual work, and compress it into a decision they can make quickly.</p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="article-close reveal">
+  <div class="col">
+    <h2 data-i18n="close.h2">Want the parts I couldn't fit here?</h2>
+    <p data-i18n="close.p.genial">Happy to walk through the interview findings, the features that didn't work, or how I argued against the redesign everyone wanted.</p>
+    <div class="close-ctas">
+      <a class="btn btn-primary" href="index.html#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
+      <a class="btn btn-ghost" href="kruzer-case.html" data-i18n="close.cta2.genial">Read the Kruzer case</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span>© 2026 Guilherme Cannalonga.</span>
+      <div class="foot-links">
+        <a href="index.html" data-i18n="footer.portfolio">Portfolio</a>
+        <a href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:cannalongadesign@gmail.com" data-contact-trigger data-i18n="footer.email">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="contact-modal" id="contactModal">
+  <div class="contact-modal-card">
+    <button class="contact-modal-close" id="contactModalClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <span class="kicker" data-i18n="modal.label">Let's talk</span>
+    <h3 data-i18n="modal.h3">How would you like to connect?</h3>
+    <p data-i18n="modal.p">Pick whichever's faster for you.</p>
+    <div class="contact-modal-options">
+      <a class="contact-option" href="mailto:cannalongadesign@gmail.com">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.email.title">Send an email</span><span class="co-sub">cannalongadesign@gmail.com</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a class="contact-option" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.call.title">Book a 30-min call</span><span class="co-sub" data-i18n="modal.call.sub">Daily, 5–7pm ET</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.1});
+  els.forEach(el=>io.observe(el));
+
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, {passive:true});
+
+  /* ---- growth chart: wipe the real chart in while the real figure counts up ---- */
+  (function(){
+    const shot = document.getElementById('growthShot');
+    const numEl = document.getElementById('growthNum');
+    if(!shot || !numEl) return;
+    const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const START = 8.59, END = 62.3, DUR = 2100;
+
+    if(reduce){ numEl.textContent = END.toFixed(1) + '%'; return; }
+
+    function run(){
+      shot.classList.add('drawing');
+      requestAnimationFrame(()=> shot.classList.add('drawn'));
+      const t0 = performance.now();
+      function tick(now){
+        const t = Math.min(1, (now - t0) / DUR);
+        // same easing curve as the veil so the number and the reveal stay in step
+        const e = 1 - Math.pow(1 - t, 3);
+        numEl.textContent = (START + (END - START) * e).toFixed(2).replace(/\.00$/,'') + '%';
+        if(t < 1) requestAnimationFrame(tick);
+        else numEl.textContent = END.toFixed(1) + '%';
+      }
+      requestAnimationFrame(tick);
+    }
+
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ run(); io.unobserve(e.target); }
+      });
+    }, {threshold:0.35});
+    io.observe(shot);
+  })();
+
+
+  /* ---- the visitor's cursor, rendered as a Figma collaborator pointer ---- */
+  (function(){
+    if(!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const el = document.createElement('div');
+    el.className = 'fig-pointer';
+    el.setAttribute('aria-hidden','true');
+    el.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 3.2 19 11.4l-6.1 1.2-2.6 5.8z" fill="#f2a93b" stroke="#0c0c0d" stroke-width="1.2" stroke-linejoin="round"/></svg>' +
+      '<span class="tag" id="figPointerTag">' + (window.currentLang && window.currentLang()==='pt' ? 'Você' : 'You') + '</span>';
+    document.body.appendChild(el);
+    document.body.classList.add('fig-cursor-on');
+    document.addEventListener('langchange', (e)=>{
+      const tag = document.getElementById('figPointerTag');
+      if(tag) tag.textContent = e.detail.lang === 'pt' ? 'Você' : 'You';
+    });
+    let x = innerWidth/2, y = innerHeight/2, tx = x, ty = y, shown = false;
+    addEventListener('mousemove', e=>{
+      tx = e.clientX; ty = e.clientY;
+      if(!shown){ shown = true; el.classList.add('on'); }
+    }, {passive:true});
+    document.addEventListener('mouseleave', ()=> el.classList.remove('on'));
+    document.addEventListener('mouseenter', ()=>{ if(shown) el.classList.add('on'); });
+    addEventListener('mousedown', ()=> el.classList.add('tap'));
+    addEventListener('mouseup',   ()=> el.classList.remove('tap'));
+    function tick(){
+      x += (tx - x) * 0.35;
+      y += (ty - y) * 0.35;
+      el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  /* ---- magnetic pull on buttons (desktop only) ---- */
+  const isTouch = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if(isTouch){
+    document.querySelectorAll('.btn, .nav-cta').forEach(btn=>{
+      btn.addEventListener('mousemove', (e)=>{
+        const r = btn.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        btn.style.transform = `translate(${px*8}px, ${py*8 - 1}px)`;
+      });
+      btn.addEventListener('mouseleave', ()=>{ btn.style.transform = ''; });
+    });
+  }
+
+  // Contact modal: email vs. book a call
+  (function(){
+    const modal = document.getElementById('contactModal');
+    if(!modal) return;
+    const closeBtn = document.getElementById('contactModalClose');
+    function openModal(){
+      modal.classList.add('open');
+      requestAnimationFrame(()=> modal.classList.add('show'));
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+      setTimeout(()=> modal.classList.remove('open'), 250);
+    }
+    document.querySelectorAll('[data-contact-trigger]').forEach(el=>{
+      el.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
+    });
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+  })();
+
+  // Graceful placeholder for screenshots not yet added to /assets
+  document.querySelectorAll('.shot img').forEach(img=>{
+    img.addEventListener('error', ()=>{
+      const ph = document.createElement('div');
+      ph.className = 'img-pending';
+      ph.innerHTML = '<div class="t">'+(img.dataset.pending||'Screenshot')+'</div>'+
+                     '<div class="s">Image slot ready, drop the file at <code>'+img.getAttribute('src')+'</code></div>';
+      img.replaceWith(ph);
+    });
+  });
+</script>
+
+<script>
+  /* ---- language toggle: English is the base language, Portuguese (Brazil) is opt-in ---- */
+  (function(){
+    const I18N = {
+      en: {
+        'nav.back':'Back to portfolio', 'nav.cta':`Let's talk`,
+        'hero.kicker':'Case study · Healthcare · Product Growth',
+        'hero.h1':'Turning a forgotten app into the tool 62% of families open every day',
+        'hero.dek':`The Genial Care family app went from an 8% daily-active rate to 62% in a year, not through a redesign, but by fixing a scheduling bottleneck that was overloading operations, then letting usage decide what came next.`,
+        'meta.role':'Role', 'meta.team':'Team', 'meta.company':'Company', 'meta.timeline':'Timeline', 'meta.outcome':'Outcome',
+        'g.lead1':`I joined Genial Care, Brazil's leading platform for autism care, as its first Senior Product Designer, brought in to build the Atípico design system from scratch, improve the family-facing app, and stand up the clinical panel therapists use to run sessions (the same panel LIAM would later live inside). This case is about the app half of that mandate.`,
+        'g.lead2':`When I joined, the app was a one-way channel: articles and content cards to read, with no direct interaction of any kind. You couldn't do anything in it. You could only look at things. About 8% of families opened it on a given day, which is roughly what you'd expect from a digital pamphlet.`,
+        'g.h2.bottleneck':`The bottleneck wasn't the app. It was scheduling.`,
+        'g.bottleneck.p1':`Instead of starting from the app, we started by mapping the biggest process gaps across Genial Care as a whole. One stood out immediately: session scheduling. Every family's weekly schedule, dozens of therapists and dozens of time slots, was built by hand by the operations team. The moment anything changed, a reschedule, a cancellation, that manual process broke. Information about who knew what lived across phone calls and spreadsheets, nothing was centralized, and keeping everyone aligned consumed a disproportionate share of the team's time every single week.`,
+        'g.bottleneck.p2':`That was the actual opportunity: not a content problem, but an operations problem wearing a UX costume.`,
+        'g.bottleneck.pull':`It wasn't a content problem. It was an operations problem wearing a UX costume.`,
+        'g.h2.howworked':`How I worked: continuous discovery, not a big-bang redesign`,
+        'g.howworked.p':`I didn't run this as a single project with a launch date. I ran it as a loop: talk to people, ship the smallest useful thing, watch what they actually do, decide the next bet from that. That's the reason the app kept climbing instead of spiking once and flattening.`,
+        'g.artifact1':'Journey mapping', 'g.artifact2':'Wireframes &amp; prototypes', 'g.artifact3':'User interviews',
+        'g.proc1.h':'Talked to both sides of the problem',
+        'g.proc1.p':`Interviews with families to understand why they weren't opening the app, and with the operations team to map where their week actually went. The insight that scheduling was the shared pain came from listening to ops, not from looking at the app.`,
+        'g.proc2.h':'Tied every decision to one metric',
+        'g.proc2.p':`We set daily engagement as the north star and filtered every idea through a single question: would this give a family a reason to open the app on a day they otherwise wouldn't? Ideas that couldn't answer it didn't get built.`,
+        'g.proc3.h':'Prototyped and tested before building',
+        'g.proc3.p':`Each feature started as a clickable prototype run past a handful of real families, so we caught the confusing parts of a flow before engineering time went into it.`,
+        'g.proc4.h':'Shipped narrow, then read the behavior',
+        'g.proc4.p':`Small releases into real usage, measured against the metric, with the analytics telling us where people entered, what they used, and where they still dropped, which set the next release instead of a roadmap written up front.`,
+        'g.role.h':'My role',
+        'g.role.p':`Senior product designer end to end: discovery, research, interaction and UI, prototype, and working alongside engineering through launch, across iOS, Android, and web.`,
+        'g.team.h':'The team',
+        'g.team.p':`Worked directly with a product manager, the operations lead, and a small engineering squad, plus the clinical team as domain experts on what families needed to see.`,
+        'g.h2.opening':`The opening move: let families act, not just read`,
+        'g.opening.p1':`We scoped an MVP around the two actions responsible for most of the manual back-and-forth: showing each child's upcoming sessions inside the app, and letting families cancel a session themselves instead of routing it through a phone call. Discovery, prototype, and build: one month, start to finish, deliberately small so we'd get a real answer fast instead of a better guess slowly.`,
+        'g.opening.p2':`It launched, and the result wasn't ambiguous. Families used it immediately, cancellations started coming through the app instead of the phone, and operations felt the relief right away: the manual, repetitive core of their week had a real alternative.`,
+        'g.opening.p3':`That first release proved something bigger than the feature itself: give families a reason to <em>act</em>, not just read, and they'll show up. From there, we kept adding to it, each new feature earning its place by giving someone another reason to open the app, and each one pulling another manual task off operations so the team could focus on higher-value work instead of rebuilding the same schedule by hand every week.`,
+        'g.cap1':`The result of that first MVP: upcoming sessions and a therapist's note on the home screen, with cancellation now handled in-app instead of by phone.`,
+        'g.h2.longterm':`Then: make the long-term visible, not just the next appointment`,
+        'g.longterm.p1':`Sessions answer "what happened this week." They don't answer the question underneath every parent's week, which is "is my child actually progressing?" The PEI, the individualized education plan, already existed as a clinical document, but it lived where families couldn't see it. I brought it into the app as a plain-language list of the skills being worked on, each with a start date: <em>Gabriel will play with different toys. Gabriel will be able to climb the ball pit.</em>`,
+        'g.longterm.p2':`This is a different kind of move than the scheduling MVP: not a new capability, but taking something the clinical side already produces and putting it where the family can see their child inside it.`,
+        'g.cap2':`The PEI, translated from clinical document into something a parent can read: concrete skills, in plain language, with dates.`,
+        'g.h2.between':`And then: the moment between sessions`,
+        'g.between.p1':`The hardest moments for these families don't happen during a session. They happen at 8pm on a Tuesday when a child bites someone and a parent has no idea what to do. <em>Genial Junto</em> opened a direct line to a Genial advisor for exactly that: describe the difficult situation, get a real, specific answer back within a stated response window.`,
+        'g.between.p2':`Design-wise, the decision I care about here is the visible response-time badge. An open-ended "we'll get back to you" invites people to check obsessively and then lose trust. Stating "up to 2 business days" up front sets the expectation once, honestly, and lets the parent put the phone down.`,
+        'g.cap3':`Genial Junto: support for the moments between sessions, with the response-time expectation stated before the parent writes anything.`,
+        'g.curve.p1':`None of the above launched as one release. Each was a small bet against the same bar (<em>does this give someone a reason to come back?</em>), shipped narrow, then measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn't a hockey stick, it's a staircase with visible dips, where each step up follows a release and each dip taught us something before the next one.`,
+        'g.curve.pull':`It isn't one redesign that worked. It's a staircase, each step a bet that had to prove itself before the next one started.`,
+        'g.growth.label':'weekly average daily active users',
+        'g.growth.caption':`Weekly average DAU, Jun 2023 → Jul 2024: 8.59% to 62.3%. Star markers are releases: the growth tracks them, which is the point.`,
+        'g.m1':'Weekly average daily active users', 'g.m2':'Year-over-year engagement growth', 'g.m3':'From first release to peak', 'g.m4':'Family onboarded to the platform',
+        'g.note':`<strong>How it was measured:</strong> daily active users tracked in the product analytics platform as a weekly average of unique families opening the app, from the first release baseline through peak. The chart above is the raw weekly series over that period.`,
+        'g.h2.defend':`What I'd defend in a design review`,
+        'g.defend.p1':`The number people react to is 62%. The decision I'd actually defend is the one that came before it: we didn't start in the app at all. We started by mapping process gaps across the whole company, and the biggest one turned out to be a scheduling problem, not a content problem. A redesign brief would never have surfaced that: it takes looking at operations, not just at screens, to find it.`,
+        'g.defend.p2':`The second is scoping the MVP around actions, not features. Showing a schedule and enabling cancellation are unglamorous compared to a full engagement suite, but they were the two things actually driving operations' manual workload, so they were the two things worth building first, in a month, to get a real answer instead of a better guess.`,
+        'g.defend.p3':`The third is what happened after the MVP proved itself: the PEI and Genial Junto additions were a different kind of move, not fixing an operational bottleneck, but surfacing clinical value Genial Care already produced and simply wasn't showing families. Knowing which of those two levers to pull, and when, is most of what this case is actually about.`,
+        'g.h2.next':'What came next',
+        'g.next.p':`Once families were opening the app daily, the constraint moved to the other side of the platform: the therapists. Their bottleneck was documentation: up to two hours after every session, reconstructing what happened from memory for mandatory clinical reports. That became the next project, LIAM.`,
+        'g.liam.h':'LIAM: AI clinical documentation',
+        'g.liam.p':`An assistant that lets therapists narrate a session out loud as it happens, then drafts the required report fields for review. Session documentation went from ~2 hours to ~25 minutes. <a href="liam-case.html" style="color:var(--gold); font-weight:500;">Read the case →</a>`,
+        'g.through.h':'The through-line',
+        'g.through.p':`Both projects are the same instinct: find the moment where a person is spending effort on something that isn't the actual work, and compress it into a decision they can make quickly.`,
+        'close.h2':`Want the parts I couldn't fit here?`,
+        'close.p.genial':`Happy to walk through the interview findings, the features that didn't work, or how I argued against the redesign everyone wanted.`,
+        'close.cta1':'Get in touch', 'close.cta2.genial':'Read the Kruzer case',
+        'footer.portfolio':'Portfolio', 'footer.email':'Email',
+        'modal.label':`Let's talk`, 'modal.h3':'How would you like to connect?', 'modal.p':`Pick whichever's faster for you.`,
+        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':'Daily, 5–7pm ET'
+      },
+      pt: {
+        'nav.back':'Voltar ao portfólio', 'nav.cta':'Vamos conversar',
+        'hero.kicker':'Case study · Saúde · Crescimento de Produto',
+        'hero.h1':'Transformando um app esquecido na ferramenta que 62% das famílias abrem todo dia',
+        'hero.dek':`O app das famílias na Genial Care foi de 8% de uso diário para 62% em um ano, não com um redesign, mas corrigindo um gargalo de agendamento que sobrecarregava a operação, e deixando o uso real decidir o próximo passo.`,
+        'meta.role':'Papel', 'meta.team':'Time', 'meta.company':'Empresa', 'meta.timeline':'Período', 'meta.outcome':'Resultado',
+        'g.lead1':`Entrei na Genial Care, maior plataforma de cuidado com autismo do Brasil, como a primeira Senior Product Designer, trazida para construir o design system Atípico do zero, melhorar o app das famílias e estruturar o painel clínico que os terapeutas usam para conduzir sessões (o mesmo painel onde o LIAM viveria depois). Este case é sobre a metade do mandato ligada ao app.`,
+        'g.lead2':`Quando entrei, o app era um canal de mão única: artigos e cards de conteúdo pra rolar a tela, sem interação direta de nenhum tipo. Não dava pra fazer nada nele, só olhar. Cerca de 8% das famílias abriam por dia, o que é mais ou menos o que se espera de um panfleto digital.`,
+        'g.h2.bottleneck':'O gargalo não era o app. Era o agendamento.',
+        'g.bottleneck.p1':`Em vez de começar pelo app, começamos mapeando os maiores gargalos de processo na Genial Care como um todo. Um se destacou na hora: o agendamento de sessões. A agenda semanal de cada família, dezenas de terapeutas e dezenas de horários, era montada à mão pela equipe de operações. No momento em que algo mudava, um reagendamento, um cancelamento, esse processo manual quebrava. A informação sobre quem sabia o quê vivia espalhada em ligações e planilhas, nada era centralizado, e manter todo mundo alinhado consumia uma fatia desproporcional do tempo do time toda semana.`,
+        'g.bottleneck.p2':'Essa era a oportunidade real: não um problema de conteúdo, mas um problema operacional disfarçado de UX.',
+        'g.bottleneck.pull':'Não era um problema de conteúdo. Era um problema operacional disfarçado de UX.',
+        'g.h2.howworked':'Como trabalhei: descoberta contínua, não um redesign de uma vez só',
+        'g.howworked.p':`Eu não conduzi isso como um projeto único com data de lançamento. Conduzi como um loop: conversar com as pessoas, lançar a menor coisa útil possível, observar o que elas realmente fazem, decidir a próxima aposta a partir disso. É por isso que o app continuou subindo em vez de picar uma vez e estabilizar.`,
+        'g.artifact1':'Mapeamento de jornada', 'g.artifact2':'Wireframes e protótipos', 'g.artifact3':'Entrevistas com usuários',
+        'g.proc1.h':'Ouvi os dois lados do problema',
+        'g.proc1.p':`Entrevistas com famílias para entender por que não abriam o app, e com a equipe de operações para mapear pra onde ia a semana delas de fato. O insight de que o agendamento era a dor compartilhada veio de ouvir a operação, não de olhar o app.`,
+        'g.proc2.h':'Amarrei toda decisão a uma métrica',
+        'g.proc2.p':`Definimos engajamento diário como a métrica norte e filtramos toda ideia por uma pergunta: isso daria à família um motivo para abrir o app num dia em que não abriria? Ideias que não respondiam isso não eram construídas.`,
+        'g.proc3.h':'Prototipei e testei antes de construir',
+        'g.proc3.p':`Cada funcionalidade começou como um protótipo clicável testado com famílias reais, pra pegarmos os pontos confusos de um fluxo antes de gastar tempo de engenharia.`,
+        'g.proc4.h':'Lancei estreito, depois li o comportamento',
+        'g.proc4.p':`Lançamentos pequenos direto no uso real, medidos contra a métrica, com a analytics mostrando por onde as pessoas entravam, o que usavam e onde ainda desistiam, o que definia o próximo lançamento em vez de um roadmap escrito de antemão.`,
+        'g.role.h':'Meu papel',
+        'g.role.p':`Senior product designer ponta a ponta: descoberta, pesquisa, interação e UI, protótipo, e trabalhando junto com engenharia até o lançamento, em iOS, Android e web.`,
+        'g.team.h':'O time',
+        'g.team.p':`Trabalhei diretamente com um product manager, a líder de operações, e um squad pequeno de engenharia, além do time clínico como especialistas no que as famílias precisavam ver.`,
+        'g.h2.opening':'O primeiro movimento: deixar as famílias agirem, não só ler',
+        'g.opening.p1':`Escopamos um MVP em torno das duas ações responsáveis pela maior parte do vaivém manual: mostrar as próximas sessões de cada criança dentro do app, e deixar as famílias cancelarem uma sessão sozinhas em vez de passar por telefone. Descoberta, protótipo e construção: um mês, do início ao fim, deliberadamente pequeno pra conseguirmos uma resposta real rápido em vez de um palpite melhor devagar.`,
+        'g.opening.p2':`Lançou, e o resultado não deixou dúvida. As famílias usaram na hora, os cancelamentos começaram a vir pelo app em vez do telefone, e a operação sentiu o alívio na hora: o núcleo manual e repetitivo da semana delas tinha uma alternativa real.`,
+        'g.opening.p3':`Aquele primeiro lançamento provou algo maior que a funcionalidade em si: dê às famílias um motivo pra <em>agir</em>, não só ler, e elas aparecem. A partir daí, continuamos adicionando, cada nova funcionalidade conquistando seu espaço ao dar a alguém mais um motivo pra abrir o app, e cada uma tirando mais uma tarefa manual da operação pro time focar em trabalho de maior valor em vez de remontar a mesma agenda à mão toda semana.`,
+        'g.cap1':'O resultado daquele primeiro MVP: próximas sessões e a nota de um terapeuta na tela inicial, com cancelamento agora tratado dentro do app em vez de por telefone.',
+        'g.h2.longterm':'Depois: tornar o longo prazo visível, não só a próxima consulta',
+        'g.longterm.p1':`As sessões respondem "o que aconteceu essa semana". Elas não respondem a pergunta por trás da semana de todo pai e mãe, que é "meu filho está progredindo de verdade?" O PEI, o plano educacional individualizado, já existia como documento clínico, mas vivia num lugar que as famílias não viam. Eu o trouxe pro app como uma lista das habilidades trabalhadas em linguagem simples, cada uma com data de início: <em>Gabriel vai brincar com brinquedos diferentes. Gabriel vai conseguir subir na piscina de bolinhas.</em>`,
+        'g.longterm.p2':'Esse é um tipo de movimento diferente do MVP de agendamento: não uma capacidade nova, mas pegar algo que o time clínico já produzia e colocar onde a família consegue ver o filho dentro dele.',
+        'g.cap2':'O PEI, traduzido de documento clínico para algo que um pai ou mãe consegue ler: habilidades concretas, em linguagem simples, com datas.',
+        'g.h2.between':'E depois: o momento entre as sessões',
+        'g.between.p1':`Os momentos mais difíceis para essas famílias não acontecem durante uma sessão. Acontecem às 20h de uma terça quando uma criança morde alguém e o pai ou mãe não sabe o que fazer. O <em>Genial Junto</em> abriu uma linha direta com um consultor da Genial exatamente pra isso: descrever a situação difícil, receber uma resposta real e específica dentro de uma janela de tempo declarada.`,
+        'g.between.p2':`No design, a decisão que mais importa aqui é o selo visível de tempo de resposta. Um "a gente te retorna" em aberto convida a pessoa a checar obsessivamente e depois perder a confiança. Declarar "até 2 dias úteis" de antemão define a expectativa uma vez, com honestidade, e deixa o pai ou mãe largar o celular.`,
+        'g.cap3':'Genial Junto: suporte para os momentos entre sessões, com a expectativa de tempo de resposta declarada antes mesmo do pai ou mãe escrever qualquer coisa.',
+        'g.curve.p1':`Nada disso foi lançado como um release só. Cada um foi uma aposta pequena contra a mesma régua (<em>isso dá a alguém um motivo pra voltar?</em>), lançado estreito, depois medido antes do próximo começar. O gráfico de usuários ativos semanais abaixo é a versão honesta dessa história, com marcadores de release e tudo: não é um hockey stick, é uma escada com quedas visíveis, onde cada degrau segue um release e cada queda ensinou algo antes do próximo.`,
+        'g.curve.pull':'Não foi um redesign que funcionou. Foi uma escada, cada degrau uma aposta que precisava se provar antes da próxima começar.',
+        'g.growth.label':'média semanal de usuários ativos diários',
+        'g.growth.caption':'Média semanal de DAU, jun/2023 → jul/2024: 8,59% a 62,3%. As estrelas marcam releases: o crescimento acompanha eles, e esse é o ponto.',
+        'g.m1':'Média semanal de usuários ativos diários', 'g.m2':'Crescimento de engajamento ano a ano', 'g.m3':'Do primeiro release ao pico', 'g.m4':'Família integrada à plataforma',
+        'g.note':`<strong>Como foi medido:</strong> usuários ativos diários rastreados na plataforma de analytics de produto como média semanal de famílias únicas abrindo o app, da linha de base do primeiro release até o pico. O gráfico acima é a série semanal bruta desse período.`,
+        'g.h2.defend':'O que eu defenderia numa design review',
+        'g.defend.p1':`O número que as pessoas reagem é 62%. A decisão que eu realmente defenderia é a que veio antes dele: não começamos pelo app. Começamos mapeando gargalos de processo na empresa inteira, e o maior deles acabou sendo um problema de agendamento, não de conteúdo. Um briefing de redesign nunca teria revelado isso: é preciso olhar pra operação, não só pras telas, pra encontrar.`,
+        'g.defend.p2':`A segunda é escopar o MVP em torno de ações, não de funcionalidades. Mostrar uma agenda e permitir cancelamento são coisas nada glamourosas perto de uma suíte completa de engajamento, mas eram as duas coisas que realmente geravam a carga manual da operação, então eram as duas coisas que valia a pena construir primeiro, em um mês, pra ter uma resposta real em vez de um palpite melhor.`,
+        'g.defend.p3':`A terceira é o que aconteceu depois que o MVP se provou: as adições do PEI e do Genial Junto foram um tipo de movimento diferente, não corrigir um gargalo operacional, mas expor valor clínico que a Genial Care já produzia e simplesmente não mostrava às famílias. Saber qual dessas duas alavancas puxar, e quando, é a maior parte do que esse case é, de fato, sobre.`,
+        'g.h2.next':'O que veio depois',
+        'g.next.p':`Com as famílias abrindo o app diariamente, a restrição se moveu para o outro lado da plataforma: os terapeutas. O gargalo deles era documentação: até duas horas depois de cada sessão, reconstruindo o que aconteceu de memória para relatórios clínicos obrigatórios. Isso virou o próximo projeto, o LIAM.`,
+        'g.liam.h':'LIAM: documentação clínica com IA',
+        'g.liam.p':`Um assistente que deixa o terapeuta narrar uma sessão em voz alta enquanto ela acontece, e depois rascunha os campos obrigatórios do relatório pra revisão. A documentação da sessão foi de ~2 horas pra ~25 minutos. <a href="liam-case.html" style="color:var(--gold); font-weight:500;">Ler o case →</a>`,
+        'g.through.h':'O fio condutor',
+        'g.through.p':'Os dois projetos são o mesmo instinto: achar o momento em que alguém está gastando esforço em algo que não é o trabalho real, e comprimir isso numa decisão que a pessoa consegue tomar rápido.',
+        'close.h2':'Quer as partes que não couberam aqui?',
+        'close.p.genial':'Fico à vontade pra passar pelos achados das entrevistas, pelas funcionalidades que não funcionaram, ou por como argumentei contra o redesign que todo mundo queria.',
+        'close.cta1':'Entrar em contato', 'close.cta2.genial':'Ler o case do Kruzer',
+        'footer.portfolio':'Portfólio', 'footer.email':'Email',
+        'modal.label':'Vamos conversar', 'modal.h3':'Como você prefere falar comigo?', 'modal.p':'Escolha o que for mais rápido pra você.',
+        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':'Diariamente, 17h–19h'
+      }
+    };
+
+    function apply(lang){
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      const dict = I18N[lang] || I18N.en;
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const v = dict[el.dataset.i18n];
+        if(v !== undefined) el.innerHTML = v;
+      });
+      document.querySelectorAll('.lang-toggle button').forEach(b=> b.classList.toggle('active', b.dataset.lang === lang));
+      document.dispatchEvent(new CustomEvent('langchange', {detail:{lang}}));
+    }
+    window.currentLang = function(){ return localStorage.getItem('site-lang') === 'pt' ? 'pt' : 'en'; };
+    document.querySelectorAll('.lang-toggle button').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        localStorage.setItem('site-lang', b.dataset.lang);
+        apply(b.dataset.lang);
+      });
+    });
+    apply(window.currentLang());
+  })();
+</script>
+
+</body>
+</html>

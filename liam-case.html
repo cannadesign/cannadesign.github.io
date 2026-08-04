@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canna Design · LIAM case study</title>
+<meta name="description" content="How I designed LIAM, an AI assistant that turned two hours of clinical paperwork into a 25-minute review for Genial Care's therapists.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0c0c0d">
+
+<!-- Social preview. NOTE: replace https://your-domain.com with your real deployed URL after publishing. -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Guilherme Cannalonga">
+<meta property="og:title" content="LIAM case study · 2 hours of clinical paperwork into a 25-minute review">
+<meta property="og:description" content="Designing an AI documentation assistant therapists can actually trust, one that drafts the report and leaves the decision with the clinician.">
+<meta property="og:url" content="https://your-domain.com/liam-case.html">
+<meta property="og:image" content="https://your-domain.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="LIAM case study · 2 hours of clinical paperwork into a 25-minute review">
+<meta name="twitter:description" content="Designing an AI documentation assistant therapists can actually trust.">
+<meta name="twitter:image" content="https://your-domain.com/assets/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c0d; --bg-alt:#141416; --card:#18181b; --border:#27272a;
+    --text:#f2f2f0; --text-dim:#a6a6ab; --text-faint:#808085;
+    --gold:#f2a93b; --gold-dim:#c98f2e; --teal:#5aa9c4;
+    --max:1120px; --text-col:740px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg); color:var(--text); font-family:'Inter', -apple-system, sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.02em;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  .col{max-width:var(--text-col); margin:0 auto; padding:0 32px;}
+  ::selection{background:var(--gold); color:#141414;}
+  @media (prefers-reduced-motion:reduce){
+    *, *::before, *::after{
+      animation-duration:0.01ms !important; animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important; scroll-behavior:auto !important;
+    }
+  }
+
+  nav{
+    position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:100;
+    width:min(880px, calc(100% - 32px));
+    background:rgba(20,20,22,0.6); backdrop-filter:blur(16px) saturate(140%);
+    border:1px solid var(--border); border-radius:100px; box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    transition:background .3s ease;
+  }
+  nav.scrolled{background:rgba(14,14,15,0.85);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px; max-width:none; padding:0 10px 0 22px;}
+  .nav-cta{
+    position:relative; overflow:hidden; will-change:transform;
+    font-size:13px; padding:9px 18px; border:1px solid var(--border); border-radius:100px;
+    background:rgba(255,255,255,0.03); transition:all .2s;
+  }
+  .nav-cta:hover{border-color:var(--gold); color:var(--gold); background:rgba(242,169,59,0.08);}
+  .nav-cta::after{
+    content:'→'; display:inline-block; width:0; opacity:0; margin-left:0; transform:translateX(-4px);
+    transition:width .25s cubic-bezier(.16,1,.3,1), opacity .2s ease, transform .25s cubic-bezier(.16,1,.3,1), margin .25s ease;
+    overflow:hidden; white-space:nowrap; vertical-align:middle;
+  }
+  .nav-cta:hover::after{width:12px; opacity:1; margin-left:6px; transform:translateX(0);}
+  .back-link{display:flex; align-items:center; gap:8px; font-size:13.5px; color:var(--text-dim); transition:color .2s;}
+  .back-link:hover{color:var(--text);}
+  .back-link:hover svg{transform:translateX(-3px);}
+  .back-link svg{transition:transform .25s cubic-bezier(.16,1,.3,1);}
+
+  .lang-toggle{display:flex; align-items:center; gap:2px; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:100px; padding:3px; flex-shrink:0;}
+  .lang-toggle button{font-family:'Space Grotesk'; font-size:11px; font-weight:600; padding:5px 10px; border-radius:100px; color:var(--text-faint); background:transparent; border:none; cursor:pointer; transition:all .2s;}
+  .lang-toggle button.active{background:var(--gold); color:#141414;}
+  .lang-toggle button:not(.active):hover{color:var(--text);}
+
+  .article-hero{padding:150px 0 60px; border-bottom:1px solid var(--border);}
+  .kicker{font-size:12.5px; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); margin-bottom:20px; display:block;}
+  .article-hero h1{font-size:clamp(30px,5vw,52px); line-height:1.12; margin-bottom:24px; max-width:820px;}
+  .article-hero .dek{font-size:clamp(16px,1.8vw,19px); color:var(--text-dim); max-width:640px; margin-bottom:36px;}
+  .meta-row{display:flex; flex-wrap:wrap; gap:28px; padding-top:28px; border-top:1px solid var(--border);}
+  .meta-item .k{font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint); margin-bottom:6px;}
+  .meta-item .v{font-size:14px; color:var(--text);}
+
+  .article-body{padding:64px 0;}
+  .article-body p{font-size:17px; color:var(--text-dim); margin-bottom:22px;}
+  .article-body h2{font-size:clamp(22px,3vw,28px); margin:56px 0 20px;}
+  .article-body h2:first-child{margin-top:0;}
+  .lead{font-size:19px !important; color:var(--text) !important;}
+  .pull{
+    font-family:'Space Grotesk'; font-size:clamp(20px,2.6vw,26px); line-height:1.4; color:var(--text);
+    border-left:2px solid var(--gold); padding-left:24px; margin:40px 0; max-width:640px;
+  }
+  .note{
+    font-size:13.5px; color:var(--text-faint); border-left:2px solid var(--border);
+    padding-left:16px; margin:28px 0; max-width:640px;
+  }
+
+  /* full-bleed browser-chrome shot — same treatment as the Kruzer case */
+  .shot{width:100%; max-width:600px; margin:48px auto; padding:0 32px;}
+  .shot .frame{
+    border-radius:12px; overflow:hidden; border:1px solid var(--border);
+    box-shadow:0 30px 60px rgba(0,0,0,0.5); position:relative; background:#1c1c1e;
+  }
+  .shot .shot-bar{
+    display:flex; align-items:center; gap:10px; padding:0 14px; height:34px;
+    background:#1c1c1e; border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .shot .shot-bar .dot{width:7px; height:7px; border-radius:50%;}
+  .shot .shot-bar span{font-size:11px; color:rgba(255,255,255,0.65); font-family:'Space Grotesk'; letter-spacing:0.02em;}
+  .shot img{display:block; width:100%; height:auto;}
+  .shot .caption{text-align:center; font-size:13px; color:var(--text-faint); margin-top:14px;}
+
+  .metrics-strip{
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+    margin:40px 0;
+  }
+  .metrics-strip .m{background:var(--bg-alt); padding:22px 20px;}
+  .metrics-strip .num{font-family:'Space Grotesk'; font-size:24px; font-weight:700; color:var(--gold); margin-bottom:4px;}
+  .metrics-strip .label{font-size:12px; color:var(--text-faint); line-height:1.4;}
+
+  .callout-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin:32px 0;}
+  .callout{background:var(--bg-alt); padding:26px;}
+  .callout h4{font-size:15.5px; margin-bottom:8px;}
+  .callout p{font-size:14px; color:var(--text-dim); margin:0;}
+
+  /* PROCESS STEPS */
+  .process{list-style:none; counter-reset:step; margin:32px 0; display:grid; gap:14px;}
+  .process li{
+    counter-increment:step; position:relative; padding:20px 24px 20px 66px;
+    background:var(--bg-alt); border:1px solid var(--border); border-radius:14px;
+  }
+  .process li::before{
+    content:counter(step,decimal-leading-zero); position:absolute; left:22px; top:20px;
+    font-family:'Space Grotesk'; font-size:15px; font-weight:700; color:var(--gold);
+  }
+  .process li h4{font-size:15.5px; margin-bottom:5px; color:var(--text);}
+  .process li p{font-size:14px; color:var(--text-dim); margin:0;}
+
+  /* ARTIFACT ROW — abstract, futuristic support visuals for the process narrative */
+  .artifact-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0 8px;}
+  .artifact-tile{
+    border:1px solid var(--border); border-radius:14px; padding:20px 18px 16px; background:var(--bg-alt);
+    display:flex; flex-direction:column; gap:16px; min-height:118px;
+  }
+  .artifact-tile .a-label{font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-faint);}
+  .artifact-tile .a-visual{flex:1; display:flex; align-items:center; justify-content:center;}
+  .a-journey{display:flex; align-items:center; width:100%; gap:0;}
+  .a-journey .seg{flex:1; height:2px; background:var(--border);}
+  .a-journey .dot{width:9px; height:9px; border-radius:50%; background:var(--border); flex-shrink:0; position:relative;}
+  .a-journey .dot.on{background:var(--teal);}
+  .a-journey .dot.on::after{content:''; position:absolute; inset:-4px; border:1px solid var(--teal); border-radius:50%; opacity:0.5;}
+  .a-wire{display:flex; flex-direction:column; gap:6px; width:100%;}
+  .a-wire .row{height:7px; border-radius:3px; background:rgba(255,255,255,0.08);}
+  .a-wire .row.w70{width:70%;} .a-wire .row.w100{width:100%;} .a-wire .row.w45{width:45%;}
+  .a-wire .block{height:26px; border-radius:6px; background:rgba(255,255,255,0.05); border:1px dashed var(--border); margin-top:2px;}
+  .a-chat{position:relative; width:100%; height:60px;}
+  .a-chat .bub{position:absolute; border-radius:10px; height:16px;}
+  .a-chat .bub1{top:0; left:0; width:62%; background:rgba(255,255,255,0.08);}
+  .a-chat .bub2{top:24px; left:22%; width:70%; background:rgba(90,169,196,0.2); border:1px solid rgba(90,169,196,0.5);}
+  .a-chat .bub3{top:44px; left:0; width:40%; background:rgba(255,255,255,0.08);}
+  @media (max-width:640px){ .artifact-row{grid-template-columns:1fr 1fr;} .artifact-row .artifact-tile:last-child{grid-column:1 / -1;} }
+
+  .article-close{padding:80px 0 120px; border-top:1px solid var(--border); text-align:center;}
+  .article-close h2{font-size:clamp(24px,3.6vw,34px); margin-bottom:20px;}
+  .article-close p{color:var(--text-dim); font-size:16px; margin-bottom:32px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-size:14px; font-weight:500;
+    padding:12px 22px; border-radius:10px; transition:all .2s; will-change:transform;
+  }
+  .btn-primary{background:var(--gold); color:#141414;}
+  .btn-primary:hover{background:#ffc766; transform:translateY(-1px); box-shadow:0 10px 28px rgba(242,169,59,0.25);}
+  .btn-ghost{border:1px solid var(--border); color:var(--text);}
+  .close-ctas{display:inline-flex; gap:14px; flex-wrap:wrap; justify-content:center;}
+  .btn-ghost:hover{border-color:var(--text-dim); transform:translateY(-1px);}
+  .btn::after{
+    content:'→'; display:inline-block; width:0; opacity:0; transform:translateX(-4px);
+    transition:width .25s cubic-bezier(.16,1,.3,1), opacity .2s ease, transform .25s cubic-bezier(.16,1,.3,1);
+    overflow:hidden; white-space:nowrap;
+  }
+  .btn:hover::after{width:14px; opacity:1; transform:translateX(0);}
+
+  footer{border-top:1px solid var(--border); padding:40px 0;}
+  .foot-bottom{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    font-size:13px; color:var(--text-faint);
+  }
+  .foot-links{display:flex; gap:24px;}
+  .foot-links a:hover{color:var(--text-dim);}
+
+  /* CONTACT MODAL */
+  .contact-modal{
+    position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center;
+    padding:20px; background:rgba(8,8,9,0.82); backdrop-filter:blur(6px);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .contact-modal.open{display:flex;}
+  .contact-modal.show{opacity:1;}
+  .contact-modal-card{
+    position:relative; width:100%; max-width:420px; background:var(--bg-alt); border:1px solid var(--border);
+    border-radius:16px; padding:32px; box-shadow:0 30px 70px rgba(0,0,0,0.6);
+    transform:translateY(12px) scale(0.98); transition:transform .25s ease;
+  }
+  .contact-modal.show .contact-modal-card{transform:translateY(0) scale(1);}
+  .contact-modal-card h3{font-size:20px; margin:4px 0 6px;}
+  .contact-modal-card > p{font-size:14px; color:var(--text-dim); margin-bottom:24px;}
+  .contact-modal-close{
+    position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%;
+    background:rgba(255,255,255,0.05); border:1px solid var(--border); color:var(--text-dim);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;
+  }
+  .contact-modal-close:hover{background:rgba(255,255,255,0.12); color:var(--text);}
+  .contact-modal-options{display:flex; flex-direction:column; gap:10px;}
+  .contact-option{
+    display:flex; align-items:center; gap:14px; padding:16px; border-radius:12px;
+    border:1px solid var(--border); background:var(--card); transition:all .2s ease;
+  }
+  .contact-option:hover{border-color:var(--gold); background:rgba(242,169,59,0.06); transform:translateX(2px);}
+  .contact-option .co-icon{
+    width:38px; height:38px; border-radius:10px; background:rgba(242,169,59,0.1); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .contact-option .co-body{flex:1; display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .contact-option .co-title{font-size:14.5px; font-weight:500; color:var(--text);}
+  .contact-option .co-sub{font-size:12.5px; color:var(--text-faint); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .contact-option .co-arrow{color:var(--text-faint); transition:transform .2s, color .2s; flex-shrink:0;}
+  .contact-option:hover .co-arrow{transform:translateX(3px); color:var(--gold);}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity .8s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:860px){
+    .callout-grid{grid-template-columns:1fr;}
+    .meta-row{gap:20px;}
+  }
+  @media (max-width:640px){
+    .wrap, .col{padding:0 20px;}
+    .shot{padding:0 20px;}
+    .article-hero{padding:120px 0 44px;}
+    .close-ctas{flex-direction:column; align-items:stretch; width:100%; gap:10px;}
+    .close-ctas .btn{justify-content:center; text-align:center;}
+  }
+
+  /* FIGMA-STYLE POINTER — the visitor's own cursor, rendered as a collaborator cursor */
+  .fig-pointer{
+    position:fixed; top:0; left:0; z-index:2000; pointer-events:none;
+    display:flex; align-items:flex-start; opacity:0; transition:opacity .25s ease;
+    will-change:transform;
+  }
+  .fig-pointer.on{opacity:1;}
+  .fig-pointer svg{width:20px; height:20px; display:block; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.45));}
+  .fig-pointer .tag{
+    margin:11px 0 0 -1px; padding:3px 8px; border-radius:7px; white-space:nowrap;
+    font-family:'Space Grotesk'; font-size:11px; font-weight:600; color:#0c0c0d;
+    background:var(--gold); box-shadow:0 4px 12px rgba(0,0,0,0.35);
+    transform-origin:left center; transition:transform .18s cubic-bezier(.16,1,.3,1);
+  }
+  .fig-pointer.tap .tag{transform:scale(0.9);}
+  body.fig-cursor-on, body.fig-cursor-on *{cursor:none !important;}
+  @media (prefers-reduced-motion:reduce){ .fig-pointer{display:none;} }
+</style>
+</head>
+<body>
+
+<nav id="siteNav">
+  <div class="wrap">
+    <a class="back-link" href="index.html#work">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span data-i18n="nav.back">Back to portfolio</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="lang-toggle">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <a class="nav-cta" href="index.html#contact" data-contact-trigger data-i18n="nav.cta">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<header class="article-hero">
+  <div class="col">
+    <span class="kicker" data-i18n="hero.kicker">Case study · Healthcare · AI Design</span>
+    <h1 data-i18n="hero.h1">LIAM: turning 2 hours of clinical paperwork into a 25-minute review</h1>
+    <p class="dek" data-i18n="hero.dek">Therapists at Genial Care were losing up to two hours after every session reconstructing it from memory for mandatory clinical reports. LIAM lets them narrate instead, and hands back a draft to review, not a form to fill.</p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="k" data-i18n="meta.role">Role</div><div class="v">Senior Product Designer</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.team">Team</div><div class="v">PM · AI eng squad · Clinical</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.company">Company</div><div class="v">Genial Care</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.timeline">Timeline</div><div class="v">2023 – 2024</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.outcome">Outcome</div><div class="v">2h → 25min per session</div></div>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+  <div class="col reveal">
+    <p class="lead" data-i18n="l.lead">Every session at Genial Care generates a clinical record: what was targeted, what the child did, what changed. Therapists were writing that record from memory, after the fact, on top of a full day of sessions, which is exactly the kind of task that gets rushed, delayed, or thinned out under pressure. LIAM's job was to move the record-keeping into the moment it actually happens, instead of the moment there's finally time for it.</p>
+
+    <h2 data-i18n="l.h2.howworked">How I worked: designing an AI feature people can trust</h2>
+    <p data-i18n="l.howworked.p">The hard part of LIAM was never the model. It was earning the therapist's trust in something that drafts clinical language on their behalf. So the process was built around validating trust as much as usability.</p>
+    <div class="artifact-row reveal">
+      <div class="artifact-tile">
+        <div class="a-visual">
+          <div class="a-journey">
+            <div class="dot on"></div><div class="seg"></div>
+            <div class="dot"></div><div class="seg"></div>
+            <div class="dot"></div><div class="seg"></div>
+            <div class="dot"></div>
+          </div>
+        </div>
+        <span class="a-label" data-i18n="l.artifact1">Workflow shadowing</span>
+      </div>
+      <div class="artifact-tile">
+        <div class="a-visual">
+          <div class="a-wire">
+            <div class="row w45"></div>
+            <div class="block"></div>
+            <div class="row w100"></div>
+            <div class="row w70"></div>
+          </div>
+        </div>
+        <span class="a-label" data-i18n="l.artifact2">Prototyping risky states</span>
+      </div>
+      <div class="artifact-tile">
+        <div class="a-visual">
+          <div class="a-chat">
+            <div class="bub bub1"></div>
+            <div class="bub bub2"></div>
+            <div class="bub bub3"></div>
+          </div>
+        </div>
+        <span class="a-label" data-i18n="l.artifact3">Therapist &amp; clinical lead testing</span>
+      </div>
+    </div>
+    <ol class="process">
+      <li>
+        <h4 data-i18n="l.proc1.h">Shadowed the real workflow first</h4>
+        <p data-i18n="l.proc1.p">Sat with the documentation therapists already do, where it happens, what fields are mandatory, where the two hours actually go, so the design fit the session instead of adding a step to it.</p>
+      </li>
+      <li>
+        <h4 data-i18n="l.proc2.h">Prototyped the risky states, not the happy path</h4>
+        <p data-i18n="l.proc2.p">The demo-friendly flow is "record → perfect draft." I spent the design time on the states that decide trust: capture confirmation, upload failure, and the moment a therapist reads an AI suggestion that's wrong.</p>
+      </li>
+      <li>
+        <h4 data-i18n="l.proc3.h">Tested drafts with therapists and clinical leads</h4>
+        <p data-i18n="l.proc3.p">Ran the AI-drafted output past the people who'd have to sign it, checking whether suggestions read as clinically credible and where they needed to override. The clinical team acted as domain reviewers throughout.</p>
+      </li>
+      <li>
+        <h4 data-i18n="l.proc4.h">Built a feedback loop into the product itself</h4>
+        <p data-i18n="l.proc4.p">Rather than assume quality held, I shipped an in-flow prompt asking whether LIAM's suggestions were still good, so drift shows up in real usage instead of in a churned habit months later.</p>
+      </li>
+    </ol>
+    <div class="callout-grid">
+      <div class="callout">
+        <h4 data-i18n="l.role.h">My role</h4>
+        <p data-i18n="l.role.p">Senior product designer end to end: workflow research, interaction and UI, prototype, and the trust-and-safety states that make an AI feature usable in a clinical context.</p>
+      </div>
+      <div class="callout">
+        <h4 data-i18n="l.team.h">The team</h4>
+        <p data-i18n="l.team.p">Partnered with a product manager, an engineering squad building the AI pipeline, and the clinical team as the domain authority on what a report must contain.</p>
+      </div>
+    </div>
+
+    <h2 data-i18n="l.h2.recording">Recording lives inside the work, not next to it</h2>
+    <p data-i18n="l.recording.p">The intervention screen, with its programs, targets, and progress per skill, is where a therapist already spends the session. Adding LIAM meant putting the record button there, not in a separate "documentation" tool the therapist would have to remember to open afterward. A single mic control sits in the corner of the exact screen they're already using.</p>
+  </div>
+
+  <div class="shot reveal">
+    <div class="frame">
+      <div class="shot-bar"><span class="dot" style="background:#e05f4f;"></span><span class="dot" style="background:#e0b04f;"></span><span class="dot" style="background:#5fbf6b;"></span><span>LIAM: Intervention screen</span></div>
+      <img src="assets/liam-1.jpg" alt="LIAM intervention screen with progress-tracking targets and an idle voice-recording control in the corner">
+    </div>
+    <p class="caption" data-i18n="l.cap1">The intervention screen the therapist is already working in: recording starts from a single control here, not a separate tool.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="l.h2.confirm">Confirm the capture before asking the therapist to trust it</h2>
+    <p data-i18n="l.confirm.p">Once recorded, the note doesn't vanish into a black box. It surfaces as a waveform with its length, and an explicit send action. That pause matters more than it looks: a therapist just spoke clinical information out loud about a child, and the interface's next job is to prove it actually captured that before asking them to move on.</p>
+  </div>
+
+  <div class="shot reveal">
+    <div class="frame">
+      <div class="shot-bar"><span class="dot" style="background:#e05f4f;"></span><span class="dot" style="background:#e0b04f;"></span><span class="dot" style="background:#5fbf6b;"></span><span>LIAM: Voice note recorded</span></div>
+      <img src="assets/liam-2.jpg" alt="LIAM recorded voice note shown as a waveform with duration, plus discard and send controls">
+    </div>
+    <p class="caption" data-i18n="l.cap2">The captured note before it's sent, length and waveform visible, with a clear way to discard and re-record.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="l.h2.uploads">Uploads fail. The interface has to say so, plainly</h2>
+    <p data-i18n="l.uploads.p">A voice note recorded in a clinic doesn't always make it to the server on the first try. I designed the failure state as a direct, specific statement, "your voice note wasn't sent," with an obvious retry, instead of a spinner that quietly gives up or an error code the therapist has to interpret. For a tool handling clinical documentation, silent failure is worse than an ugly one.</p>
+    <p class="pull" data-i18n="l.uploads.pull">Silent failure is worse than an ugly one, especially in a tool handling clinical documentation.</p>
+  </div>
+
+  <div class="shot reveal">
+    <div class="frame">
+      <div class="shot-bar"><span class="dot" style="background:#e05f4f;"></span><span class="dot" style="background:#e0b04f;"></span><span class="dot" style="background:#5fbf6b;"></span><span>LIAM: Upload failed</span></div>
+      <img src="assets/liam-3.jpg" alt="LIAM error state stating the voice note failed to send, with a retry control">
+    </div>
+    <p class="caption" data-i18n="l.cap3">The failure state, stated plainly: what happened, and a direct way to fix it, no ambiguity about whether the recording is safe.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="l.h2.payoff">The payoff: a draft, not a form</h2>
+    <p data-i18n="l.payoff.p1">This is what the two hours collapse into. LIAM turns the audio into a first draft of every required field: health check-in, reinforcers used, challenges observed, session summary, clinical discussion points, each one pre-filled and clearly marked as LIAM's suggestion, with a one-click copy into the real field. The therapist's job changes from writing the report to editing one: read, correct what's off, keep what's right, submit.</p>
+    <p data-i18n="l.payoff.p2">Nothing here submits itself. Every field stays editable, and the "Save" action stays with the therapist: LIAM proposes, the clinician decides.</p>
+  </div>
+
+  <div class="shot reveal">
+    <div class="frame">
+      <div class="shot-bar"><span class="dot" style="background:#e05f4f;"></span><span class="dot" style="background:#e0b04f;"></span><span class="dot" style="background:#5fbf6b;"></span><span>LIAM: Session note draft</span></div>
+      <img src="assets/liam-4.jpg" alt="LIAM session note form with each field pre-filled with an AI-drafted suggestion and a copy action">
+    </div>
+    <p class="caption" data-i18n="l.cap4">The session-note form: every field carries a LIAM-drafted suggestion the therapist reviews and copies in, never submitted on their behalf.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="l.h2.trustloop">Trust isn't a one-time decision. It's a loop</h2>
+    <p data-i18n="l.trustloop.p">An AI feature that quietly gets worse, or quietly gets better, teaches people to stop trusting it either way. I added a lightweight feedback prompt directly in the flow: are you happy with LIAM's suggestions right now, yes or no, with room to say why, so drift in suggestion quality surfaces from real usage instead of waiting for a support ticket or a churned habit.</p>
+  </div>
+
+  <div class="shot reveal">
+    <div class="frame">
+      <div class="shot-bar"><span class="dot" style="background:#e05f4f;"></span><span class="dot" style="background:#e0b04f;"></span><span class="dot" style="background:#5fbf6b;"></span><span>LIAM: Feedback request</span></div>
+      <img src="assets/liam-5.jpg" alt="LIAM feedback modal asking whether the therapist likes the suggestions LIAM is generating, with a comment field">
+    </div>
+    <p class="caption" data-i18n="l.cap5">A direct feedback loop on the suggestions themselves: the mechanism that lets LIAM's output quality stay visible instead of assumed.</p>
+  </div>
+
+  <div class="col reveal">
+    <h2 data-i18n="l.h2.defend">What I'd defend in a design review</h2>
+    <p data-i18n="l.defend.p">The design decision underneath all five screens is the same one: an AI feature earns trust through visible mechanics, not through confidence. Show the capture before asking for the record. State the failure instead of hiding it. Mark every suggestion as a suggestion. Ask, explicitly, whether the output is still good. None of that is about making LIAM seem smart. It's about making it safe to rely on for something as consequential as a clinical record.</p>
+
+    <div class="metrics-strip">
+      <div class="m"><div class="num">2h → 25min</div><div class="label" data-i18n="l.m1">Documentation time, per session</div></div>
+      <div class="m"><div class="num">100%</div><div class="label" data-i18n="l.m2">Fields reviewed and editable before submit</div></div>
+    </div>
+    <p class="note" data-i18n="l.note"><strong>How it was measured:</strong> documentation time compares therapists' self-reported time to complete a session report before LIAM against the review-and-submit time with LIAM's draft in place.</p>
+
+    <h2 data-i18n="l.h2.bigpicture">Where this sits in the bigger picture</h2>
+    <p data-i18n="l.bigpicture.p">LIAM shipped after the family-facing app had already gone from 8% to 62% daily use. Once families were actually engaging, the constraint moved to the other side of the platform: the therapists producing the content families were now relying on. Same instinct, different audience: find where a person is spending effort on something that isn't the actual work, and compress it into a decision they can make quickly.</p>
+  </div>
+</article>
+
+<section class="article-close reveal">
+  <div class="col">
+    <h2 data-i18n="close.h2">Want the parts I couldn't fit here?</h2>
+    <p data-i18n="close.p.liam">Happy to walk through the model choices, how we handled clinical-language accuracy, or what the feedback loop has surfaced so far.</p>
+    <div class="close-ctas">
+      <a class="btn btn-primary" href="index.html#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
+      <a class="btn btn-ghost" href="genial-case.html" data-i18n="close.cta2.liam">Read the Genial App case</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span>© 2026 Guilherme Cannalonga.</span>
+      <div class="foot-links">
+        <a href="index.html" data-i18n="footer.portfolio">Portfolio</a>
+        <a href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:cannalongadesign@gmail.com" data-contact-trigger data-i18n="footer.email">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="contact-modal" id="contactModal">
+  <div class="contact-modal-card">
+    <button class="contact-modal-close" id="contactModalClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <span class="kicker" data-i18n="modal.label">Let's talk</span>
+    <h3 data-i18n="modal.h3">How would you like to connect?</h3>
+    <p data-i18n="modal.p">Pick whichever's faster for you.</p>
+    <div class="contact-modal-options">
+      <a class="contact-option" href="mailto:cannalongadesign@gmail.com">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.email.title">Send an email</span><span class="co-sub">cannalongadesign@gmail.com</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a class="contact-option" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.call.title">Book a 30-min call</span><span class="co-sub" data-i18n="modal.call.sub">Daily, 5–7pm ET</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.1});
+  els.forEach(el=>io.observe(el));
+
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, {passive:true});
+
+
+  /* ---- the visitor's cursor, rendered as a Figma collaborator pointer ---- */
+  (function(){
+    if(!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const el = document.createElement('div');
+    el.className = 'fig-pointer';
+    el.setAttribute('aria-hidden','true');
+    el.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 3.2 19 11.4l-6.1 1.2-2.6 5.8z" fill="#f2a93b" stroke="#0c0c0d" stroke-width="1.2" stroke-linejoin="round"/></svg>' +
+      '<span class="tag" id="figPointerTag">' + (window.currentLang && window.currentLang()==='pt' ? 'Você' : 'You') + '</span>';
+    document.body.appendChild(el);
+    document.body.classList.add('fig-cursor-on');
+    document.addEventListener('langchange', (e)=>{
+      const tag = document.getElementById('figPointerTag');
+      if(tag) tag.textContent = e.detail.lang === 'pt' ? 'Você' : 'You';
+    });
+    let x = innerWidth/2, y = innerHeight/2, tx = x, ty = y, shown = false;
+    addEventListener('mousemove', e=>{
+      tx = e.clientX; ty = e.clientY;
+      if(!shown){ shown = true; el.classList.add('on'); }
+    }, {passive:true});
+    document.addEventListener('mouseleave', ()=> el.classList.remove('on'));
+    document.addEventListener('mouseenter', ()=>{ if(shown) el.classList.add('on'); });
+    addEventListener('mousedown', ()=> el.classList.add('tap'));
+    addEventListener('mouseup',   ()=> el.classList.remove('tap'));
+    function tick(){
+      x += (tx - x) * 0.35;
+      y += (ty - y) * 0.35;
+      el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  /* ---- magnetic pull on buttons (desktop only) ---- */
+  const isTouch = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if(isTouch){
+    document.querySelectorAll('.btn, .nav-cta').forEach(btn=>{
+      btn.addEventListener('mousemove', (e)=>{
+        const r = btn.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        btn.style.transform = `translate(${px*8}px, ${py*8 - 1}px)`;
+      });
+      btn.addEventListener('mouseleave', ()=>{ btn.style.transform = ''; });
+    });
+  }
+
+  // Contact modal: email vs. book a call
+  (function(){
+    const modal = document.getElementById('contactModal');
+    if(!modal) return;
+    const closeBtn = document.getElementById('contactModalClose');
+    function openModal(){
+      modal.classList.add('open');
+      requestAnimationFrame(()=> modal.classList.add('show'));
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+      setTimeout(()=> modal.classList.remove('open'), 250);
+    }
+    document.querySelectorAll('[data-contact-trigger]').forEach(el=>{
+      el.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
+    });
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+  })();
+</script>
+
+<script>
+  /* ---- language toggle: English is the base language, Portuguese (Brazil) is opt-in ---- */
+  (function(){
+    const I18N = {
+      en: {
+        'nav.back':'Back to portfolio', 'nav.cta':`Let's talk`,
+        'hero.kicker':'Case study · Healthcare · AI Design',
+        'hero.h1':'LIAM: turning 2 hours of clinical paperwork into a 25-minute review',
+        'hero.dek':`Therapists at Genial Care were losing up to two hours after every session reconstructing it from memory for mandatory clinical reports. LIAM lets them narrate instead, and hands back a draft to review, not a form to fill.`,
+        'meta.role':'Role', 'meta.team':'Team', 'meta.company':'Company', 'meta.timeline':'Timeline', 'meta.outcome':'Outcome',
+        'l.lead':`Every session at Genial Care generates a clinical record: what was targeted, what the child did, what changed. Therapists were writing that record from memory, after the fact, on top of a full day of sessions, which is exactly the kind of task that gets rushed, delayed, or thinned out under pressure. LIAM's job was to move the record-keeping into the moment it actually happens, instead of the moment there's finally time for it.`,
+        'l.h2.howworked':'How I worked: designing an AI feature people can trust',
+        'l.howworked.p':`The hard part of LIAM was never the model. It was earning the therapist's trust in something that drafts clinical language on their behalf. So the process was built around validating trust as much as usability.`,
+        'l.artifact1':'Workflow shadowing', 'l.artifact2':'Prototyping risky states', 'l.artifact3':'Therapist &amp; clinical lead testing',
+        'l.proc1.h':'Shadowed the real workflow first',
+        'l.proc1.p':`Sat with the documentation therapists already do, where it happens, what fields are mandatory, where the two hours actually go, so the design fit the session instead of adding a step to it.`,
+        'l.proc2.h':'Prototyped the risky states, not the happy path',
+        'l.proc2.p':`The demo-friendly flow is "record → perfect draft." I spent the design time on the states that decide trust: capture confirmation, upload failure, and the moment a therapist reads an AI suggestion that's wrong.`,
+        'l.proc3.h':'Tested drafts with therapists and clinical leads',
+        'l.proc3.p':`Ran the AI-drafted output past the people who'd have to sign it, checking whether suggestions read as clinically credible and where they needed to override. The clinical team acted as domain reviewers throughout.`,
+        'l.proc4.h':'Built a feedback loop into the product itself',
+        'l.proc4.p':`Rather than assume quality held, I shipped an in-flow prompt asking whether LIAM's suggestions were still good, so drift shows up in real usage instead of in a churned habit months later.`,
+        'l.role.h':'My role',
+        'l.role.p':`Senior product designer end to end: workflow research, interaction and UI, prototype, and the trust-and-safety states that make an AI feature usable in a clinical context.`,
+        'l.team.h':'The team',
+        'l.team.p':`Partnered with a product manager, an engineering squad building the AI pipeline, and the clinical team as the domain authority on what a report must contain.`,
+        'l.h2.recording':`Recording lives inside the work, not next to it`,
+        'l.recording.p':`The intervention screen, with its programs, targets, and progress per skill, is where a therapist already spends the session. Adding LIAM meant putting the record button there, not in a separate "documentation" tool the therapist would have to remember to open afterward. A single mic control sits in the corner of the exact screen they're already using.`,
+        'l.cap1':`The intervention screen the therapist is already working in: recording starts from a single control here, not a separate tool.`,
+        'l.h2.confirm':'Confirm the capture before asking the therapist to trust it',
+        'l.confirm.p':`Once recorded, the note doesn't vanish into a black box. It surfaces as a waveform with its length, and an explicit send action. That pause matters more than it looks: a therapist just spoke clinical information out loud about a child, and the interface's next job is to prove it actually captured that before asking them to move on.`,
+        'l.cap2':`The captured note before it's sent, length and waveform visible, with a clear way to discard and re-record.`,
+        'l.h2.uploads':'Uploads fail. The interface has to say so, plainly',
+        'l.uploads.p':`A voice note recorded in a clinic doesn't always make it to the server on the first try. I designed the failure state as a direct, specific statement, "your voice note wasn't sent," with an obvious retry, instead of a spinner that quietly gives up or an error code the therapist has to interpret. For a tool handling clinical documentation, silent failure is worse than an ugly one.`,
+        'l.uploads.pull':'Silent failure is worse than an ugly one, especially in a tool handling clinical documentation.',
+        'l.cap3':`The failure state, stated plainly: what happened, and a direct way to fix it, no ambiguity about whether the recording is safe.`,
+        'l.h2.payoff':'The payoff: a draft, not a form',
+        'l.payoff.p1':`This is what the two hours collapse into. LIAM turns the audio into a first draft of every required field: health check-in, reinforcers used, challenges observed, session summary, clinical discussion points, each one pre-filled and clearly marked as LIAM's suggestion, with a one-click copy into the real field. The therapist's job changes from writing the report to editing one: read, correct what's off, keep what's right, submit.`,
+        'l.payoff.p2':`Nothing here submits itself. Every field stays editable, and the "Save" action stays with the therapist: LIAM proposes, the clinician decides.`,
+        'l.cap4':`The session-note form: every field carries a LIAM-drafted suggestion the therapist reviews and copies in, never submitted on their behalf.`,
+        'l.h2.trustloop':`Trust isn't a one-time decision. It's a loop`,
+        'l.trustloop.p':`An AI feature that quietly gets worse, or quietly gets better, teaches people to stop trusting it either way. I added a lightweight feedback prompt directly in the flow: are you happy with LIAM's suggestions right now, yes or no, with room to say why, so drift in suggestion quality surfaces from real usage instead of waiting for a support ticket or a churned habit.`,
+        'l.cap5':`A direct feedback loop on the suggestions themselves: the mechanism that lets LIAM's output quality stay visible instead of assumed.`,
+        'l.h2.defend':`What I'd defend in a design review`,
+        'l.defend.p':`The design decision underneath all five screens is the same one: an AI feature earns trust through visible mechanics, not through confidence. Show the capture before asking for the record. State the failure instead of hiding it. Mark every suggestion as a suggestion. Ask, explicitly, whether the output is still good. None of that is about making LIAM seem smart. It's about making it safe to rely on for something as consequential as a clinical record.`,
+        'l.m1':'Documentation time, per session', 'l.m2':'Fields reviewed and editable before submit',
+        'l.note':`<strong>How it was measured:</strong> documentation time compares therapists' self-reported time to complete a session report before LIAM against the review-and-submit time with LIAM's draft in place.`,
+        'l.h2.bigpicture':'Where this sits in the bigger picture',
+        'l.bigpicture.p':`LIAM shipped after the family-facing app had already gone from 8% to 62% daily use. Once families were actually engaging, the constraint moved to the other side of the platform: the therapists producing the content families were now relying on. Same instinct, different audience: find where a person is spending effort on something that isn't the actual work, and compress it into a decision they can make quickly.`,
+        'close.h2':`Want the parts I couldn't fit here?`,
+        'close.p.liam':`Happy to walk through the model choices, how we handled clinical-language accuracy, or what the feedback loop has surfaced so far.`,
+        'close.cta1':'Get in touch', 'close.cta2.liam':'Read the Genial App case',
+        'footer.portfolio':'Portfolio', 'footer.email':'Email',
+        'modal.label':`Let's talk`, 'modal.h3':'How would you like to connect?', 'modal.p':`Pick whichever's faster for you.`,
+        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':'Daily, 5–7pm ET'
+      },
+      pt: {
+        'nav.back':'Voltar ao portfólio', 'nav.cta':'Vamos conversar',
+        'hero.kicker':'Case study · Saúde · Design de IA',
+        'hero.h1':'LIAM: transformando 2 horas de papelada clínica em uma revisão de 25 minutos',
+        'hero.dek':`Terapeutas na Genial Care perdiam até duas horas depois de cada sessão reconstruindo tudo de memória para relatórios clínicos obrigatórios. O LIAM deixa eles narrarem em vez disso, e devolve um rascunho pra revisar, não um formulário pra preencher.`,
+        'meta.role':'Papel', 'meta.team':'Time', 'meta.company':'Empresa', 'meta.timeline':'Período', 'meta.outcome':'Resultado',
+        'l.lead':`Toda sessão na Genial Care gera um registro clínico: o que foi trabalhado, o que a criança fez, o que mudou. Terapeutas escreviam esse registro de memória, depois do fato, em cima de um dia cheio de sessões, exatamente o tipo de tarefa que se faz correndo, atrasada ou rasa sob pressão. O trabalho do LIAM era mover o registro para o momento em que ele realmente acontece, em vez do momento em que finalmente sobra tempo.`,
+        'l.h2.howworked':'Como trabalhei: desenhando uma funcionalidade de IA em que as pessoas confiam',
+        'l.howworked.p':`A parte difícil do LIAM nunca foi o modelo. Foi conquistar a confiança do terapeuta em algo que rascunha linguagem clínica em nome dele. Então o processo foi construído em torno de validar confiança tanto quanto usabilidade.`,
+        'l.artifact1':'Observação do fluxo de trabalho', 'l.artifact2':'Prototipagem dos estados de risco', 'l.artifact3':'Testes com terapeutas e líderes clínicos',
+        'l.proc1.h':'Observei o fluxo real primeiro',
+        'l.proc1.p':`Acompanhei a documentação que os terapeutas já faziam, onde acontece, quais campos são obrigatórios, para onde vão de fato as duas horas, para o design encaixar na sessão em vez de adicionar mais uma etapa.`,
+        'l.proc2.h':'Prototipei os estados de risco, não o caminho feliz',
+        'l.proc2.p':`O fluxo bonito de demo é "gravar → rascunho perfeito." Gastei o tempo de design nos estados que decidem a confiança: confirmação de captura, falha de upload, e o momento em que o terapeuta lê uma sugestão de IA que está errada.`,
+        'l.proc3.h':'Testei rascunhos com terapeutas e líderes clínicos',
+        'l.proc3.p':`Passei o que a IA rascunhava pelas pessoas que teriam que assinar embaixo, checando se as sugestões pareciam clinicamente confiáveis e onde precisavam ser sobrescritas. O time clínico atuou como revisor de domínio o tempo todo.`,
+        'l.proc4.h':'Construí um loop de feedback dentro do próprio produto',
+        'l.proc4.p':`Em vez de assumir que a qualidade se mantinha, lancei um prompt dentro do fluxo perguntando se as sugestões do LIAM ainda estavam boas, para o desvio aparecer no uso real em vez de virar um hábito abandonado meses depois.`,
+        'l.role.h':'Meu papel',
+        'l.role.p':`Senior product designer ponta a ponta: pesquisa de fluxo, interação e UI, protótipo, e os estados de confiança e segurança que tornam uma funcionalidade de IA usável em contexto clínico.`,
+        'l.team.h':'O time',
+        'l.team.p':`Parceria com um product manager, um squad de engenharia construindo o pipeline de IA, e o time clínico como autoridade de domínio sobre o que um relatório precisa conter.`,
+        'l.h2.recording':'A gravação vive dentro do trabalho, não ao lado dele',
+        'l.recording.p':`A tela de intervenção, com seus programas, metas e progresso por habilidade, é onde o terapeuta já passa a sessão. Adicionar o LIAM significou colocar o botão de gravação ali, não numa ferramenta separada de "documentação" que o terapeuta teria que lembrar de abrir depois. Um único controle de microfone fica no canto da tela exata que ele já está usando.`,
+        'l.cap1':'A tela de intervenção onde o terapeuta já está trabalhando: a gravação começa por um único controle aqui, não uma ferramenta separada.',
+        'l.h2.confirm':'Confirme a captura antes de pedir que o terapeuta confie nela',
+        'l.confirm.p':`Depois de gravada, a nota não desaparece numa caixa preta. Ela aparece como uma onda sonora com sua duração, e uma ação explícita de enviar. Essa pausa importa mais do que parece: o terapeuta acabou de falar informação clínica em voz alta sobre uma criança, e o próximo trabalho da interface é provar que capturou aquilo antes de deixá-lo seguir em frente.`,
+        'l.cap2':'A nota capturada antes de ser enviada, duração e onda sonora visíveis, com uma forma clara de descartar e regravar.',
+        'l.h2.uploads':'Uploads falham. A interface precisa dizer isso, claramente',
+        'l.uploads.p':`Uma nota de voz gravada numa clínica nem sempre chega ao servidor na primeira tentativa. Desenhei o estado de falha como uma afirmação direta e específica, "sua nota de voz não foi enviada," com um retry óbvio, em vez de um spinner que desiste silenciosamente ou um código de erro que o terapeuta precisa interpretar. Para uma ferramenta que lida com documentação clínica, falha silenciosa é pior que falha feia.`,
+        'l.uploads.pull':'Falha silenciosa é pior que falha feia, especialmente numa ferramenta que lida com documentação clínica.',
+        'l.cap3':'O estado de falha, dito claramente: o que aconteceu, e uma forma direta de corrigir, sem ambiguidade sobre se a gravação está segura.',
+        'l.h2.payoff':'O resultado: um rascunho, não um formulário',
+        'l.payoff.p1':'É nisso que as duas horas colapsam. O LIAM transforma o áudio num primeiro rascunho de cada campo obrigatório: check-in de saúde, reforçadores usados, desafios observados, resumo da sessão, pontos de discussão clínica, cada um pré-preenchido e claramente marcado como sugestão do LIAM, com uma cópia de um clique para o campo real. O trabalho do terapeuta muda de escrever o relatório para editar um: ler, corrigir o que está errado, manter o que está certo, enviar.',
+        'l.payoff.p2':`Nada aqui se envia sozinho. Todo campo continua editável, e a ação de "Salvar" fica com o terapeuta: o LIAM propõe, o clínico decide.`,
+        'l.cap4':'O formulário de nota de sessão: todo campo carrega uma sugestão rascunhada pelo LIAM que o terapeuta revisa e copia, nunca enviada em nome dele.',
+        'l.h2.trustloop':'Confiança não é uma decisão única. É um loop',
+        'l.trustloop.p':'Uma funcionalidade de IA que piora silenciosamente, ou melhora silenciosamente, ensina as pessoas a parar de confiar de qualquer jeito. Adicionei um prompt leve de feedback direto no fluxo: você está satisfeito com as sugestões do LIAM agora, sim ou não, com espaço para dizer por quê, para o desvio na qualidade das sugestões aparecer no uso real em vez de esperar um chamado de suporte ou um hábito abandonado.',
+        'l.cap5':'Um loop de feedback direto sobre as próprias sugestões: o mecanismo que mantém a qualidade do output do LIAM visível em vez de assumida.',
+        'l.h2.defend':'O que eu defenderia numa design review',
+        'l.defend.p':'A decisão de design por trás das cinco telas é a mesma: uma funcionalidade de IA conquista confiança através de mecânica visível, não de confiança implícita. Mostre a captura antes de pedir a gravação. Declare a falha em vez de escondê-la. Marque toda sugestão como sugestão. Pergunte, explicitamente, se o resultado ainda está bom. Nada disso é sobre fazer o LIAM parecer inteligente. É sobre torná-lo seguro para confiar em algo tão consequente quanto um registro clínico.',
+        'l.m1':'Tempo de documentação, por sessão', 'l.m2':'Campos revisados e editáveis antes do envio',
+        'l.note':`<strong>Como foi medido:</strong> o tempo de documentação compara o tempo auto-reportado pelos terapeutas para completar um relatório de sessão antes do LIAM contra o tempo de revisar e enviar com o rascunho do LIAM já pronto.`,
+        'l.h2.bigpicture':'Onde isso se encaixa no quadro geral',
+        'l.bigpicture.p':'O LIAM foi lançado depois que o app das famílias já tinha ido de 8% para 62% de uso diário. Com as famílias realmente engajadas, a restrição se moveu para o outro lado da plataforma: os terapeutas produzindo o conteúdo em que as famílias agora confiavam. Mesmo instinto, público diferente: achar onde alguém está gastando esforço em algo que não é o trabalho real, e comprimir isso numa decisão que a pessoa consegue tomar rápido.',
+        'close.h2':'Quer as partes que não couberam aqui?',
+        'close.p.liam':'Fico à vontade pra passar pelas escolhas de modelo, como lidamos com precisão da linguagem clínica, ou o que o loop de feedback já revelou até agora.',
+        'close.cta1':'Entrar em contato', 'close.cta2.liam':'Ler o case do app Genial',
+        'footer.portfolio':'Portfólio', 'footer.email':'Email',
+        'modal.label':'Vamos conversar', 'modal.h3':'Como você prefere falar comigo?', 'modal.p':'Escolha o que for mais rápido pra você.',
+        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':'Diariamente, 17h–19h'
+      }
+    };
+
+    function apply(lang){
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      const dict = I18N[lang] || I18N.en;
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const v = dict[el.dataset.i18n];
+        if(v !== undefined) el.innerHTML = v;
+      });
+      document.querySelectorAll('.lang-toggle button').forEach(b=> b.classList.toggle('active', b.dataset.lang === lang));
+      document.dispatchEvent(new CustomEvent('langchange', {detail:{lang}}));
+    }
+    window.currentLang = function(){ return localStorage.getItem('site-lang') === 'pt' ? 'pt' : 'en'; };
+    document.querySelectorAll('.lang-toggle button').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        localStorage.setItem('site-lang', b.dataset.lang);
+        apply(b.dataset.lang);
+      });
+    });
+    apply(window.currentLang());
+  })();
+</script>
+
+</body>
+</html>

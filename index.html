@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canna Design · Guilherme Cannalonga, Senior Product Designer</title>
+<meta name="description" content="Senior Product Designer turning complex healthcare, logistics, and consumer-trust systems into decisions people can act on, currently designing for platforms serving 20M+ users monthly.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#0c0c0d">
+
+<!-- Social preview (Open Graph + Twitter).
+     NOTE: replace https://your-domain.com below with your real deployed URL after publishing,
+     so link previews on LinkedIn/Slack/iMessage resolve the absolute image path. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Guilherme Cannalonga">
+<meta property="og:title" content="Guilherme Cannalonga · Senior Product Designer">
+<meta property="og:description" content="I turn complex data into fast decisions. Senior Product Designer across healthcare, enterprise logistics, and consumer trust, designing for platforms serving 20M+ users monthly.">
+<meta property="og:url" content="https://your-domain.com/">
+<meta property="og:image" content="https://your-domain.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Guilherme Cannalonga · Senior Product Designer">
+<meta name="twitter:description" content="I turn complex data into fast decisions. Designing for platforms serving 20M+ users monthly.">
+<meta name="twitter:image" content="https://your-domain.com/assets/og-image.jpg">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c0d;
+    --bg-alt:#141416;
+    --card:#18181b;
+    --border:#27272a;
+    --text:#f2f2f0;
+    --text-dim:#a6a6ab;
+    --text-faint:#808085;
+    --gold:#f2a93b;
+    --gold-dim:#c98f2e;
+    --purple:#7c6fe0;
+    --max:1120px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter', -apple-system, sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    cursor:default;
+  }
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.02em;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  section{position:relative;}
+
+  /* grain + cursor glow */
+  .grain{
+    position:fixed; inset:0; z-index:2; pointer-events:none; opacity:0.035; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .cursor-glow{
+    position:fixed; top:0; left:0; width:520px; height:520px; z-index:1; pointer-events:none;
+    background:radial-gradient(circle, rgba(242,169,59,0.09), transparent 70%);
+    transform:translate(calc(var(--mx,50vw) - 260px), calc(var(--my,50vh) - 260px));
+    transition:opacity .4s ease;
+    opacity:0;
+  }
+  .cursor-glow.active{opacity:1;}
+
+  /* NAV — floating pill */
+  nav{
+    position:fixed; top:20px; left:50%; transform:translateX(-50%); z-index:100;
+    width:min(880px, calc(100% - 32px));
+    background:rgba(20,20,22,0.6); backdrop-filter:blur(16px) saturate(140%);
+    border:1px solid var(--border); border-radius:100px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    transition:padding .3s ease, background .3s ease, box-shadow .3s ease;
+  }
+  nav.scrolled{background:rgba(14,14,15,0.85); box-shadow:0 8px 24px rgba(0,0,0,0.4);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px; max-width:none; padding:0 10px 0 22px;}
+  .brand{display:flex; align-items:center; gap:10px; font-family:'Space Grotesk'; font-weight:700; font-size:14.5px;}
+  .brand .dot{width:8px; height:8px; border-radius:50%; background:var(--gold);}
+  .brand img{height:40px; width:auto; display:block;}
+  .navlinks{display:flex; gap:28px; font-size:13.5px; color:var(--text-dim); position:relative;}
+  .navlinks a{transition:color .2s; position:relative;}
+  .navlinks a:hover{color:var(--text);}
+  .navlinks a.active{color:var(--text);}
+  .nav-indicator{
+    position:absolute; bottom:-6px; height:2px; border-radius:2px; background:var(--gold);
+    transition:left .4s cubic-bezier(.16,1,.3,1), width .4s cubic-bezier(.16,1,.3,1), opacity .3s ease;
+    opacity:0; pointer-events:none;
+  }
+  .nav-cta{
+    position:relative; overflow:hidden;
+    font-size:13px; padding:9px 18px; border:1px solid var(--border); border-radius:100px;
+    transition:all .2s; background:rgba(255,255,255,0.03);
+    will-change:transform;
+  }
+  .nav-cta:hover{border-color:var(--gold); color:var(--gold); background:rgba(242,169,59,0.08);}
+  .nav-cta::after{
+    content:'→'; display:inline-block; width:0; opacity:0; margin-left:0; transform:translateX(-4px);
+    transition:width .25s cubic-bezier(.16,1,.3,1), opacity .2s ease, transform .25s cubic-bezier(.16,1,.3,1), margin .25s ease;
+    overflow:hidden; white-space:nowrap; vertical-align:middle;
+  }
+  .nav-cta:hover::after{width:12px; opacity:1; margin-left:6px; transform:translateX(0);}
+
+  .lang-toggle{display:flex; align-items:center; gap:2px; background:rgba(255,255,255,0.04); border:1px solid var(--border); border-radius:100px; padding:3px; flex-shrink:0;}
+  .lang-toggle button{font-family:'Space Grotesk'; font-size:11px; font-weight:600; padding:5px 10px; border-radius:100px; color:var(--text-faint); background:transparent; border:none; cursor:pointer; transition:all .2s;}
+  .lang-toggle button.active{background:var(--gold); color:#141414;}
+  .lang-toggle button:not(.active):hover{color:var(--text);}
+
+  @media (max-width:768px){ .navlinks{display:none;} }
+
+  /* HERO */
+  .hero{
+    min-height:100vh; min-height:100svh; display:flex; flex-direction:column; justify-content:center;
+    padding-top:96px; padding-bottom:48px;
+    position:relative;
+    isolation:isolate;
+  }
+  .hero::before{
+    content:''; position:absolute; inset:0; z-index:-2;
+    background-image:url('assets/cover-web.jpg');
+    background-size:cover; background-position:center 35%;
+  }
+  .hero::after{
+    content:''; position:absolute; inset:0; z-index:-1;
+    background:
+      linear-gradient(180deg, rgba(12,12,13,0.35) 0%, rgba(12,12,13,0.55) 55%, var(--bg) 100%),
+      radial-gradient(ellipse 700px 400px at 15% 10%, rgba(242,169,59,0.08), transparent 60%);
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:12px; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold);
+    border:1px solid rgba(242,169,59,0.3); padding:6px 14px; border-radius:100px;
+    margin-bottom:26px; background:rgba(242,169,59,0.06);
+  }
+  .hero h1{
+    font-size:clamp(28px, 4.4vw, 54px);
+    line-height:1.1;
+    max-width:860px;
+    margin-bottom:22px;
+  }
+  .hero h1 .accent{color:var(--gold);}
+  .hero p.sub{
+    font-size:clamp(15px, 1.7vw, 17.5px); color:var(--text-dim); max-width:600px; margin-bottom:36px;
+  }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:14px; font-weight:500; padding:11px 20px; border-radius:10px;
+    transition:all .2s; will-change:transform;
+  }
+  .btn-primary{background:var(--gold); color:#141414;}
+  .btn-primary:hover{background:#ffc766; transform:translateY(-1px); box-shadow:0 10px 28px rgba(242,169,59,0.25);}
+  .btn-ghost{border:1px solid var(--border); color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-dim); transform:translateY(-1px);}
+  .btn::after{
+    content:'→'; display:inline-block; width:0; opacity:0; transform:translateX(-4px);
+    transition:width .25s cubic-bezier(.16,1,.3,1), opacity .2s ease, transform .25s cubic-bezier(.16,1,.3,1);
+    overflow:hidden; white-space:nowrap;
+  }
+  .btn:hover::after{width:14px; opacity:1; transform:translateX(0);}
+
+  .stat-row{
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(170px,1fr));
+    gap:1px; background:var(--border); border:1px solid var(--border); border-radius:14px; overflow:hidden;
+    max-width:820px;
+  }
+  .stat{background:var(--bg-alt); padding:20px 22px;}
+  .stat .num{font-family:'Space Grotesk'; font-size:23px; font-weight:700; color:var(--gold); margin-bottom:4px;}
+  .stat .label{font-size:12px; color:var(--text-faint); line-height:1.4;}
+
+  /* PROOF STRIP — seamless logo marquee */
+  .proof{padding:32px 0; border-top:1px solid var(--border); border-bottom:1px solid var(--border); overflow:hidden;}
+  .proof .wrap{display:flex; align-items:center; gap:40px;}
+  .proof-label{font-size:12px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap; flex-shrink:0;}
+  .proof-marquee{
+    flex:1; overflow:hidden; min-width:0;
+    -webkit-mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    mask-image:linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .proof-track{display:flex; gap:52px; width:max-content; animation:proofScroll 24s linear infinite;}
+  .proof-marquee:hover .proof-track{animation-play-state:paused;}
+  .proof-track span{font-family:'Space Grotesk'; font-weight:600; font-size:16px; color:var(--text-faint); white-space:nowrap; transition:color .2s;}
+  .proof-track span:hover{color:var(--text-dim);}
+  @keyframes proofScroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion:reduce){ .proof-track{animation:none;} }
+
+  /* SECTION HEADERS */
+  .section-pad{padding:120px 0;}
+  .section-head{max-width:680px; margin-bottom:64px;}
+  .section-label{font-size:12.5px; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); margin-bottom:16px; display:block;}
+  .section-head h2{font-size:clamp(26px,3.6vw,40px); margin-bottom:16px;}
+  .section-head p{color:var(--text-dim); font-size:16px;}
+
+  /* CASE STUDY CARD */
+  .case{
+    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
+    padding:64px 0; border-top:1px solid var(--border);
+    scroll-margin-top:100px;
+  }
+  .case:last-child{border-bottom:1px solid var(--border);}
+  .case-visual{
+    aspect-ratio:4/3; border-radius:16px; position:relative; overflow:hidden;
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--border);
+  }
+  .case-tag{
+    display:inline-block; font-size:11.5px; text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--text-faint); margin-bottom:14px;
+  }
+  .wip-badge{
+    display:inline-flex; align-items:center; gap:7px; font-size:11px; text-transform:uppercase;
+    letter-spacing:0.08em; color:var(--text-dim); border:1px dashed var(--border);
+    padding:6px 12px; border-radius:100px; margin-bottom:14px;
+  }
+  .wip-badge .dot{width:6px; height:6px; border-radius:50%; background:var(--gold); animation:wipPulse 1.8s ease-in-out infinite;}
+  @keyframes wipPulse{0%,100%{opacity:1;} 50%{opacity:0.35;}}
+
+  /* RA visual: an annotated design frame — live panel + spec notes, all inside the image */
+  .ra-frame{
+    width:100%; height:100%; padding:22px; display:grid;
+    grid-template-columns:1.08fr 0.92fr; gap:18px; align-items:center;
+  }
+  .ra-notes{display:flex; flex-direction:column; gap:15px; min-width:0;}
+  .ra-note{display:grid; grid-template-columns:auto 1fr; gap:3px 9px; align-items:baseline;}
+  .ra-note .n{
+    grid-row:1 / span 2; font-family:'Space Grotesk'; font-size:10px; font-weight:700;
+    color:#6bcf7f; opacity:0.75; letter-spacing:0.04em; padding-top:1px;
+  }
+  .ra-note .t{
+    font-family:'Space Grotesk'; font-size:10.5px; font-weight:600; text-transform:uppercase;
+    letter-spacing:0.07em; color:#6bcf7f;
+  }
+  .ra-note .d{font-size:11.5px; line-height:1.5; color:var(--text-dim);}
+  @media (max-width:860px){
+    .case-visual.ra-visual{aspect-ratio:auto;}
+    .ra-frame{grid-template-columns:1fr; gap:22px; padding:24px;}
+    .ra-notes{gap:13px;}
+  }
+
+  /* RA: LIVE, PLAYABLE trust panel — drag the signals, watch the call change */
+  .trust-demo{
+    --tone:#6bcf7f;
+    width:100%; background:#161618; border:1px solid rgba(255,255,255,0.08);
+    border-radius:14px; padding:15px; display:flex; flex-direction:column; gap:11px;
+    box-shadow:0 24px 50px rgba(0,0,0,0.45); position:relative; z-index:6;
+  }
+  .trust-demo .td-head{display:flex; align-items:center; gap:10px;}
+  .trust-demo .td-logo{
+    width:32px; height:32px; border-radius:9px; flex-shrink:0;
+    background:linear-gradient(135deg,#2a2a2e,#1c1c1f); border:1px solid rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk'; font-size:14px; font-weight:700; color:var(--text-faint);
+  }
+  .trust-demo .td-brand{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .trust-demo .td-name{font-size:13px; font-weight:600; color:var(--text);}
+  .trust-demo .td-verified{
+    display:inline-flex; align-items:center; gap:4px; font-size:10.5px; font-weight:600;
+    color:var(--tone); transition:color .3s ease;
+  }
+  .trust-demo .td-verified svg{width:11px; height:11px;}
+  .trust-demo .td-score{
+    display:flex; align-items:center; gap:11px; padding:11px 0;
+    border-top:1px solid rgba(255,255,255,0.06); border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .trust-demo .td-ring{
+    --p:0.82;
+    width:48px; height:48px; border-radius:50%; flex-shrink:0; position:relative;
+    background:conic-gradient(var(--tone) 0turn calc(var(--p) * 1turn), rgba(255,255,255,0.08) calc(var(--p) * 1turn) 1turn);
+    display:flex; align-items:center; justify-content:center;
+    transition:background .25s ease;
+  }
+  .trust-demo .td-ring::after{content:''; position:absolute; inset:5px; border-radius:50%; background:#161618;}
+  .trust-demo .td-ring b{
+    position:relative; z-index:1; font-family:'Space Grotesk'; font-weight:700;
+    font-size:14px; color:var(--tone); transition:color .3s ease;
+  }
+  .trust-demo .td-verdict{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .trust-demo .td-vtitle{font-size:12px; font-weight:600; color:var(--tone); transition:color .3s ease;}
+  .trust-demo .td-vsub{font-size:10.5px; color:var(--text-faint); line-height:1.4;}
+  .trust-demo .td-controls{display:flex; flex-direction:column; gap:9px;}
+  .trust-demo .td-ctl{display:flex; flex-direction:column; gap:5px;}
+  .trust-demo .td-ctl .td-lab{display:flex; justify-content:space-between; align-items:baseline; gap:8px;}
+  .trust-demo .td-ctl .td-lab span{font-size:10.5px; color:var(--text-dim); letter-spacing:0.01em;}
+  .trust-demo .td-ctl .td-lab em{
+    font-style:normal; font-family:'Space Grotesk'; font-size:11px; font-weight:600; color:var(--text);
+  }
+  .trust-demo input[type=range]{
+    -webkit-appearance:none; appearance:none; width:100%; height:4px; border-radius:2px;
+    background:rgba(255,255,255,0.12); outline:none; cursor:grab; margin:0;
+  }
+  .trust-demo input[type=range]:active{cursor:grabbing;}
+  .trust-demo input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none; appearance:none; width:14px; height:14px; border-radius:50%;
+    background:var(--tone); border:2px solid #161618; cursor:grab;
+    box-shadow:0 0 0 1px var(--tone), 0 2px 6px rgba(0,0,0,0.5); transition:background .3s ease, box-shadow .3s ease;
+  }
+  .trust-demo input[type=range]::-moz-range-thumb{
+    width:12px; height:12px; border-radius:50%; background:var(--tone);
+    border:2px solid #161618; cursor:grab; box-shadow:0 0 0 1px var(--tone);
+  }
+  .trust-demo input[type=range]:focus-visible{outline:2px solid var(--tone); outline-offset:4px;}
+  .trust-demo .td-hint{
+    display:flex; align-items:center; gap:6px; font-size:10px; color:var(--text-faint);
+    letter-spacing:0.04em; text-transform:uppercase; margin-top:1px;
+  }
+  .trust-demo .td-hint .pulse{
+    width:5px; height:5px; border-radius:50%; background:var(--tone);
+    animation:wipPulse 1.8s ease-in-out infinite; flex-shrink:0;
+  }
+
+  /* FIGMA-STYLE POINTER — the visitor's own cursor, rendered as a collaborator cursor */
+  .fig-pointer{
+    position:fixed; top:0; left:0; z-index:2000; pointer-events:none;
+    display:flex; align-items:flex-start; opacity:0; transition:opacity .25s ease;
+    will-change:transform;
+  }
+  .fig-pointer.on{opacity:1;}
+  .fig-pointer svg{width:20px; height:20px; display:block; filter:drop-shadow(0 2px 5px rgba(0,0,0,0.45));}
+  .fig-pointer .tag{
+    margin:11px 0 0 -1px; padding:3px 8px; border-radius:7px; white-space:nowrap;
+    font-family:'Space Grotesk'; font-size:11px; font-weight:600; color:#0c0c0d;
+    background:var(--gold); box-shadow:0 4px 12px rgba(0,0,0,0.35);
+    transform-origin:left center; transition:transform .18s cubic-bezier(.16,1,.3,1);
+  }
+  .fig-pointer.tap .tag{transform:scale(0.9);}
+  body.fig-cursor-on, body.fig-cursor-on *{cursor:none !important;}
+  @media (prefers-reduced-motion:reduce){ .fig-pointer{display:none;} }
+  .case h3{font-size:clamp(22px,3vw,30px); margin-bottom:18px; line-height:1.15;}
+  .case .desc{color:var(--text-dim); font-size:15.5px; margin-bottom:24px;}
+  .case .metrics{display:flex; gap:28px; flex-wrap:wrap; margin-bottom:28px;}
+  .case .metrics .m-num{font-family:'Space Grotesk'; font-size:22px; font-weight:700; color:var(--text);}
+  .case .metrics .m-label{font-size:12px; color:var(--text-faint);}
+  .case-link{font-size:14px; color:var(--gold); display:inline-flex; align-items:center; gap:6px; font-weight:500;}
+  .case-link:hover{gap:10px;}
+  .case-link svg{transition:transform .2s;}
+
+  /* mock phone / dashboard visuals (abstract placeholders) */
+  .mock{width:100%; height:100%; position:relative;}
+  .mock-phone{
+    width:56%; margin:0 auto; height:88%; background:#1c1c1f; border-radius:28px;
+    border:1px solid #2c2c30; padding:14px; display:flex; flex-direction:column; gap:8px;
+  }
+  .mock-phone .bar{height:10px; border-radius:4px; background:rgba(255,255,255,0.08);}
+  .mock-phone .bar.w60{width:60%;} .mock-phone .bar.w40{width:40%;} .mock-phone .bar.w80{width:80%;}
+  .mock-phone .card{flex:1; border-radius:12px; margin-top:6px;}
+  .mock-dash{width:100%; height:100%; padding:20px; display:grid; grid-template-columns:1.3fr 1fr; grid-template-rows:auto auto; gap:12px;}
+  .mock-dash .block{border-radius:10px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.06);}
+  .glow-purple{background:radial-gradient(circle at 30% 20%, rgba(124,111,224,0.25), transparent 60%), var(--bg-alt);}
+  .glow-gold{background:radial-gradient(circle at 70% 20%, rgba(242,169,59,0.2), transparent 60%), var(--bg-alt);}
+  .glow-red{background:radial-gradient(circle at 40% 70%, rgba(224,111,111,0.18), transparent 60%), var(--bg-alt);}
+  .glow-teal{background:radial-gradient(circle at 70% 20%, rgba(90,169,196,0.22), transparent 60%), var(--bg-alt);}
+  .glow-green{background:radial-gradient(circle at 40% 70%, rgba(107,207,127,0.2), transparent 60%), var(--bg-alt);}
+
+  /* iPhone-mockup hero inside a case-visual (transparent PNG, no extra chrome) */
+  .phone-hero{
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center; padding:28px;
+  }
+  .phone-hero img{
+    max-width:100%; max-height:100%; width:auto; height:auto; display:block;
+    filter:drop-shadow(0 26px 46px rgba(0,0,0,0.55));
+  }
+  /* device overflows the top edge of its frame — sized by WIDTH so the
+     case keeps exactly the same footprint as every other case */
+  .case-visual.bleed .phone-hero{
+    padding:0; overflow:visible; position:relative; z-index:2;
+  }
+  .case-visual.bleed .phone-hero img{
+    max-width:none; max-height:none;
+    width:64%; height:auto;
+    transform:translateY(-6%) translateZ(50px);
+    filter:drop-shadow(0 30px 55px rgba(0,0,0,0.65)) drop-shadow(0 6px 14px rgba(0,0,0,0.35));
+  }
+  .phone-hero .img-pending{
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px;
+    width:60%; min-height:70%; padding:24px; text-align:center; border-radius:14px;
+    background:repeating-linear-gradient(45deg,#161619,#161619 12px,#1a1a1e 12px,#1a1a1e 24px);
+    border:1px dashed var(--border);
+  }
+  .phone-hero .img-pending .t{font-family:'Space Grotesk'; font-size:13px; color:var(--text-dim);}
+  .phone-hero .img-pending .s{font-size:11.5px; color:var(--text-faint); line-height:1.5;}
+
+  /* auto-playing carousel — clean full-bleed real screenshots, no fake hardware */
+  .kruzer-carousel{position:relative; width:100%; height:100%; overflow:hidden;}
+  .kruzer-carousel img{
+    position:absolute; top:34px; left:0; right:0; bottom:0; width:100%; height:calc(100% - 34px);
+    object-fit:cover; object-position:top center;
+    transition:opacity .5s ease;
+  }
+  .shot-bar{
+    position:absolute; top:0; left:0; right:0; z-index:4; height:34px;
+    display:flex; align-items:center; gap:10px; padding:0 14px;
+    background:#1c1c1e;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+  }
+  .shot-bar .dot{width:7px; height:7px; border-radius:50%;}
+  .shot-bar span{font-size:11px; color:rgba(255,255,255,0.65); font-family:'Space Grotesk'; letter-spacing:0.02em;}
+  .kruzer-carousel::after{
+    content:''; position:absolute; left:0; right:0; bottom:0; top:34px; z-index:2; pointer-events:none;
+    background:linear-gradient(180deg, rgba(10,10,11,0.18) 0%, transparent 14%, transparent 80%, rgba(10,10,11,0.5) 100%);
+  }
+  .carousel-dots{
+    position:absolute; left:50%; bottom:12px; transform:translateX(-50%); z-index:5;
+    display:flex; gap:7px; padding:7px 10px; border-radius:100px;
+    background:rgba(10,10,11,0.55); backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.08);
+  }
+  .carousel-dots button{
+    width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.4); border:none; padding:0;
+    cursor:pointer; transition:all .3s ease;
+  }
+  .carousel-dots button.active{background:var(--gold); width:20px; border-radius:3px;}
+
+  /* RANGE STRIP */
+  .range-grid{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden;}
+  .range-item{background:var(--bg-alt); padding:32px; transition:transform .3s cubic-bezier(.16,1,.3,1), box-shadow .3s ease; position:relative;}
+  .range-item:hover{transform:translateY(-4px); box-shadow:0 20px 40px rgba(0,0,0,0.35); z-index:1;}
+  .range-item h4{font-size:17px; margin-bottom:10px;}
+  .range-item p{font-size:14px; color:var(--text-dim);}
+  .range-item p strong{color:var(--text); font-weight:600;}
+  .range-item .range-tag{font-size:11.5px; color:var(--text-faint); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:10px; display:block;}
+  .range-shots{display:flex; align-items:flex-end; gap:10px; margin-top:18px;}
+  .range-shots img{
+    height:84px; width:auto; border-radius:8px; border:1px solid var(--border);
+    box-shadow:0 12px 22px rgba(0,0,0,0.4); opacity:0.9; cursor:zoom-in;
+    transition:opacity .25s ease, transform .25s ease;
+  }
+  .range-shots img:hover{opacity:1; transform:translateY(-3px);}
+
+  /* LIGHTBOX */
+  .lightbox{
+    position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center;
+    padding:5vh 5vw; background:rgba(8,8,9,0.9); backdrop-filter:blur(6px);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox.show{opacity:1;}
+  .lightbox img{
+    max-width:100%; max-height:90vh; width:auto; height:auto; border-radius:10px;
+    box-shadow:0 30px 70px rgba(0,0,0,0.6); border:1px solid var(--border);
+    transform:scale(0.96); transition:transform .25s ease;
+  }
+  .lightbox.show img{transform:scale(1);}
+  .lightbox-close{
+    position:absolute; top:20px; right:24px; width:40px; height:40px; border-radius:50%;
+    background:rgba(255,255,255,0.06); border:1px solid var(--border); color:var(--text);
+    display:flex; align-items:center; justify-content:center; cursor:pointer;
+    transition:background .2s ease;
+  }
+  .lightbox-close:hover{background:rgba(255,255,255,0.14);}
+
+  /* TESTIMONIALS */
+  .tst-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:stretch;}
+  .tst-card{
+    position:relative; background:var(--bg-alt); border:1px solid var(--border);
+    border-radius:16px; padding:32px 28px 26px; overflow:hidden;
+    display:flex; flex-direction:column; height:100%;
+    transition:transform .3s cubic-bezier(.16,1,.3,1), border-color .3s ease, box-shadow .3s ease;
+  }
+  .tst-card:hover{transform:translateY(-4px); border-color:rgba(242,169,59,0.35); box-shadow:0 20px 40px rgba(0,0,0,0.35);}
+  .tst-card .quote-mark{
+    position:absolute; top:6px; right:18px; font-family:'Space Grotesk'; font-weight:700;
+    font-size:120px; line-height:1; color:var(--gold); opacity:0.08; pointer-events:none; user-select:none;
+  }
+  .tst-quote{position:relative; z-index:1; font-size:15px; line-height:1.65; color:var(--text-dim); margin-bottom:24px;}
+  .tst-quote strong{color:var(--text); font-weight:600;}
+  .tst-author{display:flex; align-items:center; gap:13px; margin-top:auto; padding-top:8px;}
+  .tst-avatar{
+    width:44px; height:44px; border-radius:50%; object-fit:cover; flex-shrink:0;
+    border:1px solid var(--border); background:var(--card);
+  }
+  .tst-avatar-fallback{
+    width:44px; height:44px; border-radius:50%; flex-shrink:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Grotesk'; font-size:15px; font-weight:600; color:var(--gold);
+    background:rgba(242,169,59,0.12); border:1px solid rgba(242,169,59,0.25);
+  }
+  .tst-meta{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .tst-name{font-size:14px; font-weight:600; color:var(--text);}
+  .tst-role{font-size:12px; color:var(--text-faint); line-height:1.35;}
+  .tst-dots{display:none; justify-content:center; gap:7px; margin-top:18px;}
+  .tst-dots button{
+    width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,0.22); border:none;
+    padding:0; cursor:pointer; transition:all .3s ease;
+  }
+  .tst-dots button.active{background:var(--gold); width:20px; border-radius:3px;}
+
+  /* ABOUT */
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:start;}
+  .about-photo{
+    aspect-ratio:0.85; border-radius:16px; background:var(--bg-alt); border:1px solid var(--border);
+    overflow:hidden; position:relative;
+  }
+  .about-photo img{
+    width:100%; height:100%; object-fit:cover; position:absolute; inset:0;
+  }
+  .about-photo::after{
+    content:''; position:absolute; inset:0; z-index:1;
+    background:linear-gradient(0deg, rgba(12,12,13,0.85) 0%, transparent 35%);
+  }
+  .about-photo .caption{
+    position:absolute; left:22px; bottom:20px; z-index:2;
+    font-family:'Space Grotesk'; font-size:13px; color:var(--text);
+    display:flex; align-items:center; gap:8px;
+  }
+  .about-photo .caption .dot{width:6px; height:6px; border-radius:50%; background:var(--gold);}
+  .about-text p{color:var(--text-dim); margin-bottom:18px; font-size:15.5px;}
+  .about-text .badge{
+    display:inline-flex; align-items:center; gap:8px; font-size:13px; color:var(--text-dim);
+    border:1px solid var(--border); padding:8px 14px; border-radius:100px; margin-top:8px;
+  }
+  .about-text .badge .dot{width:6px;height:6px;border-radius:50%;background:#6bcf7f;}
+
+  /* FOOTER / CONTACT */
+  footer{border-top:1px solid var(--border); padding:100px 0 48px;}
+  .contact-cta h2{font-size:clamp(28px,4vw,44px); max-width:640px; margin-bottom:24px;}
+  .contact-cta p{color:var(--text-dim); font-size:16px; margin-bottom:36px; max-width:520px;}
+  .foot-bottom{
+    margin-top:100px; padding-top:28px; border-top:1px solid var(--border);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;
+    font-size:13px; color:var(--text-faint);
+  }
+  .foot-links{display:flex; gap:24px;}
+  .foot-links a:hover{color:var(--text-dim);}
+
+  /* CONTACT MODAL */
+  .contact-modal{
+    position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center;
+    padding:20px; background:rgba(8,8,9,0.82); backdrop-filter:blur(6px);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .contact-modal.open{display:flex;}
+  .contact-modal.show{opacity:1;}
+  .contact-modal-card{
+    position:relative; width:100%; max-width:420px; background:var(--bg-alt); border:1px solid var(--border);
+    border-radius:16px; padding:32px; box-shadow:0 30px 70px rgba(0,0,0,0.6);
+    transform:translateY(12px) scale(0.98); transition:transform .25s ease;
+  }
+  .contact-modal.show .contact-modal-card{transform:translateY(0) scale(1);}
+  .contact-modal-card h3{font-size:20px; margin:4px 0 6px;}
+  .contact-modal-card > p{font-size:14px; color:var(--text-dim); margin-bottom:24px;}
+  .contact-modal-close{
+    position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%;
+    background:rgba(255,255,255,0.05); border:1px solid var(--border); color:var(--text-dim);
+    display:flex; align-items:center; justify-content:center; cursor:pointer; transition:all .2s;
+  }
+  .contact-modal-close:hover{background:rgba(255,255,255,0.12); color:var(--text);}
+  .contact-modal-options{display:flex; flex-direction:column; gap:10px;}
+  .contact-option{
+    display:flex; align-items:center; gap:14px; padding:16px; border-radius:12px;
+    border:1px solid var(--border); background:var(--card); transition:all .2s ease;
+  }
+  .contact-option:hover{border-color:var(--gold); background:rgba(242,169,59,0.06); transform:translateX(2px);}
+  .contact-option .co-icon{
+    width:38px; height:38px; border-radius:10px; background:rgba(242,169,59,0.1); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .contact-option .co-body{flex:1; display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .contact-option .co-title{font-size:14.5px; font-weight:500; color:var(--text);}
+  .contact-option .co-sub{font-size:12.5px; color:var(--text-faint); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .contact-option .co-arrow{color:var(--text-faint); transition:transform .2s, color .2s; flex-shrink:0;}
+  .contact-option:hover .co-arrow{transform:translateX(3px); color:var(--gold);}
+
+  /* ============ RESPONSIVE ============ */
+
+  /* Tablet / small desktop */
+  @media (max-width:1024px){
+    .wrap{padding:0 28px;}
+    .section-pad{padding:88px 0;}
+    .case{gap:44px;}
+    .about-grid{gap:48px;}
+  }
+
+  /* Tablet portrait — stack two-column layouts */
+  @media (max-width:860px){
+    .case{grid-template-columns:1fr; gap:32px; padding:48px 0;}
+    .case-visual.bleed .phone-hero img{width:58%; transform:translateY(-5%);}
+    .about-grid{grid-template-columns:1fr; gap:36px;}
+    .range-grid{grid-template-columns:1fr;}
+    .tst-grid{grid-template-columns:1fr;}
+    .case-visual{order:-1;}
+    .section-pad{padding:72px 0;}
+    .section-head{margin-bottom:44px;}
+    .about-photo{max-width:420px; aspect-ratio:1.1;}
+  }
+
+  /* Large phones / small tablets */
+  @media (max-width:640px){
+    .wrap{padding:0 20px;}
+    nav{top:12px; width:calc(100% - 20px);}
+    nav .wrap{padding:0 8px 0 16px;}
+    .brand img{height:30px;}
+    .navlinks{display:none;}
+    .nav-cta{padding:8px 14px; font-size:12.5px;}
+    .lang-toggle button{padding:4px 8px; font-size:10.5px;}
+
+    .hero{padding-top:84px; padding-bottom:36px;}
+    .hero::before{background-position:28% 40%;}
+    .eyebrow{font-size:11px; padding:5px 12px; margin-bottom:20px;}
+    .hero h1{margin-bottom:18px;}
+    .hero p.sub{margin-bottom:26px;}
+    .hero-ctas{flex-direction:column; align-items:stretch; margin-bottom:28px; gap:10px;}
+    .btn{justify-content:center; text-align:center;}
+    .stat-row{grid-template-columns:1fr 1fr; max-width:none;}
+
+    .proof{padding:24px 0;}
+    .proof .wrap{flex-direction:column; align-items:flex-start; gap:12px;}
+    .proof-marquee{width:100%;}
+    .proof-track span{font-size:14.5px;}
+
+    .section-head h2{font-size:clamp(22px,6vw,30px);}
+    .case h3{font-size:clamp(20px,5.5vw,26px);}
+    .case .desc{font-size:14.5px;}
+    .case .metrics{gap:18px 24px;}
+    .range-item{padding:24px;}
+    .about-photo{max-width:none; aspect-ratio:1;}
+    .about-photo .caption{font-size:12px;}
+
+    /* testimonials: one-card-per-screen swipe carousel on mobile */
+    .tst-wrap{position:relative;}
+    .tst-grid{
+      display:flex; flex-direction:row; grid-template-columns:none; align-items:stretch;
+      gap:16px; overflow-x:auto; scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:4px;
+    }
+    .tst-grid::-webkit-scrollbar{display:none;}
+    .tst-card{
+      flex:0 0 100%; width:100%; box-sizing:border-box;
+      scroll-snap-align:center; scroll-snap-stop:always;
+    }
+    .tst-dots{display:flex;}
+
+    footer{padding:64px 0 32px;}
+    .foot-bottom{margin-top:56px; flex-direction:column; align-items:flex-start; gap:12px;}
+  }
+
+  /* Small phones */
+  @media (max-width:400px){
+    .stat-row{grid-template-columns:1fr;}
+    .hero h1{font-size:26px;}
+    .brand img{height:26px;}
+    .eyebrow{white-space:normal;}
+  }
+
+  /* Respect no-hover / touch devices: drop cursor glow + tilt cleanly */
+  @media (hover:none){
+    .cursor-glow{display:none;}
+  }
+
+  .reveal{
+    opacity:0; transform:translateY(28px) scale(0.98); filter:blur(6px);
+    transition:opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1), filter .9s cubic-bezier(.16,1,.3,1);
+  }
+  .reveal.in{opacity:1; transform:translateY(0) scale(1); filter:blur(0);}
+
+  /* staggered children inside a .stagger container */
+  .stagger > *{
+    opacity:0; transform:translateY(20px); transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+  }
+  .stagger.in > *{opacity:1; transform:translateY(0);}
+  .stagger.in > *:nth-child(1){transition-delay:.05s;}
+  .stagger.in > *:nth-child(2){transition-delay:.15s;}
+  .stagger.in > *:nth-child(3){transition-delay:.25s;}
+  .stagger.in > *:nth-child(4){transition-delay:.35s;}
+  .stagger.in > *:nth-child(5){transition-delay:.45s;}
+
+  /* tilt + reveal wipe on case visuals */
+  .case-visual{
+    clip-path:inset(0 0 0 0 round 16px);
+    transition:transform .12s ease-out;
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+  .case-visual::before{
+    content:''; position:absolute; inset:-1px; border-radius:16px;
+    background:linear-gradient(135deg, rgba(255,255,255,0.06), transparent 40%);
+    pointer-events:none;
+  }
+  .case-visual .mock, .case-visual .mock-dash{transform:translateZ(30px);}
+  .case-visual .kruzer-carousel{transform:translateZ(30px);}
+
+  /* BLEED VARIANT — device breaks out of the square frame (layer over layer) */
+  .case-visual.bleed{
+    clip-path:none; overflow:visible;
+  }
+  .case-visual.bleed::before{
+    /* keep the sheen on the frame itself, behind the device */
+    z-index:0;
+  }
+
+  /* count-up numbers get a subtle pop */
+  .num.counting{color:var(--gold);}
+
+  ::selection{background:var(--gold); color:#141414;}
+
+  /* respect users who've asked for less motion */
+  @media (prefers-reduced-motion:reduce){
+    *, *::before, *::after{
+      animation-duration:0.01ms !important; animation-iteration-count:1 !important;
+      transition-duration:0.01ms !important; scroll-behavior:auto !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<nav id="siteNav">
+  <div class="wrap">
+    <div class="brand" id="brandSlot"><img src="assets/logo.png" alt="Canna Design · Guilherme Cannalonga"></div>
+    <div class="navlinks" id="navLinks">
+      <a href="#work" data-i18n="nav.work">Work</a>
+      <a href="#range" data-i18n="nav.other">Other work</a>
+      <a href="#words" data-i18n="nav.testimonials">Testimonials</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <span class="nav-indicator" id="navIndicator"></span>
+    </div>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="lang-toggle">
+        <button type="button" data-lang="en">EN</button>
+        <button type="button" data-lang="pt">PT</button>
+      </div>
+      <a class="nav-cta" href="#contact" data-contact-trigger data-i18n="nav.cta">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow" data-i18n="hero.eyebrow">Greater Boston, MA · On-site, hybrid, or remote</span>
+    <h1 data-i18n="hero.h1">I design the moment complex data becomes <span class="accent">a fast decision.</span></h1>
+    <p class="sub" data-i18n="hero.sub">Senior Product Designer turning complex systems in healthcare, enterprise logistics, and consumer trust into decisions people can act on. Currently designing for platforms that serve 20M+ users a month.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#work" data-i18n="hero.cta1">See the work</a>
+      <a class="btn btn-ghost" href="mailto:cannalongadesign@gmail.com" data-contact-trigger>cannalongadesign@gmail.com</a>
+    </div>
+    <div class="stat-row reveal stagger">
+      <div class="stat"><div class="num">2h → 25min</div><div class="label" data-i18n="stat.liam.label">Clinical documentation time, via an AI assistant I designed</div></div>
+      <div class="stat"><div class="num" data-countup="675" data-suffix="%">0%</div><div class="label" data-i18n="stat.genial.label">DAU growth in one year at Genial Care</div></div>
+      <div class="stat"><div class="num" data-countup="40" data-suffix="%">0%</div><div class="label" data-i18n="stat.compass.label">Fewer UI inconsistencies after building Compass DS</div></div>
+      <div class="stat"><div class="num" data-countup="20" data-suffix="M+">0M+</div><div class="label" data-i18n="stat.ra.label">Monthly users on the platform I design for today</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="proof">
+  <div class="wrap">
+    <span class="proof-label" data-i18n="proof.label">Where I've worked</span>
+    <div class="proof-marquee">
+      <div class="proof-track">
+        <span>7COMm</span>
+        <span>Genial Care</span>
+        <span>Modal</span>
+        <span>Kruzer</span>
+        <span>Modal Bank</span>
+        <span>Matri Bank</span>
+        <span>Reclame Aqui</span>
+        <span>Shock IT</span>
+        <span>7COMm</span>
+        <span>Genial Care</span>
+        <span>Modal</span>
+        <span>Kruzer</span>
+        <span>Modal Bank</span>
+        <span>Matri Bank</span>
+        <span>Reclame Aqui</span>
+        <span>Shock IT</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section id="work" class="section-pad" style="padding-top:72px;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-label" data-i18n="work.label">Selected work</span>
+      <h2 data-i18n="work.h2">Same instinct, three different worlds.</h2>
+      <p data-i18n="work.p">Healthcare, enterprise logistics, and consumer trust are different industries, but the job is the same: turn complexity into a decision someone can act on immediately.</p>
+    </div>
+
+    <!-- CASE 1: Genial App -->
+    <div class="case reveal" id="case-genial-app">
+      <div class="case-visual glow-purple bleed">
+        <div class="phone-hero" id="genialHero">
+          <img src="assets/genial-hero.webp" alt="Genial Care family app, main screen">
+        </div>
+      </div>
+      <div>
+        <span class="case-tag" data-i18n="case.genial.tag">Case 01 · Healthcare · Product Growth · 2022–2024</span>
+        <h3 data-i18n="case.genial.h3">Turning a forgotten app into the tool 62% of families open every day</h3>
+        <p class="desc" data-i18n="case.genial.desc">When I joined Genial Care, Brazil's leading autism care platform, the family-facing app was read-only, content to scroll with nothing to act on. The real problem wasn't the app: it was session scheduling, built and rebuilt by hand every week by an overloaded operations team. We shipped an MVP in a month letting families see their schedule and cancel a session themselves, and it worked immediately. From there, each release earned its place by giving families another reason to open the app, pulling another manual task off operations along the way.</p>
+        <div class="metrics">
+          <div><div class="m-num">8.59% → 62.3%</div><div class="m-label" data-i18n="case.genial.m1">Daily active users, in one year</div></div>
+          <div><div class="m-num">+675%</div><div class="m-label" data-i18n="case.genial.m2">Year-over-year engagement growth</div></div>
+          <div><div class="m-num">500th</div><div class="m-label" data-i18n="case.genial.m3">Family onboarded to the platform</div></div>
+        </div>
+        <a class="case-link" href="genial-case.html"><span data-i18n="case.genial.link">Read the full case study</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+      </div>
+    </div>
+
+    <!-- CASE 2: LIAM -->
+    <div class="case reveal" id="case-liam">
+      <div>
+        <span class="case-tag" data-i18n="case.liam.tag">Case 02 · Healthcare · AI Design · 2023–2024</span>
+        <h3 data-i18n="case.liam.h3">LIAM: turning 2 hours of clinical paperwork into a 25-minute review</h3>
+        <p class="desc" data-i18n="case.liam.desc">Once families were actually opening the app, the next bottleneck was on the other side: therapists spent up to two hours after every session manually reconstructing what happened, from memory, for mandatory clinical reports. I designed LIAM, an AI assistant that lets therapists narrate the session out loud as it happens; LIAM organizes the audio, understands clinical context, and drafts the required report fields automatically. The therapist reviews, edits, and sends, so nothing goes out unchecked.</p>
+        <div class="metrics">
+          <div><div class="m-num">2h → 25min</div><div class="m-label" data-i18n="case.liam.m1">Session documentation time</div></div>
+        </div>
+        <a class="case-link" href="liam-case.html"><span data-i18n="case.liam.link">Read the full case study</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+      </div>
+      <div class="case-visual glow-teal">
+        <div class="kruzer-carousel">
+          <div class="shot-bar">
+            <span class="dot" style="background:#e05f4f;"></span>
+            <span class="dot" style="background:#e0b04f;"></span>
+            <span class="dot" style="background:#5fbf6b;"></span>
+            <span>LIAM · Clinical documentation</span>
+          </div>
+          <img src="assets/liam-4.jpg" alt="LIAM session note form with AI-drafted suggestions ready for the therapist to review">
+        </div>
+      </div>
+    </div>
+
+    <!-- CASE 3: Kruzer -->
+    <div class="case reveal" id="case-kruzer">
+      <div class="case-visual glow-gold">
+        <div class="kruzer-carousel" id="kruzerCarousel">
+          <div class="shot-bar">
+            <span class="dot" style="background:#e05f4f;"></span>
+            <span class="dot" style="background:#e0b04f;"></span>
+            <span class="dot" style="background:#5fbf6b;"></span>
+            <span>Kruzer · Fulfillment</span>
+          </div>
+          <img id="carouselImg" src="assets/kruzer-carousel-1.jpg" alt="Kruzer Pick &amp; Pack order queue screen">
+          <div class="carousel-dots">
+            <button class="active" aria-label="Slide 1"></button>
+            <button aria-label="Slide 2"></button>
+            <button aria-label="Slide 3"></button>
+            <button aria-label="Slide 4"></button>
+            <button aria-label="Slide 5"></button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <span class="case-tag" data-i18n="case.kruzer.tag">Case 03 · Enterprise Commerce · Design Systems · 2024–2026</span>
+        <h3 data-i18n="case.kruzer.h3">From click to 2-hour delivery: real-time order visibility across 80+ stores</h3>
+        <p class="desc" data-i18n="case.kruzer.desc">Fast Shop needed to migrate 80+ stores and 22,000+ SKUs onto a single delivery platform. I designed Pick &amp; Pack around three perspectives at once (store, distribution center, and driver) plus exception flows for failed deliveries and returns. Alongside it, I built the Compass Design System from scratch and delivered PIM and DevTools.</p>
+        <div class="metrics">
+          <div><div class="m-num">80+</div><div class="m-label" data-i18n="case.kruzer.m1">Stores migrated to the platform</div></div>
+          <div><div class="m-num">40%</div><div class="m-label" data-i18n="case.kruzer.m2">Fewer UI inconsistencies via Compass DS</div></div>
+          <div><div class="m-num">~25%</div><div class="m-label" data-i18n="case.kruzer.m3">Faster design delivery via Compass</div></div>
+        </div>
+        <a class="case-link" href="kruzer-case.html"><span data-i18n="case.kruzer.link">Read the full case study</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+      </div>
+    </div>
+
+    <!-- CASE 4: Reclame Aqui (current role, in design) -->
+    <div class="case reveal" id="case-ra">
+      <div>
+        <span class="wip-badge"><span class="dot"></span><span data-i18n="case.ra.wip">Current role · case study in progress</span></span>
+        <span class="case-tag" data-i18n="case.ra.tag">Consumer Trust · Feb 2026–Present</span>
+        <h3 data-i18n="case.ra.h3">Designing the trust layer for 20M+ monthly shoppers</h3>
+        <p class="desc" data-i18n="case.ra.desc">Reclame Aqui is Latin America's largest consumer reputation platform: 20M+ monthly visitors, 750K+ registered companies, and roughly 46K complaints a day. I lead end-to-end design for <em>Compra Confiável</em>, the trust layer that surfaces reputation and resolution scores at the moment of purchase, inside Brazil's $200B+ e-commerce market.</p>
+        <div class="metrics">
+          <div><div class="m-num">50%+</div><div class="m-label" data-i18n="case.ra.m1">Growth in monthly traffic to the trust pages I redesigned</div></div>
+          <div><div class="m-num">2</div><div class="m-label" data-i18n="case.ra.m2">Core surfaces owned: brand pages &amp; complaint flow</div></div>
+        </div>
+        <a class="case-link" href="#contact" data-contact-trigger><span data-i18n="case.ra.link">Ask me to walk through it live</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></a>
+      </div>
+      <div class="case-visual glow-green no-tilt ra-visual">
+        <div class="ra-frame">
+        <div class="trust-demo" id="trustDemo">
+          <div class="td-head">
+            <div class="td-logo">L</div>
+            <div class="td-brand">
+              <span class="td-name">Gui's Store</span>
+              <span class="td-verified" id="tdVerified">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 1.8 3 .1 1 2.8 2.4 1.8-.9 2.9.9 2.9-2.4 1.8-1 2.8-3 .1L12 22l-2.4-1.8-3-.1-1-2.8L3.2 15.5l.9-2.9-.9-2.9 2.4-1.8 1-2.8 3-.1z" fill="currentColor" opacity="0.9"/><path d="M8.5 12.5l2.2 2.2 4.8-4.8" stroke="#0c0c0d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span id="tdVerifiedTxt">Verified brand</span>
+              </span>
+            </div>
+          </div>
+
+          <div class="td-score">
+            <div class="td-ring" id="tdRing"><b id="tdScore">8.2</b></div>
+            <div class="td-verdict">
+              <span class="td-vtitle" id="tdVerdict">Strong reputation</span>
+              <span class="td-vsub" id="tdVsub">Most buyers would purchase here again.</span>
+            </div>
+          </div>
+
+          <div class="td-controls">
+            <div class="td-ctl">
+              <span class="td-lab"><span data-i18n="ra.response">Response rate</span><em id="tdV1">92%</em></span>
+              <input type="range" id="tdS1" min="0" max="100" value="92" aria-label="Response rate">
+            </div>
+            <div class="td-ctl">
+              <span class="td-lab"><span data-i18n="ra.resolution">Resolution index</span><em id="tdV2">85%</em></span>
+              <input type="range" id="tdS2" min="0" max="100" value="85" aria-label="Resolution index">
+            </div>
+            <div class="td-ctl">
+              <span class="td-lab"><span data-i18n="ra.wouldbuy">Would buy again</span><em id="tdV3">74%</em></span>
+              <input type="range" id="tdS3" min="0" max="100" value="74" aria-label="Would buy again rate">
+            </div>
+          </div>
+
+          <span class="td-hint"><span class="pulse"></span><span data-i18n="ra.hint">Drag a signal, watch the call change</span></span>
+        </div>
+
+        <div class="ra-notes">
+          <div class="ra-note">
+            <span class="n">01</span>
+            <span class="t" data-i18n="ra.note1.t">Problem</span>
+            <span class="d" data-i18n="ra.note1.d">Reputation data sits one search away from the decision.</span>
+          </div>
+          <div class="ra-note">
+            <span class="n">02</span>
+            <span class="t" data-i18n="ra.note2.t">Designing</span>
+            <span class="d" data-i18n="ra.note2.d">Three signals synthesized into one readable call.</span>
+          </div>
+          <div class="ra-note">
+            <span class="n">03</span>
+            <span class="t" data-i18n="ra.note3.t">The tension</span>
+            <span class="d" data-i18n="ra.note3.d">Moves conversion and fraud at once, so clarity beats persuasion.</span>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="range" class="section-pad" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-label" data-i18n="range.label">Also shipped</span>
+      <h2 data-i18n="range.h2">Range, under pressure.</h2>
+    </div>
+    <div class="range-grid reveal">
+      <div class="range-item">
+        <span class="range-tag" data-i18n="range.modal.tag">Retail · 7COMm</span>
+        <h4>Modal</h4>
+        <p data-i18n="range.modal.p">I joined 7COMm as a support intern and left five years later as a Senior UX/UI Designer, moving through support analyst and programmer analyst while picking up UX work on the side. When the agency designing Modal's site dropped the project mid-way, I took over the Figma file and shipped it, the work that earned the senior title.</p>
+        <div class="range-shots">
+          <img src="assets/modal-1.jpg" alt="Modal investment platform homepage" loading="lazy">
+          <img src="assets/modal-2.jpg" alt="Modal fixed income product page" loading="lazy">
+        </div>
+      </div>
+      <div class="range-item">
+        <span class="range-tag" data-i18n="range.matri.tag">Fintech · Shock Tecnologia (freelance)</span>
+        <h4>Matri Bank</h4>
+        <p data-i18n="range.matri.p">Staff Product Designer on white-label digital banking across web and mobile, balancing regulation, business goals, and user needs. Designed the flow for credit products backed by court-ordered government payments, which <strong>lifted contracting 30% in its first 3 months</strong>, and built the Matri Design System adopted by Matri Bank and Startec Bank.</p>
+        <div class="range-shots">
+          <img src="assets/matri-1.jpg" alt="Matri Bank app welcome and login screen" loading="lazy">
+          <img src="assets/matri-2.jpg" alt="Matri Bank app account home with balance and product offers" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="words" class="section-pad" style="padding-top:0;">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-label" data-i18n="tst.label">What people say</span>
+      <h2 data-i18n="tst.h2">Words from people I've built with.</h2>
+    </div>
+    <div class="tst-grid reveal stagger">
+
+      <!-- TESTIMONIAL 1 — Romulo Lebre (was Gui's design manager at Genial Care) -->
+      <div class="tst-card">
+        <span class="quote-mark">&rdquo;</span>
+        <p class="tst-quote" data-i18n="tst.1.quote">As his design manager at Genial Care, I watched Guilherme's work grow <strong>increasingly strategic</strong>, always aligned to product and business goals, with a high bar for quality. I strongly recommend him to any team after a designer who's engaged and focused on real impact.</p>
+        <div class="tst-author">
+          <img class="tst-avatar" src="assets/tst-1.jpg" alt="Romulo Lebre" data-initials="RL">
+          <div class="tst-meta">
+            <span class="tst-name">Romulo Lebre</span>
+            <span class="tst-role" data-i18n="tst.1.role">Product Design Manager · Genial Care</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TESTIMONIAL 2 — Lívia Bomfim (Product Manager at Genial Care) -->
+      <div class="tst-card">
+        <span class="quote-mark">&rdquo;</span>
+        <p class="tst-quote" data-i18n="tst.2.quote">Guilherme has a sharp critical and creative eye, and a real commitment to what he ships. We ran projects in close partnership and the quality was always there. <strong>Watching him work live in tools like Figma was mesmerizing</strong>, the speed of his vision and execution.</p>
+        <div class="tst-author">
+          <img class="tst-avatar" src="assets/tst-2.jpg" alt="Lívia Bomfim" data-initials="LB">
+          <div class="tst-meta">
+            <span class="tst-name">Lívia Bomfim</span>
+            <span class="tst-role" data-i18n="tst.2.role">Product Manager · Genial Care</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- TESTIMONIAL 3 — Arthur Togni (developer on the Modal project) -->
+      <div class="tst-card">
+        <span class="quote-mark">&rdquo;</span>
+        <p class="tst-quote" data-i18n="tst.3.quote">Working with Canna was incredible. He has an exceptional ability to <strong>translate user pain into effective solutions</strong>, backing the team with concrete deliverables and quality at every step. I recommend him without reservation to any team after design excellence and real results.</p>
+        <div class="tst-author">
+          <img class="tst-avatar" src="assets/tst-3.jpg" alt="Arthur Togni" data-initials="AT">
+          <div class="tst-meta">
+            <span class="tst-name">Arthur Togni</span>
+            <span class="tst-role" data-i18n="tst.3.role">Developer · Modal project</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="tst-dots" id="tstDots">
+      <button class="active" type="button" aria-label="Testimonial 1"></button>
+      <button type="button" aria-label="Testimonial 2"></button>
+      <button type="button" aria-label="Testimonial 3"></button>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="section-pad">
+  <div class="wrap">
+    <div class="about-grid reveal">
+      <div class="about-photo" id="aboutPhoto">
+        <img src="assets/photo-main-web.jpg" alt="Guilherme Cannalonga">
+        <span class="caption"><span class="dot"></span> <span data-i18n="about.location">Greater Boston, Massachusetts</span></span>
+      </div>
+      <div class="about-text">
+        <span class="section-label" data-i18n="about.label">About</span>
+        <p data-i18n="about.p1">10+ years in technology, 6+ of them in product and UX design. I started as a support intern monitoring enterprise systems, moved into development, then into UX. That path is why I default to systems thinking over decoration, and why engineers rarely have to translate my files.</p>
+        <p data-i18n="about.p2">I've designed inside a startup squad shipping an MVP in a month and inside a platform serving 20M+ monthly users, where one flawed decision moves national-scale metrics. Same instinct at either pace: find the real constraint and design around it. Along the way I've built three design systems from scratch, Compass, Matri, and Atípico, and the DesignOps practices that keep them alive.</p>
+        <p data-i18n="about.p3">I treat AI as part of my craft, using it for research, benchmarks, and pressure-testing concepts early, so I spend more time on judgment and less on busywork. I work with LLMs and custom AI agents day to day, and lately I've been building with Claude Code to ship small experiments straight to production, this site among them.</p>
+        <span class="badge"><span class="dot" style="background:var(--gold);"></span> <span data-i18n="about.badge">Startup pace to 20M-user scale, same systems instinct</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="contact-cta reveal">
+      <span class="section-label" data-i18n="contact.label">Contact</span>
+      <h2 data-i18n="contact.h2">Let's talk about what you're building.</h2>
+      <p data-i18n="contact.p">Open to Senior Product Design roles and select contract work in the U.S. Grab a slot straight on my calendar, or send an email if you'd rather share the details first.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="mailto:cannalongadesign@gmail.com" data-contact-trigger>cannalongadesign@gmail.com</a>
+        <a class="btn btn-ghost" href="tel:+17744041059">+1 (774) 404-1059</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Guilherme Cannalonga.</span>
+      <div class="foot-links">
+        <a href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:cannalongadesign@gmail.com" data-contact-trigger data-i18n="footer.email">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="contact-modal" id="contactModal">
+  <div class="contact-modal-card">
+    <button class="contact-modal-close" id="contactModalClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <span class="section-label" data-i18n="modal.label">Let's talk</span>
+    <h3 data-i18n="modal.h3">How would you like to connect?</h3>
+    <p data-i18n="modal.p">Pick whichever's faster for you.</p>
+    <div class="contact-modal-options">
+      <a class="contact-option" href="mailto:cannalongadesign@gmail.com">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.email.title">Send an email</span><span class="co-sub">cannalongadesign@gmail.com</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a class="contact-option" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.call.title">Book a 30-min call</span><span class="co-sub" data-i18n="modal.call.sub">Daily, 5–7pm ET</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+  </button>
+  <img id="lightboxImg" src="" alt="">
+</div>
+
+<script>
+  /* ---- scroll reveal (+ stagger) ----
+     Fires as soon as the element's top edge clears the fold rather than waiting for
+     15% of it to be visible, which on mobile left tall sections blank for too long. */
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0, rootMargin:'0px 0px -8% 0px'});
+  els.forEach(el=>io.observe(el));
+
+  /* ---- count-up numbers ---- */
+  function easeOutExpo(t){ return t===1 ? 1 : 1 - Math.pow(2,-10*t); }
+  function runCountUp(el){
+    const target = parseFloat(el.dataset.countup);
+    const suffix = el.dataset.suffix || '';
+    const dur = 1400;
+    const start = performance.now();
+    function tick(now){
+      const t = Math.min(1, (now-start)/dur);
+      const val = Math.round(target * easeOutExpo(t));
+      el.textContent = val + suffix;
+      if(t < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  const countEls = document.querySelectorAll('[data-countup]');
+  const countIo = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ runCountUp(e.target); countIo.unobserve(e.target); } });
+  }, {threshold:0.4});
+  countEls.forEach(el=>countIo.observe(el));
+
+  /* ---- nav: pill shrinks + solidifies on scroll ---- */
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, {passive:true});
+
+  /* ---- nav: scrollspy — sliding indicator under the section you're reading ---- */
+  (function(){
+    const navLinks = document.getElementById('navLinks');
+    const indicator = document.getElementById('navIndicator');
+    if(!navLinks || !indicator) return;
+    const links = Array.from(navLinks.querySelectorAll('a'));
+    const sections = links.map(a=> document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    function moveTo(link){
+      links.forEach(l=>l.classList.remove('active'));
+      link.classList.add('active');
+      indicator.style.left = link.offsetLeft + 'px';
+      indicator.style.width = link.offsetWidth + 'px';
+      indicator.style.opacity = 1;
+    }
+    const spyIo = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          const idx = sections.indexOf(e.target);
+          if(idx !== -1) moveTo(links[idx]);
+        }
+      });
+    }, {rootMargin:'-45% 0px -50% 0px', threshold:0});
+    sections.forEach(s=>spyIo.observe(s));
+  })();
+
+  /* ---- cursor glow (desktop only) ---- */
+  const glow = document.getElementById('cursorGlow');
+  const isTouch = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if(isTouch){
+    window.addEventListener('mousemove', (e)=>{
+      document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+      document.documentElement.style.setProperty('--my', e.clientY + 'px');
+      glow.classList.add('active');
+    }, {passive:true});
+    document.addEventListener('mouseleave', ()=>glow.classList.remove('active'));
+  }
+
+  /* ---- magnetic pull on primary buttons (desktop only) ---- */
+  if(isTouch){
+    document.querySelectorAll('.btn, .nav-cta').forEach(btn=>{
+      btn.addEventListener('mousemove', (e)=>{
+        const r = btn.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        btn.style.transform = `translate(${px*8}px, ${py*8 - 1}px)`;
+      });
+      btn.addEventListener('mouseleave', ()=>{ btn.style.transform = ''; });
+    });
+  }
+
+  /* ---- subtle 3D tilt on case visuals ---- */
+  if(isTouch){
+    document.querySelectorAll('.case-visual:not(.no-tilt)').forEach(card=>{
+      card.addEventListener('mousemove', (e)=>{
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = `perspective(900px) rotateY(${px*8}deg) rotateX(${-py*8}deg) scale(1.015)`;
+      });
+      card.addEventListener('mouseleave', ()=>{
+        card.style.transform = 'perspective(900px) rotateY(0) rotateX(0) scale(1)';
+      });
+    });
+  }
+
+  /* ---- shot carousel: full-bleed real screenshots, autoplay, dots, pause on hover, respects reduced motion ---- */
+  function initShotCarousel(rootId, imgId, shots, ms){
+    const root = document.getElementById(rootId);
+    if(!root) return;
+    const img = document.getElementById(imgId);
+    const dots = root.querySelectorAll('.carousel-dots button');
+    const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let idx = 0, timer = null;
+    function show(i){
+      idx = (i + shots.length) % shots.length;
+      img.style.opacity = 0;
+      setTimeout(()=>{ img.src = shots[idx]; img.style.opacity = 1; }, 300);
+      dots.forEach((d,j)=>d.classList.toggle('active', j===idx));
+    }
+    function next(){ show(idx+1); }
+    function start(){ if(!reduceMotion && !timer) timer = setInterval(next, ms); }
+    function stop(){ clearInterval(timer); timer = null; }
+    dots.forEach((d,j)=>d.addEventListener('click', ()=>{ show(j); stop(); start(); }));
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    const carouselIo = new IntersectionObserver((entries)=>{
+      entries.forEach(e=> e.isIntersecting ? start() : stop());
+    }, {threshold:0.2});
+    carouselIo.observe(root);
+    start();
+  }
+  initShotCarousel('kruzerCarousel', 'carouselImg', [1,2,3,4,5].map(n=>`assets/kruzer-carousel-${n}.jpg`), 3400);
+
+  /* ---- testimonials: sync dots with the mobile swipe carousel ---- */
+  (function(){
+    const grid = document.querySelector('.tst-grid');
+    const dotsWrap = document.getElementById('tstDots');
+    if(!grid || !dotsWrap) return;
+    const cards = Array.from(grid.querySelectorAll('.tst-card'));
+    const dots = Array.from(dotsWrap.querySelectorAll('button'));
+    dots.forEach((d,i)=> d.addEventListener('click', ()=>{
+      grid.scrollTo({left: cards[i].offsetLeft, behavior:'smooth'});
+    }));
+    let ticking = false;
+    grid.addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(()=>{
+        const center = grid.scrollLeft + grid.clientWidth/2;
+        let closest = 0, min = Infinity;
+        cards.forEach((c,i)=>{
+          const mid = c.offsetLeft + c.offsetWidth/2;
+          const d = Math.abs(mid - center);
+          if(d < min){ min = d; closest = i; }
+        });
+        dots.forEach((d,i)=> d.classList.toggle('active', i===closest));
+        ticking = false;
+      });
+    }, {passive:true});
+  })();
+
+  /* ---- the visitor's cursor, rendered as a Figma collaborator pointer ---- */
+  (function(){
+    if(!matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const el = document.createElement('div');
+    el.className = 'fig-pointer';
+    el.setAttribute('aria-hidden','true');
+    el.innerHTML =
+      '<svg viewBox="0 0 24 24" fill="none"><path d="M5.5 3.2 19 11.4l-6.1 1.2-2.6 5.8z" fill="#f2a93b" stroke="#0c0c0d" stroke-width="1.2" stroke-linejoin="round"/></svg>' +
+      '<span class="tag" id="figPointerTag">' + (window.currentLang && window.currentLang()==='pt' ? 'Você' : 'You') + '</span>';
+    document.body.appendChild(el);
+    document.body.classList.add('fig-cursor-on');
+    document.addEventListener('langchange', (e)=>{
+      const tag = document.getElementById('figPointerTag');
+      if(tag) tag.textContent = e.detail.lang === 'pt' ? 'Você' : 'You';
+    });
+
+    let x = innerWidth/2, y = innerHeight/2, tx = x, ty = y, shown = false;
+
+    addEventListener('mousemove', e=>{
+      tx = e.clientX; ty = e.clientY;
+      if(!shown){ shown = true; el.classList.add('on'); }
+    }, {passive:true});
+    document.addEventListener('mouseleave', ()=> el.classList.remove('on'));
+    document.addEventListener('mouseenter', ()=>{ if(shown) el.classList.add('on'); });
+    addEventListener('mousedown', ()=> el.classList.add('tap'));
+    addEventListener('mouseup',   ()=> el.classList.remove('tap'));
+
+    function tick(){
+      // light easing: responsive enough to feel like your cursor, smooth enough to feel designed
+      x += (tx - x) * 0.35;
+      y += (ty - y) * 0.35;
+      el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0)';
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  })();
+
+  /* ---- Reclame Aqui: live trust panel, drag the signals to change the call ---- */
+  (function(){
+    const root = document.getElementById('trustDemo');
+    if(!root) return;
+    const s1 = document.getElementById('tdS1'), s2 = document.getElementById('tdS2'), s3 = document.getElementById('tdS3');
+    const v1 = document.getElementById('tdV1'), v2 = document.getElementById('tdV2'), v3 = document.getElementById('tdV3');
+    const ring = document.getElementById('tdRing'), scoreEl = document.getElementById('tdScore');
+    const verdict = document.getElementById('tdVerdict'), vsub = document.getElementById('tdVsub');
+    const verifiedTxt = document.getElementById('tdVerifiedTxt');
+
+    const STATES = {
+      en: [
+        {min:8.0, tone:'#6bcf7f', title:'Strong reputation',  sub:'Most buyers would purchase here again.',        badge:'Verified brand'},
+        {min:6.5, tone:'#9ccf6b', title:'Generally reliable', sub:'Resolves most issues, with some friction.',      badge:'Verified brand'},
+        {min:5.0, tone:'#f2a93b', title:'Mixed signals',      sub:'Check recent complaints before you buy.',        badge:'Reputation under review'},
+        {min:0.0, tone:'#e06b5f', title:'Proceed with care',  sub:'Low resolution and weak buyer confidence.',      badge:'High complaint volume'}
+      ],
+      pt: [
+        {min:8.0, tone:'#6bcf7f', title:'Reputação forte',     sub:'A maioria voltaria a comprar aqui.',                    badge:'Marca verificada'},
+        {min:6.5, tone:'#9ccf6b', title:'Geralmente confiável', sub:'Resolve a maioria dos casos, com algum atrito.',        badge:'Marca verificada'},
+        {min:5.0, tone:'#f2a93b', title:'Sinais mistos',        sub:'Vale checar reclamações recentes antes de comprar.',    badge:'Reputação em análise'},
+        {min:0.0, tone:'#e06b5f', title:'Compre com cautela',   sub:'Baixa resolução e pouca confiança do comprador.',       badge:'Alto volume de reclamações'}
+      ]
+    };
+
+    function render(){
+      const lang = window.currentLang ? window.currentLang() : 'en';
+      const a = +s1.value, b = +s2.value, c = +s3.value;
+      v1.textContent = a + '%';
+      v2.textContent = b + '%';
+      v3.textContent = c + '%';
+      // resolution weighted heaviest: it's the signal that best predicts a good outcome
+      const score = (a*0.3 + b*0.4 + c*0.3) / 10;
+      const list = STATES[lang] || STATES.en;
+      const st = list.find(s => score >= s.min) || list[list.length-1];
+      root.style.setProperty('--tone', st.tone);
+      ring.style.setProperty('--p', (score/10).toFixed(3));
+      scoreEl.textContent = score.toFixed(1);
+      verdict.textContent = st.title;
+      vsub.textContent = st.sub;
+      verifiedTxt.textContent = st.badge;
+    }
+    [s1,s2,s3].forEach(s => s.addEventListener('input', render));
+    document.addEventListener('langchange', render);
+    render();
+  })();
+
+  /* ---- contact modal: email vs. book a call ---- */
+  (function(){
+    const modal = document.getElementById('contactModal');
+    if(!modal) return;
+    const closeBtn = document.getElementById('contactModalClose');
+    function openModal(){
+      modal.classList.add('open');
+      requestAnimationFrame(()=> modal.classList.add('show'));
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(){
+      modal.classList.remove('show');
+      document.body.style.overflow = '';
+      setTimeout(()=> modal.classList.remove('open'), 250);
+    }
+    document.querySelectorAll('[data-contact-trigger]').forEach(el=>{
+      el.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
+    });
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+  })();
+
+  /* ---- lightbox: click a range-shot thumbnail to view it full size ---- */
+  (function(){
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeBtn = document.getElementById('lightboxClose');
+    function open(src, alt){
+      lightboxImg.src = src;
+      lightboxImg.alt = alt || '';
+      lightbox.classList.add('open');
+      requestAnimationFrame(()=> lightbox.classList.add('show'));
+      document.body.style.overflow = 'hidden';
+    }
+    function close(){
+      lightbox.classList.remove('show');
+      document.body.style.overflow = '';
+      setTimeout(()=>{ lightbox.classList.remove('open'); lightboxImg.src=''; }, 250);
+    }
+    document.querySelectorAll('.range-shots img').forEach(img=>{
+      img.addEventListener('click', ()=> open(img.src, img.alt));
+    });
+    closeBtn.addEventListener('click', close);
+    lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox) close(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && lightbox.classList.contains('open')) close(); });
+  })();
+
+  /* ---- hero parallax on scroll (desktop only) ----
+     Skipped on touch/small screens: mobile browser chrome resizes the viewport
+     mid-scroll, which made the hero fade to black before the next section arrived. */
+  (function(){
+    const hero = document.querySelector('.hero');
+    if(!hero) return;
+    const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const wide = window.innerWidth > 860;
+    if(!fine || !wide || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    let vh = window.innerHeight, ticking = false;
+    addEventListener('resize', ()=>{ vh = window.innerHeight; }, {passive:true});
+
+    function update(){
+      const y = window.scrollY;
+      if(y < vh){
+        // bottom out at 0.35 opacity so the hero never becomes an empty black panel
+        hero.style.opacity = Math.max(0.35, 1 - (y / (vh * 1.15)));
+        hero.style.transform = 'translateY(' + (y * 0.12).toFixed(1) + 'px)';
+      } else if(hero.style.opacity !== ''){
+        hero.style.opacity = '';
+        hero.style.transform = '';
+      }
+      ticking = false;
+    }
+    addEventListener('scroll', ()=>{
+      if(ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, {passive:true});
+  })();
+
+  // Graceful placeholder for screenshots not yet added to /assets
+  document.querySelectorAll('.phone-hero img').forEach(img=>{
+    img.addEventListener('error', ()=>{
+      const ph = document.createElement('div');
+      ph.className = 'img-pending';
+      ph.innerHTML = '<div class="t">App screenshot</div>'+
+                     '<div class="s">Slot ready, drop the file at '+img.getAttribute('src')+'</div>';
+      img.replaceWith(ph);
+    });
+  });
+
+  // Testimonial avatars: if the photo isn't there yet, show initials instead of a broken image
+  document.querySelectorAll('.tst-avatar').forEach(img=>{
+    img.addEventListener('error', ()=>{
+      const fb = document.createElement('div');
+      fb.className = 'tst-avatar-fallback';
+      fb.textContent = img.dataset.initials || '—';
+      img.replaceWith(fb);
+    });
+  });
+</script>
+
+<script>
+  /* ---- language toggle: English is the base language, Portuguese (Brazil) is opt-in ---- */
+  (function(){
+    const I18N = {
+      en: {
+        'nav.work':'Work', 'nav.other':'Other work', 'nav.testimonials':'Testimonials', 'nav.about':'About', 'nav.contact':'Contact', 'nav.cta':'Let\'s talk',
+        'hero.eyebrow':'Greater Boston, MA · On-site, hybrid, or remote',
+        'hero.h1':`I design the moment complex data becomes <span class="accent">a fast decision.</span>`,
+        'hero.sub':`Senior Product Designer turning complex systems in healthcare, enterprise logistics, and consumer trust into decisions people can act on. Currently designing for platforms that serve 20M+ users a month.`,
+        'hero.cta1':'See the work',
+        'stat.liam.label':'Clinical documentation time, via an AI assistant I designed',
+        'stat.genial.label':'DAU growth in one year at Genial Care',
+        'stat.compass.label':'Fewer UI inconsistencies after building Compass DS',
+        'stat.ra.label':'Monthly users on the platform I design for today',
+        'proof.label':`Where I've worked`,
+        'work.label':'Selected work', 'work.h2':'Same instinct, three different worlds.',
+        'work.p':`Healthcare, enterprise logistics, and consumer trust are different industries, but the job is the same: turn complexity into a decision someone can act on immediately.`,
+        'case.genial.tag':'Case 01 · Healthcare · Product Growth · 2022–2024',
+        'case.genial.h3':`Turning a forgotten app into the tool 62% of families open every day`,
+        'case.genial.desc':`When I joined Genial Care, Brazil's leading autism care platform, the family-facing app was read-only, content to scroll with nothing to act on. The real problem wasn't the app: it was session scheduling, built and rebuilt by hand every week by an overloaded operations team. We shipped an MVP in a month letting families see their schedule and cancel a session themselves, and it worked immediately. From there, each release earned its place by giving families another reason to open the app, pulling another manual task off operations along the way.`,
+        'case.genial.m1':'Daily active users, in one year', 'case.genial.m2':'Year-over-year engagement growth', 'case.genial.m3':'Family onboarded to the platform',
+        'case.genial.link':'Read the full case study',
+        'case.liam.tag':'Case 02 · Healthcare · AI Design · 2023–2024',
+        'case.liam.h3':'LIAM: turning 2 hours of clinical paperwork into a 25-minute review',
+        'case.liam.desc':`Once families were actually opening the app, the next bottleneck was on the other side: therapists spent up to two hours after every session manually reconstructing what happened, from memory, for mandatory clinical reports. I designed LIAM, an AI assistant that lets therapists narrate the session out loud as it happens; LIAM organizes the audio, understands clinical context, and drafts the required report fields automatically. The therapist reviews, edits, and sends, so nothing goes out unchecked.`,
+        'case.liam.m1':'Session documentation time', 'case.liam.link':'Read the full case study',
+        'case.kruzer.tag':'Case 03 · Enterprise Commerce · Design Systems · 2024–2026',
+        'case.kruzer.h3':'From click to 2-hour delivery: real-time order visibility across 80+ stores',
+        'case.kruzer.desc':`Fast Shop needed to migrate 80+ stores and 22,000+ SKUs onto a single delivery platform. I designed Pick &amp; Pack around three perspectives at once (store, distribution center, and driver) plus exception flows for failed deliveries and returns. Alongside it, I built the Compass Design System from scratch and delivered PIM and DevTools.`,
+        'case.kruzer.m1':'Stores migrated to the platform', 'case.kruzer.m2':'Fewer UI inconsistencies via Compass DS', 'case.kruzer.m3':'Faster design delivery via Compass',
+        'case.kruzer.link':'Read the full case study',
+        'case.ra.wip':'Current role · case study in progress', 'case.ra.tag':'Consumer Trust · Feb 2026–Present',
+        'case.ra.h3':'Designing the trust layer for 20M+ monthly shoppers',
+        'case.ra.desc':`Reclame Aqui is Latin America's largest consumer reputation platform: 20M+ monthly visitors, 750K+ registered companies, and roughly 46K complaints a day. I lead end-to-end design for <em>Compra Confiável</em>, the trust layer that surfaces reputation and resolution scores at the moment of purchase, inside Brazil's $200B+ e-commerce market.`,
+        'case.ra.m1':'Growth in monthly traffic to the trust pages I redesigned', 'case.ra.m2':'Core surfaces owned: brand pages &amp; complaint flow',
+        'case.ra.link':'Ask me to walk through it live',
+        'ra.response':'Response rate', 'ra.resolution':'Resolution index', 'ra.wouldbuy':'Would buy again', 'ra.hint':'Drag a signal, watch the call change',
+        'ra.note1.t':'Problem', 'ra.note1.d':'Reputation data sits one search away from the decision.',
+        'ra.note2.t':'Designing', 'ra.note2.d':'Three signals synthesized into one readable call.',
+        'ra.note3.t':'The tension', 'ra.note3.d':'Moves conversion and fraud at once, so clarity beats persuasion.',
+        'range.label':'Also shipped', 'range.h2':'Range, under pressure.',
+        'range.modal.tag':'Retail · 7COMm',
+        'range.modal.p':`I joined 7COMm as a support intern and left five years later as a Senior UX/UI Designer, moving through support analyst and programmer analyst while picking up UX work on the side. When the agency designing Modal's site dropped the project mid-way, I took over the Figma file and shipped it, the work that earned the senior title.`,
+        'range.matri.tag':'Fintech · Shock Tecnologia (freelance)',
+        'range.matri.p':`Staff Product Designer on white-label digital banking across web and mobile, balancing regulation, business goals, and user needs. Designed the flow for credit products backed by court-ordered government payments, which <strong>lifted contracting 30% in its first 3 months</strong>, and built the Matri Design System adopted by Matri Bank and Startec Bank.`,
+        'tst.label':'What people say', 'tst.h2':`Words from people I've built with.`,
+        'tst.1.quote':`As his design manager at Genial Care, I watched Guilherme's work grow <strong>increasingly strategic</strong>, always aligned to product and business goals, with a high bar for quality. I strongly recommend him to any team after a designer who's engaged and focused on real impact.`,
+        'tst.1.role':'Product Design Manager · Genial Care',
+        'tst.2.quote':`Guilherme has a sharp critical and creative eye, and a real commitment to what he ships. We ran projects in close partnership and the quality was always there. <strong>Watching him work live in tools like Figma was mesmerizing</strong>, the speed of his vision and execution.`,
+        'tst.2.role':'Product Manager · Genial Care',
+        'tst.3.quote':`Working with Canna was incredible. He has an exceptional ability to <strong>translate user pain into effective solutions</strong>, backing the team with concrete deliverables and quality at every step. I recommend him without reservation to any team after design excellence and real results.`,
+        'tst.3.role':'Developer · Modal project',
+        'about.location':'Greater Boston, Massachusetts', 'about.label':'About',
+        'about.p1':`10+ years in technology, 6+ of them in product and UX design. I started as a support intern monitoring enterprise systems, moved into development, then into UX. That path is why I default to systems thinking over decoration, and why engineers rarely have to translate my files.`,
+        'about.p2':`I've designed inside a startup squad shipping an MVP in a month and inside a platform serving 20M+ monthly users, where one flawed decision moves national-scale metrics. Same instinct at either pace: find the real constraint and design around it. Along the way I've built three design systems from scratch, Compass, Matri, and Atípico, and the DesignOps practices that keep them alive.`,
+        'about.p3':`I treat AI as part of my craft, using it for research, benchmarks, and pressure-testing concepts early, so I spend more time on judgment and less on busywork. I work with LLMs and custom AI agents day to day, and lately I've been building with Claude Code to ship small experiments straight to production, this site among them.`,
+        'about.badge':'Startup pace to 20M-user scale, same systems instinct',
+        'contact.label':'Contact', 'contact.h2':`Let's talk about what you're building.`,
+        'contact.p':`Open to Senior Product Design roles and select contract work in the U.S. Grab a slot straight on my calendar, or send an email if you'd rather share the details first.`,
+        'footer.resume':'Resume', 'footer.email':'Email',
+        'modal.label':`Let's talk`, 'modal.h3':'How would you like to connect?', 'modal.p':`Pick whichever's faster for you.`,
+        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':'Daily, 5–7pm ET'
+      },
+      pt: {
+        'nav.work':'Trabalho', 'nav.other':'Outros projetos', 'nav.testimonials':'Depoimentos', 'nav.about':'Sobre', 'nav.contact':'Contato', 'nav.cta':'Vamos conversar',
+        'hero.eyebrow':'Greater Boston, MA · Presencial, híbrido ou remoto',
+        'hero.h1':`Eu desenho o momento em que dados complexos viram <span class="accent">uma decisão rápida.</span>`,
+        'hero.sub':`Senior Product Designer transformando sistemas complexos de saúde, logística empresarial e confiança do consumidor em decisões que as pessoas conseguem agir. Hoje desenho para plataformas com mais de 20 milhões de usuários por mês.`,
+        'hero.cta1':'Ver os projetos',
+        'stat.liam.label':'Tempo de documentação clínica, via um assistente de IA que desenhei',
+        'stat.genial.label':'Crescimento de usuários ativos diários em um ano na Genial Care',
+        'stat.compass.label':'Menos inconsistências de UI depois de criar o Compass DS',
+        'stat.ra.label':'Usuários mensais na plataforma que desenho hoje',
+        'proof.label':'Onde já trabalhei',
+        'work.label':'Projetos selecionados', 'work.h2':'Mesmo instinto, três mundos diferentes.',
+        'work.p':`Saúde, logística empresarial e confiança do consumidor são setores diferentes, mas o trabalho é o mesmo: transformar complexidade em uma decisão que alguém consiga tomar imediatamente.`,
+        'case.genial.tag':'Case 01 · Saúde · Crescimento de Produto · 2022–2024',
+        'case.genial.h3':'Transformando um app esquecido na ferramenta que 62% das famílias abrem todo dia',
+        'case.genial.desc':`Quando entrei na Genial Care, maior plataforma de cuidado com autismo do Brasil, o app das famílias era só de leitura: conteúdo pra rolar a tela, nada pra fazer. O problema real não era o app, era o agendamento de sessões, feito e refeito à mão toda semana por uma operação sobrecarregada. Lançamos um MVP em um mês deixando as famílias verem a agenda e cancelarem uma sessão sozinhas, e funcionou na hora. A partir daí, cada release conquistava seu espaço dando às famílias mais um motivo pra abrir o app, e tirando mais uma tarefa manual da operação.`,
+        'case.genial.m1':'Usuários ativos diários, em um ano', 'case.genial.m2':'Crescimento de engajamento ano a ano', 'case.genial.m3':'Família integrada à plataforma',
+        'case.genial.link':'Ler o case completo',
+        'case.liam.tag':'Case 02 · Saúde · Design de IA · 2023–2024',
+        'case.liam.h3':'LIAM: transformando 2 horas de papelada clínica em uma revisão de 25 minutos',
+        'case.liam.desc':`Com as famílias já abrindo o app, o próximo gargalo estava do outro lado: terapeutas gastavam até duas horas depois de cada sessão reconstruindo de memória o que aconteceu, para relatórios clínicos obrigatórios. Desenhei o LIAM, um assistente de IA que deixa o terapeuta narrar a sessão em voz alta enquanto ela acontece; o LIAM organiza o áudio, entende o contexto clínico e rascunha os campos do relatório automaticamente. O terapeuta revisa, edita e envia, então nada sai sem checagem.`,
+        'case.liam.m1':'Tempo de documentação por sessão', 'case.liam.link':'Ler o case completo',
+        'case.kruzer.tag':'Case 03 · Comércio Empresarial · Design Systems · 2024–2026',
+        'case.kruzer.h3':'Do clique à entrega em 2 horas: visibilidade de pedidos em tempo real em 80+ lojas',
+        'case.kruzer.desc':`A Fast Shop precisava migrar 80+ lojas e mais de 22 mil SKUs para uma única plataforma de entrega. Desenhei o Pick &amp; Pack considerando três perspectivas ao mesmo tempo (loja, centro de distribuição e motorista), além de fluxos de exceção para entregas falhas e devoluções. Junto com isso, construí o Compass Design System do zero e entreguei o PIM e o DevTools.`,
+        'case.kruzer.m1':'Lojas migradas para a plataforma', 'case.kruzer.m2':'Menos inconsistências de UI via Compass DS', 'case.kruzer.m3':'Entrega de design mais rápida via Compass',
+        'case.kruzer.link':'Ler o case completo',
+        'case.ra.wip':'Cargo atual · case em construção', 'case.ra.tag':'Confiança do Consumidor · Fev 2026–Presente',
+        'case.ra.h3':'Desenhando a camada de confiança para mais de 20 milhões de compradores por mês',
+        'case.ra.desc':`O Reclame Aqui é a maior plataforma de reputação do consumidor da América Latina: mais de 20 milhões de visitantes mensais, mais de 750 mil empresas cadastradas, e cerca de 46 mil reclamações por dia. Lidero o design ponta a ponta do <em>Compra Confiável</em>, a camada de confiança que mostra reputação e taxa de resolução no momento da compra, dentro de um mercado de e-commerce de mais de US$ 200 bilhões no Brasil.`,
+        'case.ra.m1':'Crescimento no tráfego mensal das páginas de confiança que redesenhei', 'case.ra.m2':'Superfícies sob minha responsabilidade: páginas de marca e fluxo de reclamação',
+        'case.ra.link':'Me chama pra ver ao vivo',
+        'ra.response':'Taxa de resposta', 'ra.resolution':'Índice de resolução', 'ra.wouldbuy':'Compraria de novo', 'ra.hint':'Arraste um sinal e veja o resultado mudar',
+        'ra.note1.t':'Problema', 'ra.note1.d':'O dado de reputação fica a uma busca de distância da decisão.',
+        'ra.note2.t':'Design', 'ra.note2.d':'Três sinais sintetizados em um resultado legível.',
+        'ra.note3.t':'A tensão', 'ra.note3.d':'Mexe em conversão e fraude ao mesmo tempo, então clareza vale mais que persuasão.',
+        'range.label':'Também já fiz', 'range.h2':'Repertório, sob pressão.',
+        'range.modal.tag':'Varejo · 7COMm',
+        'range.modal.p':`Entrei na 7COMm como estagiário de suporte e saí cinco anos depois como Senior UX/UI Designer, passando por analista de suporte e analista programador enquanto fazia UX por conta própria. Quando a agência que desenhava o site do Modal abandonou o projeto no meio, assumi o arquivo no Figma e entreguei, o trabalho que me rendeu o título de senior.`,
+        'range.matri.tag':'Fintech · Shock Tecnologia (freelance)',
+        'range.matri.p':`Staff Product Designer em banking digital white-label, web e mobile, equilibrando regulação, objetivos de negócio e necessidades do usuário. Desenhei o fluxo de produtos de crédito lastreados em pagamentos judiciais, que <strong>aumentou a contratação em 30% nos primeiros 3 meses</strong>, e construí o Matri Design System, adotado pelo Matri Bank e pelo Startec Bank.`,
+        'tst.label':'O que dizem sobre mim', 'tst.h2':'Palavras de quem já construiu comigo.',
+        'tst.1.quote':`Como gestor de design dele na Genial Care, vi o trabalho do Guilherme ficar <strong>cada vez mais estratégico</strong>, sempre alinhado aos objetivos de produto e negócio, com uma régua de qualidade alta. Recomendo fortemente a qualquer time que busque um designer engajado e focado em impacto real.`,
+        'tst.1.role':'Product Design Manager · Genial Care',
+        'tst.2.quote':`Guilherme tem um olhar crítico e criativo apurado, e um compromisso real com o que entrega. Trabalhamos em parceria próxima em vários projetos e a qualidade sempre esteve lá. <strong>Ver ele trabalhando ao vivo em ferramentas como o Figma era hipnotizante</strong>, pela velocidade da visão e da execução.`,
+        'tst.2.role':'Product Manager · Genial Care',
+        'tst.3.quote':`Trabalhar com o Canna foi incrível. Ele tem uma habilidade excepcional de <strong>traduzir a dor do usuário em soluções eficazes</strong>, sustentando o time com entregas concretas e qualidade em cada etapa. Recomendo sem ressalvas a qualquer time que busque excelência em design e resultado real.`,
+        'tst.3.role':'Desenvolvedor · projeto Modal',
+        'about.location':'Greater Boston, Massachusetts', 'about.label':'Sobre',
+        'about.p1':`Mais de 10 anos em tecnologia, 6+ deles em produto e design de UX. Comecei como estagiário de suporte monitorando sistemas corporativos, passei por desenvolvimento e cheguei em UX. Esse caminho é o motivo de eu pensar em sistemas antes de decoração, e de engenheiros raramente precisarem traduzir meus arquivos.`,
+        'about.p2':`Já desenhei dentro de uma squad de startup lançando um MVP em um mês, e dentro de uma plataforma com mais de 20 milhões de usuários mensais, onde uma decisão errada mexe em métricas de escala nacional. Mesmo instinto nos dois ritmos: achar a restrição real e desenhar em torno dela. No caminho, construí três design systems do zero, Compass, Matri e Atípico, e as práticas de DesignOps que os mantêm vivos.`,
+        'about.p3':`Trato IA como parte do meu ofício, usando pra pesquisa, benchmarks e pra testar conceitos cedo, então gasto mais tempo com julgamento e menos com trabalho repetitivo. Trabalho com LLMs e agentes de IA personalizados no dia a dia, e ultimamente venho construindo com o Claude Code pra colocar pequenos experimentos direto em produção, esse site incluso.`,
+        'about.badge':'Do ritmo de startup à escala de 20 milhões de usuários, o mesmo instinto de sistemas',
+        'contact.label':'Contato', 'contact.h2':'Vamos conversar sobre o que você está construindo.',
+        'contact.p':`Aberto a vagas de Senior Product Design e projetos pontuais nos EUA. Marque um horário direto na minha agenda, ou mande um email se preferir compartilhar os detalhes antes.`,
+        'footer.resume':'Currículo', 'footer.email':'Email',
+        'modal.label':'Vamos conversar', 'modal.h3':'Como você prefere falar comigo?', 'modal.p':'Escolha o que for mais rápido pra você.',
+        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':'Diariamente, 17h–19h'
+      }
+    };
+
+    function apply(lang){
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      const dict = I18N[lang] || I18N.en;
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const v = dict[el.dataset.i18n];
+        if(v !== undefined) el.innerHTML = v;
+      });
+      document.querySelectorAll('.lang-toggle button').forEach(b=> b.classList.toggle('active', b.dataset.lang === lang));
+      document.dispatchEvent(new CustomEvent('langchange', {detail:{lang}}));
+    }
+    window.currentLang = function(){ return localStorage.getItem('site-lang') === 'pt' ? 'pt' : 'en'; };
+    document.querySelectorAll('.lang-toggle button').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        localStorage.setItem('site-lang', b.dataset.lang);
+        apply(b.dataset.lang);
+      });
+    });
+    apply(window.currentLang());
+  })();
+</script>
+
+</body>
+</html>
