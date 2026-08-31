@@ -5,69 +5,267 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Page not found · Guilherme Cannalonga</title>
 <meta name="robots" content="noindex">
+
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<meta name="theme-color" content="#0c0c0d">
+<meta name="theme-color" content="#f7f6f1">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
 <style>
+  /* ============================================================
+     canna design — 404
+     Same paper, same ink, same acid as every other page.
+     A 404 is a navigation failure, so it does the one thing a dead
+     end can do well: hand back the four real destinations instead
+     of a single "go home".
+     ============================================================ */
   :root{
-    --bg:#0c0c0d; --bg-alt:#141416; --border:#27272a;
-    --text:#f2f2f0; --text-dim:#a6a6ab; --text-faint:#808085;
-    --gold:#f2a93b;
+    --paper:#f7f6f1;
+    --paper-2:#eeebe4;
+    --ink:#14140f;
+    --ink-2:#605e56;
+    --acid:#d9f24b;
+    --peri:#c9cbf5;    /* Genial */
+    --sky:#d3e9ff;     /* LIAM */
+    --coral:#ff8d8f;   /* Pick & Pack */
+    --indigo:#8ea5ff;  /* Compass */
+    --line:rgba(20,20,15,0.12);
+    --line-control:rgba(20,20,15,0.48);
+    --max:1180px;
+    --pad:32px;
+    --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
   body{
-    background:var(--bg); color:var(--text);
-    font-family:'Inter', -apple-system, sans-serif; line-height:1.6;
-    -webkit-font-smoothing:antialiased;
-    min-height:100vh; display:flex; align-items:center; justify-content:center;
-    padding:32px; text-align:center; position:relative; overflow-x:hidden;
+    background:var(--paper); color:var(--ink);
+    font-family:'DM Sans', system-ui, -apple-system, sans-serif;
+    font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility; overflow-x:hidden;
+    min-height:100vh; display:flex; flex-direction:column;
   }
-  body::after{
-    content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
-    background:radial-gradient(ellipse 700px 400px at 50% 20%, rgba(242,169,59,0.07), transparent 65%);
+  h1,h2,h3{font-weight:900; letter-spacing:-0.05em; line-height:0.9;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad); width:100%;}
+  ::selection{background:var(--acid); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--ink); outline-offset:3px; border-radius:4px;}
+
+  /* 2.4.1 Bypass Blocks */
+  .skip-link{
+    position:absolute; left:16px; top:-64px; z-index:200;
+    background:var(--ink); color:var(--paper); font-size:14px; font-weight:700;
+    padding:12px 20px; border-radius:100px; transition:top .16s ease;
   }
-  .wrap{position:relative; z-index:1; max-width:520px;}
-  h1,h2{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.02em;}
-  .code{
-    font-family:'Space Grotesk'; font-size:13px; font-weight:600;
-    text-transform:uppercase; letter-spacing:0.14em; color:var(--gold);
-    border:1px solid rgba(242,169,59,0.3); background:rgba(242,169,59,0.06);
-    padding:6px 14px; border-radius:100px; display:inline-block; margin-bottom:26px;
+  .skip-link:focus{top:16px;}
+  /* 2.5.5 Target Size — the visible pill stays small; the hit area does not. */
+  .lang button{position:relative;}
+  .lang button::after{
+    content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:44px; height:44px;
   }
-  h1{font-size:clamp(26px,5vw,40px); line-height:1.15; margin-bottom:18px;}
-  p{color:var(--text-dim); font-size:16px; margin-bottom:34px;}
-  .ctas{display:flex; gap:12px; justify-content:center; flex-wrap:wrap;}
-  a.btn{
-    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
-    font-size:14px; font-weight:500; padding:12px 22px; border-radius:10px;
-    transition:transform .2s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+  .label{display:block; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2);}
+
+  /* ================= NAV ================= */
+  nav{padding:22px var(--pad) 0; position:relative;}
+  .nav-mark{display:block; text-align:center; font-weight:900; font-size:19px; letter-spacing:-0.06em; line-height:1;}
+  .nav-mark sup{font-size:9px; font-weight:500; letter-spacing:0;}
+  .nav-side{position:absolute; top:22px; right:var(--pad);}
+  .lang{display:flex; background:var(--paper-2); border-radius:100px; padding:4px;}
+  .lang button{
+    font-family:inherit; font-size:11px; font-weight:700; letter-spacing:.03em;
+    padding:8px 8px; border:none; border-radius:100px; background:transparent;
+    color:var(--ink); opacity:.4; cursor:pointer; transition:opacity .2s, background .2s;
   }
-  .btn-primary{background:var(--gold); color:#141414;}
-  .btn-primary:hover{background:#ffc766; transform:translateY(-1px); box-shadow:0 10px 28px rgba(242,169,59,0.25);}
-  .btn-ghost{border:1px solid var(--border); color:var(--text);}
-  .btn-ghost:hover{border-color:var(--text-dim); transform:translateY(-1px);}
-  ::selection{background:var(--gold); color:#141414;}
-  @media (max-width:480px){
+  .lang button.active{background:var(--ink); color:var(--paper); opacity:1;}
+
+  /* ================= BUTTONS ================= */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    font-family:inherit; font-size:15px; font-weight:500; padding:16px 28px;
+    border-radius:100px; border:1px solid transparent; cursor:pointer;
+    transition:background .2s ease, border-color .2s ease; white-space:nowrap;
+  }
+  /* On paper, exactly one action is primary and it is always the contact one. */
+  .btn-primary{background:var(--acid); color:var(--ink);}
+  .btn-primary:hover{background:#cbe63d;}
+  .btn-ghost{border-color:var(--line-control); color:var(--ink);}
+  .btn-ghost:hover{background:var(--paper-2);}
+
+  /* ================= BODY ================= */
+  main{flex:1; display:flex; align-items:center; padding:var(--s6) 0;}
+  .err{display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); align-items:start;}
+  .err .label{margin-bottom:var(--s3);}
+  .err h1{font-size:clamp(44px,8.4vw,104px); margin-bottom:var(--s3);}
+  .err p{font-size:18px; line-height:1.55; color:var(--ink-2); max-width:34ch; margin-bottom:var(--s4);}
+  .ctas{display:flex; gap:12px; flex-wrap:wrap;}
+
+  /* the recovery list: the four cases, in field colour */
+  .recover{border-top:1px solid var(--line); padding-top:var(--s3);}
+  .recover .label{margin-bottom:var(--s2);}
+  .recover a{
+    display:flex; align-items:center; gap:14px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+    transition:padding-left .2s ease;
+  }
+  .recover a:hover{padding-left:8px;}
+  .swatch{width:22px; height:22px; border-radius:6px; flex:none;}
+  .recover .n{font-size:17px; font-weight:700; letter-spacing:-0.02em;}
+  .recover .t{font-size:13px; color:var(--ink-2); margin-left:auto; text-align:right;}
+  .recover a .arw{font-size:15px; color:var(--ink-2);}
+
+  footer{border-top:1px solid var(--line); padding:var(--s3) 0 var(--s4);}
+  .foot{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:13px; color:var(--ink-2);}
+  .foot-links{display:flex; gap:24px;}
+  .foot-links a:hover{color:var(--ink);}
+
+  @media (max-width:900px){
+    .err{grid-template-columns:1fr; gap:var(--s4);}
+    main{padding:var(--s5) 0;}
+  }
+  @media (max-width:560px){
+    :root{--pad:20px;}
+    .err p{font-size:16px;}
     .ctas{flex-direction:column; align-items:stretch;}
-    a.btn{justify-content:center;}
+    .recover .t{display:none;}
+    .recover a .arw{margin-left:auto;}   /* .t carried the auto margin; it is gone here */
   }
   @media (prefers-reduced-motion:reduce){
-    *, *::before, *::after{transition-duration:0.01ms !important;}
+    *, *::before, *::after{transition-duration:0.01ms !important; animation-duration:0.01ms !important;}
   }
 </style>
-<script defer src="https://cloud.umami.is/script.js" data-website-id="c3e64fd0-ec7d-4fdf-a35f-7e8f77208d02"></script></head>
+</head>
 <body>
-  <div class="wrap">
-    <span class="code">Error 404</span>
-    <h1>This page took a wrong turn.</h1>
-    <p>The link you followed doesn't exist, or it moved. The work is all still here though.</p>
-    <div class="ctas">
-      <a class="btn btn-primary" href="/">Back to the portfolio</a>
-      <a class="btn btn-ghost" href="mailto:cannalongadesign@gmail.com">Email me</a>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<nav>
+  <a class="nav-mark" href="index.html">canna<sup>&reg;</sup></a>
+  <div class="nav-side">
+    <div class="lang" role="group" aria-label="Language" data-i18n-aria="a11y.lang">
+      <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-lang="pt" aria-pressed="false" lang="pt-BR">PT</button>
     </div>
   </div>
+</nav>
+
+<main id="main">
+  <div class="wrap">
+    <div class="err">
+
+      <div>
+        <span class="label" data-i18n="e.eyebrow">Error 404</span>
+        <h1 data-i18n="e.h1">This page<br>took a<br>wrong turn.</h1>
+        <p data-i18n="e.p">The link you followed doesn't exist, or it moved. The work is all still here.</p>
+        <div class="ctas">
+          <a class="btn btn-primary" href="mailto:cannalongadesign@gmail.com" data-i18n="e.cta1">Get in touch</a>
+          <a class="btn btn-ghost" href="index.html" data-i18n="e.cta2">Back to the portfolio</a>
+        </div>
+      </div>
+
+      <div class="recover">
+        <span class="label" data-i18n="e.recover">Or go straight to a case</span>
+
+        <a href="genial-case.html">
+          <span class="swatch" style="background:var(--peri)"></span>
+          <span class="n">Genial App</span>
+          <span class="t" data-i18n="e.genial">Healthcare · 8.59% &rarr; 62.3%</span>
+          <span class="arw" aria-hidden="true">&nearr;</span>
+        </a>
+
+        <a href="liam-case.html">
+          <span class="swatch" style="background:var(--sky)"></span>
+          <span class="n">LIAM</span>
+          <span class="t" data-i18n="e.liam">AI &middot; 2h &rarr; 25min</span>
+          <span class="arw" aria-hidden="true">&nearr;</span>
+        </a>
+
+        <a href="kruzer-case.html">
+          <span class="swatch" style="background:var(--coral)"></span>
+          <span class="n">Pick &amp; Pack</span>
+          <span class="t" data-i18n="e.kruzer">Logistics · 80+ stores</span>
+          <span class="arw" aria-hidden="true">&nearr;</span>
+        </a>
+
+        <a href="compass-case.html">
+          <span class="swatch" style="background:var(--indigo)"></span>
+          <span class="n">Compass</span>
+          <span class="t" data-i18n="e.compass">Design system · +40%</span>
+          <span class="arw" aria-hidden="true">&nearr;</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span>© 2026 — <span data-i18n="foot.made">Made by Guilherme Cannalonga</span></span>
+      <div class="foot-links">
+        <a href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:cannalongadesign@gmail.com" data-i18n="footer.email">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const I18N = {
+      en: {
+        'a11y.skip':`Skip to content`, 'a11y.lang':`Language`,
+        'e.eyebrow':'Error 404',
+        'e.h1':`This page<br>took a<br>wrong turn.`,
+        'e.p':`The link you followed doesn't exist, or it moved. The work is all still here.`,
+        'e.cta1':`Get in touch`,
+        'e.cta2':`Back to the portfolio`,
+        'e.recover':'Or go straight to a case',
+        'e.genial':'Healthcare · 8.59% &rarr; 62.3%',
+        'e.liam':'AI · 2h &rarr; 25min',
+        'e.kruzer':'Logistics · 80+ stores',
+        'e.compass':'Design system · +40%',
+        'foot.made':'Made by Guilherme Cannalonga', 'footer.email':'Email'
+      },
+      pt: {
+        'a11y.skip':`Pular para o conteúdo`, 'a11y.lang':`Idioma`,
+        'e.eyebrow':'Erro 404',
+        'e.h1':`Esta página<br>pegou o<br>caminho errado.`,
+        'e.p':`O link que você seguiu não existe, ou mudou de lugar. Mas o trabalho continua todo aqui.`,
+        'e.cta1':`Vamos conversar`,
+        'e.cta2':`Voltar para o portfólio`,
+        'e.recover':'Ou vá direto para um case',
+        'e.genial':'Saúde · 8,59% &rarr; 62,3%',
+        'e.liam':'IA · 2h &rarr; 25min',
+        'e.kruzer':'Logística · 80+ lojas',
+        'e.compass':'Design system · +40%',
+        'foot.made':'Feito por Guilherme Cannalonga', 'footer.email':'Email'
+      }
+    };
+    function apply(lang){
+      document.documentElement.lang = lang==='pt' ? 'pt-BR' : 'en';
+      const d = I18N[lang] || I18N.en;
+      document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+        const v = d[el.dataset.i18nAria];
+        if(v !== undefined) el.setAttribute('aria-label', v);
+      });
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const v = d[el.dataset.i18n]; if(v !== undefined) el.innerHTML = v;
+      });
+      document.querySelectorAll('.lang button').forEach(b=>{
+        const on = b.dataset.lang===lang;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');   /* 4.1.2 state, not just style */
+      });
+    }
+    /* same key as every other page, so the choice survives landing here */
+    document.querySelectorAll('.lang button').forEach(b=>{
+      b.addEventListener('click',()=>{ localStorage.setItem('site-lang', b.dataset.lang); apply(b.dataset.lang); });
+    });
+    apply(localStorage.getItem('site-lang')==='pt' ? 'pt' : 'en');
+  })();
+</script>
+
 </body>
 </html>
