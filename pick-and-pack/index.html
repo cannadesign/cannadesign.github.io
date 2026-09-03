@@ -640,7 +640,7 @@
 
 <nav id="siteNav">
   <div class="wrap">
-    <a class="back-link" href="index.html#work">
+    <a class="back-link" href="/#work">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <span data-i18n="nav.back">Back to portfolio</span>
     </a>
@@ -649,7 +649,7 @@
         <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
         <button type="button" data-lang="pt" aria-pressed="false" lang="pt-BR">PT</button>
       </div>
-      <a class="nav-cta" href="index.html#contact" data-contact-trigger data-i18n="nav.cta">Let's talk</a>
+      <a class="nav-cta" href="/#contact" data-contact-trigger data-i18n="nav.cta">Let's talk</a>
     </div>
   </div>
 </nav>
@@ -920,7 +920,7 @@
       </a>
       <div class="callout">
         <h3 class="card-h" data-i18n="k.instrument.h">The instrument was chosen, not inherited</h3>
-        <p data-i18n="k.instrument.p1">Different project, different instrument. <a href="index.html#method">How I chose the instrument on each project &rarr;</a></p>
+        <p data-i18n="k.instrument.p1">Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a></p>
       </div>
     </div>
   </div>
@@ -931,8 +931,8 @@
     <h2 data-i18n="close.h2">Questions this page doesn't answer?</h2>
     <p data-i18n="close.p.kruzer">Happy to walk through the research, the failed first version of the kanban, or how we prioritized against Fast Shop's OKRs.</p>
     <div class="close-ctas">
-      <a class="btn btn-primary" href="index.html#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
-      <a class="btn btn-ghost" href="index.html#work" data-i18n="close.cta2.kruzer">See the other case</a>
+      <a class="btn btn-primary" href="/#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
+      <a class="btn btn-ghost" href="/#work" data-i18n="close.cta2.kruzer">See the other case</a>
     </div>
   </div>
 </section>
@@ -1157,7 +1157,7 @@
         'k.system.p':`None of these screens were designed in isolation. A status pill means the same thing on the board, the table and the order page because the token layer says so. That work grew large enough to be its own case.`,
         'k.system.cta':`Read the Compass case &rarr;`,
         'k.instrument.h':`The instrument was chosen, not inherited`,
-        'k.instrument.p1':`Different project, different instrument. <a href="index.html#method">How I chose the instrument on each project &rarr;</a>`
+        'k.instrument.p1':`Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a>`
       },
       pt: {
         'nav.back.genial':`Voltar ao Genial App`,
@@ -1294,7 +1294,7 @@
         'k.system.p':`Nenhuma dessas telas foi desenhada isolada. Uma pílula de status significa a mesma coisa no board, na tabela e na página do pedido porque a camada de tokens diz isso. Esse trabalho cresceu o bastante para ser um case próprio.`,
         'k.system.cta':`Ler o case do Compass &rarr;`,
         'k.instrument.h':`O instrumento foi escolhido, não herdado`,
-        'k.instrument.p1':`Projeto diferente, instrumento diferente. <a href="index.html#method">Como escolhi o instrumento em cada projeto &rarr;</a>`
+        'k.instrument.p1':`Projeto diferente, instrumento diferente. <a href="/#method">Como escolhi o instrumento em cada projeto &rarr;</a>`
       }
     };
 
@@ -1337,16 +1337,17 @@
        the portfolio. Same-origin only, and a refresh is not a journey. */
     const link=document.querySelector('.back-link'); if(!link) return;
     const label=link.querySelector('[data-i18n]'); if(!label) return;
-    const MAP={'genial.html':'nav.back.genial','liam.html':'nav.back.liam',
-               'pick-and-pack.html':'nav.back.kruzer','compass.html':'nav.back.compass'};
+    const MAP={'genial':'nav.back.genial','liam':'nav.back.liam',
+               'pick-and-pack':'nav.back.kruzer','compass':'nav.back.compass'};
     try{
       if(!document.referrer) return;
       const u=new URL(document.referrer);
       if(u.origin!==location.origin) return;
-      const from=u.pathname.split('/').pop();
-      if(!from || from===location.pathname.split('/').pop()) return;
+      const slug=p=>p.split('/').filter(Boolean).pop()||'';
+      const from=slug(u.pathname);
+      if(!from || from===slug(location.pathname)) return;
       const key=MAP[from]; if(!key) return;
-      link.setAttribute('href', from);
+      link.setAttribute('href', '/'+from+'/');
       label.dataset.i18n=key;
       if(window.applyLang) window.applyLang();
     }catch(e){ /* a malformed referrer just leaves the default in place */ }

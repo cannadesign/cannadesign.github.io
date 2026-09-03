@@ -624,7 +624,7 @@
 
 <nav>
   <div class="wrap">
-    <a class="back-link" href="index.html#work">
+    <a class="back-link" href="/#work">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       <span data-i18n="nav.back">Back to portfolio</span>
     </a>
@@ -633,7 +633,7 @@
         <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
         <button type="button" data-lang="pt" aria-pressed="false" lang="pt-BR">PT</button>
       </div>
-      <a class="nav-cta" href="index.html#contact" data-contact-trigger data-i18n="nav.cta">Let's talk</a>
+      <a class="nav-cta" href="/#contact" data-contact-trigger data-i18n="nav.cta">Let's talk</a>
     </div>
   </div>
 </nav>
@@ -912,7 +912,7 @@
     <h3 class="sub" data-i18n="c.dif.h">What I&rsquo;d do differently</h3>
     <p data-i18n="c.dif.p">I would write the governance rules before the component library, not after it. Adoption took about two months to reach all three products &mdash; faster than I expected, which sounds like good news and meant the rules arrived while people were already adding variants, so the first months of governance were spent undoing things instead of preventing them. I would also have led with a different number. Throughput was the easy metric to reach for; cycle time on the same class of ticket, roughly 4.2 days down to 2.5, is the harder one to argue with, and I only went looking for it after 40% was already the headline. Reach for the number that could embarrass you first.</p>
 
-    <p class="note" data-i18n="c.instrument.p1">Different project, different instrument. <a href="index.html#method">How I chose the instrument on each project &rarr;</a></p>
+    <p class="note" data-i18n="c.instrument.p1">Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a></p>
 
     <h2 data-i18n="c.h2.defend">What I'd defend in a design review</h2>
     <p data-i18n="c.defend.p2">The decision I would defend hardest is refusing to let the component layer grow. Every one-off override was a signal that the semantic layer had a gap, and fixing the gap is slower in the moment and cheaper for everyone after. I also count governance as part of the deliverable: a system nobody owns drifts back to where it started, and the next designer gets to rebuild it and claim the same 40%.</p>
@@ -925,7 +925,7 @@
     <h2 data-i18n="close.h2">Questions this page doesn't answer?</h2>
     <p data-i18n="close.p">Happy to walk through the token naming decisions, the audit that started it, or how I handled the components teams did not want to give up.</p>
     <div class="close-ctas">
-      <a class="btn btn-primary" href="index.html#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
+      <a class="btn btn-primary" href="/#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
       <a class="btn btn-ghost" href="/pick-and-pack/" data-i18n="close.cta2">Read the Pick &amp; Pack case</a>
     </div>
   </div>
@@ -1104,7 +1104,7 @@
         'c.test.p1':`There is no usability test for a design system, and no funnel. The users are colleagues, the sample is the team, and the thing you want to know, whether this makes the work faster and more consistent, only shows up in how work actually flows.`,
         'c.test.p2':`So the evidence came from three places. The audit gave a hard before: around twenty blues, seven paddings and four button heights live in production, counted rather than estimated. Pick &amp; Pack was the first consumer, which made the system prove itself against a real product before anyone else adopted it. And Jira, which the team was already using to track demand, gave the after: the same class of work, measured before and after adoption.`,
         'c.test.p3':`Using a system the team already maintained matters. A metric I invent to prove my own project is worth roughly nothing in a review; a metric engineering already trusts is much harder to wave away, and much harder for me to flatter.`,
-        'c.instrument.p1':`Different project, different instrument. <a href="index.html#method">How I chose the instrument on each project &rarr;</a>`,
+        'c.instrument.p1':`Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a>`,
         'c.h2.role':'What I owned',
         'c.role.p':`I built Compass end to end and stayed responsible for it after launch: the audit, the token architecture, the component library, the documentation, and the governance rules that decide who can change what.`,
         'c.h2.tokens':'The semantic token scale is the actual product',
@@ -1227,7 +1227,7 @@
         'c.test.p1':`Não existe teste de usabilidade para design system, nem funil. Os usuários são colegas, a amostra é o time, e o que você quer saber, se isso deixa o trabalho mais rápido e mais consistente, só aparece em como o trabalho de fato flui.`,
         'c.test.p2':`Então a evidência veio de três lugares. A auditoria deu um antes duro: uns vinte azuis, sete paddings e quatro alturas de botão vivos em produção, contados em vez de estimados. O Pick &amp; Pack foi o primeiro consumidor, o que obrigou o sistema a se provar contra um produto real antes de qualquer outro adotar. E o Jira, que o time já usava para acompanhar demanda, deu o depois: a mesma classe de trabalho, medida antes e depois da adoção.`,
         'c.test.p3':`Usar um sistema que o time já mantinha faz diferença. Uma métrica que eu invento para provar o meu próprio projeto vale praticamente nada numa review; uma métrica em que engenharia já confia é muito mais difícil de descartar, e muito mais difícil de eu maquiar.`,
-        'c.instrument.p1':`Projeto diferente, instrumento diferente. <a href="index.html#method">Como escolhi o instrumento em cada projeto &rarr;</a>`,
+        'c.instrument.p1':`Projeto diferente, instrumento diferente. <a href="/#method">Como escolhi o instrumento em cada projeto &rarr;</a>`,
         'c.h2.role':'O que era meu',
         'c.role.p':`Construí o Compass ponta a ponta e continuei responsável por ele depois do lançamento: a auditoria, a arquitetura de tokens, a biblioteca de componentes, a documentação e as regras de governança que definem quem pode mudar o quê.`,
         'c.h2.tokens':'A escala semântica de tokens é o produto de verdade',
@@ -1295,16 +1295,17 @@
        the portfolio. Same-origin only, and a refresh is not a journey. */
     const link=document.querySelector('.back-link'); if(!link) return;
     const label=link.querySelector('[data-i18n]'); if(!label) return;
-    const MAP={'genial.html':'nav.back.genial','liam.html':'nav.back.liam',
-               'pick-and-pack.html':'nav.back.kruzer','compass.html':'nav.back.compass'};
+    const MAP={'genial':'nav.back.genial','liam':'nav.back.liam',
+               'pick-and-pack':'nav.back.kruzer','compass':'nav.back.compass'};
     try{
       if(!document.referrer) return;
       const u=new URL(document.referrer);
       if(u.origin!==location.origin) return;
-      const from=u.pathname.split('/').pop();
-      if(!from || from===location.pathname.split('/').pop()) return;
+      const slug=p=>p.split('/').filter(Boolean).pop()||'';
+      const from=slug(u.pathname);
+      if(!from || from===slug(location.pathname)) return;
       const key=MAP[from]; if(!key) return;
-      link.setAttribute('href', from);
+      link.setAttribute('href', '/'+from+'/');
       label.dataset.i18n=key;
       if(window.applyLang) window.applyLang();
     }catch(e){ /* a malformed referrer just leaves the default in place */ }
