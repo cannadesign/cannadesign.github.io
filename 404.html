@@ -74,9 +74,11 @@
   .nav-side{position:absolute; top:22px; right:var(--pad);}
   .lang{display:flex; background:var(--paper-2); border-radius:100px; padding:4px;}
   .lang button{
+    /* 1.4.3 — o idioma nao selecionado ficava em 2,7:1. Nao e um controle
+       desabilitado, e a outra opcao do par, entao precisa ser legivel. */
     font-family:inherit; font-size:11px; font-weight:700; letter-spacing:.03em;
     padding:8px 8px; border:none; border-radius:100px; background:transparent;
-    color:var(--ink); opacity:.4; cursor:pointer; transition:opacity .2s, background .2s;
+    color:var(--ink); opacity:.62; cursor:pointer; transition:opacity .2s, background .2s;
   }
   .lang button.active{background:var(--ink); color:var(--paper); opacity:1;}
 
@@ -124,6 +126,7 @@
     .err{grid-template-columns:1fr; gap:var(--s4);}
     main{padding:var(--s5) 0;}
   }
+
   @media (max-width:560px){
     :root{--pad:20px;}
     .err p{font-size:16px;}
@@ -134,6 +137,8 @@
   @media (prefers-reduced-motion:reduce){
     *, *::before, *::after{transition-duration:0.01ms !important; animation-duration:0.01ms !important;}
   }
+
+
 </style>
 </head>
 <body>
@@ -166,28 +171,28 @@
       <div class="recover">
         <span class="label" data-i18n="e.recover">Or go straight to a case</span>
 
-        <a href="genial-case.html">
+        <a href="genial.html">
           <span class="swatch" style="background:var(--peri)"></span>
           <span class="n">Genial App</span>
           <span class="t" data-i18n="e.genial">Healthcare · 8.59% &rarr; 62.3%</span>
           <span class="arw" aria-hidden="true">&nearr;</span>
         </a>
 
-        <a href="liam-case.html">
+        <a href="liam.html">
           <span class="swatch" style="background:var(--sky)"></span>
           <span class="n">LIAM</span>
           <span class="t" data-i18n="e.liam">AI &middot; 2h &rarr; 25min</span>
           <span class="arw" aria-hidden="true">&nearr;</span>
         </a>
 
-        <a href="kruzer-case.html">
+        <a href="pick-and-pack.html">
           <span class="swatch" style="background:var(--coral)"></span>
           <span class="n">Pick &amp; Pack</span>
           <span class="t" data-i18n="e.kruzer">Logistics · 80+ stores</span>
           <span class="arw" aria-hidden="true">&nearr;</span>
         </a>
 
-        <a href="compass-case.html">
+        <a href="compass.html">
           <span class="swatch" style="background:var(--indigo)"></span>
           <span class="n">Compass</span>
           <span class="t" data-i18n="e.compass">Design system · +40%</span>

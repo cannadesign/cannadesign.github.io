@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>canna design · Guilherme Cannalonga, Senior Product Designer</title>
-<meta name="description" content="Senior Product Designer turning complex healthcare, logistics, and consumer-trust systems into decisions people can act on, currently designing for platforms serving 20M+ users monthly.">
+<title>Guilherme Cannalonga · Senior Product Designer · Boston</title>
+<meta name="description" content="Senior Product Designer in Greater Boston. Clinical AI, enterprise logistics, consumer healthcare and fintech: 8%→62% daily use, 2h→25min documentation, 18%→63% credit completion. Open to Senior and Lead roles in the US.">
 
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Guilherme Cannalonga">
 <meta property="og:title" content="Guilherme Cannalonga · Senior Product Designer">
-<meta property="og:description" content="I turn complex data into fast decisions. Senior Product Designer across healthcare, enterprise logistics, and consumer trust, designing for platforms serving 20M+ users monthly.">
+<meta property="og:description" content="Product design for systems where the wrong screen is expensive. Clinical AI, enterprise logistics, consumer healthcare and fintech. Open to Senior and Lead roles in the US.">
 <meta property="og:url" content="https://cannadesign.github.io/">
 <link rel="canonical" href="https://cannadesign.github.io/">
 <meta property="og:image" content="https://cannadesign.github.io/assets/og-image.jpg">
@@ -22,7 +22,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Guilherme Cannalonga · Senior Product Designer">
-<meta name="twitter:description" content="I turn complex data into fast decisions. Designing for platforms serving 20M+ users monthly.">
+<meta name="twitter:description" content="Product design for systems where the wrong screen is expensive. Open to Senior and Lead roles in the US.">
 <meta name="twitter:image" content="https://cannadesign.github.io/assets/og-image.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -104,7 +104,13 @@
   .label{display:block; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2);}
 
   /* ================= NAV ================= */
-  nav{position:fixed; top:0; left:0; right:0; z-index:100; padding:22px var(--pad) 0;}
+  nav{position:fixed; top:0; left:0; right:0; z-index:100; padding:22px var(--pad) 0;
+      transition:background .22s ease, box-shadow .22s ease;}
+  /* A fixed bar over a transparent page means body copy scrolls visibly
+     under the pill. At the top of the page there is nothing behind it, so
+     it stays clear; once the page moves it becomes opaque paper and the
+     text passes behind it instead of through it. */
+  nav.solid{background:var(--paper); padding-bottom:14px; box-shadow:0 1px 0 var(--line);}
   .nav-mark{display:block; text-align:center; font-weight:900; font-size:19px; letter-spacing:-0.06em; line-height:1;}
   .nav-mark sup{font-size:9px; font-weight:500; letter-spacing:0;}
   .nav-pill{
@@ -121,12 +127,38 @@
   .nav-side{position:absolute; top:22px; right:var(--pad);}
   .lang{display:flex; background:var(--paper-2); border-radius:100px; padding:4px;}
   .lang button{
+    /* 1.4.3 — o idioma nao selecionado ficava em 2,7:1. Nao e um controle
+       desabilitado, e a outra opcao do par, entao precisa ser legivel. */
     font-family:inherit; font-size:11px; font-weight:700; letter-spacing:.03em;
     padding:8px 8px; border:none; border-radius:100px; background:transparent;
-    color:var(--ink); opacity:.4; cursor:pointer; transition:opacity .2s, background .2s;
+    color:var(--ink); opacity:.62; cursor:pointer; transition:opacity .2s, background .2s;
   }
   .lang button.active{background:var(--ink); color:var(--paper); opacity:1;}
-  
+  /* Below 820 the language switch moves inside the nav pill, so the page has
+     one floating element instead of two competing for the same corner. Two
+     languages do not need a modal: a modal turns a one-tap switch into three
+     taps and adds a focus trap to every page. A divider keeps it legible as
+     a different kind of control from the section links beside it. */
+  .lang.in-pill{display:none; background:none; padding:0; gap:2px;}
+  .pill-sep{display:none; width:1px; align-self:stretch; margin:6px 4px; background:var(--line-2);}
+
+  /* ================= BACK TO TOP ================= */
+  /* The nav is fixed but the page is long; on a phone the fastest way back
+     to the top should not be four thumb-flicks. 48px, above the 44px
+     minimum target, clear of the iOS home indicator. */
+  .to-top{
+    position:fixed; right:16px; bottom:calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index:99; width:48px; height:48px; border-radius:50%;
+    background:var(--ink); color:var(--paper); border:none; cursor:pointer;
+    display:none; align-items:center; justify-content:center; font-size:18px; line-height:1;
+    opacity:0; transform:translateY(8px) scale(.9); pointer-events:none;
+    transition:opacity .2s ease, transform .2s ease;
+  }
+  .to-top.on{opacity:1; transform:none; pointer-events:auto;}
+  .to-top:hover{background:#2c2c22;}
+  /* the modal owns the screen while it is open; nothing floats over its scrim */
+  body.modal-open .to-top{opacity:0; pointer-events:none;}
+
 
   /* ================= BUTTONS ================= */
   .btn{
@@ -145,9 +177,27 @@
   .btn-acid:hover{background:#cbe63c;}
 
   /* ================= HERO ================= */
-  .hero{padding:190px 0 var(--s4);}
+  .hero{padding:170px 0 var(--s4);}
   .hero .label{margin-bottom:var(--s3);}
-  .hero h1{font-size:clamp(44px,10.4vw,138px); margin-bottom:var(--s5);}
+  /* No picture in the hero. The evidence here is the four numbers below,
+     and they are typographic — a screenshot beside them competes with them
+     and repeats what the grid one scroll down already shows better. The
+     headline gets the full column instead, capped at a measure that still
+     reads as a line of type rather than a paragraph. */
+  .hero-grid{padding-bottom:var(--s5); border-bottom:1px solid var(--line);}
+  .hero-copy h1{font-size:clamp(40px,6.6vw,86px); line-height:.94; margin-bottom:var(--s3); text-wrap:balance; max-width:17ch;}
+  .hero-copy .bio{font-size:18px; color:var(--ink-2); max-width:58ch; margin-bottom:var(--s3);}
+  .avail{display:flex; align-items:center; gap:10px; font-size:13.5px; font-weight:700; letter-spacing:-0.01em; margin-bottom:var(--s3);}
+  .avail .dot{width:8px; height:8px; border-radius:50%; background:#2f9e5b; flex-shrink:0;}
+  .hero-actions{display:flex; flex-wrap:wrap; gap:10px;}
+  .btn-line{background:transparent; border-color:var(--line-2); color:var(--ink);}
+  .btn-line:hover{border-color:var(--ink);}
+  /* One scale for every width. The vw coefficient is set by the tightest
+     case — a 320px phone, where 13.8vw lands on 44px, the size that already
+     fit there. Above 320px the type grows slower than the column does
+     (padding is fixed), so the line only gets safer as the screen widens,
+     while reading much larger on a phone than the old 44px floor did. */
+  .hero h1{margin-bottom:var(--s5);}
   /* the pill nests into the rag of the last line: the short line is the point */
   .hero-pill{
     display:inline-flex; align-items:center; gap:8px; vertical-align:middle;
@@ -175,7 +225,9 @@
   .stat{padding-inline:var(--s4); border-right:1px solid var(--line);}
   .stat:first-child{padding-left:0;}
   .stat:last-child{border-right:none; padding-right:0;}
-  .stat .n{font-weight:900; font-size:clamp(20px,2.2vw,27px); letter-spacing:-0.05em; line-height:1;}
+  .stat .n{font-weight:900; font-size:clamp(19px,1.9vw,25px); letter-spacing:-0.04em; line-height:1; white-space:nowrap; font-variant-numeric:tabular-nums;}
+  .stat .n span{font-weight:700; font-size:.72em; letter-spacing:0;}
+  .stat .n span.morph{font-weight:900; font-size:1em; letter-spacing:inherit;}
   .stat .l{font-size:12.5px; color:var(--ink-2); margin-top:8px; line-height:1.45; max-width:24ch;}
   
   
@@ -239,7 +291,23 @@
   .card-cap{display:flex; justify-content:space-between; align-items:baseline; gap:var(--s3); margin-top:16px;}
   .card-cap h3{font-size:21px; letter-spacing:-0.04em; line-height:1.15;}
   .card-cap .cat{font-size:13.5px; color:var(--ink-2); margin-top:4px;}
-  .card-cap .met{font-size:14px; font-weight:700; text-align:right; white-space:nowrap; letter-spacing:-0.02em;}
+  .card-sum{font-size:14.5px; color:var(--ink-2); margin-top:10px; max-width:46ch; line-height:1.5;}
+  .now-tag{display:inline-block; vertical-align:middle; margin-left:8px; font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; background:var(--acid); padding:4px 8px; border-radius:100px; transform:translateY(-3px);}
+  .card-media.ink{background:var(--ink);}
+  .sec-head.sub{margin:var(--s6) 0 var(--s3);}
+  .card-cap .met{flex-shrink:0;}
+  section[id]{scroll-margin-top:120px;}
+  /* A number with no name is trivia. "8.59% → 62.3%" tells a reader the
+     direction and the size of a win but not what moved, so the strongest
+     evidence on the page was arriving unlabelled. The name sits on the
+     baseline of the card title; the number sits under it, where the eye
+     lands after reading what it measures. */
+  .card-cap .met{text-align:right; letter-spacing:-0.02em; max-width:17ch;}
+  .card-cap .met-n{
+    display:block; font-size:11px; font-weight:700; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-2); line-height:1.3;
+  }
+  .card-cap .met-v{display:block; font-size:15px; font-weight:700; margin-top:5px; white-space:nowrap;}
   a.card:hover .card-cap h3{text-decoration:underline; text-underline-offset:5px; text-decoration-thickness:2px;}
   /* corner affordance, the way Stripe hints an expandable card */
   a.card .card-media::after{
@@ -321,6 +389,28 @@
 
   
 
+  /* ================= HOW I DECIDE ================= */
+  .method-grid{display:grid; grid-template-columns:1fr 1.2fr; gap:var(--s6); align-items:start;}
+  .method-grid .sec-head{margin-bottom:0;}
+  .instruments{list-style:none; border-top:1px solid var(--line);}
+  .instruments li{display:grid; grid-template-columns:120px 1fr; gap:var(--s3); padding:18px 0; border-bottom:1px solid var(--line);}
+  .instruments .k{font-weight:900; letter-spacing:-0.03em; font-size:16px;}
+  .instruments .v{font-size:15px; color:var(--ink-2); line-height:1.5;}
+  /* ================= TESTIMONIALS (all three, static) ================= */
+  .quotes{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .quote-card{background:var(--paper-2); border-radius:18px; padding:var(--s4) var(--s3); display:flex; flex-direction:column; gap:var(--s3); justify-content:space-between;}
+  .quote{font-size:17px; line-height:1.45; letter-spacing:-0.015em; font-weight:500;}
+  .quote strong{font-weight:900;}
+  .quote-by .n{font-size:14.5px; font-weight:700;}
+  .quote-by .r{font-size:13px; color:var(--ink-2); margin-top:4px;}
+  .timeline{margin:var(--s4) 0 var(--s3); border-top:1px solid var(--line);}
+  .timeline > div{display:grid; grid-template-columns:110px 1fr; gap:var(--s3); padding:12px 0; border-bottom:1px solid var(--line); font-size:14.5px;}
+  .timeline dt{font-weight:700; font-variant-numeric:tabular-nums; white-space:nowrap;}
+  .timeline dd{color:var(--ink-2);}
+  .about-links{display:flex; flex-wrap:wrap; gap:10px;}
+  .closing .label{margin-bottom:var(--s3);}
+  .closing-actions{display:flex; flex-wrap:wrap; gap:10px; justify-content:center;}
+
   /* ================= ABOUT ================= */
   .about-grid{display:grid; grid-template-columns:390px 1fr; gap:var(--s6); align-items:start;}
   .about-photo{border-radius:20px; overflow:hidden;}
@@ -353,9 +443,60 @@
   .opt .t{font-size:15px; font-weight:700; display:block;}
   .opt .s{font-size:12.5px; color:var(--ink-2); display:block;}
 
+
+  /* modal on small screens: never wider than the viewport, never taller than it,
+     the nav goes away underneath it, and the focus lands on the dialog itself
+     so the close button does not open with a ring around it. */
+  .modal-card{max-height:calc(100dvh - 40px); overflow:auto; outline:none;}
+  .opt{min-width:0;}
+  .opt > span:last-child{min-width:0;}
+  .opt .t,.opt .s{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  body.modal-open nav,body.modal-open .to-top{visibility:hidden;}
+  /* ================= MOTION SIGNATURE: the acid marker =================
+     One idea, used three ways. A highlighter sweeps under the phrase that
+     matters in the hero; the "after" number in each proof counts up from its
+     real "before" (never from zero); the marker draws itself beside the
+     takeaways on every case page. Everything renders at its final state
+     without JavaScript and under prefers-reduced-motion. */
+  .mk{
+    background-color:transparent; color:inherit; padding:0 .06em; margin:0 -.06em;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone;
+    background-image:linear-gradient(var(--acid),var(--acid));
+    background-repeat:no-repeat; background-position:0 78%; background-size:100% .38em;
+  }
+  .js .mk{background-size:0% .38em; transition:background-size .9s cubic-bezier(.2,.7,.2,1) .7s;}
+  .js .hero.ready .mk{background-size:100% .38em;}
+  .js .reveal.in .mk.on{background-size:100% .38em; transition-delay:.35s;}
+  @keyframes rise{from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:none;}}
+  @keyframes settle{from{opacity:0; transform:translateY(24px) rotate(-1.2deg) scale(.97);} to{opacity:1; transform:none;}}
+  .js .hero-copy > *{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;}
+  .js .hero-copy > :nth-child(1){animation-delay:.05s}
+  .js .hero-copy > :nth-child(2){animation-delay:.15s}
+  .js .hero-copy > :nth-child(3){animation-delay:.3s}
+  .js .hero-copy > :nth-child(4){animation-delay:.4s}
+  .js .hero-copy > :nth-child(5){animation-delay:.5s}
+  .js .stats{animation:rise .7s cubic-bezier(.2,.7,.2,1) .65s both;}
+  .morph{display:inline-block; min-width:2.6ch; text-align:left; font-variant-numeric:tabular-nums;}
+  /* cards: the artwork breathes, the well deepens, the arrow points the way */
+  .card-shot{transition:transform .7s cubic-bezier(.2,.7,.2,1);}
+  a.card:hover .card-shot{transform:scale(1.035);}
+  .card-media{transition:filter .4s ease;}
+  a.card:hover .card-media{filter:saturate(1.12);}
+  /* reveal: rise once, from a visible state, with a stagger inside grids */
+  .js .reveal{opacity:0; transform:translateY(14px);}
+  .js .reveal.in{opacity:1; transform:none; transition:opacity .6s cubic-bezier(.2,.7,.2,1), transform .6s cubic-bezier(.2,.7,.2,1);}
+  .js .grid .reveal.in:nth-child(2){transition-delay:.08s}
+  @media (prefers-reduced-motion:reduce){
+    .js .mk{background-size:100% .38em; transition:none;}
+    .js .hero-copy > *, .js .stats{animation:none;}
+    .js .reveal{opacity:1; transform:none;}
+    a.card:hover .card-shot{transform:none;}
+  }
+
   /* ================= MOTION ================= */
-  .reveal{opacity:0; transform:translateY(16px); transition:opacity .55s ease, transform .55s ease;}
-  .reveal.in{opacity:1; transform:none;}
+  /* Content is visible at rest; the observer only adds a gentle settle. */
+  .reveal{opacity:1; transform:none; transition:transform .45s ease, opacity .45s ease;}
+  .reveal.in{transform:none;}
   @media (prefers-reduced-motion:reduce){
     *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
     .reveal{opacity:1; transform:none;}
@@ -365,24 +506,73 @@
      específica de tela sempre venha depois na cascata. Antes desta
      passagem havia inversões: em 375px a meta-row caía na regra de 900px
      e renderizava três colunas onde deveria ter duas. ── */
+  /* ── Matri and Modal: artwork is desktop and tablet only ─────
+     Both files are desktop compositions whose devices deliberately run off
+     the edges of a wide card. Every attempt to re-frame that for a narrow
+     column either sliced a phone mid-screen or left the laptop stranded in
+     dead ink. On a phone the copy carries these two on its own — they are
+     the "also shipped" pair, not cases — and a card with no image beats a
+     card with a broken one. */
+  /* Small phones: the four-item pill is the only thing that will not fit at
+     320px in Portuguese, where the labels are longer. */
+
+  /* ── Breakpoints, do maior para o menor. A ordem importa: em CSS
+     duas regras de mesma especificidade empatam pela posição, então um
+     bloco de 900px depois de um de 640px vence no celular. ── */
+
   @media (max-width:980px){
     .also{grid-template-columns:1fr;}
     .also-ratio{display:none;}
     .also-item{padding:var(--s4); display:flex; flex-direction:column; gap:var(--s3);}
     .also-copy{position:static; display:block; width:100%; order:0;}
     .also-item .label{white-space:normal;}
-    /* crop to the artwork side of the composition */
-    .also-art{position:static; width:100%; height:300px; object-position:right center; border-radius:12px; order:1;}
+    /* The desktop file is a full card composite: four Matri phones that
+       deliberately bleed off the top and bottom of a wide card, plus empty
+       copy space on the left. Any other proportion turns that intentional
+       bleed into what looks like a mistake — the first attempt sliced a
+       phone mid-screen and left a stray fragment floating in ink.
+       So below 980 the source is not a rescale of the desktop file but a
+       recomposition of it: the bottom row only, both phones with their tops
+       intact, staggered, running off the bottom edge of the card. A cut
+       that lands flush on the card edge reads as a bleed; a cut that lands
+       in the middle of the plate reads as broken. Same rule for the Modal
+       laptop, cropped to its own silhouette instead of floating in a fixed
+       300px box. The plate behind both is the same ink as the card, so the
+       art runs to the corners with no seam. */
+    .also-art{
+      position:static; order:1; height:auto; object-fit:contain;
+      object-position:center; background:var(--ink); border-radius:0;
+      width:calc(100% + 2 * var(--s4));
+      margin:0 calc(-1 * var(--s4)) calc(-1 * var(--s4));
+    }
   }
+
+  @media (max-width:900px){ .quotes{grid-template-columns:1fr;} }
 
   @media (max-width:900px){ .about-grid{grid-template-columns:1fr; gap:var(--s4);} .about-photo{max-width:390px;} }
 
+  @media (max-width:820px){ .method-grid{grid-template-columns:1fr; gap:var(--s4);} .instruments li{grid-template-columns:1fr; gap:6px;} }
+
   @media (max-width:820px){
-    .nav-side{position:static; display:flex; justify-content:center; margin-top:8px;}
+    /* ── Language switch is desktop only ───────────────────────
+       display:none rather than a visual hide: it takes the control out of
+       the accessibility tree too, so a screen reader on a phone is never
+       told about a button that is not there. The preference itself is not
+       lost — it lives in localStorage, so someone who chose Portuguese on
+       a desktop still gets Portuguese on their phone. */
+    .nav-side{display:none;}
+    .lang.in-pill{display:flex;}
+    .pill-sep{display:block;}
+    .lang.in-pill button{padding:8px 7px; font-size:11px;}
     .nav-pill a{font-size:12.5px; padding:8px 12px;}
+    .to-top{display:flex;}
   }
 
-  @media (max-width:820px){ .hero-info{grid-template-columns:1fr; gap:var(--s3);} }
+  @media (max-width:820px){
+    /* No rule between the intro and the numbers: the numbers already start
+       their own block, and two rules that close together read as a table. */
+    .hero-info{grid-template-columns:1fr; gap:var(--s3); padding-bottom:0; border-bottom:none;}
+  }
 
   @media (max-width:820px){
     .stats{grid-template-columns:1fr 1fr;}
@@ -395,8 +585,8 @@
 
   @media (max-width:820px){
     .grid{grid-template-columns:1fr; gap:var(--s4);}
-    .card-cap{flex-direction:column; gap:8px;}
-    .card-cap .met{text-align:left; white-space:normal;}
+    .card-cap{flex-direction:column; gap:10px;}
+    .card-cap .met{text-align:left; max-width:none;}
     /* the brief is type, not a picture: it needs room, not a ratio */
     .card-media.brief{aspect-ratio:auto; min-height:340px;}
   }
@@ -404,6 +594,19 @@
   @media (max-width:820px){ .exp-grid{grid-template-columns:1fr; gap:var(--s4);} }
 
   @media (max-width:820px){ .quote-wrap{grid-template-columns:1fr; gap:var(--s3); align-items:start;} }
+
+  @media (max-width:767px){
+    .also-item picture{display:none;}
+    .also-item{padding:var(--s4); gap:var(--s2);}
+  }
+
+  @media (max-width:640px){
+    .modal{padding:12px; align-items:flex-end;}
+    .modal-card{padding:28px 20px 20px; border-radius:20px; max-height:calc(100dvh - 24px);}
+    .modal-card h3{font-size:24px; padding-right:40px;}
+    .opt{padding:14px;}
+    .opt .ico{width:36px; height:36px;}
+  }
 
   @media (max-width:640px){
     :root{--pad:20px; --s5:44px; --s6:64px; --s7:84px;}
@@ -419,24 +622,47 @@
   }
 
   @media (max-width:440px){
+    /* Four section links plus the language switch will not fit one row in
+       Portuguese below 440px. Expertise is the one that gives: it is a
+       same-page anchor to a section the reader scrolls into anyway, and it
+       is the least distinct of the four. Losing a shortcut costs less than
+       a nav that wraps or clips. */
+    .nav-pill a[href="#method"]{display:none;}
+    .nav-pill a{font-size:11.5px; padding:8px 9px;}
+    .nav-pill{gap:3px;}
+
     .stats{grid-template-columns:1fr;}
     .stat{border-right:none; border-bottom:1px solid var(--line); padding:var(--s3) 0;}
+    /* The two-column rule above kills the bottom border on the last TWO
+       cells, which is right in a 2x2 grid and wrong in a single column: it
+       left the +40% and the 20M+ running together with no rule between
+       them. In one column only the final cell closes without a line. */
+    .stat:nth-last-child(-n+2){border-bottom:1px solid var(--line); padding-bottom:var(--s3);}
     .stat:first-child{padding-top:0;}
     .stat:last-child{border-bottom:none; padding-bottom:0;}
   }
 
+  @media (max-width:380px){
+    .nav-pill{padding:3px;}
+    .nav-pill a{font-size:11.5px; padding:8px 9px;}
+  }
 </style>
 </head>
-<body>
+<body class="js">
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
 <nav>
   <a class="nav-mark" href="#top">canna<sup>&reg;</sup></a>
   <div class="nav-pill" id="navPill">
     <a href="#work" data-i18n="nav.work">Work</a>
-    <a href="#expertise" data-i18n="nav.expertise">Expertise</a>
+    <a href="#method" data-i18n="nav.method">How I decide</a>
     <a href="#about" data-i18n="nav.about">About</a>
     <a href="#contact" data-contact-trigger data-i18n="nav.contact">Contact</a>
+    <span class="pill-sep" aria-hidden="true"></span>
+    <div class="lang in-pill" role="group" aria-label="Language" data-i18n-aria="a11y.lang">
+      <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-lang="pt" aria-pressed="false" lang="pt-BR">PT</button>
+    </div>
   </div>
   <div class="nav-side">
     <div class="lang" role="group" aria-label="Language" data-i18n-aria="a11y.lang">
@@ -446,23 +672,30 @@
   </div>
 </nav>
 
+<button type="button" class="to-top" id="toTop" aria-label="Back to top" data-i18n-aria="a11y.top">
+  <span aria-hidden="true">&uarr;</span>
+</button>
+
 <main id="main">
 <section class="hero" id="top">
   <div class="wrap">
-    <span class="label" data-i18n="hero.eyebrow">Greater Boston, MA · Senior Product Designer</span>
-    <h1 data-i18n="hero.h1">Complex data,<br>fast decisions.<a class="hero-pill" href="#work">See the work <span>&darr;</span></a></h1>
-    <div class="hero-info">
-      <div class="talk">
-        <span class="label" data-i18n="hero.talk">Let's talk</span>
-        <a href="mailto:cannalongadesign@gmail.com" data-contact-trigger>cannalongadesign@gmail.com</a>
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="label" data-i18n="hero.eyebrow">Guilherme Cannalonga · Senior Product Designer · Greater Boston, MA</span>
+        <h1 data-i18n="hero.h1">Product design for systems where <mark class="mk">the wrong screen</mark> is expensive.</h1>
+        <p class="bio" data-i18n="hero.bio">I design the tools clinicians, operators and families use to decide fast when the stakes are real. Six-plus years in product design; today on a platform used by 20M+ people a month.</p>
+        <p class="avail" data-i18n="hero.avail"><span class="dot" aria-hidden="true"></span>Open to Senior and Lead product design roles in the US · Authorized to work in the US</p>
+        <div class="hero-actions">
+          <a class="btn btn-acid" href="#work"><span data-i18n="hero.cta1">See the work</span> <span aria-hidden="true">&darr;</span></a>
+          <a class="btn btn-line" href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">&nearr;</span></a>
+        </div>
       </div>
-      <p class="bio" data-i18n="hero.bio">Hi, I'm Guilherme. I turn complex systems in healthcare, enterprise logistics and consumer trust into decisions people can act on. Today I design for a platform serving 20M+ users a month.</p>
     </div>
-    <div class="stats reveal">
-      <div class="stat"><div class="n">2h &rarr; 25min</div><div class="l" data-i18n="stat.liam.label">Clinical documentation time, via an AI assistant I designed</div></div>
-      <div class="stat"><div class="n" data-countup="675" data-suffix="%">0%</div><div class="l" data-i18n="stat.genial.label">DAU growth in one year at Genial Care</div></div>
-      <div class="stat"><div class="n" data-countup="40" data-suffix="%">0%</div><div class="l" data-i18n="stat.compass.label">Rise in maintenance and prototyping agility, after Compass DS</div></div>
-      <div class="stat"><div class="n" data-countup="20" data-suffix="M+">0M+</div><div class="l" data-i18n="stat.ra.label">Monthly users on the platform I design for today</div></div>
+    <div class="stats">
+      <div class="stat"><div class="n">8.6% &rarr; <span class="morph" data-from="8.6" data-to="62.3" data-dec="1" data-suffix="%">62.3%</span></div><div class="l" data-i18n="stat.genial.label">Families opening the app daily · Genial Care</div></div>
+      <div class="stat"><div class="n">2h &rarr; <span class="morph" data-from="120" data-to="25" data-suffix="min">25min</span></div><div class="l" data-i18n="stat.liam.label">Documentation per session · LIAM</div></div>
+      <div class="stat"><div class="n">18% &rarr; <span class="morph" data-from="18" data-to="63" data-suffix="%">63%</span></div><div class="l" data-i18n="stat.matri.label">Credit-journey completion · Matri Bank</div></div>
+      <div class="stat"><div class="n">81% <span data-i18n="stat.pp.n">on time</span></div><div class="l" data-i18n="stat.pp.label">Held while volume grew, 80+ stores · Pick &amp; Pack</div></div>
     </div>
   </div>
 </section>
@@ -471,63 +704,86 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="label" data-i18n="work.label">Selected work</span>
-      <h2 data-i18n="work.h2">Four products, the system underneath them, and one slot still open.</h2>
-      <p data-i18n="work.p">Healthcare, enterprise logistics and consumer trust are different industries. The job is the same: turn complexity into a decision someone can act on immediately.</p>
+      <h2 data-i18n="work.h2">Four products where the failure states mattered more than the demo.</h2>
+      <p data-i18n="work.p">Healthcare, logistics and fintech. Same job every time: find the real constraint, name the number that could veto the win, design the exceptions first.</p>
     </div>
 
     <div class="grid">
 
-      <a class="card reveal" href="genial-case.html">
+      <a class="card reveal" href="genial.html">
         <div class="card-media peri">
           <img class="card-shot" src="assets/card-genial.webp" alt="Genial Care family app on two iPhones: home with upcoming sessions, and a session detail with the child&#39;s evolution note" loading="lazy" width="1096" height="864">
         </div>
         <div class="card-cap">
           <div>
             <h3>Genial App</h3>
-            <div class="cat" data-i18n="card.genial.cat">Healthcare · Product Growth</div>
+            <div class="cat" data-i18n="card.genial.cat">Consumer healthcare · Genial Care</div>
+            <p class="card-sum" data-i18n="card.genial.sum">Fixed scheduling, not content. A one-month MVP, then a year of small bets.</p>
           </div>
-          <div class="met" >8.59% &rarr; 62.3%</div>
+          <div class="met"><span class="met-n" data-i18n="card.genial.metname">Families opening the app daily</span><span class="met-v">8.6% &rarr; 62.3%</span></div>
         </div>
       </a>
 
-      <a class="card reveal" href="liam-case.html">
+      <a class="card reveal" href="liam.html">
         <div class="card-media sky">
           <img class="card-shot" src="assets/card-liam.webp" alt="LIAM running on a tablet held in one hand: the intervention screen a therapist works in during a session" loading="lazy" width="1096" height="864">
         </div>
         <div class="card-cap">
           <div>
             <h3>LIAM</h3>
-            <div class="cat" data-i18n="card.liam.cat">Healthcare · AI Design</div>
+            <div class="cat" data-i18n="card.liam.cat">AI clinical documentation · Genial Care</div>
+            <p class="card-sum" data-i18n="card.liam.sum">Drafts the clinical record from the therapist's narration. Never signs it.</p>
           </div>
-          <div class="met" >2h &rarr; 25min</div>
+          <div class="met"><span class="met-n" data-i18n="card.liam.metname">Documentation per session</span><span class="met-v">2h &rarr; 25min</span></div>
         </div>
       </a>
 
-      <a class="card reveal" href="kruzer-case.html">
+      <a class="card reveal" href="pick-and-pack.html">
         <div class="card-media coral">
           <img class="card-shot" src="assets/card-kruzer.webp" alt="Pick &amp; Pack order queue on a desktop monitor: every order with status, carrier and waiting time" loading="lazy" width="1096" height="864">
         </div>
         <div class="card-cap">
           <div>
             <h3>Pick &amp; Pack</h3>
-            <div class="cat" data-i18n="card.kruzer.cat">Enterprise Commerce · B2B · SaaS</div>
+            <div class="cat" data-i18n="card.kruzer.cat">Enterprise logistics · Kruzer for Fast Shop</div>
+            <p class="card-sum" data-i18n="card.kruzer.sum">One order, three people, one screen each. Designed around the exceptions.</p>
           </div>
-          <div class="met" data-i18n="card.kruzer.met">80+ fully operational on the system.</div>
+          <div class="met"><span class="met-n" data-i18n="card.kruzer.metname">On-time rate, under growing volume</span><span class="met-v" data-i18n="card.kruzer.met">81% held</span></div>
         </div>
       </a>
 
-      <a class="card reveal" href="compass-case.html">
+      <a class="card reveal" href="compass.html">
         <div class="card-media indigo">
           <img class="card-shot" src="assets/card-compass.webp" alt="Compass design system documentation on a desktop monitor: the colour palette page with primitive and semantic tokens" loading="lazy" width="1096" height="864">
         </div>
         <div class="card-cap">
           <div>
             <h3>Compass</h3>
-            <div class="cat" data-i18n="card.compass.cat">Design Systems · built from scratch</div>
+            <div class="cat" data-i18n="card.compass.cat">Design system · Kruzer</div>
+            <p class="card-sum" data-i18n="card.compass.sum">Twenty blues in production to one semantic token layer, with governance.</p>
           </div>
-          <div class="met" data-i18n="card.compass.met">+40% agility</div>
+          <div class="met"><span class="met-n" data-i18n="card.compass.metname">Design-ticket throughput</span><span class="met-v" data-i18n="card.compass.met">+40%</span></div>
         </div>
       </a>
+    </div>
+
+    <div class="sec-head sub reveal">
+      <span class="label" data-i18n="more.label">Also shipped · and now</span>
+    </div>
+    <div class="grid">
+      <div class="card reveal">
+        <div class="card-media ink">
+          <img class="card-shot" src="assets/matri-app.webp" alt="Matri Bank app screens on nine phones: account home with the credit card, Pix area, statement, Pix limits, support and the welcome screen" loading="lazy" width="1400" height="1054">
+        </div>
+        <div class="card-cap">
+          <div>
+            <h3>Matri Bank</h3>
+            <div class="cat" data-i18n="card.matri.cat">Fintech · Shock Tecnologia</div>
+            <p class="card-sum" data-i18n="card.matri.sum">Redesigned the credit journey for a regulated product. Full case on request.</p>
+          </div>
+          <div class="met"><span class="met-n" data-i18n="card.matri.metname">Credit-journey completion</span><span class="met-v">18% &rarr; 63%</span></div>
+        </div>
+      </div>
 
       <div class="card reveal">
         <div class="card-media mint">
@@ -535,84 +791,34 @@
         </div>
         <div class="card-cap">
           <div>
-            <h3>Compra Confiável</h3>
-            <div class="cat" data-i18n="card.ra.cat">Consumer trust at national scale &middot; Reclame Aqui</div>
-            <div class="wip"><span class="dot"></span><span data-i18n="card.ra.wip">Current role · in progress</span></div>
+            <h3>Compra Confiável <span class="now-tag" data-i18n="card.ra.now">Now</span></h3>
+            <div class="cat" data-i18n="card.ra.cat">Consumer trust · Reclame Aqui</div>
+            <p class="card-sum" data-i18n="card.ra.sum">Senior Product Designer on the product 20M+ people use to check a company before buying. Under NDA.</p>
           </div>
-          <div class="met" data-i18n="card.ra.met">20M+ users monthly</div>
-        </div>
-      </div>
-
-      <div class="card reveal">
-        <div class="card-media brief">
-          <div class="brief-sheet">
-            <span class="bl" data-i18n="next.label">Case 05 &middot; unwritten</span>
-            <div class="brief-row">
-              <span class="k" data-i18n="next.k1">Company</span>
-              <span class="v blank"><span class="caret"></span></span>
-            </div>
-            <div class="brief-row">
-              <span class="k" data-i18n="next.k2">Role</span>
-              <span class="v" data-i18n="next.v2">Senior / Staff Product Designer</span>
-            </div>
-            <div class="brief-row">
-              <span class="k" data-i18n="next.k3">Start</span>
-              <span class="v" data-i18n="next.v3">Available now</span>
-            </div>
-            <div class="brief-row">
-              <span class="k" data-i18n="next.k4">Impact</span>
-              <span class="v" data-i18n="next.v4">To be measured together</span>
-            </div>
-            <a class="brief-cta" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
-              <span data-i18n="next.cta">Book a 30-min chat</span> <span aria-hidden="true">&nearr;</span>
-            </a>
-          </div>
-        </div>
-        <div class="card-cap">
-          <div>
-            <h3 data-i18n="next.h3">Your product here</h3>
-            <div class="cat" data-i18n="next.cat">Open to new opportunities &middot; US</div>
-          </div>
-          <div class="met" data-i18n="next.met">2026</div>
+          <div class="met"><span class="met-n" data-i18n="card.ra.metname">Monthly users</span><span class="met-v" data-i18n="card.ra.met">20M+</span></div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section id="expertise" class="section">
+<section id="method" class="section">
   <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="label" data-i18n="exp.label">Expertise</span>
-      <h2 data-i18n="exp.h2">What I actually do.</h2>
-    </div>
-    <div class="exp-grid reveal">
-      <div class="exp">
-        <h3 data-i18n="exp.1.t">Discovery</h3>
-        <p data-i18n="exp.1.d">Stakeholder and user interviews, data analysis, opportunity solution trees and journey mapping. Mostly, finding the constraint that actually moves the metric before anyone opens Figma.</p>
+    <div class="method-grid reveal">
+      <div class="sec-head">
+        <span class="label" data-i18n="method.label">How I decide</span>
+        <h2 data-i18n="method.h2">The instrument is <mark class="mk on">chosen</mark>, not inherited.</h2>
+        <p data-i18n="method.p">A decision doesn't reach production until something outside my own taste has argued for it. What changes is which evidence is the cheapest that could still prove me wrong.</p>
       </div>
-      <div class="exp">
-        <h3 data-i18n="exp.2.t">Delivery</h3>
-        <p data-i18n="exp.2.d">Prioritization, roadmaps, high-fidelity prototypes and usability testing, then staying with the engineering squad through build and release instead of handing off a file.</p>
-      </div>
-      <div class="exp">
-        <h3 data-i18n="exp.3.t">Design Systems</h3>
-        <p data-i18n="exp.3.d">Three built from scratch at three companies: Compass, Matri and Atípico, plus the DesignOps governance that keeps a system coherent after launch.</p>
-      </div>
-      <div class="exp">
-        <h3 data-i18n="exp.4.t">Mentoring</h3>
-        <p data-i18n="exp.4.d">Workshop facilitation, design critique rituals and mentoring junior and mid-level designers. At Genial Care I later led design across two teams.</p>
-      </div>
+      <ul class="instruments">
+        <li><span class="k">Genial App</span><span class="v" data-i18n="method.1">A weekly behaviour curve with release markers. Hundreds of families, so an A/B test would have bought comfort at the price of learning speed.</span></li>
+        <li><span class="k">LIAM</span><span class="v" data-i18n="method.2">Every therapist on staff, reading drafts out loud. The risk was clinical trust, and a funnel can't see who stops trusting but keeps clicking.</span></li>
+        <li><span class="k">Pick &amp; Pack</span><span class="v" data-i18n="method.3">A store that went first. You can't split traffic in a warehouse, and the operation already records what it does.</span></li>
+        <li><span class="k">Compass</span><span class="v" data-i18n="method.4">The engineering team's own tracker. A metric I invent to prove my own project is worth nothing in a review.</span></li>
+      </ul>
     </div>
   </div>
 </section>
-
-<div class="band" aria-hidden="true">
-  <div class="band-track">
-    <span data-i18n="band.text">Turn complexity into a decision someone can act on ·</span>
-    <span data-i18n="band.text">Turn complexity into a decision someone can act on ·</span>
-  </div>
-</div>
 
 <section id="words" class="section">
   <div class="wrap">
@@ -620,48 +826,19 @@
       <span class="label" data-i18n="tst.label">What people say</span>
       <h2 data-i18n="tst.h2">Words from people I've built with.</h2>
     </div>
-    <div class="quote-wrap reveal">
-      <div>
-        <p class="quote" id="qText" data-i18n="tst.1.quote">As his design manager at Genial Care, I watched Guilherme's work grow <strong>increasingly strategic</strong>, always aligned to product and business goals, with a high bar for quality.</p>
-        <div class="quote-dots" id="qDots" role="group" aria-label="Choose a testimonial">
-          <button class="active" type="button" aria-pressed="true" aria-label="Testimonial 1 of 3"></button>
-          <button type="button" aria-pressed="false" aria-label="Testimonial 2 of 3"></button>
-          <button type="button" aria-pressed="false" aria-label="Testimonial 3 of 3"></button>
-        </div>
-      </div>
-      <div class="quote-by">
-        <div class="n" id="qName">Romulo Lebre</div>
-        <div class="r" id="qRole" data-i18n="tst.1.role">Product Design Manager · Genial Care</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <span class="label" data-i18n="range.label">Also shipped</span>
-      <h2 data-i18n="range.h2">Range, under pressure.</h2>
-    </div>
-    <div class="also reveal">
-      <div class="also-item">
-        <span class="also-ratio" aria-hidden="true"></span>
-        <img class="also-art" src="assets/also-matri-flat.webp" alt="Matri Bank app screens: account home, support, statement and the welcome screen" loading="lazy" width="1096" height="825">
-        <div class="also-copy">
-          <span class="label" data-i18n="range.matri.tag">Fintech · Shock Tecnologia</span>
-          <h3>Matri Bank</h3>
-          <p data-i18n="range.matri.p">Staff Product Designer on white-label digital banking. Redesigned the credit journey for products backed by court-ordered government payments, taking completion from <strong>18% to 63%</strong> &mdash; a 45-point gain on the step that decides whether the product exists. Also built the Matri Design System.</p>
-        </div>
-      </div>
-      <div class="also-item">
-        <span class="also-ratio" aria-hidden="true"></span>
-        <img class="also-art" src="assets/also-modal-flat.webp" alt="Modal Bank investment site on a laptop" loading="lazy" width="1096" height="825">
-        <div class="also-copy">
-          <span class="label" data-i18n="range.modal.tag">Retail · 7COMm</span>
-          <h3>Modal Bank</h3>
-          <p data-i18n="range.modal.p">I joined 7COMm as a support intern and left five years later as a Senior UX/UI Designer. When the agency designing Modal's site dropped the project mid-way, I took over the Figma file and shipped it. That work earned the senior title.</p>
-        </div>
-      </div>
+    <div class="quotes reveal">
+      <figure class="quote-card">
+        <blockquote class="quote" data-i18n="tst.1.quote">As his design manager at Genial Care, I watched Guilherme's work grow <strong>increasingly strategic</strong>, always aligned to product and business goals, with a high bar for quality.</blockquote>
+        <figcaption class="quote-by"><div class="n">Romulo Lebre</div><div class="r" data-i18n="tst.1.role">Product Design Manager · Genial Care</div></figcaption>
+      </figure>
+      <figure class="quote-card">
+        <blockquote class="quote" data-i18n="tst.2.quote">Guilherme has a sharp critical and creative eye, and a real commitment to what he ships. <strong>Watching him work live in Figma was mesmerizing</strong>, the speed of his vision and execution.</blockquote>
+        <figcaption class="quote-by"><div class="n">Lívia Bomfim</div><div class="r" data-i18n="tst.2.role">Product Manager · Genial Care</div></figcaption>
+      </figure>
+      <figure class="quote-card">
+        <blockquote class="quote" data-i18n="tst.3.quote">Working with Canna was incredible. He has an exceptional ability to <strong>translate user pain into effective solutions</strong>, backing the team with concrete deliverables at every step.</blockquote>
+        <figcaption class="quote-by"><div class="n">Arthur Togni</div><div class="r" data-i18n="tst.3.role">Developer · Modal project</div></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -675,9 +852,16 @@
       </div>
       <div class="about-text">
         <span class="label" style="margin-bottom:18px" data-i18n="about.label">About</span>
-        <p data-i18n="about.p1">10+ years in technology, 6+ of them in product and UX design. I started as a support intern monitoring enterprise systems, moved into development, then into UX. That path is why I default to systems thinking over decoration.</p>
-        <p data-i18n="about.p2">I've designed inside a startup squad shipping an MVP in a month and inside a platform serving 20M+ monthly users, where one flawed decision moves national-scale metrics. Same instinct at either pace: find the real constraint and design around it.</p>
-        <p data-i18n="about.p3">I treat AI as part of my craft, for research, benchmarks and pressure-testing concepts early. I work with LLMs and custom agents day to day, and I build with Claude Code to ship small experiments straight to production, this site among them.</p>
+        <p data-i18n="about.p1">I came to design through the machine room: five years in support and development on enterprise systems before my first screen. It shows. I read the API before the wireframe, ask what the backend does past the cutoff, and stay in the squad through release.</p>
+        <p data-i18n="about.p2">I have been the first or only designer more often than not: first Senior Product Designer at Genial Care, later leading design across two teams; sole designer for four products at Kruzer; now on Reclame Aqui's consumer-trust platform.</p>
+        <p data-i18n="about.p3">I use LLMs and agents daily for research and for pressure-testing concepts before they cost engineering time, and I ship experiments with Claude Code, this site among them.</p>
+        <dl class="timeline">
+          <div><dt>2026 –</dt><dd data-i18n="tl.1">Senior Product Designer · Reclame Aqui · consumer trust, 20M+ monthly users</dd></div>
+          <div><dt>2024 – 26</dt><dd data-i18n="tl.2">Senior Product Designer · Kruzer · enterprise logistics platform for Fast Shop, sole designer for four products</dd></div>
+          <div><dt>2022 – 24</dt><dd data-i18n="tl.3">Senior Product Designer · Genial Care · first designer, then leading design across two teams</dd></div>
+          <div><dt data-i18n="tl.4.d">before 2022</dt><dd data-i18n="tl.4">Product Designer · Shock Tecnologia · white-label banking (Matri)</dd></div>
+          <div><dt data-i18n="tl.5.d">five years</dt><dd data-i18n="tl.5">7COMm · support intern to Senior UX/UI Designer, by way of development</dd></div>
+        </dl>
       </div>
     </div>
   </div>
@@ -685,12 +869,13 @@
 
 <section class="closing" id="contact">
   <div class="wrap">
-    <h2 data-i18n="contact.h2">Let's talk!</h2>
-    <a class="btn btn-acid" href="mailto:cannalongadesign@gmail.com" data-contact-trigger>cannalongadesign@gmail.com &nearr;</a>
+    <span class="label" data-i18n="contact.label">Hiring for Senior or Lead Product Design?</span>
+    <h2 data-i18n="contact.h2">Let's talk.</h2>
+    <div class="closing-actions">
+      <a class="btn btn-acid" href="mailto:cannalongadesign@gmail.com" data-contact-trigger>cannalongadesign@gmail.com &nearr;</a>
+    </div>
   </div>
 </section>
-
-
 
 </main>
 
@@ -707,7 +892,7 @@
 </footer>
 
 <div class="modal" id="contactModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
-  <div class="modal-card">
+  <div class="modal-card" tabindex="-1">
     <button class="modal-close" id="modalClose" aria-label="Close">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
     </button>
@@ -721,23 +906,40 @@
       </a>
       <a class="opt" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
         <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
-        <span style="flex:1;min-width:0"><span class="t" data-i18n="modal.call.title">Book a 30-min call</span><span class="s" data-i18n="modal.call.sub">Daily, 5–7pm ET</span></span>
+        <span style="flex:1;min-width:0"><span class="t" data-i18n="modal.call.title">Book a 30-min call</span><span class="s" data-i18n="modal.call.sub">Weekdays, 5–7pm ET</span></span>
+      </a>
+      <a class="opt" href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">
+        <span class="ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="2"/><path d="M8 10v6M8 7.5v.5M12 16v-3.5a2 2 0 014 0V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span style="flex:1;min-width:0"><span class="t" data-i18n="modal.li.title">Connect on LinkedIn</span><span class="s">/in/guilhermecannalonga</span></span>
       </a>
     </div>
   </div>
 </div>
 
 <script>
-  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -8% 0px'});
-  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  /* ---- motion: marker + before→after counters ---- */
+  (function(){
+    const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const hero=document.querySelector('.hero');
+    requestAnimationFrame(()=>requestAnimationFrame(()=>hero&&hero.classList.add('ready')));
+    if(reduce) return;
+    const fmt=(v,dec)=>dec? v.toFixed(dec).replace(/\.0$/,'') : Math.round(v).toString();
+    function morph(el){
+      const from=parseFloat(el.dataset.from), to=parseFloat(el.dataset.to), dec=+(el.dataset.dec||0), sfx=el.dataset.suffix||'';
+      const dur=1500, t0=performance.now();
+      el.textContent=fmt(from,dec)+sfx;
+      (function tick(now){
+        const p=Math.min(1,(now-t0)/dur), e=1-Math.pow(1-p,4);
+        el.textContent=fmt(from+(to-from)*e,dec)+sfx;
+        if(p<1) requestAnimationFrame(tick); else el.textContent=fmt(to,dec)+sfx;
+      })(t0);
+    }
+    const mo=new IntersectionObserver((es)=>{es.forEach(e=>{ if(e.isIntersecting){ morph(e.target); mo.unobserve(e.target);} });},{threshold:.6});
+    document.querySelectorAll('.morph').forEach(el=>mo.observe(el));
+  })();
 
-  function runCountUp(el){
-    const t=parseFloat(el.dataset.countup),sfx=el.dataset.suffix||'',dur=1100,t0=performance.now();
-    (function tick(now){const p=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-p,3);
-      el.textContent=Math.round(t*e)+sfx; if(p<1)requestAnimationFrame(tick);})(t0);
-  }
-  const cIo=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){runCountUp(e.target);cIo.unobserve(e.target);}});},{threshold:0.4});
-  document.querySelectorAll('[data-countup]').forEach(el=>cIo.observe(el));
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0,rootMargin:'0px 0px -4% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
   (function(){
     const links=Array.from(document.querySelectorAll('#navPill a[href^="#"]'));
@@ -748,26 +950,27 @@
     secs.forEach(x=>s.observe(x));
   })();
 
-
   (function(){
-    const t=document.getElementById('qText'),n=document.getElementById('qName'),r=document.getElementById('qRole');
-    const dots=Array.from(document.querySelectorAll('#qDots button'));
-    if(!t) return;
-    const NAMES=['Romulo Lebre','Lívia Bomfim','Arthur Togni'];
-    function show(i){
-      t.dataset.i18n='tst.'+(i+1)+'.quote';
-      r.dataset.i18n='tst.'+(i+1)+'.role';
-      n.textContent=NAMES[i];
-      if(window.applyLang) window.applyLang();
-      dots.forEach((d,j)=>{ d.classList.toggle('active',j===i); d.setAttribute('aria-pressed', j===i ? 'true':'false'); });
+    const nav=document.querySelector('nav'), top=document.getElementById('toTop');
+    if(!nav) return;
+    let ticking=false;
+    function read(){
+      const y=window.scrollY||document.documentElement.scrollTop;
+      nav.classList.toggle('solid', y>12);
+      if(top) top.classList.toggle('on', y>window.innerHeight*0.9);
+      ticking=false;
     }
-    dots.forEach((d,i)=>d.addEventListener('click',()=>show(i)));
+    window.addEventListener('scroll',()=>{ if(!ticking){ ticking=true; requestAnimationFrame(read); } },{passive:true});
+    read();
+    if(top) top.addEventListener('click',()=>{
+      const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'});
+      const mark=document.querySelector('.nav-mark');
+      if(mark){ mark.setAttribute('tabindex','-1'); mark.focus({preventScroll:true}); }
+    });
   })();
 
   (function(){
-    /* 4.1.2 + 2.4.3. A dialog that does not trap focus lets a keyboard user tab
-       into the page behind it, where they cannot see where they are. Returning
-       focus to the trigger on close is the other half of the same contract. */
     const m=document.getElementById('contactModal'); if(!m) return;
     let lastFocused=null;
     const focusables=()=>[...m.querySelectorAll('a[href],button:not([disabled])')];
@@ -781,12 +984,14 @@
     const open=()=>{
       lastFocused=document.activeElement;
       m.classList.add('open'); m.setAttribute('aria-hidden','false');
+      document.body.classList.add('modal-open');
       document.body.style.overflow='hidden';
-      const f=focusables(); if(f.length) f[0].focus();
+      const card=m.querySelector('.modal-card'); if(card) card.focus({preventScroll:true});
       document.addEventListener('keydown',trap);
     };
     const close=()=>{
       m.classList.remove('open'); m.setAttribute('aria-hidden','true');
+      document.body.classList.remove('modal-open');
       document.body.style.overflow='';
       document.removeEventListener('keydown',trap);
       if(lastFocused && lastFocused.focus) lastFocused.focus();
@@ -796,7 +1001,6 @@
     m.addEventListener('click',e=>{if(e.target===m)close();});
     addEventListener('keydown',e=>{if(e.key==='Escape'&&m.classList.contains('open'))close();});
   })();
-
 </script>
 
 <script>
@@ -804,37 +1008,45 @@
   (function(){
     const I18N = {
       en: {
-        'a11y.skip':`Skip to content`, 'a11y.lang':`Language`,
-        'nav.work':'Work', 'nav.expertise':'Expertise', 'nav.about':'About', 'nav.contact':'Contact',
-        'hero.eyebrow':'Greater Boston, MA · Senior Product Designer',
-        'hero.h1':`Complex data,<br>fast decisions.<a class="hero-pill" href="#work">See the work <span>&darr;</span></a>`,
-        'hero.talk':`Let's talk`,
-        'hero.bio':`Hi, I'm Guilherme. I turn complex systems in healthcare, enterprise logistics and consumer trust into decisions people can act on. Today I design for a platform serving 20M+ users a month.`,
-        'stat.liam.label':'Clinical documentation time, via an AI assistant I designed',
-        'stat.genial.label':'DAU growth in one year at Genial Care',
-        'stat.compass.label':'Rise in maintenance and prototyping agility, after Compass DS',
-        'stat.ra.label':'Monthly users on the platform I design for today',
-        'work.label':'Selected work', 'work.h2':'Four products, the system underneath them, and one slot still open.',
-        'work.p':`Healthcare, enterprise logistics and consumer trust are different industries. The job is the same: turn complexity into a decision someone can act on immediately.`,
-        'card.genial.cat':'Healthcare · Product Growth',
-        'card.liam.cat':'Healthcare · AI Design',
-        'card.kruzer.cat':'Enterprise Commerce · B2B · SaaS', 'card.kruzer.met':'80+ fully operational on the system.',
-        'card.compass.cat':'Design Systems · built from scratch', 'card.compass.met':'+40% agility',
-        'next.label':'Case 05 · unwritten', 'next.k1':'Company', 'next.k2':'Role',
-        'next.v2':'Senior / Staff Product Designer', 'next.k3':'Start', 'next.v3':'Available now',
-        'next.k4':'Impact', 'next.v4':'To be measured together', 'next.cta':'Book a 30-min chat',
-        'next.h3':'Your product here', 'next.cat':'Open to new opportunities · US', 'next.met':'2026',
-        'card.ra.cat':'Consumer trust at national scale &middot; Reclame Aqui', 'card.ra.met':'20M+ users monthly', 'card.ra.wip':'Current role · in progress',
-        'exp.label':'Expertise', 'exp.h2':'What I actually do.',
-        'exp.1.t':'Discovery',
-        'exp.1.d':`Stakeholder and user interviews, data analysis, opportunity solution trees and journey mapping. Mostly, finding the constraint that actually moves the metric before anyone opens Figma.`,
-        'exp.2.t':'Delivery',
-        'exp.2.d':`Prioritization, roadmaps, high-fidelity prototypes and usability testing, then staying with the engineering squad through build and release instead of handing off a file.`,
-        'exp.3.t':'Design Systems',
-        'exp.3.d':`Three built from scratch at three companies: Compass, Matri and Atípico, plus the DesignOps governance that keeps a system coherent after launch.`,
-        'exp.4.t':'Mentoring',
-        'exp.4.d':`Workshop facilitation, design critique rituals and mentoring junior and mid-level designers. At Genial Care I later led design across two teams.`,
-        'band.text':'Turn complexity into a decision someone can act on ·',
+        'a11y.skip':`Skip to content`, 'a11y.lang':`Language`, 'a11y.top':`Back to top`,
+        'nav.work':'Work', 'nav.method':'How I decide', 'nav.about':'About', 'nav.contact':'Contact',
+        'hero.eyebrow':'Guilherme Cannalonga · Senior Product Designer · Greater Boston, MA',
+        'hero.h1':`Product design for systems where <mark class="mk">the wrong screen</mark> is expensive.`,
+        'hero.bio':`I design the tools clinicians, operators and families use to decide fast when the stakes are real. Six-plus years in product design; today on a platform used by 20M+ people a month.`,
+        'hero.avail':`<span class="dot" aria-hidden="true"></span>Open to Senior and Lead product design roles in the US · Authorized to work in the US`,
+        'hero.cta1':'See the work', 'hero.cta3':'Book 30 minutes',
+        'stat.genial.label':`Families opening the app daily · Genial Care`,
+        'stat.liam.label':`Documentation per session · LIAM`,
+        'stat.matri.label':`Credit-journey completion · Matri Bank`,
+        'stat.pp.n':'on time',
+        'stat.pp.label':`Held while volume grew, 80+ stores · Pick &amp; Pack`,
+        'work.label':'Selected work', 'work.h2':`Four products where the failure states mattered more than the demo.`,
+        'work.p':`Healthcare, logistics and fintech. Same job every time: find the real constraint, name the number that could veto the win, design the exceptions first.`,
+        'card.liam.cat':`AI clinical documentation · Genial Care`,
+        'card.liam.sum':`Drafts the clinical record from the therapist's narration. Never signs it.`,
+        'card.liam.metname':'Documentation per session',
+        'card.kruzer.cat':`Enterprise logistics · Kruzer for Fast Shop`,
+        'card.kruzer.sum':`One order, three people, one screen each. Designed around the exceptions.`,
+        'card.kruzer.metname':'On-time rate, under growing volume', 'card.kruzer.met':'81% held',
+        'card.genial.cat':`Consumer healthcare · Genial Care`,
+        'card.genial.sum':`Fixed scheduling, not content. A one-month MVP, then a year of small bets.`,
+        'card.genial.metname':'Families opening the app daily',
+        'card.compass.cat':`Design system · Kruzer`,
+        'card.compass.sum':`Twenty blues in production to one semantic token layer, with governance.`,
+        'card.compass.metname':'Design-ticket throughput', 'card.compass.met':'+40%',
+        'more.label':'Also shipped · and now',
+        'card.matri.cat':`Fintech · Shock Tecnologia`,
+        'card.matri.sum':`Redesigned the credit journey for a regulated product. Full case on request.`,
+        'card.matri.metname':'Credit-journey completion',
+        'card.ra.now':'Now', 'card.ra.cat':`Consumer trust · Reclame Aqui`,
+        'card.ra.sum':`Senior Product Designer on the product 20M+ people use to check a company before buying. Under NDA.`,
+        'card.ra.metname':'Monthly users', 'card.ra.met':'20M+',
+        'method.label':'How I decide', 'method.h2':`The instrument is <mark class="mk on">chosen</mark>, not inherited.`,
+        'method.p':`A decision doesn't reach production until something outside my own taste has argued for it. What changes is which evidence is the cheapest that could still prove me wrong.`,
+        'method.1':`A weekly behaviour curve with release markers. Hundreds of families, so an A/B test would have bought comfort at the price of learning speed.`,
+        'method.2':`Every therapist on staff, reading drafts out loud. The risk was clinical trust, and a funnel can't see who stops trusting but keeps clicking.`,
+        'method.3':`A store that went first. You can't split traffic in a warehouse, and the operation already records what it does.`,
+        'method.4':`The engineering team's own tracker. A metric I invent to prove my own project is worth nothing in a review.`,
         'tst.label':'What people say', 'tst.h2':`Words from people I've built with.`,
         'tst.1.quote':`As his design manager at Genial Care, I watched Guilherme's work grow <strong>increasingly strategic</strong>, always aligned to product and business goals, with a high bar for quality.`,
         'tst.1.role':'Product Design Manager · Genial Care',
@@ -842,52 +1054,61 @@
         'tst.2.role':'Product Manager · Genial Care',
         'tst.3.quote':`Working with Canna was incredible. He has an exceptional ability to <strong>translate user pain into effective solutions</strong>, backing the team with concrete deliverables at every step.`,
         'tst.3.role':'Developer · Modal project',
-        'range.label':'Also shipped', 'range.h2':'Range, under pressure.',
-        'range.modal.tag':'Retail · 7COMm',
-        'range.modal.p':`I joined 7COMm as a support intern and left five years later as a Senior UX/UI Designer. When the agency designing Modal's site dropped the project mid-way, I took over the Figma file and shipped it. That work earned the senior title.`,
-        'range.matri.tag':'Fintech · Shock Tecnologia',
-        'range.matri.p':`Staff Product Designer on white-label digital banking. Redesigned the credit journey for products backed by court-ordered government payments, taking completion from <strong>18% to 63%</strong> &mdash; a 45-point gain on the step that decides whether the product exists. Also built the Matri Design System.`,
         'about.location':'Greater Boston, Massachusetts', 'about.label':'About',
-        'about.p1':`10+ years in technology, 6+ of them in product and UX design. I started as a support intern monitoring enterprise systems, moved into development, then into UX. That path is why I default to systems thinking over decoration.`,
-        'about.p2':`I've designed inside a startup squad shipping an MVP in a month and inside a platform serving 20M+ monthly users, where one flawed decision moves national-scale metrics. Same instinct at either pace: find the real constraint and design around it.`,
-        'about.p3':`I treat AI as part of my craft, for research, benchmarks and pressure-testing concepts early. I work with LLMs and custom agents day to day, and I build with Claude Code to ship small experiments straight to production, this site among them.`,
-        'contact.h2':`Let's talk!`,
+        'about.p1':`I came to design through the machine room: five years in support and development on enterprise systems before my first screen. It shows. I read the API before the wireframe, ask what the backend does past the cutoff, and stay in the squad through release.`,
+        'about.p2':`I have been the first or only designer more often than not: first Senior Product Designer at Genial Care, later leading design across two teams; sole designer for four products at Kruzer; now on Reclame Aqui's consumer-trust platform.`,
+        'about.p3':`I use LLMs and agents daily for research and for pressure-testing concepts before they cost engineering time, and I ship experiments with Claude Code, this site among them.`,
+        'tl.1':'Senior Product Designer · Reclame Aqui · consumer trust, 20M+ monthly users',
+        'tl.2':`Senior Product Designer · Kruzer · enterprise logistics platform for Fast Shop, sole designer for four products`,
+        'tl.3':'Senior Product Designer · Genial Care · first designer, then leading design across two teams',
+        'tl.4':'Product Designer · Shock Tecnologia · white-label banking (Matri)',
+        'tl.5':'7COMm · support intern to Senior UX/UI Designer, by way of development',
+        'about.book':'Book 30 minutes', 'tl.4.d':'before 2022', 'tl.5.d':'five years',
+        'contact.label':'Hiring for Senior or Lead Product Design?', 'contact.h2':`Let's talk.`,
         'foot.made':'Made by Guilherme Cannalonga', 'footer.email':'Email',
         'modal.label':`Let's talk`, 'modal.h3':'How would you like to connect?', 'modal.p':`Pick whichever's faster for you.`,
-        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':'Daily, 5–7pm ET'
+        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':'Weekdays, 5–7pm ET', 'modal.li.title':'Connect on LinkedIn'
       },
       pt: {
-        'a11y.skip':`Pular para o conteúdo`, 'a11y.lang':`Idioma`,
-        'nav.work':'Trabalho', 'nav.expertise':'Expertise', 'nav.about':'Sobre', 'nav.contact':'Contato',
-        'hero.eyebrow':'Greater Boston, MA · Senior Product Designer',
-        'hero.h1':`Dados complexos,<br>decisões rápidas.<a class="hero-pill" href="#work">Ver os projetos <span>&darr;</span></a>`,
-        'hero.talk':'Vamos conversar',
-        'hero.bio':`Oi, sou o Guilherme. Transformo sistemas complexos de saúde, logística empresarial e confiança do consumidor em decisões que as pessoas conseguem tomar. Hoje desenho para uma plataforma com mais de 20 milhões de usuários por mês.`,
-        'stat.liam.label':'Tempo de documentação clínica, via um assistente de IA que desenhei',
-        'stat.genial.label':'Crescimento de usuários ativos diários em um ano na Genial Care',
-        'stat.compass.label':'De aumento em manutenção e agilidade de prototipação, após o Compass DS',
-        'stat.ra.label':'Usuários mensais na plataforma que desenho hoje',
-        'work.label':'Projetos selecionados', 'work.h2':'Quatro produtos, o sistema por trás deles, e uma vaga ainda aberta.',
-        'work.p':`Saúde, logística empresarial e confiança do consumidor são setores diferentes. O trabalho é o mesmo: transformar complexidade em uma decisão que alguém consiga tomar imediatamente.`,
-        'card.genial.cat':'Saúde · Crescimento de Produto',
-        'card.liam.cat':'Saúde · Design de IA',
-        'card.kruzer.cat':'Comércio Empresarial · B2B · SaaS', 'card.kruzer.met':'80+ lojas rodando no sistema.',
-        'card.compass.cat':'Design Systems · construído do zero', 'card.compass.met':'+40% de agilidade',
-        'next.label':'Case 05 · em branco', 'next.k1':'Empresa', 'next.k2':'Cargo',
-        'next.v2':'Product Designer Sênior / Staff', 'next.k3':'Início', 'next.v3':'Disponível agora',
-        'next.k4':'Impacto', 'next.v4':'A medir, juntos', 'next.cta':'Marcar um papo de 30 min',
-        'next.h3':'Seu produto aqui', 'next.cat':'Aberto a novas oportunidades · EUA', 'next.met':'2026',
-        'card.ra.cat':'Confiança do consumidor em escala nacional &middot; Reclame Aqui', 'card.ra.met':'20M+ usuários por mês', 'card.ra.wip':'Cargo atual · em construção',
-        'exp.label':'Expertise', 'exp.h2':'O que eu faço de verdade.',
-        'exp.1.t':'Discovery',
-        'exp.1.d':`Entrevistas com stakeholders e usuários, análise de dados, opportunity solution trees e mapeamento de jornada. Principalmente, achar a restrição que move a métrica antes de alguém abrir o Figma.`,
-        'exp.2.t':'Entrega',
-        'exp.2.d':`Priorização, roadmaps, protótipos de alta fidelidade e testes de usabilidade, e depois ficar com o squad de engenharia até o lançamento em vez de entregar um arquivo.`,
-        'exp.3.t':'Design Systems',
-        'exp.3.d':`Três construídos do zero em três empresas: Compass, Matri e Atípico, além da governança de DesignOps que mantém um sistema coerente depois do lançamento.`,
-        'exp.4.t':'Mentoria',
-        'exp.4.d':`Facilitação de workshops, rituais de crítica de design e mentoria de designers júnior e pleno. Na Genial Care, depois liderei design em dois times.`,
-        'band.text':'Transformar complexidade em uma decisão que alguém consegue tomar ·',
+        'a11y.skip':`Pular para o conteúdo`, 'a11y.lang':`Idioma`, 'a11y.top':`Voltar ao topo`,
+        'nav.work':'Trabalho', 'nav.method':'Como decido', 'nav.about':'Sobre', 'nav.contact':'Contato',
+        'hero.eyebrow':'Guilherme Cannalonga · Senior Product Designer · Greater Boston, MA',
+        'hero.h1':`Design de produto para sistemas onde <mark class="mk">a tela errada</mark> custa caro.`,
+        'hero.bio':`Desenho as ferramentas que clínicos, operadores e famílias usam para decidir rápido quando o risco é real. Mais de seis anos em design de produto; hoje em uma plataforma usada por mais de 20 milhões de pessoas por mês.`,
+        'hero.avail':`<span class="dot" aria-hidden="true"></span>Aberto a vagas Senior e Lead de product design nos EUA · Autorizado a trabalhar nos EUA`,
+        'hero.cta1':'Ver os projetos', 'hero.cta3':'Agendar 30 minutos',
+        'stat.genial.label':`Famílias abrindo o app por dia · Genial Care`,
+        'stat.liam.label':`Documentação por sessão · LIAM`,
+        'stat.matri.label':`Conclusão da jornada de crédito · Matri Bank`,
+        'stat.pp.n':'no prazo',
+        'stat.pp.label':`Mantido com o volume crescendo, 80+ lojas · Pick &amp; Pack`,
+        'work.label':'Projetos selecionados', 'work.h2':`Quatro produtos em que os estados de falha importavam mais do que a demo.`,
+        'work.p':`Saúde, logística e fintech. O mesmo trabalho toda vez: achar a restrição real, nomear o número que poderia vetar a vitória, desenhar as exceções primeiro.`,
+        'card.liam.cat':`Documentação clínica com IA · Genial Care`,
+        'card.liam.sum':`Rascunha o registro clínico a partir da narração do terapeuta. Nunca assina por ele.`,
+        'card.liam.metname':'Documentação por sessão',
+        'card.kruzer.cat':`Logística empresarial · Kruzer para a Fast Shop`,
+        'card.kruzer.sum':`Um pedido, três pessoas, uma tela para cada. Desenhado a partir das exceções.`,
+        'card.kruzer.metname':'Entregas no prazo, com volume crescendo', 'card.kruzer.met':'81% mantido',
+        'card.genial.cat':`Saúde para famílias · Genial Care`,
+        'card.genial.sum':`Consertou a agenda, não o conteúdo. Um MVP de um mês e um ano de apostas pequenas.`,
+        'card.genial.metname':'Famílias abrindo o app por dia',
+        'card.compass.cat':`Design system · Kruzer`,
+        'card.compass.sum':`De vinte azuis em produção para uma camada de tokens semânticos, com governança.`,
+        'card.compass.metname':'Vazão de tickets de design', 'card.compass.met':'+40%',
+        'more.label':'Também entreguei · e agora',
+        'card.matri.cat':`Fintech · Shock Tecnologia`,
+        'card.matri.sum':`Redesenhei a jornada de crédito de um produto regulado. Case completo sob consulta.`,
+        'card.matri.metname':'Conclusão da jornada de crédito',
+        'card.ra.now':'Agora', 'card.ra.cat':`Confiança do consumidor · Reclame Aqui`,
+        'card.ra.sum':`Senior Product Designer no produto que 20M+ pessoas usam para checar uma empresa antes de comprar. Sob NDA.`,
+        'card.ra.metname':'Usuários por mês', 'card.ra.met':'20M+',
+        'method.label':'Como decido', 'method.h2':`O instrumento é <mark class="mk on">escolhido</mark>, não herdado.`,
+        'method.p':`Uma decisão não chega em produção até que algo fora do meu gosto tenha argumentado por ela. O que muda é qual evidência é a mais barata que ainda consegue me provar errado.`,
+        'method.1':`Uma curva semanal com marcadores de release. Centenas de famílias, então um A/B compraria conforto ao preço da velocidade de aprendizado.`,
+        'method.2':`Cada terapeuta da equipe, lendo rascunhos em voz alta. O risco era confiança clínica, e um funil não vê quem deixa de confiar mas continua clicando.`,
+        'method.3':`Uma loja que foi primeiro. Não dá para dividir tráfego em um armazém, e a operação já registra o que faz.`,
+        'method.4':`O tracker do próprio time de engenharia. Uma métrica que eu invento para provar meu projeto não vale nada em uma revisão.`,
         'tst.label':'O que dizem sobre mim', 'tst.h2':'Palavras de quem já construiu comigo.',
         'tst.1.quote':`Como gestor de design dele na Genial Care, vi o trabalho do Guilherme ficar <strong>cada vez mais estratégico</strong>, sempre alinhado aos objetivos de produto e negócio, com uma régua de qualidade alta.`,
         'tst.1.role':'Product Design Manager · Genial Care',
@@ -895,19 +1116,20 @@
         'tst.2.role':'Product Manager · Genial Care',
         'tst.3.quote':`Trabalhar com o Canna foi incrível. Ele tem uma habilidade excepcional de <strong>traduzir a dor do usuário em soluções eficazes</strong>, sustentando o time com entregas concretas em cada etapa.`,
         'tst.3.role':'Desenvolvedor · projeto Modal',
-        'range.label':'Também já fiz', 'range.h2':'Repertório, sob pressão.',
-        'range.modal.tag':'Varejo · 7COMm',
-        'range.modal.p':`Entrei na 7COMm como estagiário de suporte e saí cinco anos depois como Senior UX/UI Designer. Quando a agência que desenhava o site do Modal abandonou o projeto no meio, assumi o arquivo no Figma e entreguei. Foi esse trabalho que me rendeu o título de senior.`,
-        'range.matri.tag':'Fintech · Shock Tecnologia',
-        'range.matri.p':`Staff Product Designer em banking digital white-label. Redesenhei a jornada de crédito para produtos lastreados em pagamentos judiciais, levando a conclusão de <strong>18% para 63%</strong> &mdash; 45 pontos na etapa que decide se o produto existe. Também construí o Matri Design System.`,
         'about.location':'Greater Boston, Massachusetts', 'about.label':'Sobre',
-        'about.p1':`Mais de 10 anos em tecnologia, 6+ deles em produto e design de UX. Comecei como estagiário de suporte monitorando sistemas corporativos, passei por desenvolvimento e cheguei em UX. Esse caminho é o motivo de eu pensar em sistemas antes de decoração.`,
-        'about.p2':`Já desenhei dentro de uma squad de startup lançando um MVP em um mês, e dentro de uma plataforma com mais de 20 milhões de usuários mensais, onde uma decisão errada mexe em métricas de escala nacional. Mesmo instinto nos dois ritmos: achar a restrição real e desenhar em torno dela.`,
-        'about.p3':`Trato IA como parte do meu ofício, para pesquisa, benchmarks e para testar conceitos cedo. Trabalho com LLMs e agentes personalizados no dia a dia, e construo com o Claude Code para colocar pequenos experimentos direto em produção, esse site incluso.`,
-        'contact.h2':'Vamos conversar!',
+        'about.p1':`Cheguei ao design pela sala de máquinas: cinco anos em suporte e desenvolvimento de sistemas corporativos antes da primeira tela. Isso aparece. Leio a API antes do wireframe, pergunto o que o backend faz depois do prazo de corte e fico com o squad até o lançamento.`,
+        'about.p2':`Fui o primeiro ou o único designer mais vezes do que não: primeiro Senior Product Designer da Genial Care, depois liderando design em dois times; designer único de quatro produtos na Kruzer; agora na plataforma de confiança do consumidor do Reclame Aqui.`,
+        'about.p3':`Uso LLMs e agentes todo dia para pesquisa e para testar conceitos antes que custem tempo de engenharia, e coloco experimentos no ar com o Claude Code, este site incluso.`,
+        'tl.1':'Senior Product Designer · Reclame Aqui · confiança do consumidor, 20M+ usuários mensais',
+        'tl.2':'Senior Product Designer · Kruzer · plataforma de logística para a Fast Shop, designer único de quatro produtos',
+        'tl.3':'Senior Product Designer · Genial Care · primeiro designer, depois liderando design em dois times',
+        'tl.4':'Product Designer · Shock Tecnologia · banking white-label (Matri)',
+        'tl.5':'7COMm · de estagiário de suporte a Senior UX/UI Designer, passando por desenvolvimento',
+        'about.book':'Agendar 30 minutos', 'tl.4.d':'antes de 2022', 'tl.5.d':'cinco anos',
+        'contact.label':'Contratando Senior ou Lead Product Designer?', 'contact.h2':'Vamos conversar.',
         'foot.made':'Feito por Guilherme Cannalonga', 'footer.email':'Email',
         'modal.label':'Vamos conversar', 'modal.h3':'Como você prefere falar comigo?', 'modal.p':'Escolha o que for mais rápido pra você.',
-        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':'Diariamente, 17h–19h'
+        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':'Dias úteis, 17h–19h (ET)', 'modal.li.title':'Conectar no LinkedIn'
       }
     };
     function apply(lang){
@@ -915,7 +1137,7 @@
       const d=I18N[lang]||I18N.en;
       document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
         const v = d[el.dataset.i18nAria];
-        if(v !== undefined) el.setAttribute('aria-label', v);   /* rótulos de leitor de tela também traduzem */
+        if(v !== undefined) el.setAttribute('aria-label', v);
       });
       document.querySelectorAll('[data-i18n]').forEach(el=>{
         const v=d[el.dataset.i18n]; if(v!==undefined) el.innerHTML=v;
@@ -923,7 +1145,7 @@
       document.querySelectorAll('.lang button').forEach(b=>{
         const on = b.dataset.lang===lang;
         b.classList.toggle('active',on);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');   /* 4.1.2 state, not just style */
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
       document.dispatchEvent(new CustomEvent('langchange',{detail:{lang}}));
     }

@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canna Design · Pick &amp; Pack (Kruzer) case study</title>
+<meta name="description" content="How I designed real-time order visibility across 80+ stores for Fast Shop's logistics platform, from click to 2-hour delivery.">
+
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="theme-color" content="#f7f6f1">
+
+<!-- Social preview. NOTE: replace https://cannadesign.github.io with your real deployed URL after publishing. -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Guilherme Cannalonga">
+<meta property="og:title" content="Pick &amp; Pack (Kruzer) case study · real-time order visibility across 80+ stores">
+<meta property="og:description" content="Designing fulfillment for three roles at once, plus the Compass design system, for Fast Shop's move to 2-hour delivery.">
+<meta property="og:url" content="https://cannadesign.github.io/pick-and-pack.html">
+<link rel="canonical" href="https://cannadesign.github.io/pick-and-pack.html">
+<meta property="og:image" content="https://cannadesign.github.io/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pick &amp; Pack (Kruzer) case study · real-time order visibility across 80+ stores">
+<meta name="twitter:description" content="Designing fulfillment for three roles at once, plus the Compass design system.">
+<meta name="twitter:image" content="https://cannadesign.github.io/assets/og-image.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     canna design — case study system
+     Paper ground, ink type, one acid field. DM Sans.
+     Hard rules: no shadow, no gradient, no glow, no translucency.
+     ============================================================ */
+  :root{
+    --paper:#f7f6f1; --paper-2:#edeae1; --ink:#14140f; --ink-2:#605e56;
+    --paper-3:#e4dfd3; --acid:#d9f24b; --peri:#c9cbf5; --sky:#d3e9ff; --coral:#ff8d8f; --indigo:#8ea5ff; --mint:#aae1cc; --line:rgba(20,20,15,0.14); --line-strong:rgba(20,20,15,0.28); --line-control:rgba(20,20,15,0.48);
+    --max:1200px; --text-col:648px; --pad:24px;
+
+    /* Spacing scale. Every margin and padding in this file is one of these
+       eleven values, all multiples of 8. Nothing is typed by hand, so the
+       vertical rhythm is auditable instead of accidental. */
+    --sp-1:4px;  --sp-2:8px;   --sp-3:16px;  --sp-4:24px;
+    --sp-5:32px; --sp-6:40px;  --sp-7:56px;  --sp-8:72px;
+    --sp-9:96px; --sp-10:120px; --sp-11:160px;
+
+    /* Type scale, on a 8px baseline: 18/32 body, 15/24 small, 13/20 micro. */
+    --fs-body:18px;   --lh-body:32px;
+    --fs-small:15px;  --lh-small:24px;
+    --fs-micro:13px;  --lh-micro:20px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'DM Sans', system-ui, -apple-system, sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  }
+  h1,h2,h3,h4{font-weight:900; letter-spacing:-0.045em; line-height:1.0;}
+  a{color:inherit; text-decoration:none;}
+  img{display:block; max-width:100%;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad);}
+  .col{max-width:var(--text-col); margin:0 auto; padding:0 var(--pad);}
+  ::selection{background:var(--acid); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--ink); outline-offset:3px; border-radius:4px;}
+
+  /* ============================================================
+     ACCESSIBILITY
+     Audited against WCAG 2.1 AA. Each rule below closes a specific
+     criterion, noted inline so the reasoning survives the next edit.
+     ============================================================ */
+  /* 2.4.1 Bypass Blocks — a fixed nav sits before 2,900 words of article,
+     so a keyboard user needs a way past it that does not cost eight tabs. */
+  .skip-link{
+    position:absolute; left:16px; top:-64px; z-index:200;
+    background:var(--ink); color:var(--paper); font-size:14px; font-weight:700;
+    padding:12px 20px; border-radius:100px; transition:top .16s ease;
+  }
+  .skip-link:focus{top:16px;}
+
+  /* 2.5.5 Target Size — the visible pill stays small; the hit area does not. */
+  .lang-toggle button{position:relative;}
+  .lang-toggle button::after{
+    content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:44px; height:44px;
+  }
+  .modal-close{position:relative;}
+  .modal-close::before{
+    content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:44px; height:44px;
+  }
+
+  /* 1.3.1 — the reveal animation must never be the reason content is missing. */
+  @media (scripting: none){ .reveal{opacity:1 !important; transform:none !important;} }
+
+  /* NAV */
+  nav{position:fixed; top:16px; left:0; right:0; z-index:100;}
+  /* The nav is the only element that floats over the article, and every
+     surface it passes over — notes, frames, device stages, comparison
+     blocks — is paper-2. Same value as the pill, so the bar dissolved into
+     whatever scrolled under it.
+     Two changes, and the second is the one that actually works. The pill
+     drops a step to paper-3, which separates it tonally from every content
+     surface. And it gets a real boundary: line-control reads 3.4:1 against
+     paper-2 and 3.8:1 against the page ground, both past the 3:1 that WCAG
+     1.4.11 asks of a component edge. A tone alone would break the next time
+     a block gets a new colour; an edge holds against anything. */
+  nav .wrap{
+    max-width:900px; background:var(--paper-3); border-radius:100px;
+    border:1px solid var(--line-control);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 8px 8px 16px; gap:16px;
+  }
+    /* 2.5.5 — a standalone navigation link needs the full target, even when
+     the label is short. Padding does it here without moving anything. */
+/* ── Return path ──────────────────────────────────────────────
+     The back link used to be hardcoded to the home page, so arriving at
+     Compass from Pick & Pack and pressing "back" sent you somewhere you had
+     never been. It now reads the referrer and names the actual page you came
+     from, falling back to the portfolio when there isn't one. */
+  .crumbs{margin-bottom:var(--sp-4);}
+  .crumbs ol{list-style:none; display:flex; flex-wrap:wrap; align-items:center; gap:var(--sp-2); margin:0; padding:0;}
+  .crumbs li{display:flex; align-items:center; gap:var(--sp-2); font-size:12.5px; color:var(--ink-2);}
+  .crumbs li + li::before{content:'/'; color:var(--line-control); font-weight:400;}
+  .crumbs a{color:var(--ink-2); text-decoration:underline; text-decoration-color:var(--line-control); text-underline-offset:3px;}
+  .crumbs a:hover{color:var(--ink); text-decoration-color:var(--ink);}
+  .crumbs [aria-current="page"]{color:var(--ink); font-weight:700;}
+    .back-link{
+    display:flex; align-items:center; gap:8px; padding:12px 4px;
+    font-size:13.5px; font-weight:500; opacity:.7;
+  }
+  .back-link:hover{opacity:1;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; font-family:inherit; font-size:14px; font-weight:500;
+    padding:12px 20px; border-radius:100px; border:1px solid transparent; cursor:pointer;
+    transition:background .15s, border-color .15s; white-space:nowrap;
+  }
+  /* Primary action on the paper background is the acid field, everywhere.
+     Ink pills stay for surfaces that are already dark or already acid. */
+  /* ── Action hierarchy ─────────────────────────────────────────
+     Wherever two actions sit together, exactly one is primary and it is
+     always the contact action. Everything else is the outline variant.
+     A pair of equal-weight choices (the contact chooser inside the modal)
+     is a different component on purpose: a chooser must not rank its
+     options. Re-check with: two .btn-primary as siblings is a bug. */
+  .btn-primary{background:var(--acid); color:var(--ink);}
+  .btn-primary:hover{background:#cbe63d;}
+  .btn-ghost{border-color:var(--line-control); color:var(--ink);}
+  .btn-ghost:hover{background:var(--paper-2);}
+  .nav-cta{font-size:13px; padding:8px 16px; background:var(--ink); color:var(--paper); border-radius:100px;}
+  .nav-cta:hover{background:#2c2c22;}
+  .lang-toggle{display:flex; gap:4px; background:rgba(20,20,15,.08); border-radius:100px; padding:4px;}
+  .lang-toggle button{
+    /* 1.4.3 — o idioma nao selecionado ficava em 2,7:1. Nao e um controle
+       desabilitado, e a outra opcao do par, entao precisa ser legivel. */
+    font-family:inherit; font-size:11px; font-weight:700; padding:4px 8px; border:none;
+    border-radius:100px; background:transparent; color:var(--ink); opacity:.65; cursor:pointer;
+  }
+  .lang-toggle button.active{background:var(--ink); color:var(--paper); opacity:1;}
+
+  /* ARTICLE HERO */
+  .article-hero{padding:148px 0 var(--sp-6);}
+  .kicker{
+    display:inline-block; font-size:11.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
+    background:var(--acid); color:var(--ink); padding:8px 12px; border-radius:100px; margin-bottom:24px;
+  }
+  .article-hero h1{font-size:clamp(34px,5.6vw,68px); margin-bottom:24px; max-width:18ch;}
+  .article-hero .dek{font-size:clamp(16px,1.7vw,20px); color:var(--ink-2); max-width:62ch; margin-bottom:32px;}
+  /* A five-cell spec strip. It used to be a wrapping flex row, which broke:
+     the items sized to their content, so the second line never lined up with
+     the first and the last item on a line kept a dangling divider. A grid with
+     a known column count fixes both — and because the rule is border-LEFT with
+     a first-of-row exception, there is no trailing divider at any breakpoint. */
+  .meta-row{
+    display:grid; grid-template-columns:repeat(5,1fr); row-gap:var(--sp-4);
+    padding-top:var(--sp-4); border-top:1px solid var(--line);
+  }
+  .meta-item{padding-inline:20px; border-left:1px solid var(--line); min-width:0;}
+  .meta-item:nth-child(5n+1){border-left:none; padding-left:0;}
+  .meta-item .k{font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-2); margin-bottom:4px;}
+  .meta-item .v{font-size:14.5px; font-weight:500;}
+
+  /* BODY */
+  .article-body{padding:var(--sp-7) 0 var(--sp-5);}
+  .article-body p{font-size:var(--fs-body); line-height:var(--lh-body); color:var(--ink-2); margin-bottom:var(--sp-4);}
+  .article-body h2{font-size:clamp(25px,3.2vw,34px); line-height:1.12; margin:var(--sp-8) 0 var(--sp-4);}
+  .article-body h2:first-child{margin-top:0;}
+  .article-body ul{margin:0 0 var(--sp-4) var(--sp-4);}
+  .article-body li{font-size:var(--fs-body); line-height:var(--lh-body); color:var(--ink-2); margin-bottom:var(--sp-2);}
+  .article-body li strong{color:var(--ink); font-weight:700;}
+  .lead{font-size:21px !important; line-height:1.55 !important; color:var(--ink) !important;}
+  /* The spine marker. Every case walks the same eight stages, so a recruiter
+     skimming two cases sees the same argument twice with different evidence. */
+  .stage-label{
+    display:block; font-size:11px; font-weight:700; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-2);
+    margin:var(--sp-10) 0 var(--sp-3); padding-top:var(--sp-5); border-top:1px solid var(--line);
+  }
+  .article-body > .col:first-child .stage-label:first-of-type{margin-top:var(--sp-8);}
+  .stage-label{scroll-margin-top:112px;}
+  .stage-label b{color:var(--ink); font-weight:900; margin-right:8px;}
+  .stage-label + h2{margin-top:0 !important;}
+
+  /* ============================================================
+     EDITORIAL LAYER
+     Recruiters scan before they read. These components give the page
+     a second, faster reading path on top of the prose: a summary that
+     stands alone, a jump index, one bold takeaway per stage, and a
+     compare block for the moments where a belief changed.
+     ============================================================ */
+
+  /* the short version — readable on its own in ~20 seconds */
+  .tldr{
+    max-width:var(--text-col); margin:0 auto 8px; padding:24px 28px;
+    background:var(--paper-2); border-radius:16px;
+  }
+  .tldr .k{font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-2); margin-bottom:16px; display:block;}
+  .tldr dl{display:grid; gap:16px;}
+  .tldr dt{font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-2); margin-bottom:4px;}
+  .tldr dd{font-size:16px; color:var(--ink); line-height:1.5;}
+  .tldr dd b{font-weight:700;}
+
+  /* jump index: the spine, visible before the first paragraph */
+  .index{max-width:var(--text-col); margin:32px auto 0; padding:0 var(--pad);}
+  .index .k{font-size:10.5px; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-2); display:block; margin-bottom:16px;}
+  .index .k{display:flex; justify-content:space-between; align-items:baseline; gap:16px;}
+  .index .k .rt{font-weight:700; letter-spacing:.1em; color:var(--ink);}
+  .index ol{list-style:none; counter-reset:ix; display:grid; grid-template-columns:1fr 1fr; gap:0 28px;}
+  .index li{counter-increment:ix; border-top:1px solid var(--line);}
+  .index li a{display:flex; gap:12px; align-items:baseline; padding:12px 0; font-size:14.5px; color:var(--ink-2); transition:color .15s;}
+  .index li a::before{content:'0' counter(ix); font-weight:900; font-size:11.5px; color:var(--ink); letter-spacing:.04em;}
+  .index li a:hover{color:var(--ink);}
+  
+  
+
+  /* one line per stage that a skimmer can read alone */
+  .article-body h3.sub{
+    font-size:19px; font-weight:900; letter-spacing:-0.03em; line-height:1.25;
+    margin:var(--sp-7) 0 var(--sp-3); color:var(--ink);
+  }
+  .receipts{list-style:none; margin:var(--sp-5) 0 var(--sp-2); display:grid; gap:0;}
+  .receipts li{
+    display:grid; grid-template-columns:minmax(132px,auto) 1fr; gap:var(--sp-2) var(--sp-4);
+    padding:var(--sp-3) 0; border-top:1px solid var(--line); align-items:baseline;
+  }
+  .receipts li:last-child{border-bottom:1px solid var(--line);}
+  .receipts b{font-size:12px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-2);}
+  .receipts span{font-size:15.5px; color:var(--ink);}
+  
+  .takeaway{
+    max-width:var(--text-col); margin:var(--sp-6) auto; padding:var(--sp-3) 0 var(--sp-3) var(--sp-4);
+    border-left:4px solid var(--acid);
+    font-size:17px; font-weight:700; line-height:1.45; letter-spacing:-0.015em; color:var(--ink);
+  }
+
+  /* the moment a belief changed, side by side */
+  .compare{display:grid; grid-template-columns:1fr 1fr; gap:0; margin:var(--sp-6) 0; border-top:1px solid var(--line);}
+  .compare > div{padding:var(--sp-4) var(--sp-4) var(--sp-4) 0; border-right:1px solid var(--line);}
+  .compare > div:last-child{border-right:none; padding-right:0; padding-left:var(--sp-4);}
+  .compare .k{display:block; font-size:10.5px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2); margin-bottom:8px;}
+  .compare p{font-size:15.5px !important; color:var(--ink) !important; margin:0 !important;}
+  
+
+  /* shorter measure reads faster; 17.5px over 720px was a wide column */
+  .pull{
+    font-size:clamp(21px,2.7vw,30px); font-weight:900; letter-spacing:-0.04em; line-height:1.16; color:var(--ink);
+    border-left:4px solid var(--acid); padding-left:var(--sp-4); margin:var(--sp-7) 0; max-width:22ch;
+  }
+  .note{
+    font-size:var(--fs-small); line-height:var(--lh-small); color:var(--ink-2); background:var(--paper-2);
+    border-radius:12px; padding:var(--sp-4); margin:var(--sp-5) 0;
+  }
+  .note strong{color:var(--ink); font-weight:700;}
+
+  /* SHOTS — big, flat, hairline framed */
+    /* One rule for every picture in the article: it occupies exactly the text
+     column, so it starts where the paragraph starts and ends where it ends.
+     Nothing is ever bigger or smaller than the measure it interrupts. */
+  .shot{width:100%; max-width:1040px; margin:var(--sp-8) auto; padding:0 var(--pad);}
+  .shot.narrow{max-width:var(--text-col);}
+  /* The frame follows the picture instead of forcing every picture into 3:2.
+     A wide chart stops being letterboxed into dead space; a very tall screenshot
+     is capped by height so it can't take over the page. */
+  .shot .frame{
+    width:100%; border-radius:14px; overflow:hidden; border:1px solid var(--line);
+    background:var(--paper-2); display:flex; justify-content:center; align-items:center;
+  }
+  .shot .frame > img{
+    display:block; width:100%; height:auto;
+    max-height:780px; object-fit:contain; object-position:center;
+  }
+  .shot img{width:100%; height:auto;}
+  .shot .shot-bar{
+    display:flex; align-items:center; gap:8px; padding:0 16px; height:34px;
+    background:var(--paper-2); border-bottom:1px solid var(--line);
+  }
+  .shot .shot-bar .dot{width:8px; height:8px; border-radius:50%; background:var(--line-strong);}
+  .shot .shot-bar span{font-size:11.5px; font-weight:500; color:var(--ink-2);}
+  .shot .caption{text-align:left; font-size:var(--fs-micro); line-height:var(--lh-micro); color:var(--ink-2); margin-top:var(--sp-3); max-width:70ch;}
+  /* Hero moments: the transparent monitor mockup sits on a colour field and
+     bleeds off the bottom edge. max-width AND max-height are both set, so the
+     rule works for any artwork orientation. */
+  .shot-device{max-width:1040px;}
+  /* The field hugs the artwork. A fixed ratio left a different amount of dead
+     colour around every mockup, depending on its proportions; a padded box that
+     follows the picture gives the same visual margin on all of them. */
+  .shot-device .stage{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    background:var(--coral); border-radius:20px; overflow:hidden;
+    width:100%; padding:clamp(12px,2vw,24px);
+  }
+  .shot-device .stage img{
+    position:static; display:block; transform:none;
+    width:100%; height:auto; max-width:100%;
+  }
+  .shot-device .stage.sand{background:var(--paper-2);}
+  .shot-device .stage.sky{background:var(--sky);}
+  .shot-device .stage.coral{background:var(--coral);}
+  .shot-device .stage.indigo{background:var(--indigo);}
+  .shot-device .stage.mint{background:var(--mint);}
+  .shot-device .stage.peri{background:var(--peri);}
+  /* the monitor is a complete object: centred on both axes, even margins */
+  /* whole mockup, centred, never cropped */
+  
+  /* Supporting evidence stays in a plain frame and is deliberately narrower,
+     so mockup = hero moment and frame = detail. */
+  .shot-frame{max-width:820px;}
+
+  /* phone shots sit on an acid field so they read as product, not decoration */
+  .shot-phone{max-width:var(--text-col);}
+  /* Phone groups keep their bleed off the bottom edge, but the field now hugs
+     them horizontally instead of leaving half the block as empty colour. */
+  .shot-phone .phone-row{
+    position:relative; width:100%; margin:0 auto;
+    display:flex; align-items:flex-end; justify-content:center;
+    padding:0 clamp(16px,3.6vw,40px);
+    background:var(--peri); border-radius:18px; overflow:hidden;
+  }
+  .shot-phone .phone-row img{
+    position:static; display:block; transform:none;
+    width:100%; height:auto; max-width:none;
+    margin-bottom:-8%;
+  }
+  
+
+  /* METRICS */
+  /* rule spans the container, content is inset on both sides */
+    /* Flex with flex:1 1 0 keeps every metric on one line regardless of how many
+     there are, which the auto-fit grid could not: at this column width it fitted
+     three and wrapped the fourth on its own. */
+  .metrics-strip{display:flex; border-top:1px solid var(--line); border-bottom:1px solid var(--line); margin:var(--sp-7) 0;}
+  .metrics-strip .m{flex:1 1 0; min-width:0; padding:var(--sp-4) var(--sp-3); border-right:1px solid var(--line);}
+  .metrics-strip .m:first-child{padding-left:0;}
+  .metrics-strip .m:last-child{border-right:none; padding-right:0;}
+  .metrics-strip .num{font-weight:900; font-size:clamp(16px,2.5vw,22px); letter-spacing:-0.045em; line-height:1.12;}
+  .metrics-strip .label{font-size:12px; color:var(--ink-2); margin-top:var(--sp-2); line-height:1.35;}
+
+  /* CALLOUTS */
+  .callout-grid{display:grid; grid-template-columns:1fr 1fr; gap:var(--sp-3); margin:var(--sp-6) 0;}
+  .callout{background:var(--paper-2); border-radius:14px; padding:var(--sp-4);}
+  /* A card that links behaves like a card that links: the whole surface is the
+     target, and it carries the same corner affordance and hover as the cards on
+     the home page. The circle inverts to ink here because the card is light. */
+  a.callout{display:block; position:relative; padding-right:60px; transition:background .18s ease;}
+  a.callout::after{
+    content:'\2197'; position:absolute; top:20px; right:20px;
+    width:34px; height:34px; border-radius:50%; background:var(--ink); color:var(--paper);
+    display:flex; align-items:center; justify-content:center;
+    font-size:15px; font-weight:700; line-height:1;
+    opacity:.5; transition:opacity .2s ease, transform .2s ease;
+  }
+  a.callout:hover{background:#e7e3d9;}
+  a.callout:hover::after{opacity:1; transform:translate(2px,-2px);}
+  a.callout:hover h4{text-decoration:underline; text-underline-offset:5px; text-decoration-thickness:2px;}
+  a.callout .go{
+    display:inline-block; margin-top:12px; font-size:13.5px; font-weight:700;
+    letter-spacing:-0.01em; color:var(--ink);
+  }
+  .callout h3{font-size:17px; line-height:1.3; margin-bottom:var(--sp-2);}
+  .callout p{font-size:var(--fs-small); line-height:var(--lh-small); color:var(--ink-2); margin:0;}
+
+  /* PROCESS STEPS */
+  .process{list-style:none; counter-reset:step; margin:var(--sp-6) 0; display:grid; gap:var(--sp-2);}
+  .process li{counter-increment:step; position:relative; padding:var(--sp-4) var(--sp-4) var(--sp-4) 64px; background:var(--paper-2); border-radius:14px;}
+  .process li::before{
+    content:counter(step,decimal-leading-zero); position:absolute; left:24px; top:22px;
+    font-weight:900; font-size:15px; color:var(--ink); opacity:.42;
+  }
+  .process li h3{font-size:16.5px; margin-bottom:8px;}
+  .process li p{font-size:14.5px; color:var(--ink-2); margin:0;}
+
+  /* ARTIFACT TILES */
+  .artifact-row{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:28px 0 8px;}
+  .artifact-tile{background:var(--paper-2); border-radius:14px; padding:20px 16px 16px; display:flex; flex-direction:column; gap:16px; min-height:118px;}
+  .artifact-tile .a-label{font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2);}
+  .artifact-tile .a-visual{flex:1; display:flex; align-items:center; justify-content:center;}
+  .a-journey{display:flex; align-items:center; width:100%;}
+  .a-journey .seg{flex:1; height:2px; background:var(--line-strong);}
+  .a-journey .dot{width:9px; height:9px; border-radius:50%; background:var(--line-strong); flex-shrink:0;}
+  .a-journey .dot.on{background:var(--ink);}
+  .a-wire{display:flex; flex-direction:column; gap:8px; width:100%;}
+  .a-wire .row{height:7px; border-radius:3px; background:var(--line-strong);}
+  .a-wire .row.w70{width:70%;} .a-wire .row.w100{width:100%;} .a-wire .row.w45{width:45%;}
+  .a-wire .block{height:26px; border-radius:6px; background:var(--acid); margin-top:4px;}
+  .a-chat{position:relative; width:100%; height:60px;}
+  .a-chat .bub{position:absolute; border-radius:10px; height:16px;}
+  .a-chat .bub1{top:0; left:0; width:62%; background:var(--line-strong);}
+  .a-chat .bub2{top:24px; left:22%; width:70%; background:var(--acid);}
+  .a-chat .bub3{top:44px; left:0; width:40%; background:var(--line-strong);}
+
+  /* GENIAL growth reveal */
+  .growth-readout{display:flex; flex-direction:column; margin-bottom:16px;}
+  .gr-num{font-weight:900; font-size:clamp(40px,6vw,72px); letter-spacing:-0.055em; line-height:.9;}
+  .gr-lab{font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); margin-top:8px;}
+  .growth-frame{position:relative; overflow:hidden; border-radius:14px; border:1px solid var(--line); background:#fff;}
+  .growth-veil{position:absolute; inset:0; background:var(--paper); transform-origin:right; transform:scaleX(1); transition:transform 2.1s cubic-bezier(.16,1,.3,1);}
+  .drawing .growth-veil{transform:scaleX(1);}
+  .drawn .growth-veil{transform:scaleX(0);}
+
+  /* KRUZER Compass playground */
+  .dsp{--dsp-accent:#14140f; --dsp-radius:10px; --dsp-pad:14px; --dsp-gap:12px;
+    max-width:1000px; margin:56px auto; padding:0 var(--pad);}
+  .dsp-shell{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--paper-2);}
+  .dsp-bar{display:flex; align-items:center; gap:8px; padding:0 16px; height:34px; border-bottom:1px solid var(--line);}
+  .dsp-bar .dot{width:8px; height:8px; border-radius:50%; background:var(--line-strong);}
+  .dsp-bar span{font-size:11.5px; font-weight:500; color:var(--ink-2);}
+  .dsp-body{display:grid; grid-template-columns:300px 1fr; gap:0;}
+  .dsp-tokens{padding:24px; border-right:1px solid var(--line); display:flex; flex-direction:column; gap:24px;}
+  .dsp-tokens .grp .lab{display:block; font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-2); margin-bottom:8px;}
+  .dsp-tokens .grp .lab .val{font-style:normal; color:var(--ink);}
+  .dsp-swatches{display:flex; gap:8px;}
+  .dsp-swatches button{width:30px; height:30px; border-radius:8px; border:2px solid transparent; cursor:pointer; padding:0;}
+  .dsp-swatches button[aria-pressed="true"]{border-color:var(--ink);}
+  .dsp input[type=range]{-webkit-appearance:none; appearance:none; width:100%; height:3px; border-radius:2px; background:var(--line-strong); outline:none; margin:0;}
+  .dsp input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; appearance:none; width:15px; height:15px; border-radius:50%; background:var(--ink); cursor:grab;}
+  .dsp input[type=range]::-moz-range-thumb{width:13px; height:13px; border-radius:50%; background:var(--ink); border:none; cursor:grab;}
+  .dsp-seg{display:flex; background:rgba(20,20,15,.07); border-radius:100px; padding:4px;}
+  .dsp-seg button{flex:1; font-family:inherit; font-size:11.5px; font-weight:500; padding:8px 4px; border:none; border-radius:100px; background:transparent; color:var(--ink); opacity:.55; cursor:pointer;}
+  .dsp-seg button[aria-pressed="true"]{background:var(--paper); opacity:1; font-weight:700;}
+  .dsp-preview{padding:24px; display:flex; flex-direction:column; gap:var(--dsp-gap); background:var(--paper);}
+  .dsp-card{background:var(--paper-2); border:1px solid var(--line); border-radius:var(--dsp-radius); padding:var(--dsp-pad); display:flex; flex-direction:column; gap:calc(var(--dsp-gap) * 0.6);}
+  .dsp-card .row{display:flex; align-items:center; justify-content:space-between; gap:8px;}
+  .dsp-card .title{font-weight:700; font-size:15px;}
+  .dsp-pill{display:inline-flex; align-items:center; gap:8px; font-size:11.5px; font-weight:700; padding:4px 8px; border-radius:var(--dsp-radius); background:var(--dsp-accent); color:var(--paper);}
+  .dsp-pill .d{width:6px; height:6px; border-radius:50%; background:currentColor;}
+  .dsp-meta{font-size:12.5px; color:var(--ink-2);}
+  .dsp-input{width:100%; font-family:inherit; font-size:13px; padding:var(--dsp-pad); border-radius:var(--dsp-radius); border:1px solid var(--line-strong); background:var(--paper); color:var(--ink-2);}
+  .dsp-actions{display:flex; gap:8px;}
+  .dsp-btn{font-family:inherit; font-size:13px; font-weight:700; padding:calc(var(--dsp-pad) * .7) var(--dsp-pad); border-radius:var(--dsp-radius); border:1px solid transparent; cursor:pointer;}
+  .dsp-btn.primary{background:var(--dsp-accent); color:var(--paper);}
+  .dsp-btn.ghost{background:transparent; border-color:var(--line-strong); color:var(--ink);}
+  .dsp-caption{font-size:13.5px; color:var(--ink-2); margin-top:16px; max-width:70ch;}
+  
+
+  /* CLOSE + FOOTER */
+  .article-close{padding:var(--sp-9) 0 var(--sp-9); border-top:1px solid var(--line); margin-top:var(--sp-9);}
+  .article-close h2{font-size:clamp(28px,4.4vw,48px); margin-bottom:16px; max-width:18ch;}
+  .article-close p{color:var(--ink-2); font-size:17px; margin-bottom:32px; max-width:60ch;}
+  .close-ctas{display:flex; gap:var(--sp-2); flex-wrap:wrap;}
+  footer{border-top:1px solid var(--line); padding:var(--sp-5) 0;}
+  .foot-bottom{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:13px; color:var(--ink-2);}
+  .foot-links{display:flex; gap:24px;}
+  .foot-links a{font-weight:500;}
+  .foot-links a:hover{color:var(--ink);}
+
+  /* MODAL */
+  .contact-modal{position:fixed; inset:0; z-index:1000; display:none; align-items:center; justify-content:center; padding:20px; background:rgba(20,20,15,.55);}
+  .contact-modal.open{display:flex;}
+  .contact-modal-card{position:relative; width:100%; max-width:440px; background:var(--paper); border-radius:18px; padding:32px;}
+  .contact-modal-card h3{font-size:26px; margin:8px 0 8px;}
+  .contact-modal-card > p{font-size:14.5px; color:var(--ink-2); margin-bottom:24px;}
+  .contact-modal-close{position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%; background:var(--paper-2); border:none; color:var(--ink); display:flex; align-items:center; justify-content:center; cursor:pointer;}
+  .contact-modal-options{display:flex; flex-direction:column; gap:8px;}
+  .contact-option{display:flex; align-items:center; gap:16px; padding:16px; border-radius:12px; border:1px solid var(--line); transition:background .15s, border-color .15s;}
+  .contact-option:hover{background:var(--acid); border-color:var(--acid);}
+  .contact-option .co-icon{width:38px; height:38px; border-radius:10px; background:var(--paper-2); color:var(--ink); display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+  .contact-option .co-body{flex:1; display:flex; flex-direction:column; gap:4px; min-width:0;}
+  .contact-option .co-title{font-size:14.5px; font-weight:700;}
+  .contact-option .co-sub{font-size:12.5px; color:var(--ink-2); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .contact-option .co-arrow{color:var(--ink-2); flex-shrink:0;}
+
+  /* MOTION */
+  .reveal{opacity:1; transform:none; transition:transform .45s ease, opacity .45s ease;}
+  .reveal.in{opacity:1; transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
+    .reveal{opacity:1; transform:none;}
+  }
+
+  /* ── Responsive. Ordenado do maior para o menor, para que a regra mais
+     específica de tela sempre venha depois na cascata. Antes desta
+     passagem havia inversões: em 375px a meta-row caía na regra de 900px
+     e renderizava três colunas onde deveria ter duas. ── */
+  /* ================= MOTION SIGNATURE: the acid marker ================= */
+  .takeaway,.pull{border-left:0; position:relative;}
+  .takeaway::before,.pull::before{
+    content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--acid);
+    transform-origin:top; transform:scaleY(1);
+  }
+  .js .takeaway::before,.js .pull::before{transform:scaleY(0); transition:transform .8s cubic-bezier(.2,.7,.2,1) .15s;}
+  .js .reveal.in .takeaway::before,.js .reveal.in .pull::before{transform:scaleY(1);}
+  @keyframes rise{from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:none;}}
+  .js .article-hero .col > *{animation:rise .7s cubic-bezier(.2,.7,.2,1) both;}
+  .js .article-hero .col > :nth-child(2){animation-delay:.1s}
+  .js .article-hero .col > :nth-child(3){animation-delay:.2s}
+  .js .article-hero .col > :nth-child(4){animation-delay:.3s}
+  .js .article-hero .col > :nth-child(5){animation-delay:.4s}
+  .shot .frame > img, .shot-device .stage img{transition:transform .7s cubic-bezier(.2,.7,.2,1);}
+  @media (prefers-reduced-motion:reduce){
+    .js .takeaway::before,.js .pull::before{transform:scaleY(1); transition:none;}
+    .js .article-hero .col > *{animation:none;}
+  }
+
+  .contact-modal-card{max-height:calc(100dvh - 40px); overflow:auto; outline:none;}
+  .contact-modal-options a{min-width:0;}
+  .co-body{min-width:0;}
+  .co-title,.co-sub{overflow:hidden; text-overflow:ellipsis; white-space:nowrap; display:block;}
+  body.modal-open nav,body.modal-open .to-top{visibility:hidden;}
+  /* ================= ANNOTATED SCREENS ================= */
+  .annot .frame{position:relative;}
+  .annot .frame > img{max-height:none;}
+  .pin{
+    position:absolute; width:26px; height:26px; margin:-13px 0 0 -13px; border-radius:50%;
+    background:var(--acid); color:var(--ink); font-size:12px; font-weight:900; line-height:26px; text-align:center;
+    box-shadow:0 0 0 3px var(--paper), 0 2px 8px rgba(20,20,15,.25); z-index:2;
+  }
+  .annot-list{list-style:none; margin:var(--sp-4) auto 0; max-width:var(--text-col); display:grid; gap:10px;}
+  .annot-list li{display:grid; grid-template-columns:26px 1fr; gap:12px; align-items:start; font-size:14.5px; line-height:1.5; color:var(--ink);}
+  .annot-list li b{width:22px; height:22px; border-radius:50%; background:var(--acid); color:var(--ink); font-size:11px; font-weight:900; line-height:22px; text-align:center;}
+  .annot .caption{margin-left:auto; margin-right:auto; max-width:var(--text-col);}
+  /* exception states, 2x2 */
+  .states-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  .state{border:1px solid var(--line); border-radius:14px; overflow:hidden; background:var(--paper-2);}
+  /* Four modals of four different proportions. cover cropped each one at a
+     different point, so the frames matched and the contents didn't — which
+     is the version that reads as carelessness. The sources are now cropped
+     to the modal itself, and contain shows each one whole inside an
+     identical square. Nothing about a UI screenshot should be cut off:
+     a modal with its bottom missing looks like a mistake, not a crop. */
+  .state img{
+    width:100%; height:auto; aspect-ratio:1/1;
+    object-fit:contain; object-position:center;
+    padding:18px; background:var(--paper);
+    display:block; border-bottom:1px solid var(--line);
+  }
+  .state p{padding:14px 16px 16px; font-size:14px; line-height:1.5; color:var(--ink-2); margin:0;}
+  .state p b{display:block; color:var(--ink); font-weight:700; margin-bottom:4px;}
+  .states .caption{margin-left:auto; margin-right:auto; max-width:var(--text-col);}
+  /* ================= DATA PLACEHOLDERS (remove when filled) ================= */
+  .ph{
+    display:inline; font-family:ui-monospace, SFMono-Regular, Menlo, monospace; font-size:.82em; font-weight:600;
+    background:var(--acid); color:var(--ink); padding:1px 6px; border-radius:4px; outline:2px dashed var(--ink); outline-offset:1px;
+    -webkit-box-decoration-break:clone; box-decoration-break:clone;
+  }
+  .metrics-strip .num .ph{font-size:.6em; vertical-align:middle;}
+
+  /* ── Breakpoints, do maior para o menor. A ordem importa: em CSS
+     duas regras de mesma especificidade empatam pela posição, então um
+     bloco de 900px depois de um de 640px vence no celular. ── */
+
+  @media (max-width:900px){
+    .callout-grid{grid-template-columns:1fr;}
+    .meta-row{grid-template-columns:repeat(3,1fr);}
+    .meta-item{padding-inline:16px; border-left:1px solid var(--line);}
+    .meta-item:nth-child(5n+1){border-left:1px solid var(--line); padding-left:16px;}
+    .meta-item:nth-child(3n+1){border-left:none; padding-left:0;}
+  }
+
+  @media (max-width:820px){ .dsp-body{grid-template-columns:1fr;} .dsp-tokens{border-right:none; border-bottom:1px solid var(--line);} }
+
+  @media (max-width:700px){ .states-grid{grid-template-columns:1fr;} }
+
+  @media (max-width:640px){ .index ol{grid-template-columns:1fr;} }
+
+  @media (max-width:640px){ .receipts li{grid-template-columns:1fr; gap:4px;} }
+
+  @media (max-width:640px){
+    .compare{grid-template-columns:1fr;}
+    .compare > div{border-right:none; border-bottom:1px solid var(--line); padding:20px 0;}
+    .compare > div:last-child{border-bottom:none; padding-left:0;}
+  }
+
+  @media (max-width:640px){
+  }
+
+  @media (max-width:640px){
+    .shot-phone .phone-row img{margin-bottom:-7%;}
+  }
+
+  @media (max-width:640px){
+    :root{--pad:20px;}
+    nav{top:10px;}
+    nav .wrap{width:calc(100% - 20px); margin:0 8px;}
+    .article-hero{padding:120px 0 36px;}
+    .artifact-row{grid-template-columns:1fr 1fr;}
+    .artifact-row .artifact-tile:last-child{grid-column:1 / -1;}
+    .close-ctas{flex-direction:column; align-items:stretch;}
+    .close-ctas .btn{justify-content:center;}
+    .metrics-strip{flex-direction:column;}
+    .metrics-strip .m{border-right:none; border-bottom:1px solid var(--line); padding:20px 0;}
+    .metrics-strip .m:first-child{padding-top:0;}
+    .metrics-strip .m:last-child{border-bottom:none; padding-bottom:0;}
+  }
+
+  @media (max-width:640px){
+    .contact-modal{padding:12px; align-items:flex-end;}
+    .contact-modal-card{padding:28px 20px 20px; border-radius:20px; max-height:calc(100dvh - 24px);}
+    .contact-modal-card h3{font-size:23px; padding-right:40px;}
+  }
+
+  @media (max-width:560px){
+    /* O nav estourava a pílula: em português "Voltar ao Pick & Pack" + toggle de
+       idioma + "Vamos conversar" somavam 418px num espaço de 323px. Com o
+       toggle de idioma agora restrito ao desktop, sobraram uns 60px e o rótulo
+       do voltar volta a caber acima de 380px — um link com nome vale mais que
+       uma seta solta. Abaixo disso ele volta a ficar visualmente oculto,
+       continuando legível por leitor de tela, então o link nunca perde o nome
+       acessível. */
+    nav .wrap{gap:8px; padding:8px 8px 8px 12px;}
+    .back-link{padding:12px 8px;}
+    .back-link span[data-i18n]{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0;
+    }
+    .nav-cta{font-size:12.5px; padding:8px 14px;}
+  }
+
+  @media (max-width:560px){
+    .meta-row{grid-template-columns:repeat(2,1fr); row-gap:20px;}
+    .meta-item{padding-inline:16px;}
+    .meta-item:nth-child(3n+1){border-left:1px solid var(--line); padding-left:16px;}
+    .meta-item:nth-child(2n+1){border-left:none; padding-left:0;}
+  }
+</style>
+</head>
+<body class="js">
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<nav id="siteNav">
+  <div class="wrap">
+    <a class="back-link" href="index.html#work">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 6l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span data-i18n="nav.back">Back to portfolio</span>
+    </a>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div class="lang-toggle" role="group" aria-label="Language" data-i18n-aria="a11y.lang">
+        <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+        <button type="button" data-lang="pt" aria-pressed="false" lang="pt-BR">PT</button>
+      </div>
+      <a class="nav-cta" href="index.html#contact" data-contact-trigger data-i18n="nav.cta">Let's talk</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<header class="article-hero">
+  <div class="col">
+    <span class="kicker" data-i18n="hero.kicker">Case study · Enterprise logistics · B2B</span>
+    <h1 data-i18n="hero.h1">Pick &amp; Pack: one order, three people, one screen each</h1>
+    <p class="dek" data-i18n="hero.dek">Fast Shop sells two-hour delivery. The tool behind that promise ran on phone calls and spreadsheets. This is how I designed the platform that replaced them, for the store, the distribution centre and the driver at once, and why the exceptions got designed before the happy path.</p>
+    <div class="meta-row">
+      <div class="meta-item"><div class="k" data-i18n="meta.role">Role</div><div class="v" data-i18n="meta.v.role">Sole product designer</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.team">Team</div><div class="v" data-i18n="meta.v.team">PM · Eng teams · Fast Shop ops</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.client">Client</div><div class="v">Fast Shop</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.timeline">Timeline</div><div class="v" data-i18n="meta.v.time">Sep 2024 – Feb 2026</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.scope">Scope</div><div class="v">80+ stores · 22,000+ SKUs · web</div></div>
+    </div>
+  </div>
+</header>
+
+<article class="article-body">
+  <div class="col reveal">
+    <div class="tldr">
+      <span class="k" data-i18n="tl.k">The short version</span>
+      <dl>
+        <div><dt data-i18n="tl.problem.k">Problem</dt><dd data-i18n="k.tl.problem">Checkout promised delivery in two hours. Behind it, nobody could tell where an order was without a phone call, and a failed delivery had no defined next step.</dd></div>
+        <div><dt data-i18n="tl.did.k">What I did</dt><dd data-i18n="k.tl.did">Designed Pick &amp; Pack for three roles at once instead of one primary user, rebuilt the board after the floor rejected my first version, and rolled it out store by store, reading the operation's own records as the evidence.</dd></div>
+        <div><dt data-i18n="tl.out.k">Outcome</dt><dd data-i18n="k.tl.out">On-time delivery held at <b>81%</b> against the two-hour promise while volume grew by roughly 38%; operators stopped exporting to spreadsheets; a class of failed deliveries that had no name got a status and a next step.</dd></div>
+      </dl>
+    </div>
+  </div>
+
+  <div class="index reveal">
+    <span class="k"><span data-i18n="ix.k">In this case</span><span class="rt" data-i18n="ix.time">7 min read</span></span>
+    <ol>
+      <li><a href="#s01" data-i18n="k.ix.1">The promise on the checkout page</a></li>
+      <li><a href="#s02" data-i18n="k.ix.2">What the operation taught me</a></li>
+      <li><a href="#s03" data-i18n="k.ix.3">Three roles, not a primary user</a></li>
+      <li><a href="#s04" data-i18n="k.ix.4">The first board was wrong</a></li>
+      <li><a href="#s05" data-i18n="k.ix.5">The screens, annotated</a></li>
+      <li><a href="#s06" data-i18n="k.ix.6">Rollout, store by store</a></li>
+      <li><a href="#s07" data-i18n="k.ix.7">What it changed, measured</a></li>
+      <li><a href="#s08" data-i18n="k.ix.8">What I'd do differently</a></li>
+    </ol>
+  </div>
+
+  <div class="col reveal">
+    <span class="stage-label" id="s01"><b>01</b> &middot; <span data-i18n="k.ix.1">The promise on the checkout page</span></span>
+    <h2 data-i18n="k.h2.s01">Two hours, promised before anyone in a store knows the order exists</h2>
+    <p data-i18n="k.s01.p1">Fast Shop is one of Brazil's largest electronics retailers: 80+ stores, 22,000+ SKUs and around 2,500 orders a day. Its checkout sells delivery in two hours. That promise is made before a single person in a store has seen the order, and it is the reason Kruzer's platform was funded at all. Every order that misses it costs twice: once in the delivery, once in the customer who stops believing the badge next time.</p>
+    <p data-i18n="k.s01.p2">Before Pick &amp; Pack, the promise ran on people. A store found out about an order by phone. The distribution centre routed couriers from a spreadsheet. A driver got an address by message. When something stalled, whoever noticed first called whoever they thought was responsible, and nobody held a number for how often that ended on time. There is no on-time baseline to quote, and that is the point: nothing in the operation could produce one. It ran on WhatsApp threads, a courier app and spreadsheets. The absence of the number was the problem the project existed to solve.</p>
+    <p data-i18n="k.s01.p3">So the number we set out to move was never &ldquo;a better fulfilment UI.&rdquo; It was the on-time rate, and underneath it the number that actually decides it: how long it takes an operator to find out an order is in trouble. Before the platform that was whenever an operator happened to notice, or whenever someone chased them about it. An operation only hits its SLA if the exceptions surface early enough to be fixed.</p>
+    <p class="takeaway" data-i18n="k.tk.s01">81% on time is a statement about the other 19% being findable.</p>
+  </div>
+
+  <div class="col reveal">
+    <span class="stage-label" id="s02"><b>02</b> &middot; <span data-i18n="k.ix.2">What the operation taught me</span></span>
+    <h2 data-i18n="k.h2.s02">The stall list is the requirements list</h2>
+    <p data-i18n="k.s02.p1">Fast Shop's operations people had run this process for years without software. Treating them as stakeholders to be informed, rather than as the source of the requirements, would have produced a beautiful tool for a process that doesn't exist. So before drawing a screen I spent time with eight operators across three stores, asking two questions on the floor.</p>
+    <ol class="process">
+      <li>
+        <h3 class="card-h" data-i18n="k.q1.h">Where does an order actually stop?</h3>
+        <p data-i18n="k.q1.p">Not in theory. The real stalls: waiting for a courier who arrived before the order was packed, a product not on the shelf where the system says it is, a customer who isn't home, an invoice rejected by the tax system. Each stall became a status, and each status became something an operator could act on instead of phone about.</p>
+      </li>
+      <li>
+        <h3 class="card-h" data-i18n="k.q2.h">What happens when a delivery fails?</h3>
+        <p data-i18n="k.q2.p">The answer was uncomfortable and useful: nothing consistent. The order stayed &ldquo;in transit&rdquo; forever, the product came back to the store informally, and nobody was accountable. That gap is where the &ldquo;returning to store&rdquo; status came from later, and I only found it by asking about the ugly path instead of the happy one.</p>
+      </li>
+    </ol>
+    <p data-i18n="k.s02.p2">Two things could not change, and knowing them early kept the design from becoming an argument the operation would always win: the carrier integrations (Uber, Borzo and the store's own drivers) and the fiscal documents every order has to carry.</p>
+  </div>
+
+  <figure class="shot narrow reveal">
+    <div class="frame"><img src="assets/slot-kruzer.webp" alt="A printed three-lane process diagram taped to a work surface, with marker loops and crossing arrows drawn in the gaps between the lanes: the order journey mapped across store, distribution centre and driver" loading="lazy" width="1264" height="843"></div>
+    <figcaption class="caption" data-i18n="k.slot1.c">One order, three lanes. The gaps between the lanes, where information fell on the floor, are where the arrows are.</figcaption>
+  </figure>
+
+  <div class="col reveal">
+    <span class="stage-label" id="s03"><b>03</b> &middot; <span data-i18n="k.ix.3">Three roles, not a primary user</span></span>
+    <h2 data-i18n="k.h2.s03">Same order, three people, three definitions of &ldquo;done&rdquo;</h2>
+    <p data-i18n="k.s03.p1">The store operator is hiring this to clear the queue before the courier arrives. The distribution-centre operator is hiring it to know which orders are about to breach and route around them. The driver is hiring it to get an unambiguous next stop. Most fulfilment tools pick one of those jobs and make the other two adapt.</p>
+    <p data-i18n="k.s03.p2">Designing for three roles costs more than designing for one, and it had to be argued for before anyone had seen a screen. &ldquo;Design it for the store operator and the rest will adapt&rdquo; was a perfectly reasonable position. What won the argument was not an opinion but the map above: once the points where information fell between store, distribution centre and driver were visible on one page, nobody proposed picking a primary user again.</p>
+    <p data-i18n="k.s03.p3">In the interface that decision shows up as one platform with a different home per role: a store sees its own queue, the distribution centre sees every store plus the numbers that say where the day is going wrong, and the driver gets the stop. Same order, same statuses, same colours, different first screen.</p>
+    <p class="pull" data-i18n="k.pull.s03">Holding all three at once is what forced every interface decision: what goes first in a card, what earns an alert, what is allowed to be one click.</p>
+  </div>
+
+  <div class="col reveal">
+    <span class="stage-label" id="s04"><b>04</b> &middot; <span data-i18n="k.ix.4">The first board was wrong</span></span>
+    <h2 data-i18n="k.h2.s04">The round that rebuilt the board</h2>
+    <p data-i18n="k.s04.p1">You can't A/B test a warehouse, and I couldn't pull store operators off the floor for a lab session. So the round happened where the work is: at the counter, on their machine, with real orders in front of them, walking their actual day instead of a task I had written.</p>
+    <div class="compare">
+      <div>
+        <span class="k" data-i18n="cmp.assumed">What we assumed</span>
+        <p data-i18n="k.cmp.a">That the board should mirror the order's lifecycle, because that is how the system thinks about an order: received, invoiced, picked, dispatched, delivered.</p>
+      </div>
+      <div>
+        <span class="k" data-i18n="cmp.found">What the round showed</span>
+        <p data-i18n="k.cmp.b">Operators don't think in lifecycles. They think in what is about to hurt them: what leaves in the next hour, what is already late, what has nowhere to go. The first version made them translate.</p>
+      </div>
+    </div>
+    <p data-i18n="k.s04.p2">So the board was rebuilt around their sequence rather than the system's, and the card was rebuilt around their first question. &ldquo;Is this one late?&rdquo; moved to the top-right corner in red. The remaining SLA moved onto the modality pill. The carrier logo moved to where the eye lands last, because it is the thing you need only after you have decided to act.</p>
+  </div>
+
+  <figure class="shot annot reveal">
+    <div class="frame annot-frame">
+      <img src="assets/pp-store-board.webp" alt="Pick &amp; Pack store board: four columns (order received, picking, ready for pickup, in transit) with order cards showing late flags, status pills with the remaining SLA, and the carrier logo" loading="lazy" width="1800" height="1455">
+      <span class="pin" style="left:22.4%;top:25.7%">1</span>
+      <span class="pin" style="left:20%;top:31.7%">2</span>
+      <span class="pin" style="left:24.5%;top:34.8%">3</span>
+      <span class="pin" style="left:55%;top:21.2%">4</span>
+      <span class="pin" style="left:66.5%;top:46.5%">5</span>
+    </div>
+    <ol class="annot-list">
+      <li><b>1</b><span data-i18n="k.an1.1">&ldquo;Late in this status&rdquo; is the first thing on the card, in red, because it is the first question an operator asks.</span></li>
+      <li><b>2</b><span data-i18n="k.an1.2">Two pills, two questions: what is happening to the order, and how much of the promise is left (UltraFast · 1h).</span></li>
+      <li><b>3</b><span data-i18n="k.an1.3">The carrier logo sits last. You only need it once you have decided to act.</span></li>
+      <li><b>4</b><span data-i18n="k.an1.4">Columns follow the operator's day, not the system's lifecycle: received, picking, ready for pickup, in transit.</span></li>
+      <li><b>5</b><span data-i18n="k.an1.5">Click &amp; Collect orders live on the same board with their own pill (&ldquo;Retira&rdquo;), so a store never runs two tools.</span></li>
+    </ol>
+    <figcaption class="caption" data-i18n="k.an1.c">The store board, as shipped: what leaves in the next hour, what is already late, what has nowhere to go.</figcaption>
+  </figure>
+
+  <div class="col reveal">
+    <span class="stage-label" id="s05"><b>05</b> &middot; <span data-i18n="k.ix.5">The screens, annotated</span></span>
+    <h2 data-i18n="k.h2.s05">The distribution centre: every store, and the numbers that say where the day is going wrong</h2>
+    <p data-i18n="k.s05.p1">The distribution centre sees all stores at once, so its first screen is not a queue but a set of counters: late, invoicing problems, transport problems, proof of delivery pending. Each one is a filter, not a chart. The job here is triage, and triage starts by clicking the number that hurts.</p>
+    <p data-i18n="k.s05.p2">Allocation was the other thing this role needed that a store did not. Several operators work the same queue, so every card says who owns it, and a card allocated to someone else fades back instead of disappearing: you can still see it is being handled, you just can't grab it by mistake.</p>
+  </div>
+
+  <figure class="shot annot reveal">
+    <div class="frame annot-frame">
+      <img src="assets/pp-dc-board-allocation.webp" alt="Pick &amp; Pack distribution-centre board with counters for late, invoicing, transport and proof-of-delivery problems across the top, cards showing who each order is allocated to, and a menu to unallocate or allocate to another user" loading="lazy" width="1800" height="1455">
+      <span class="pin" style="left:20.5%;top:12.6%">1</span>
+      <span class="pin" style="left:43%;top:39.5%">2</span>
+      <span class="pin" style="left:40%;top:49.5%">3</span>
+      <span class="pin" style="left:40%;top:66%">4</span>
+    </div>
+    <ol class="annot-list">
+      <li><b>1</b><span data-i18n="k.an2.1">Counters, not charts. Late (23), invoicing (3), transport (7), proof pending (12): each is a filter, and the day starts by clicking the one that hurts.</span></li>
+      <li><b>2</b><span data-i18n="k.an2.2">Allocation actions live on the card, two clicks from anywhere: take it off someone, or hand it to someone else.</span></li>
+      <li><b>3</b><span data-i18n="k.an2.3">&ldquo;Allocated to&rdquo; on every card, because in a shared queue the question &ldquo;is anyone on this?&rdquo; used to be a shout across the floor.</span></li>
+      <li><b>4</b><span data-i18n="k.an2.4">A card owned by someone else fades back rather than vanishing: visible, not grabbable.</span></li>
+    </ol>
+    <figcaption class="caption" data-i18n="k.an2.c">The distribution-centre board: same cards as the store, plus ownership, because here several people work one queue.</figcaption>
+  </figure>
+
+  <div class="col reveal">
+    <h2 data-i18n="k.h2.s05b">The same queue as a table, when the question changes</h2>
+    <p data-i18n="k.s05.p3">A board answers &ldquo;what is the shape of my day.&rdquo; It does not answer &ldquo;which of these 104 orders has been sitting the longest,&rdquo; and that is the question the distribution centre asks every hour. So the same queue toggles into a table: one row per order, sortable, with dwell time as its own column and a severity dot before the order number. Same data, same statuses, same colours, a different first question.</p>
+  </div>
+
+  <figure class="shot annot reveal">
+    <div class="frame annot-frame">
+      <img src="assets/pp-dc-table.webp" alt="Pick &amp; Pack distribution-centre table view: one row per order with a severity dot, store, modality, stage, status pill, carrier, creation time and time in queue, sortable by any column" loading="lazy" width="1800" height="1460">
+      <span class="pin" style="left:87%;top:23%">1</span>
+      <span class="pin" style="left:9%;top:34.5%">2</span>
+      <span class="pin" style="left:90%;top:31%">3</span>
+      <span class="pin" style="left:61%;top:34.5%">4</span>
+      <span class="pin" style="left:47%;top:72%">5</span>
+    </div>
+    <ol class="annot-list">
+      <li><b>1</b><span data-i18n="k.an3.1">One toggle between board and table. Same filters, same selection, no re-learning.</span></li>
+      <li><b>2</b><span data-i18n="k.an3.2">A severity dot before the order number (red, amber, blue) so the eye can scan the column without reading a word.</span></li>
+      <li><b>3</b><span data-i18n="k.an3.3">&ldquo;Time in queue&rdquo; is its own sortable column: the one the distribution centre sorts by first, every hour.</span></li>
+      <li><b>4</b><span data-i18n="k.an3.4">Status pills carry the same colour semantics as the board: red needs a person, amber needs a step, blue is moving, green is done.</span></li>
+      <li><b>5</b><span data-i18n="k.an3.5">Rows allocated to another operator fade, exactly as cards do on the board.</span></li>
+    </ol>
+    <figcaption class="caption" data-i18n="k.an3.c">The table view: the question changes from &ldquo;what is my day&rdquo; to &ldquo;what has been waiting longest,&rdquo; and the layout follows.</figcaption>
+  </figure>
+
+  <div class="col reveal">
+    <h2 data-i18n="k.h2.s05c">When an order becomes a phone call</h2>
+    <p data-i18n="k.s05.p4">When a customer calls, the person answering needs the whole story in seconds: how much of the SLA is left, where the order is, what has already been said. The order page puts the countdown first and in red when it is already breached, the history down the side in the order things happened, and a comment thread with attachments so that &ldquo;the customer said to leave it with the neighbour&rdquo; is on the order, not in someone's head.</p>
+  </div>
+
+  <figure class="shot annot reveal">
+    <div class="frame annot-frame">
+      <img src="assets/pp-order-detail.webp" alt="Pick &amp; Pack order detail page: SLA countdown in red, time in current status flagged as late, customer and delivery data, order summary with products, a status history timeline and a comment thread with an attachment" loading="lazy" width="1440" height="1531">
+      <span class="pin" style="left:76%;top:11.5%">1</span>
+      <span class="pin" style="left:44%;top:14%">2</span>
+      <span class="pin" style="left:82%;top:40%">3</span>
+      <span class="pin" style="left:36%;top:80%">4</span>
+    </div>
+    <ol class="annot-list">
+      <li><b>1</b><span data-i18n="k.an4.1">The SLA countdown is the biggest thing on the page and turns red past the promise, because it is the thing the customer is asking about.</span></li>
+      <li><b>2</b><span data-i18n="k.an4.2">&ldquo;Time in this status&rdquo; separates &ldquo;the order is late&rdquo; from &ldquo;this step is the one that is late.&rdquo;</span></li>
+      <li><b>3</b><span data-i18n="k.an4.3">History as a timeline, newest first, each step with a plain-language line an operator can read aloud on the phone.</span></li>
+      <li><b>4</b><span data-i18n="k.an4.4">Comments with attachments on the order itself, so a screenshot of the customer's message travels with the delivery.</span></li>
+    </ol>
+    <figcaption class="caption" data-i18n="k.an4.c">The order page: built for the moment a delivery turns into a conversation.</figcaption>
+  </figure>
+
+  <div class="col reveal">
+    <h2 data-i18n="k.h2.s05d">The exceptions are the product</h2>
+    <p data-i18n="k.s05.p5">In logistics the happy path needs almost no design; it is the exceptions that decide whether an operator trusts the screen or works around it. These four states came out of the stall list and the rollout, not out of a design file. Each one replaces something that used to be a phone call.</p>
+  </div>
+
+  <figure class="shot states reveal">
+    <div class="states-grid">
+      <div class="state">
+        <img src="assets/pp-modal-driver.webp" alt="Modal for an order ready for pickup, flagged late: driver name, ID and plate, and a state saying the ride has not started with a tracking link" loading="lazy" width="1100" height="925">
+        <p><b data-i18n="k.st1.h">The driver took the package and the ride never started</b> <span data-i18n="k.st1.p">Who has it, what car, and a plain sentence saying the ride has not begun, with tracking one click away. This used to be a call to the carrier.</span></p>
+      </div>
+      <div class="state">
+        <img src="assets/pp-modal-proof.webp" alt="Modal for a delivered order awaiting proof of delivery: a file upload area accepting images and documents, an uploaded screenshot, and a Complete order button" loading="lazy" width="1100" height="1297">
+        <p><b data-i18n="k.st2.h">Delivered, but not closed until there is proof</b> <span data-i18n="k.st2.p">An order is not done when the driver says so; it is done when a photo or signature is attached. &ldquo;Proof pending&rdquo; is a counter on the distribution-centre home for exactly this reason.</span></p>
+      </div>
+      <div class="state">
+        <img src="assets/pp-modal-qr.webp" alt="Modal for a click-and-collect order awaiting pickup: a QR code the customer scans to open a form with their data and a signature before taking the order" loading="lazy" width="709" height="588">
+        <p><b data-i18n="k.st3.h">Someone is at the counter to collect</b> <span data-i18n="k.st3.p">A QR code opens a form with the buyer's data and a signature, so the store hands over the product to the right person and keeps the record without a printer.</span></p>
+      </div>
+      <div class="state">
+        <img src="assets/pp-modal-export.webp" alt="Export dialog for an order report with a warning that no orders were selected so all 104 will be exported, a name field and a Generating button" loading="lazy" width="1026" height="768">
+        <p><b data-i18n="k.st4.h">Someone still needs a spreadsheet</b> <span data-i18n="k.st4.p">Exports stayed, deliberately, with one guardrail: if nothing is selected, the dialog says out loud that all 104 orders are about to be exported. Falling export counts became our adoption signal.</span></p>
+      </div>
+    </div>
+    <figcaption class="caption" data-i18n="k.states.c">Four exception states. Fifteen statuses exist in the shipped platform; these are the ones that replaced the most phone calls.</figcaption>
+  </figure>
+
+  <div class="col reveal">
+    <span class="stage-label" id="s06"><b>06</b> &middot; <span data-i18n="k.ix.6">Rollout, store by store</span></span>
+    <h2 data-i18n="k.h2.s06">The release wasn't a date. It was a sequence</h2>
+    <p data-i18n="k.s06.p1">Fulfilment software fails in production in ways it never fails in a demo, so the flagship store went first, alone, watched daily with its operators and managers until a full week passed without a new corner case. After that, waves of about twenty stores every two weeks. It stayed close enough to the team that a problem could be watched instead of reported. Each wave carried what the previous one had taught, and the full three months &mdash; rollout plus daily hypercare from our support team &mdash; was the experiment. After that it dropped to occasional tickets.</p>
+    <p data-i18n="k.s06.p2">The exceptions did most of the teaching. A courier arriving before an order was packed. Orders scanned out of sequence. A delivery that failed with the address still marked valid. Each became either an interface state or a rule, and I stayed in engineering's reviews through every wave, because the difference between an operator trusting the screen and working around it is usually one unhandled case.</p>
+    <p data-i18n="k.s06.p3">&ldquo;Returning to store&rdquo; is the one I would point to. It did not exist in the first version. The first wave surfaced orders sitting in &ldquo;in transit&rdquo; with nowhere to go. The operators had a workaround for it but no name, which is why it had never been requested.</p>
+    <p class="takeaway" data-i18n="k.tk.s06">The difference between an operator trusting the screen and working around it is usually one unhandled case.</p>
+  </div>
+
+  <div class="col reveal">
+    <span class="stage-label" id="s07"><b>07</b> &middot; <span data-i18n="k.ix.7">What it changed, measured</span></span>
+    <h2 data-i18n="k.h2.s07">The rate did not go up. It refused to go down while the load went up</h2>
+    <p data-i18n="k.s07.p1">Three months after rollout, on-time delivery against the two-hour promise was 81%, on roughly 38% more volume than the operation had ever handled. There is no before to hold it against, because the operation had never measured itself &mdash; so read 81% as the first honest figure this operation ever had about itself, not as an improvement over a known number. That is the whole claim, and it is worth stating carefully: in fulfilment, holding a rate while volume grows is the harder of the two outcomes.</p>
+    <div class="metrics-strip">
+      <div class="m"><div class="num">81%</div><div class="label" data-i18n="k.m0">On-time against the two-hour promise, three months after rollout, while volume grew</div></div>
+      <div class="m"><div class="num">Chased &rarr; flagged</div><div class="label" data-i18n="k.m1">Time to detect an at-risk order: before, whenever someone happened to notice; after, the moment it enters &ldquo;Late&rdquo;</div></div>
+      <div class="m"><div class="num">15</div><div class="label" data-i18n="k.m2">Statuses in the shipped taxonomy, four of them exceptions that replaced phone calls</div></div>
+    </div>
+    <h3 class="sub" data-i18n="k.meas.h">How it was measured</h3>
+    <ul class="receipts">
+      <li><b data-i18n="k.meas.1b">Headline</b> <span data-i18n="k.meas.1t">On-time rate against the two-hour promise, the platform's own figure, read three months after rollout. Baseline: none. The pre-platform operation produced no on-time figure, because it ran on WhatsApp, a courier app and spreadsheets. I present 81% as a first measurement, not as a delta.</span></li>
+      <li><b data-i18n="k.meas.2b">Operational</b> <span data-i18n="k.meas.2t">Where orders sat and for how long, by status and by store. The platform measures this now; nothing measured it before, so there is no before-and-after to give. A rate says there is a problem; this says where to go.</span></li>
+      <li><b data-i18n="k.meas.3b">Adoption</b> <span data-i18n="k.meas.3t">Whether operators worked in the platform or around it. We never counted spreadsheet exports before and after, so I can only report what the team saw: the parallel spreadsheets stopped being maintained. A blunt signal, and an uncounted one.</span></li>
+      <li><b data-i18n="k.meas.4b">Not proven</b> <span data-i18n="k.meas.4t">Causality. The platform launched alongside a growing operation, and I cannot separate the design from the process changes Fast Shop made in the same months. The staged rollout is the closest thing to a control: stores on the platform versus stores not yet on it, over the same weeks.</span></li>
+    </ul>
+    <p class="note" data-i18n="k.note"><strong>Scope, for context, not as outcome:</strong> 80+ stores migrated onto the platform, 22,000+ SKUs flowing through it, three products delivered on the same foundation (Pick &amp; Pack, PIM, DevTools), all designed by one person with <a href="compass.html">Compass</a> as the system underneath. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em></p>
+  </div>
+
+  <div class="col reveal">
+    <span class="stage-label" id="s08"><b>08</b> &middot; <span data-i18n="k.ix.8">What I'd do differently</span></span>
+    <h2 data-i18n="k.h2.s08">I designed the happy path first. In logistics, the exceptions are the product</h2>
+    <p data-i18n="k.s08.p1">I would have gone to the floor before drawing the first board, not after it fell short. The rework was cheap because it happened early, but it was avoidable: I built the first version from the system's model of an order because that was the model I had access to, and I mistook availability for accuracy. The wider version of that mistake is that I treated exceptions as a second pass, when three of the four states above are the reason operators use the tool at all.</p>
+    <p data-i18n="k.s08.p2">I would also have instrumented time-to-detect from day one. It was the pointer we agreed on, and for the first wave I could only read it off the stall list and the dwell times, not off a single number. The releases after that had it; the one people ask about most did not.</p>
+    <div class="callout-grid">
+      <div class="callout">
+        <h3 class="card-h" data-i18n="k.role.h">My role</h3>
+        <p data-i18n="k.role.p">The only designer on the platform, Sep 2024 to Feb 2026. I owned Pick &amp; Pack from discovery through the store-by-store rollout, built and governed Compass, and designed PIM and DevTools on the same foundation. With no other designer to hand anything to, prioritising between the four products was part of the job: Pick &amp; Pack first, because it carried the two-hour promise.</p>
+      </div>
+      <div class="callout">
+        <h3 class="card-h" data-i18n="k.team.h">The team, and what was mine</h3>
+        <p data-i18n="k.team.p">A product manager owned the roadmap and the OKRs with Fast Shop; Fast Shop's operations leads were the domain experts and the source of the stall list; one engineering team per product built it, with me in their reviews through every wave. Decisions that were mine: three roles instead of a primary user, the rebuilt board and card, the table toggle, the four exception states above, and &ldquo;returning to store.&rdquo;</p>
+      </div>
+    </div>
+    <div class="callout-grid">
+      <a class="callout" href="compass.html">
+        <h3 class="card-h" data-i18n="k.system.h">Compass: the system underneath</h3>
+        <p data-i18n="k.system.p">None of these screens were designed in isolation. A status pill means the same thing on the board, the table and the order page because the token layer says so. That work grew large enough to be its own case.</p>
+        <span class="go" data-i18n="k.system.cta">Read the Compass case &rarr;</span>
+      </a>
+      <div class="callout">
+        <h3 class="card-h" data-i18n="k.instrument.h">The instrument was chosen, not inherited</h3>
+        <p data-i18n="k.instrument.p1">Different project, different instrument. <a href="index.html#method">How I chose the instrument on each project &rarr;</a></p>
+      </div>
+    </div>
+  </div>
+</article>
+
+<section class="article-close reveal">
+  <div class="col">
+    <h2 data-i18n="close.h2">Questions this page doesn't answer?</h2>
+    <p data-i18n="close.p.kruzer">Happy to walk through the research, the failed first version of the kanban, or how we prioritized against Fast Shop's OKRs.</p>
+    <div class="close-ctas">
+      <a class="btn btn-primary" href="index.html#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
+      <a class="btn btn-ghost" href="index.html#work" data-i18n="close.cta2.kruzer">See the other case</a>
+    </div>
+  </div>
+</section>
+
+
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-bottom">
+      <span><span data-i18n="footer.rights">© 2026 Guilherme Cannalonga.</span></span>
+      <div class="foot-links">
+        <a href="index.html" data-i18n="footer.portfolio">Portfolio</a>
+        <a href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:cannalongadesign@gmail.com" data-contact-trigger data-i18n="footer.email">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="contact-modal" id="contactModal">
+  <div class="contact-modal-card" tabindex="-1">
+    <button class="contact-modal-close" id="contactModalClose" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 6l12 12M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    </button>
+    <span class="kicker" data-i18n="modal.label">Let's talk</span>
+    <h3 data-i18n="modal.h3">How would you like to connect?</h3>
+    <p data-i18n="modal.p">Pick whichever's faster for you.</p>
+    <div class="contact-modal-options">
+      <a class="contact-option" href="mailto:cannalongadesign@gmail.com">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.email.title">Send an email</span><span class="co-sub">cannalongadesign@gmail.com</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a class="contact-option" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="4" y="5" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 10h16M8 3v4M16 3v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.call.title">Book a 30-min call</span><span class="co-sub" data-i18n="modal.call.sub">Weekdays, 5–7pm ET</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+  const els = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold:0.1});
+  els.forEach(el=>io.observe(el));
+
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > 24) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  }, {passive:true});
+
+
+  // Contact modal: email vs. book a call
+  (function(){
+    const modal = document.getElementById('contactModal');
+    if(!modal) return;
+    const closeBtn = document.getElementById('contactModalClose');
+    function openModal(){
+      modal.classList.add('open');
+      requestAnimationFrame(()=> modal.classList.add('show'));
+      document.body.style.overflow = 'hidden';
+      document.body.classList.add('modal-open');
+      const card = modal.querySelector('.contact-modal-card'); if(card) card.focus({preventScroll:true});
+    }
+    function closeModal(){
+      modal.classList.remove('show');
+      document.body.classList.remove('modal-open');
+      document.body.style.overflow = '';
+      setTimeout(()=> modal.classList.remove('open'), 250);
+    }
+    document.querySelectorAll('[data-contact-trigger]').forEach(el=>{
+      el.addEventListener('click', (e)=>{ e.preventDefault(); openModal(); });
+    });
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+  })();
+</script>
+
+<script>
+  /* ---- language toggle: English is the base language, Portuguese (Brazil) is opt-in ---- */
+  (function(){
+    const I18N = {
+      en: {
+        'nav.back.genial':`Back to Genial App`,
+        'nav.back.liam':`Back to LIAM`,
+        'nav.back.kruzer':`Back to Pick &amp; Pack`,
+        'nav.back.compass':`Back to Compass`,
+        'a11y.skip':`Skip to content`, 'a11y.lang':`Language`,
+        'footer.rights':`© 2026 Guilherme Cannalonga. All rights reserved.`,
+        'meta.v.role':`Sole product designer`,
+        'meta.v.team':`PM · Eng teams · Fast Shop ops`,
+        'meta.v.time':`Sep 2024 – Feb 2026`,
+        'stage.build':`The build`,
+        'cmp.assumed':`What we assumed`,
+        'cmp.found':`What the round showed`,
+        'ix.time':'12 min read',
+        'ix.k':'In this case', 'tl.k':'The short version',
+        'tl.problem.k':'Problem', 'tl.did.k':'What I did', 'tl.out.k':'Outcome',
+        'nav.back':'Back to portfolio', 'nav.cta':`Let's talk`,
+        'hero.kicker':`Case study · Enterprise logistics · B2B`,
+        'hero.h1':`Pick &amp; Pack: one order, three people, one screen each`,
+        'hero.dek':`Fast Shop sells two-hour delivery. The tool behind that promise ran on phone calls and spreadsheets. This is how I designed the platform that replaced them, for the store, the distribution centre and the driver at once, and why the exceptions got designed before the happy path.`,
+        'meta.role':'Role', 'meta.team':'Team', 'meta.client':'Client', 'meta.timeline':'Timeline', 'meta.scope':'Scope',
+        'stage.pain':'The pain', 'stage.pointer':'The pointer', 'stage.questions':'The questions',
+        'stage.job':'The job', 'stage.bet':'The bet', 'stage.test':'The test',
+        'stage.evidence':'What the evidence changed', 'stage.production':'Into production',
+        'close.h2':`Questions this page doesn't answer?`,
+        'close.p.kruzer':`The research, the first version of the board and why operators rejected it, the driver&rsquo;s screen, the on-time baseline before the platform and how we prioritised against Fast Shop&rsquo;s OKRs: all of it is a 30-minute call away.`,
+        'close.cta1':'Get in touch', 'close.cta2.kruzer':'See the other case',
+        'footer.portfolio':'Portfolio', 'footer.email':'Email',
+        'modal.label':`Let's talk`, 'modal.h3':'How would you like to connect?', 'modal.p':`Pick whichever's faster for you.`,
+        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, 5–7pm ET`,
+        'k.tl.problem':`Checkout promised delivery in two hours. Behind it, nobody could tell where an order was without a phone call, and a failed delivery had no defined next step.`,
+        'k.tl.did':`Designed Pick &amp; Pack for three roles at once instead of one primary user, rebuilt the board after the floor rejected my first version, and rolled it out store by store, reading the operation's own records as the evidence.`,
+        'k.tl.out':`On-time delivery held at <b>81%</b> against the two-hour promise while volume grew by roughly 38%; operators stopped exporting to spreadsheets; a class of failed deliveries that had no name got a status and a next step.`,
+        'k.ix.1':`The promise on the checkout page`,
+        'k.ix.2':`What the operation taught me`,
+        'k.ix.3':`Three roles, not a primary user`,
+        'k.ix.4':`The first board was wrong`,
+        'k.ix.5':`The screens, annotated`,
+        'k.ix.6':`Rollout, store by store`,
+        'k.ix.7':`What it changed, measured`,
+        'k.ix.8':`What I'd do differently`,
+        'k.h2.s01':`Two hours, promised before anyone in a store knows the order exists`,
+        'k.s01.p1':`Fast Shop is one of Brazil's largest electronics retailers: 80+ stores, 22,000+ SKUs and around 2,500 orders a day. Its checkout sells delivery in two hours. That promise is made before a single person in a store has seen the order, and it is the reason Kruzer's platform was funded at all. Every order that misses it costs twice: once in the delivery, once in the customer who stops believing the badge next time.`,
+        'k.s01.p2':`Before Pick &amp; Pack, the promise ran on people. A store found out about an order by phone. The distribution centre routed couriers from a spreadsheet. A driver got an address by message. When something stalled, whoever noticed first called whoever they thought was responsible, and nobody held a number for how often that ended on time. There is no on-time baseline to quote, and that is the point: nothing in the operation could produce one. It ran on WhatsApp threads, a courier app and spreadsheets. The absence of the number was the problem the project existed to solve.`,
+        'k.s01.p3':`So the number we set out to move was never &ldquo;a better fulfilment UI.&rdquo; It was the on-time rate, and underneath it the number that actually decides it: how long it takes an operator to find out an order is in trouble. Before the platform that was whenever an operator happened to notice, or whenever someone chased them about it. An operation only hits its SLA if the exceptions surface early enough to be fixed.`,
+        'k.tk.s01':`81% on time is a statement about the other 19% being findable.`,
+        'k.h2.s02':`The stall list is the requirements list`,
+        'k.s02.p1':`Fast Shop's operations people had run this process for years without software. Treating them as stakeholders to be informed, rather than as the source of the requirements, would have produced a beautiful tool for a process that doesn't exist. So before drawing a screen I spent time with eight operators across three stores, asking two questions on the floor.`,
+        'k.q1.h':`Where does an order actually stop?`,
+        'k.q1.p':`Not in theory. The real stalls: waiting for a courier who arrived before the order was packed, a product not on the shelf where the system says it is, a customer who isn't home, an invoice rejected by the tax system. Each stall became a status, and each status became something an operator could act on instead of phone about.`,
+        'k.q2.h':`What happens when a delivery fails?`,
+        'k.q2.p':`The answer was uncomfortable and useful: nothing consistent. The order stayed &ldquo;in transit&rdquo; forever, the product came back to the store informally, and nobody was accountable. That gap is where the &ldquo;returning to store&rdquo; status came from later, and I only found it by asking about the ugly path instead of the happy one.`,
+        'k.s02.p2':`Two things could not change, and knowing them early kept the design from becoming an argument the operation would always win: the carrier integrations (Uber, Borzo and the store's own drivers) and the fiscal documents every order has to carry.`,
+        'k.slot1.c':`One order, three lanes. The gaps between the lanes, where information fell on the floor, are where the arrows are.`,
+        'k.h2.s03':`Same order, three people, three definitions of &ldquo;done&rdquo;`,
+        'k.s03.p1':`The store operator is hiring this to clear the queue before the courier arrives. The distribution-centre operator is hiring it to know which orders are about to breach and route around them. The driver is hiring it to get an unambiguous next stop. Most fulfilment tools pick one of those jobs and make the other two adapt.`,
+        'k.s03.p2':`Designing for three roles costs more than designing for one, and it had to be argued for before anyone had seen a screen. &ldquo;Design it for the store operator and the rest will adapt&rdquo; was a perfectly reasonable position. What won the argument was not an opinion but the map above: once the points where information fell between store, distribution centre and driver were visible on one page, nobody proposed picking a primary user again.`,
+        'k.s03.p3':`In the interface that decision shows up as one platform with a different home per role: a store sees its own queue, the distribution centre sees every store plus the numbers that say where the day is going wrong, and the driver gets the stop. Same order, same statuses, same colours, different first screen.`,
+        'k.pull.s03':`Holding all three at once is what forced every interface decision: what goes first in a card, what earns an alert, what is allowed to be one click.`,
+        'k.h2.s04':`The round that rebuilt the board`,
+        'k.s04.p1':`You can't A/B test a warehouse, and I couldn't pull store operators off the floor for a lab session. So the round happened where the work is: at the counter, on their machine, with real orders in front of them, walking their actual day instead of a task I had written.`,
+        'k.cmp.a':`That the board should mirror the order's lifecycle, because that is how the system thinks about an order: received, invoiced, picked, dispatched, delivered.`,
+        'k.cmp.b':`Operators don't think in lifecycles. They think in what is about to hurt them: what leaves in the next hour, what is already late, what has nowhere to go. The first version made them translate.`,
+        'k.s04.p2':`So the board was rebuilt around their sequence rather than the system's, and the card was rebuilt around their first question. &ldquo;Is this one late?&rdquo; moved to the top-right corner in red. The remaining SLA moved onto the modality pill. The carrier logo moved to where the eye lands last, because it is the thing you need only after you have decided to act.`,
+        'k.an1.1':`&ldquo;Late in this status&rdquo; is the first thing on the card, in red, because it is the first question an operator asks.`,
+        'k.an1.2':`Two pills, two questions: what is happening to the order, and how much of the promise is left (UltraFast · 1h).`,
+        'k.an1.3':`The carrier logo sits last. You only need it once you have decided to act.`,
+        'k.an1.4':`Columns follow the operator's day, not the system's lifecycle: received, picking, ready for pickup, in transit.`,
+        'k.an1.5':`Click &amp; Collect orders live on the same board with their own pill (&ldquo;Retira&rdquo;), so a store never runs two tools.`,
+        'k.an1.c':`The store board, as shipped: what leaves in the next hour, what is already late, what has nowhere to go.`,
+        'k.h2.s05':`The distribution centre: every store, and the numbers that say where the day is going wrong`,
+        'k.s05.p1':`The distribution centre sees all stores at once, so its first screen is not a queue but a set of counters: late, invoicing problems, transport problems, proof of delivery pending. Each one is a filter, not a chart. The job here is triage, and triage starts by clicking the number that hurts.`,
+        'k.s05.p2':`Allocation was the other thing this role needed that a store did not. Several operators work the same queue, so every card says who owns it, and a card allocated to someone else fades back instead of disappearing: you can still see it is being handled, you just can't grab it by mistake.`,
+        'k.an2.1':`Counters, not charts. Late (23), invoicing (3), transport (7), proof pending (12): each is a filter, and the day starts by clicking the one that hurts.`,
+        'k.an2.2':`Allocation actions live on the card, two clicks from anywhere: take it off someone, or hand it to someone else.`,
+        'k.an2.3':`&ldquo;Allocated to&rdquo; on every card, because in a shared queue the question &ldquo;is anyone on this?&rdquo; used to be a shout across the floor.`,
+        'k.an2.4':`A card owned by someone else fades back rather than vanishing: visible, not grabbable.`,
+        'k.an2.c':`The distribution-centre board: same cards as the store, plus ownership, because here several people work one queue.`,
+        'k.h2.s05b':`The same queue as a table, when the question changes`,
+        'k.s05.p3':`A board answers &ldquo;what is the shape of my day.&rdquo; It does not answer &ldquo;which of these 104 orders has been sitting the longest,&rdquo; and that is the question the distribution centre asks every hour. So the same queue toggles into a table: one row per order, sortable, with dwell time as its own column and a severity dot before the order number. Same data, same statuses, same colours, a different first question.`,
+        'k.an3.1':`One toggle between board and table. Same filters, same selection, no re-learning.`,
+        'k.an3.2':`A severity dot before the order number (red, amber, blue) so the eye can scan the column without reading a word.`,
+        'k.an3.3':`&ldquo;Time in queue&rdquo; is its own sortable column: the one the distribution centre sorts by first, every hour.`,
+        'k.an3.4':`Status pills carry the same colour semantics as the board: red needs a person, amber needs a step, blue is moving, green is done.`,
+        'k.an3.5':`Rows allocated to another operator fade, exactly as cards do on the board.`,
+        'k.an3.c':`The table view: the question changes from &ldquo;what is my day&rdquo; to &ldquo;what has been waiting longest,&rdquo; and the layout follows.`,
+        'k.h2.s05c':`When an order becomes a phone call`,
+        'k.s05.p4':`When a customer calls, the person answering needs the whole story in seconds: how much of the SLA is left, where the order is, what has already been said. The order page puts the countdown first and in red when it is already breached, the history down the side in the order things happened, and a comment thread with attachments so that &ldquo;the customer said to leave it with the neighbour&rdquo; is on the order, not in someone's head.`,
+        'k.an4.1':`The SLA countdown is the biggest thing on the page and turns red past the promise, because it is the thing the customer is asking about.`,
+        'k.an4.2':`&ldquo;Time in this status&rdquo; separates &ldquo;the order is late&rdquo; from &ldquo;this step is the one that is late.&rdquo;`,
+        'k.an4.3':`History as a timeline, newest first, each step with a plain-language line an operator can read aloud on the phone.`,
+        'k.an4.4':`Comments with attachments on the order itself, so a screenshot of the customer's message travels with the delivery.`,
+        'k.an4.c':`The order page: built for the moment a delivery turns into a conversation.`,
+        'k.h2.s05d':`The exceptions are the product`,
+        'k.s05.p5':`In logistics the happy path needs almost no design; it is the exceptions that decide whether an operator trusts the screen or works around it. These four states came out of the stall list and the rollout, not out of a design file. Each one replaces something that used to be a phone call.`,
+        'k.st1.h':`The driver took the package and the ride never started`,
+        'k.st1.p':`Who has it, what car, and a plain sentence saying the ride has not begun, with tracking one click away. This used to be a call to the carrier.`,
+        'k.st2.h':`Delivered, but not closed until there is proof`,
+        'k.st2.p':`An order is not done when the driver says so; it is done when a photo or signature is attached. &ldquo;Proof pending&rdquo; is a counter on the distribution-centre home for exactly this reason.`,
+        'k.st3.h':`Someone is at the counter to collect`,
+        'k.st3.p':`A QR code opens a form with the buyer's data and a signature, so the store hands over the product to the right person and keeps the record without a printer.`,
+        'k.st4.h':`Someone still needs a spreadsheet`,
+        'k.st4.p':`Exports stayed, deliberately, with one guardrail: if nothing is selected, the dialog says out loud that all 104 orders are about to be exported. Falling export counts became our adoption signal.`,
+        'k.states.c':`Four exception states. Fifteen statuses exist in the shipped platform; these are the ones that replaced the most phone calls.`,
+        'k.h2.s06':`The release wasn't a date. It was a sequence`,
+        'k.s06.p1':`Fulfilment software fails in production in ways it never fails in a demo, so the flagship store went first, alone, watched daily with its operators and managers until a full week passed without a new corner case. After that, waves of about twenty stores every two weeks. It stayed close enough to the team that a problem could be watched instead of reported. Each wave carried what the previous one had taught, and the full three months &mdash; rollout plus daily hypercare from our support team &mdash; was the experiment. After that it dropped to occasional tickets.`,
+        'k.s06.p2':`The exceptions did most of the teaching. A courier arriving before an order was packed. Orders scanned out of sequence. A delivery that failed with the address still marked valid. Each became either an interface state or a rule, and I stayed in engineering's reviews through every wave, because the difference between an operator trusting the screen and working around it is usually one unhandled case.`,
+        'k.s06.p3':`&ldquo;Returning to store&rdquo; is the one I would point to. It did not exist in the first version. The first wave surfaced orders sitting in &ldquo;in transit&rdquo; with nowhere to go. The operators had a workaround for it but no name, which is why it had never been requested.`,
+        'k.tk.s06':`The difference between an operator trusting the screen and working around it is usually one unhandled case.`,
+        'k.h2.s07':`The rate did not go up. It refused to go down while the load went up`,
+        'k.s07.p1':`Three months after rollout, on-time delivery against the two-hour promise was 81%, on roughly 38% more volume than the operation had ever handled. There is no before to hold it against, because the operation had never measured itself &mdash; so read 81% as the first honest figure this operation ever had about itself, not as an improvement over a known number. That is the whole claim, and it is worth stating carefully: in fulfilment, holding a rate while volume grows is the harder of the two outcomes.`,
+        'k.m0':`On-time against the two-hour promise, three months after rollout, while volume grew`,
+        'k.m1':`Time to detect an at-risk order: before, whenever someone happened to notice; after, the moment it enters &ldquo;Late&rdquo;`,
+        'k.m2':`Statuses in the shipped taxonomy, four of them exceptions that replaced phone calls`,
+        'k.meas.h':`How it was measured`,
+        'k.meas.1b':`Headline`,
+        'k.meas.1t':`On-time rate against the two-hour promise, the platform's own figure, read three months after rollout. Baseline: none. The pre-platform operation produced no on-time figure, because it ran on WhatsApp, a courier app and spreadsheets. I present 81% as a first measurement, not as a delta.`,
+        'k.meas.2b':`Operational`,
+        'k.meas.2t':`Where orders sat and for how long, by status and by store. The platform measures this now; nothing measured it before, so there is no before-and-after to give. A rate says there is a problem; this says where to go.`,
+        'k.meas.3b':`Adoption`,
+        'k.meas.3t':`Whether operators worked in the platform or around it. We never counted spreadsheet exports before and after, so I can only report what the team saw: the parallel spreadsheets stopped being maintained. A blunt signal, and an uncounted one.`,
+        'k.meas.4b':`Not proven`,
+        'k.meas.4t':`Causality. The platform launched alongside a growing operation, and I cannot separate the design from the process changes Fast Shop made in the same months. The staged rollout is the closest thing to a control: stores on the platform versus stores not yet on it, over the same weeks.`,
+        'k.note':`<strong>Scope, for context, not as outcome:</strong> 80+ stores migrated onto the platform, 22,000+ SKUs flowing through it, three products delivered on the same foundation (Pick &amp; Pack, PIM, DevTools), all designed by one person with <a href="compass.html">Compass</a> as the system underneath. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em>`,
+        'k.h2.s08':`I designed the happy path first. In logistics, the exceptions are the product`,
+        'k.s08.p1':`I would have gone to the floor before drawing the first board, not after it fell short. The rework was cheap because it happened early, but it was avoidable: I built the first version from the system's model of an order because that was the model I had access to, and I mistook availability for accuracy. The wider version of that mistake is that I treated exceptions as a second pass, when three of the four states above are the reason operators use the tool at all.`,
+        'k.s08.p2':`I would also have instrumented time-to-detect from day one. It was the pointer we agreed on, and for the first wave I could only read it off the stall list and the dwell times, not off a single number. The releases after that had it; the one people ask about most did not.`,
+        'k.role.h':`My role`,
+        'k.role.p':`The only designer on the platform, Sep 2024 to Feb 2026. I owned Pick &amp; Pack from discovery through the store-by-store rollout, built and governed Compass, and designed PIM and DevTools on the same foundation. With no other designer to hand anything to, prioritising between the four products was part of the job: Pick &amp; Pack first, because it carried the two-hour promise.`,
+        'k.team.h':`The team, and what was mine`,
+        'k.team.p':`A product manager owned the roadmap and the OKRs with Fast Shop; Fast Shop's operations leads were the domain experts and the source of the stall list; one engineering team per product built it, with me in their reviews through every wave. Decisions that were mine: three roles instead of a primary user, the rebuilt board and card, the table toggle, the four exception states above, and &ldquo;returning to store.&rdquo;`,
+        'k.system.h':`Compass: the system underneath`,
+        'k.system.p':`None of these screens were designed in isolation. A status pill means the same thing on the board, the table and the order page because the token layer says so. That work grew large enough to be its own case.`,
+        'k.system.cta':`Read the Compass case &rarr;`,
+        'k.instrument.h':`The instrument was chosen, not inherited`,
+        'k.instrument.p1':`Different project, different instrument. <a href="index.html#method">How I chose the instrument on each project &rarr;</a>`
+      },
+      pt: {
+        'nav.back.genial':`Voltar ao Genial App`,
+        'nav.back.liam':`Voltar ao LIAM`,
+        'nav.back.kruzer':`Voltar ao Pick &amp; Pack`,
+        'nav.back.compass':`Voltar ao Compass`,
+        'a11y.skip':`Pular para o conteúdo`, 'a11y.lang':`Idioma`,
+        'footer.rights':`© 2026 Guilherme Cannalonga. Todos os direitos reservados.`,
+        'meta.v.role':`Designer único do produto`,
+        'meta.v.team':`PM · Times de eng · Operações Fast Shop`,
+        'meta.v.time':`Set 2024 – Fev 2026`,
+        'stage.build':`A construção`,
+        'cmp.assumed':`O que a gente supunha`,
+        'cmp.found':`O que a rodada mostrou`,
+        'ix.time':'12 min de leitura',
+        'ix.k':'Neste case', 'tl.k':'A versão curta',
+        'tl.problem.k':'Problema', 'tl.did.k':'O que eu fiz', 'tl.out.k':'Resultado',
+        'nav.back':'Voltar ao portfólio', 'nav.cta':'Vamos conversar',
+        'hero.kicker':`Case study · Logística empresarial · B2B`,
+        'hero.h1':`Pick &amp; Pack: um pedido, três pessoas, uma tela para cada`,
+        'hero.dek':`A Fast Shop vende entrega em duas horas. A ferramenta por trás dessa promessa rodava em telefonemas e planilhas. É assim que desenhei a plataforma que substituiu tudo isso, para a loja, o centro de distribuição e o motorista ao mesmo tempo, e por que as exceções foram desenhadas antes do caminho feliz.`,
+        'meta.role':'Papel', 'meta.team':'Time', 'meta.client':'Cliente', 'meta.timeline':'Período', 'meta.scope':'Escopo',
+        'stage.pain':'A dor', 'stage.pointer':'O ponteiro', 'stage.questions':'As perguntas',
+        'stage.job':'O job', 'stage.bet':'A aposta', 'stage.test':'O teste',
+        'stage.evidence':'O que a evidência mudou', 'stage.production':'Para produção',
+        'close.h2':`Ficou alguma pergunta?`,
+        'close.p.kruzer':`A pesquisa, a primeira versão do board e por que os operadores a rejeitaram, a tela do motorista, a linha de base de entregas no prazo antes da plataforma e como priorizamos contra os OKRs da Fast Shop: tudo isso cabe em uma call de 30 minutos.`,
+        'close.cta1':'Entrar em contato', 'close.cta2.kruzer':'Ver o outro case',
+        'footer.portfolio':'Portfólio', 'footer.email':'Email',
+        'modal.label':'Vamos conversar', 'modal.h3':'Como você prefere falar comigo?', 'modal.p':'Escolha o que for mais rápido pra você.',
+        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':`Dias úteis, 17h–19h (ET)`,
+        'k.tl.problem':`O checkout prometia entrega em duas horas. Por trás, ninguém sabia onde um pedido estava sem um telefonema, e uma entrega que falhava não tinha próximo passo definido.`,
+        'k.tl.did':`Desenhei o Pick &amp; Pack para três papéis ao mesmo tempo em vez de um usuário principal, reconstruí o board depois que o chão de loja rejeitou minha primeira versão, e fiz o rollout loja a loja, lendo os próprios registros da operação como evidência.`,
+        'k.tl.out':`Entregas no prazo mantidas em <b>81%</b> contra a promessa de duas horas enquanto o volume crescia uns 38%; operadores pararam de exportar para planilhas; uma classe de entregas falhas que não tinha nome ganhou status e próximo passo.`,
+        'k.ix.1':`A promessa na página de checkout`,
+        'k.ix.2':`O que a operação me ensinou`,
+        'k.ix.3':`Três papéis, não um usuário principal`,
+        'k.ix.4':`O primeiro board estava errado`,
+        'k.ix.5':`As telas, anotadas`,
+        'k.ix.6':`Rollout, loja a loja`,
+        'k.ix.7':`O que mudou, medido`,
+        'k.ix.8':`O que eu faria diferente`,
+        'k.h2.s01':`Duas horas, prometidas antes de alguém na loja saber que o pedido existe`,
+        'k.s01.p1':`A Fast Shop é uma das maiores varejistas de eletrônicos do Brasil: 80+ lojas, 22.000+ SKUs e cerca de 2.500 pedidos por dia. O checkout vende entrega em duas horas. Essa promessa é feita antes de qualquer pessoa na loja ter visto o pedido, e é o motivo de a plataforma da Kruzer ter sido financiada. Cada pedido que perde a promessa custa duas vezes: uma na entrega, outra no cliente que deixa de acreditar no selo da próxima vez.`,
+        'k.s01.p2':`Antes do Pick &amp; Pack, a promessa rodava em pessoas. A loja descobria um pedido por telefone. O centro de distribuição roteava entregadores por planilha. O motorista recebia o endereço por mensagem. Quando algo travava, quem percebia primeiro ligava para quem achava que era responsável. Não existe uma linha de base de entrega no prazo para citar, e é justamente esse o ponto: nada na operação conseguia produzir uma. O trabalho rodava em conversas de WhatsApp, num app de entregador e em planilhas, então não havia sistema segurando um número para comparar. A ausência do número era o problema que o projeto existia para resolver.`,
+        'k.s01.p3':`Então o número que a gente quis mover nunca foi &ldquo;uma UI de fulfillment melhor&rdquo;. Foi a taxa de entregas no prazo, e por baixo dela o número que de fato a decide: quanto tempo um operador leva para descobrir que um pedido está em risco. Antes da plataforma, isso era quando o operador percebia o atraso, ou quando alguém vinha cobrar. Uma operação só cumpre o SLA se as exceções aparecem cedo o bastante para serem corrigidas.`,
+        'k.tk.s01':`81% no prazo é uma afirmação sobre os outros 19% serem encontráveis.`,
+        'k.h2.s02':`A lista de paradas é a lista de requisitos`,
+        'k.s02.p1':`O pessoal de operação da Fast Shop tinha rodado esse processo por anos sem software. Tratar essas pessoas como stakeholders a serem informados, e não como a fonte dos requisitos, produziria uma ferramenta bonita para um processo que não existe. Então, antes de desenhar uma tela, passei um tempo com oito operadores em três lojas, fazendo duas perguntas no chão de loja.`,
+        'k.q1.h':`Onde um pedido de fato para?`,
+        'k.q1.p':`Não na teoria. As paradas reais: esperar um entregador que chegou antes de o pedido estar embalado, um produto que não está na prateleira onde o sistema diz, um cliente que não está em casa, uma nota fiscal rejeitada. Cada parada virou um status, e cada status virou algo que o operador consegue agir em vez de ligar para alguém.`,
+        'k.q2.h':`O que acontece quando uma entrega falha?`,
+        'k.q2.p':`A resposta foi desconfortável e útil: nada consistente. O pedido ficava &ldquo;em transporte&rdquo; para sempre, o produto voltava para a loja informalmente e ninguém era responsável. É dessa lacuna que veio depois o status &ldquo;retornando à loja&rdquo;, e eu só o encontrei perguntando sobre o caminho feio, não sobre o feliz.`,
+        'k.s02.p2':`Duas coisas não podiam mudar, e saber disso cedo impediu que o design virasse uma discussão que a operação sempre venceria: as integrações com transportadoras (Uber, Borzo e os motoristas da própria loja) e os documentos fiscais que todo pedido precisa carregar.`,
+        'k.slot1.c':`Um pedido, três raias. Os vãos entre as raias, onde a informação caía no chão, são onde estão as setas.`,
+        'k.h2.s03':`Mesmo pedido, três pessoas, três definições de &ldquo;pronto&rdquo;`,
+        'k.s03.p1':`O operador da loja contrata isso para limpar a fila antes de o entregador chegar. O operador do centro de distribuição contrata para saber quais pedidos estão prestes a estourar e desviar deles. O motorista contrata para receber um próximo destino sem ambiguidade. A maioria das ferramentas de fulfillment escolhe um desses trabalhos e obriga os outros dois a se adaptarem.`,
+        'k.s03.p2':`Desenhar para três papéis custa mais do que desenhar para um, e precisou ser defendido antes de alguém ver uma tela. &ldquo;Desenha para o operador da loja e o resto se adapta&rdquo; era uma posição perfeitamente razoável. O que venceu a discussão não foi uma opinião, foi o mapa acima: quando os pontos em que a informação caía entre loja, centro de distribuição e motorista ficaram visíveis em uma página, ninguém propôs escolher um usuário principal de novo.`,
+        'k.s03.p3':`Na interface essa decisão aparece como uma plataforma com uma casa diferente por papel: a loja vê a própria fila, o centro de distribuição vê todas as lojas mais os números que dizem onde o dia está dando errado, e o motorista recebe a parada. Mesmo pedido, mesmos status, mesmas cores, primeira tela diferente.`,
+        'k.pull.s03':`Segurar os três ao mesmo tempo é o que forçou cada decisão de interface: o que vem primeiro no card, o que merece um alerta, o que pode ser um clique só.`,
+        'k.h2.s04':`A rodada que reconstruiu o board`,
+        'k.s04.p1':`Não dá para fazer teste A/B em um armazém, e eu não podia tirar operadores de loja do chão para uma sessão em laboratório. Então a rodada aconteceu onde o trabalho está: no balcão, na máquina deles, com pedidos reais na frente, percorrendo o dia de verdade em vez de uma tarefa que eu tinha escrito.`,
+        'k.cmp.a':`Que o board deveria espelhar o ciclo de vida do pedido, porque é assim que o sistema pensa um pedido: recebido, faturado, separado, despachado, entregue.`,
+        'k.cmp.b':`Operadores não pensam em ciclo de vida. Pensam no que está prestes a machucar: o que sai na próxima hora, o que já está atrasado, o que não tem para onde ir. A primeira versão obrigava a traduzir.`,
+        'k.s04.p2':`Então o board foi reconstruído na sequência deles e não na do sistema, e o card foi reconstruído em torno da primeira pergunta deles. &ldquo;Esse está atrasado?&rdquo; foi para o canto superior direito, em vermelho. O SLA restante foi para a pílula de modalidade. O logo da transportadora foi para onde o olho chega por último, porque é a coisa que você só precisa depois de decidir agir.`,
+        'k.an1.1':`&ldquo;Atrasado no status&rdquo; é a primeira coisa no card, em vermelho, porque é a primeira pergunta que o operador faz.`,
+        'k.an1.2':`Duas pílulas, duas perguntas: o que está acontecendo com o pedido e quanto da promessa ainda resta (UltraFast · 1h).`,
+        'k.an1.3':`O logo da transportadora fica por último. Você só precisa dele depois de decidir agir.`,
+        'k.an1.4':`As colunas seguem o dia do operador, não o ciclo de vida do sistema: recebido, em separação, pronto para retirada, em transporte.`,
+        'k.an1.5':`Pedidos de Click &amp; Collect vivem no mesmo board com a própria pílula (&ldquo;Retira&rdquo;), para a loja nunca rodar duas ferramentas.`,
+        'k.an1.c':`O board da loja, como foi entregue: o que sai na próxima hora, o que já está atrasado, o que não tem para onde ir.`,
+        'k.h2.s05':`O centro de distribuição: todas as lojas, e os números que dizem onde o dia está dando errado`,
+        'k.s05.p1':`O centro de distribuição vê todas as lojas de uma vez, então a primeira tela dele não é uma fila e sim um conjunto de contadores: atrasados, problemas de faturamento, problemas de transporte, comprovante pendente. Cada um é um filtro, não um gráfico. O trabalho aqui é triagem, e triagem começa clicando no número que dói.`,
+        'k.s05.p2':`Alocação era a outra coisa que esse papel precisava e a loja não. Vários operadores trabalham a mesma fila, então todo card diz quem é o dono, e um card alocado para outra pessoa recua em vez de sumir: dá para ver que está sendo tratado, só não dá para pegar por engano.`,
+        'k.an2.1':`Contadores, não gráficos. Atrasados (23), faturamento (3), transporte (7), comprovante pendente (12): cada um é um filtro, e o dia começa clicando no que dói.`,
+        'k.an2.2':`As ações de alocação ficam no card, a dois cliques de qualquer lugar: tirar de alguém, ou passar para outra pessoa.`,
+        'k.an2.3':`&ldquo;Alocado para&rdquo; em todo card, porque em uma fila compartilhada a pergunta &ldquo;alguém está nesse?&rdquo; costumava ser um grito pelo galpão.`,
+        'k.an2.4':`Um card de outra pessoa recua em vez de sumir: visível, mas não agarrável.`,
+        'k.an2.c':`O board do centro de distribuição: os mesmos cards da loja, mais dono, porque aqui várias pessoas trabalham uma fila só.`,
+        'k.h2.s05b':`A mesma fila como tabela, quando a pergunta muda`,
+        'k.s05.p3':`Um board responde &ldquo;qual é a forma do meu dia&rdquo;. Ele não responde &ldquo;qual desses 104 pedidos está parado há mais tempo&rdquo;, e essa é a pergunta que o centro de distribuição faz toda hora. Então a mesma fila alterna para uma tabela: uma linha por pedido, ordenável, com tempo de espera como coluna própria e um ponto de severidade antes do número do pedido. Mesmos dados, mesmos status, mesmas cores, uma primeira pergunta diferente.`,
+        'k.an3.1':`Um toggle entre board e tabela. Mesmos filtros, mesma seleção, nada para reaprender.`,
+        'k.an3.2':`Um ponto de severidade antes do número do pedido (vermelho, âmbar, azul) para o olho varrer a coluna sem ler uma palavra.`,
+        'k.an3.3':`&ldquo;Tempo do pedido&rdquo; é uma coluna própria e ordenável: a que o centro de distribuição ordena primeiro, toda hora.`,
+        'k.an3.4':`As pílulas de status carregam a mesma semântica de cor do board: vermelho precisa de uma pessoa, âmbar precisa de um passo, azul está andando, verde está pronto.`,
+        'k.an3.5':`Linhas alocadas para outro operador recuam, exatamente como os cards no board.`,
+        'k.an3.c':`A visão em tabela: a pergunta muda de &ldquo;qual é o meu dia&rdquo; para &ldquo;o que está esperando há mais tempo&rdquo;, e o layout segue.`,
+        'k.h2.s05c':`Quando um pedido vira um telefonema`,
+        'k.s05.p4':`Quando um cliente liga, quem atende precisa da história inteira em segundos: quanto do SLA resta, onde o pedido está, o que já foi dito. A página do pedido coloca a contagem regressiva primeiro e em vermelho quando já estourou, o histórico na lateral na ordem em que as coisas aconteceram, e uma conversa com anexos para que &ldquo;o cliente disse para deixar com o vizinho&rdquo; fique no pedido, não na cabeça de alguém.`,
+        'k.an4.1':`A contagem do SLA é a maior coisa da página e fica vermelha depois da promessa, porque é sobre isso que o cliente está perguntando.`,
+        'k.an4.2':`&ldquo;Tempo nesse status&rdquo; separa &ldquo;o pedido está atrasado&rdquo; de &ldquo;essa etapa é a que está atrasada&rdquo;.`,
+        'k.an4.3':`Histórico como linha do tempo, o mais recente primeiro, cada passo com uma frase simples que o operador consegue ler em voz alta no telefone.`,
+        'k.an4.4':`Comentários com anexos no próprio pedido, para o print da mensagem do cliente viajar junto com a entrega.`,
+        'k.an4.c':`A página do pedido: construída para o momento em que uma entrega vira uma conversa.`,
+        'k.h2.s05d':`As exceções são o produto`,
+        'k.s05.p5':`Em logística o caminho feliz quase não precisa de design; são as exceções que decidem se o operador confia na tela ou trabalha por fora dela. Esses quatro estados saíram da lista de paradas e do rollout, não de um arquivo de design. Cada um substitui algo que antes era um telefonema.`,
+        'k.st1.h':`O motorista pegou o pacote e a corrida nunca começou`,
+        'k.st1.p':`Quem está com ele, qual carro, e uma frase simples dizendo que a corrida não começou, com o rastreio a um clique. Isso antes era uma ligação para a transportadora.`,
+        'k.st2.h':`Entregue, mas não fechado até ter comprovante`,
+        'k.st2.p':`Um pedido não termina quando o motorista diz; termina quando uma foto ou assinatura é anexada. &ldquo;Comprovante pendente&rdquo; é um contador na casa do centro de distribuição exatamente por isso.`,
+        'k.st3.h':`Alguém está no balcão para retirar`,
+        'k.st3.p':`Um QR code abre um formulário com os dados do comprador e uma assinatura, para a loja entregar o produto à pessoa certa e guardar o registro sem impressora.`,
+        'k.st4.h':`Alguém ainda precisa de uma planilha`,
+        'k.st4.p':`As exportações ficaram, de propósito, com um guardrail: se nada estiver selecionado, o diálogo avisa em voz alta que os 104 pedidos estão prestes a ser exportados. A queda no número de exportações virou nosso sinal de adoção.`,
+        'k.states.c':`Quatro estados de exceção. Quinze status existem na plataforma entregue; estes são os que substituíram mais telefonemas.`,
+        'k.h2.s06':`O lançamento não foi uma data. Foi uma sequência`,
+        'k.s06.p1':`Software de fulfillment falha em produção de jeitos que nunca falha na demo, então a loja matriz foi primeiro, sozinha, acompanhada diariamente com operadores e gerentes até passar uma semana inteira sem um novo corner case. Depois disso, ondas de cerca de vinte lojas a cada quinze dias. Ficou perto o bastante do time para um problema ser observado em vez de reportado. Cada onda carregou o que a anterior ensinou, e os três meses completos &mdash; rollout mais hypercare diário do nosso time de sustentação &mdash; foram o experimento. Depois disso virou chamado esporádico.`,
+        'k.s06.p2':`As exceções fizeram a maior parte do ensino. Um entregador chegando antes de o pedido estar embalado. Pedidos escaneados fora de ordem. Uma entrega que falhou com o endereço ainda marcado como válido. Cada uma virou um estado de interface ou uma regra, e fiquei nas revisões de engenharia em todas as ondas, porque a diferença entre um operador confiar na tela e trabalhar por fora dela costuma ser um caso não tratado.`,
+        'k.s06.p3':`&ldquo;Retornando à loja&rdquo; é o que eu apontaria. Não existia na primeira versão. A primeira onda revelou pedidos parados em &ldquo;em transporte&rdquo; sem ter para onde ir. Os operadores tinham uma gambiarra para isso, mas não um nome, e por isso nunca tinha sido pedido.`,
+        'k.tk.s06':`A diferença entre um operador confiar na tela e trabalhar por fora dela costuma ser um caso não tratado.`,
+        'k.h2.s07':`A taxa não subiu. Ela se recusou a cair enquanto a carga subia`,
+        'k.s07.p1':`Três meses depois do rollout, a entrega no prazo contra a promessa de duas horas estava em 81%, com uns 38% mais volume do que a operação já tinha lidado. Não existe um antes para colocar do lado, porque a operação nunca tinha se medido &mdash; então leia os 81% como o primeiro número honesto que essa operação teve sobre si mesma, não como melhora sobre um número conhecido. Essa é a afirmação inteira, e vale dizer com cuidado: em fulfillment, manter uma taxa enquanto o volume cresce é o mais difícil dos dois resultados.`,
+        'k.m0':`No prazo contra a promessa de duas horas, três meses depois do rollout, com o volume crescendo`,
+        'k.m1':`Tempo para detectar um pedido em risco: antes, quando alguém percebia; depois, no instante em que ele entra em &ldquo;Atrasado&rdquo;`,
+        'k.m2':`Status na taxonomia entregue, quatro deles exceções que substituíram telefonemas`,
+        'k.meas.h':`Como foi medido`,
+        'k.meas.1b':`Principal`,
+        'k.meas.1t':`Taxa de entregas no prazo contra a promessa de duas horas, o número da própria plataforma, lido três meses depois do rollout. Linha de base: nenhuma. A operação anterior à plataforma não produzia número de prazo, porque rodava em WhatsApp, app de entregador e planilha. Apresento os 81% como primeira medição, não como delta.`,
+        'k.meas.2b':`Operacional`,
+        'k.meas.2t':`Onde os pedidos ficavam parados e por quanto tempo, por status e por loja. A plataforma mede isso hoje; nada media antes, então não existe antes-e-depois para dar. Uma taxa diz que existe um problema; isso diz para onde ir.`,
+        'k.meas.3b':`Adoção`,
+        'k.meas.3t':`Se os operadores trabalhavam na plataforma ou por fora dela. Nunca contamos as exportações para planilha antes e depois, então só posso relatar o que o time viu: as planilhas paralelas pararam de ser mantidas. Um sinal grosseiro, e não contado.`,
+        'k.meas.4b':`Não provado`,
+        'k.meas.4t':`Causalidade. A plataforma foi lançada junto com uma operação em crescimento, e não consigo separar o design das mudanças de processo que a Fast Shop fez nos mesmos meses. O rollout escalonado é o mais perto de um controle: lojas na plataforma contra lojas ainda fora dela, nas mesmas semanas.`,
+        'k.note':`<strong>Escopo, como contexto e não como resultado:</strong> 80+ lojas migradas para a plataforma, 22.000+ SKUs passando por ela, três produtos entregues sobre a mesma base (Pick &amp; Pack, PIM, DevTools), todos desenhados por uma pessoa com o <a href="compass.html">Compass</a> como sistema por baixo. <em>Sobre precisão: os números acima são o que eu e as pessoas donas deles lembram, não um relatório que eu ainda consiga puxar &mdash; saí da empresa e os dashboards ficaram lá. Trate as magnitudes como aproximadas e a direção como a afirmação. Onde um número nunca existiu, esta página diz isso em vez de reconstruir um.</em>`,
+        'k.h2.s08':`Desenhei o caminho feliz primeiro. Em logística, as exceções são o produto`,
+        'k.s08.p1':`Eu teria ido ao chão de loja antes de desenhar o primeiro board, não depois de ele falhar. O retrabalho foi barato porque aconteceu cedo, mas era evitável: construí a primeira versão a partir do modelo que o sistema tem de um pedido porque era o modelo a que eu tinha acesso, e confundi disponibilidade com precisão. A versão maior desse erro é que tratei as exceções como segunda passada, quando três dos quatro estados acima são o motivo de os operadores usarem a ferramenta.`,
+        'k.s08.p2':`Eu também teria instrumentado o tempo de detecção desde o primeiro dia. Era o ponteiro que combinamos, e na primeira onda eu só conseguia lê-lo na lista de paradas e nos tempos de permanência, não em um número só. Os releases seguintes tiveram isso; o que as pessoas mais perguntam não teve.`,
+        'k.role.h':`Meu papel`,
+        'k.role.p':`O único designer na plataforma, de setembro de 2024 a fevereiro de 2026. Fui dono do Pick &amp; Pack da descoberta ao rollout loja a loja, construí e governei o Compass, e desenhei o PIM e o DevTools sobre a mesma base. Sem outro designer para quem passar nada, priorizar entre os quatro produtos era parte do trabalho: Pick &amp; Pack primeiro, porque era ele que carregava a promessa de duas horas.`,
+        'k.team.h':`O time, e o que foi meu`,
+        'k.team.p':`Um product manager era dono do roadmap e dos OKRs com a Fast Shop; os líderes de operação da Fast Shop eram os especialistas de domínio e a fonte da lista de paradas; um time de engenharia por produto construiu, comigo nas revisões em cada onda. Decisões que foram minhas: três papéis em vez de um usuário principal, o board e o card reconstruídos, o toggle de tabela, os quatro estados de exceção acima e o &ldquo;retornando à loja&rdquo;.`,
+        'k.system.h':`Compass: o sistema por baixo`,
+        'k.system.p':`Nenhuma dessas telas foi desenhada isolada. Uma pílula de status significa a mesma coisa no board, na tabela e na página do pedido porque a camada de tokens diz isso. Esse trabalho cresceu o bastante para ser um case próprio.`,
+        'k.system.cta':`Ler o case do Compass &rarr;`,
+        'k.instrument.h':`O instrumento foi escolhido, não herdado`,
+        'k.instrument.p1':`Projeto diferente, instrumento diferente. <a href="index.html#method">Como escolhi o instrumento em cada projeto &rarr;</a>`
+      }
+    };
+
+    function apply(lang){
+      document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+      const dict = I18N[lang] || I18N.en;
+      document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+        const v = dict[el.dataset.i18nAria];
+        if(v !== undefined) el.setAttribute('aria-label', v);   /* rótulos de leitor de tela também traduzem */
+      });
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const v = dict[el.dataset.i18n];
+        if(v !== undefined) el.innerHTML = v;
+      });
+      document.querySelectorAll('[data-i18n-value]').forEach(el=>{
+        const v = dict[el.dataset.i18nValue];
+        if(v !== undefined) el.value = v;
+      });
+      document.querySelectorAll('.lang-toggle button').forEach(b=>{
+        const on = b.dataset.lang === lang;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');   /* 4.1.2 state, not just style */
+      });
+      document.dispatchEvent(new CustomEvent('langchange', {detail:{lang}}));
+    }
+    window.applyLang=function(){ apply(window.currentLang()); };
+    window.currentLang = function(){ return localStorage.getItem('site-lang') === 'pt' ? 'pt' : 'en'; };
+    document.querySelectorAll('.lang-toggle button').forEach(b=>{
+      b.addEventListener('click', ()=>{
+        localStorage.setItem('site-lang', b.dataset.lang);
+        apply(b.dataset.lang);
+      });
+    });
+    apply(window.currentLang());
+  })();
+
+  (function(){
+    /* The label and the destination must agree. If the visitor came from
+       another case on this site, "back" means that case; otherwise it means
+       the portfolio. Same-origin only, and a refresh is not a journey. */
+    const link=document.querySelector('.back-link'); if(!link) return;
+    const label=link.querySelector('[data-i18n]'); if(!label) return;
+    const MAP={'genial.html':'nav.back.genial','liam.html':'nav.back.liam',
+               'pick-and-pack.html':'nav.back.kruzer','compass.html':'nav.back.compass'};
+    try{
+      if(!document.referrer) return;
+      const u=new URL(document.referrer);
+      if(u.origin!==location.origin) return;
+      const from=u.pathname.split('/').pop();
+      if(!from || from===location.pathname.split('/').pop()) return;
+      const key=MAP[from]; if(!key) return;
+      link.setAttribute('href', from);
+      label.dataset.i18n=key;
+      if(window.applyLang) window.applyLang();
+    }catch(e){ /* a malformed referrer just leaves the default in place */ }
+  })();
+</script>
+
+</body>
+</html>
