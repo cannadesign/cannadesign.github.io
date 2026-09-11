@@ -381,6 +381,27 @@
   .callout h3{font-size:17px; line-height:1.3; margin-bottom:var(--sp-2);}
   .callout p{font-size:var(--fs-small); line-height:var(--lh-small); color:var(--ink-2); margin:0;}
 
+  /* DEMO TAGS + DECISION CARD */
+  .demo-tags{display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 0;}
+  .demo-tags span{
+    font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--ink); background:var(--paper-2); border:1px solid var(--line);
+    padding:6px 10px; border-radius:100px;
+  }
+  .decision{margin:var(--sp-7) 0; border:1px solid var(--line); border-radius:16px; overflow:hidden;}
+  .decision-head{display:flex; align-items:center; gap:12px; padding:18px 20px; background:var(--paper-2); border-bottom:1px solid var(--line);}
+  .decision-head .dn{
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+    width:26px; height:26px; border-radius:50%; background:var(--acid); color:var(--ink);
+    font-size:12px; font-weight:900;
+  }
+  .decision-head h3{font-size:17px; line-height:1.3; margin:0;}
+  .decision-body{padding:4px 20px 22px; display:grid; gap:0;}
+  .decision-row{display:grid; grid-template-columns:128px 1fr; gap:20px; padding:16px 0; border-top:1px solid var(--line);}
+  .decision-row:first-child{border-top:none;}
+  .decision-row .dk{font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-2); padding-top:2px;}
+  .decision-row .dv{font-size:15.5px; line-height:1.55; color:var(--ink); margin:0;}
+
   /* PROCESS STEPS */
   .process{list-style:none; counter-reset:step; margin:var(--sp-6) 0; display:grid; gap:var(--sp-2);}
   .process li{counter-increment:step; position:relative; padding:var(--sp-4) var(--sp-4) var(--sp-4) 64px; background:var(--paper-2); border-radius:14px;}
@@ -575,6 +596,7 @@
   @media (max-width:640px){ .index ol{grid-template-columns:1fr;} }
 
   @media (max-width:640px){ .receipts li{grid-template-columns:1fr; gap:4px;} }
+  @media (max-width:640px){ .decision-row{grid-template-columns:1fr; gap:6px;} }
 
   @media (max-width:640px){
     .compare{grid-template-columns:1fr;}
@@ -634,6 +656,7 @@
     .meta-item:nth-child(2n+1){border-left:none; padding-left:0;}
   }
 </style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="c3e64fd0-ec7d-4fdf-a35f-7e8f77208d02"></script>
 </head>
 <body class="js">
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
@@ -677,49 +700,46 @@
       <dl>
         <div><dt data-i18n="tl.problem.k">Problem</dt><dd data-i18n="k.tl.problem">Checkout promised delivery in two hours. Behind it, nobody could tell where an order was without a phone call, and a failed delivery had no defined next step.</dd></div>
         <div><dt data-i18n="tl.did.k">What I did</dt><dd data-i18n="k.tl.did">Designed Pick &amp; Pack for three roles at once instead of one primary user, rebuilt the board after the floor rejected my first version, and rolled it out store by store, reading the operation's own records as the evidence.</dd></div>
-        <div><dt data-i18n="tl.out.k">Outcome</dt><dd data-i18n="k.tl.out">On-time delivery held at <b>~81%</b> (my estimate) against the two-hour promise while volume grew by roughly 38%; operators stopped exporting to spreadsheets; a class of failed deliveries that had no name got a status and a next step.</dd></div>
+        <div><dt data-i18n="tl.out.k">Outcome</dt><dd data-i18n="k.tl.out">The two-hour promise held across 80+ stores on more volume than the operation had ever handled; operators stopped exporting to spreadsheets; a class of failed deliveries that had no name got a status and a next step.</dd></div>
       </dl>
+      <div class="demo-tags"><span data-i18n="k.demo.1">Enterprise SaaS</span><span data-i18n="k.demo.2">0&rarr;1 platform</span><span data-i18n="k.demo.3">Logistics</span><span data-i18n="k.demo.4">Systems design</span></div>
     </div>
   </div>
 
   <div class="index reveal">
     <span class="k"><span data-i18n="ix.k">In this case</span><span class="rt" data-i18n="ix.time">7 min read</span></span>
     <ol>
-      <li><a href="#s01" data-i18n="k.ix.1">The promise on the checkout page</a></li>
-      <li><a href="#s02" data-i18n="k.ix.2">What the operation taught me</a></li>
-      <li><a href="#s03" data-i18n="k.ix.3">Three roles, not a primary user</a></li>
-      <li><a href="#s04" data-i18n="k.ix.4">The first board was wrong</a></li>
-      <li><a href="#s05" data-i18n="k.ix.5">The screens, annotated</a></li>
-      <li><a href="#s06" data-i18n="k.ix.6">Rollout, store by store</a></li>
-      <li><a href="#s07" data-i18n="k.ix.7">What it changed, measured</a></li>
-      <li><a href="#s08" data-i18n="k.ix.8">What I'd do differently</a></li>
+      <li><a href="#s01" data-i18n="k.ix.1">Why it was hard</a></li>
+      <li><a href="#s02" data-i18n="k.ix.2">Decision: three roles, not one primary user</a></li>
+      <li><a href="#s03" data-i18n="k.ix.3">Decision: rebuild the board around the operator's day</a></li>
+      <li><a href="#s04" data-i18n="k.ix.4">What shipped: the screens</a></li>
+      <li><a href="#s05" data-i18n="k.ix.5">Rollout, store by store</a></li>
+      <li><a href="#s06" data-i18n="k.ix.6">Impact</a></li>
+      <li><a href="#s07" data-i18n="k.ix.7">What I'd do differently</a></li>
     </ol>
   </div>
 
   <div class="col reveal">
-    <span class="stage-label" id="s01"><b>01</b> &middot; <span data-i18n="k.ix.1">The promise on the checkout page</span></span>
-    <h2 data-i18n="k.h2.s01">Two hours, promised before anyone in a store knows the order exists</h2>
-    <p data-i18n="k.s01.p1">Fast Shop is one of Brazil's largest electronics retailers: 80+ stores, 22,000+ SKUs and around 2,500 orders a day. Its checkout sells delivery in two hours. That promise is made before a single person in a store has seen the order, and it is the reason Kruzer's platform was funded at all. Every order that misses it costs twice: once in the delivery, once in the customer who stops believing the badge next time.</p>
-    <p data-i18n="k.s01.p2">Before Pick &amp; Pack, the promise ran on people. A store found out about an order by phone. The distribution centre routed couriers from a spreadsheet. A driver got an address by message. Information fell into the gaps between those channels, and enough of it got lost that order cancellations ran high &mdash; customers giving up on a delivery they no longer trusted to arrive. When something stalled, whoever noticed first called whoever they thought was responsible, and nobody held a number for how often that ended on time. There is no on-time baseline to quote, and that is the point: nothing in the operation could produce one. It ran on WhatsApp threads, a courier app and spreadsheets. The absence of the number was the problem the project existed to solve.</p>
-    <p data-i18n="k.s01.p3">So the number we set out to move was never &ldquo;a better fulfilment UI.&rdquo; It was the on-time rate, and underneath it the number that actually decides it: how long it takes an operator to find out an order is in trouble. Before the platform that was whenever an operator happened to notice, or whenever someone chased them about it. An operation only hits its SLA if the exceptions surface early enough to be fixed.</p>
-    <p class="takeaway" data-i18n="k.tk.s01">81% on time is a statement about the other 19% being findable.</p>
+    <span class="stage-label" id="s01"><b>01</b> &middot; <span data-i18n="k.ix.1">Why it was hard</span></span>
+    <h2 data-i18n="k.h2.hard">Two hours, promised before anyone in a store knows the order exists</h2>
+    <p data-i18n="k.hard.1">Fast Shop is one of Brazil's largest electronics retailers: 80+ stores, 22,000+ SKUs, around 2,500 orders a day. Checkout sells delivery in two hours before a single person in a store has seen the order. Before Pick &amp; Pack, that promise ran on phone calls, a courier app and spreadsheets. There was no on-time baseline to quote &mdash; nothing in the operation could produce one, and that absence was itself the problem the project existed to solve.</p>
+    <p data-i18n="k.hard.2">The number worth moving was never &ldquo;a better fulfilment UI.&rdquo; It was time-to-detect: how long it takes an operator to find out an order is in trouble. Before the platform, that was whenever someone happened to notice, or whenever someone chased them about it. An operation only hits its SLA if exceptions surface early enough to fix.</p>
+    <p data-i18n="k.hard.3">Fast Shop's operations people had run this process for years without software, so before drawing a screen I spent time with eight operators across three stores asking where an order actually stops (a courier arriving before the order was packed, a product not on the shelf, an invoice the tax system rejected &mdash; each became a status) and what happens when a delivery fails (the honest answer: nothing consistent, which is the gap the &ldquo;returning to store&rdquo; status later filled). Two things couldn't change: the carrier integrations and the fiscal documents every order has to carry.</p>
+    <p class="takeaway" data-i18n="k.tk.s01">The win wasn&rsquo;t a rate. It was that a failed delivery finally had a name and a next step.</p>
   </div>
 
   <div class="col reveal">
-    <span class="stage-label" id="s02"><b>02</b> &middot; <span data-i18n="k.ix.2">What the operation taught me</span></span>
-    <h2 data-i18n="k.h2.s02">The stall list is the requirements list</h2>
-    <p data-i18n="k.s02.p1">Fast Shop's operations people had run this process for years without software. Treating them as stakeholders to be informed, rather than as the source of the requirements, would have produced a beautiful tool for a process that doesn't exist. So before drawing a screen I spent time with eight operators across three stores, asking two questions on the floor, and looked at how a handful of other fulfilment platforms handled the same three-way handoff, mostly to confirm nobody had solved it cleanly either.</p>
-    <ol class="process">
-      <li>
-        <h3 class="card-h" data-i18n="k.q1.h">Where does an order actually stop?</h3>
-        <p data-i18n="k.q1.p">Not in theory. The real stalls: waiting for a courier who arrived before the order was packed, a product not on the shelf where the system says it is, a customer who isn't home, an invoice rejected by the tax system. Each stall became a status, and each status became something an operator could act on instead of phone about.</p>
-      </li>
-      <li>
-        <h3 class="card-h" data-i18n="k.q2.h">What happens when a delivery fails?</h3>
-        <p data-i18n="k.q2.p">The answer was uncomfortable and useful: nothing consistent. The order stayed &ldquo;in transit&rdquo; forever, the product came back to the store informally, and nobody was accountable. That gap is where the &ldquo;returning to store&rdquo; status came from later, and I only found it by asking about the ugly path instead of the happy one.</p>
-      </li>
-    </ol>
-    <p data-i18n="k.s02.p2">Two things could not change, and knowing them early kept the design from becoming an argument the operation would always win: the carrier integrations (Uber, Borzo and the store's own drivers) and the fiscal documents every order has to carry.</p>
+    <span class="stage-label" id="s02"><b>02</b> &middot; <span data-i18n="k.ix.2">Decision: three roles, not one primary user</span></span>
+    <div class="decision">
+      <div class="decision-head"><span class="dn">1</span><h3 data-i18n="k.d1.title">One platform, three homes, one order</h3></div>
+      <div class="decision-body">
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.problem">Problem</span><p class="dv" data-i18n="k.d1.problem">&ldquo;Design it for the store operator and the rest will adapt&rdquo; was a perfectly reasonable default. Most fulfilment tools pick one job and make the other two adapt to it.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.decision">Decision</span><p class="dv" data-i18n="k.d1.decision">Design for three jobs at once. A store sees its own queue, the distribution centre sees every store plus where the day is going wrong, the driver gets one unambiguous stop. Same order, same statuses, same colours, different first screen.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.why">Why</span><p class="dv" data-i18n="k.d1.why">The store operator is hiring this to clear the queue before the courier arrives. The distribution centre is hiring it to route around what's about to breach. The driver is hiring it for an unambiguous next stop. Holding all three at once is what forced every interface decision: what goes first on a card, what earns an alert, what's allowed to be one click.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.argument">What won the argument</span><p class="dv" data-i18n="k.d1.argument">Not an opinion &mdash; the map below. Once the points where information fell between store, distribution centre and driver were visible on one page, nobody proposed picking a primary user again.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.result">Result</span><p class="dv" data-i18n="k.d1.result">One platform shipped with a different home per role, and no store, distribution centre or driver had to translate someone else's workflow into their own.</p></div>
+      </div>
+    </div>
   </div>
 
   <figure class="shot narrow reveal">
@@ -728,29 +748,17 @@
   </figure>
 
   <div class="col reveal">
-    <span class="stage-label" id="s03"><b>03</b> &middot; <span data-i18n="k.ix.3">Three roles, not a primary user</span></span>
-    <h2 data-i18n="k.h2.s03">Same order, three people, three definitions of &ldquo;done&rdquo;</h2>
-    <p data-i18n="k.s03.p1">The store operator is hiring this to clear the queue before the courier arrives. The distribution-centre operator is hiring it to know which orders are about to breach and route around them. The driver is hiring it to get an unambiguous next stop. Most fulfilment tools pick one of those jobs and make the other two adapt.</p>
-    <p data-i18n="k.s03.p2">Designing for three roles costs more than designing for one, and it had to be argued for before anyone had seen a screen. &ldquo;Design it for the store operator and the rest will adapt&rdquo; was a perfectly reasonable position. What won the argument was not an opinion but the map above: once the points where information fell between store, distribution centre and driver were visible on one page, nobody proposed picking a primary user again.</p>
-    <p data-i18n="k.s03.p3">In the interface that decision shows up as one platform with a different home per role: a store sees its own queue, the distribution centre sees every store plus the numbers that say where the day is going wrong, and the driver gets the stop. Same order, same statuses, same colours, different first screen.</p>
-    <p class="pull" data-i18n="k.pull.s03">Holding all three at once is what forced every interface decision: what goes first in a card, what earns an alert, what is allowed to be one click.</p>
-  </div>
-
-  <div class="col reveal">
-    <span class="stage-label" id="s04"><b>04</b> &middot; <span data-i18n="k.ix.4">The first board was wrong</span></span>
-    <h2 data-i18n="k.h2.s04">The round that rebuilt the board</h2>
-    <p data-i18n="k.s04.p1">You can't A/B test a warehouse, and I couldn't pull store operators off the floor for a lab session. So the round happened where the work is: at the counter, on their machine, with real orders in front of them, walking their actual day instead of a task I had written. Before committing engineering time to a rebuild, I used AI-assisted concept prototypes to walk stakeholders through three board directions in an afternoon instead of a sprint, so the direction was agreed before a single production screen existed.</p>
-    <div class="compare">
-      <div>
-        <span class="k" data-i18n="cmp.assumed">What we assumed</span>
-        <p data-i18n="k.cmp.a">That the board should mirror the order's lifecycle, because that is how the system thinks about an order: received, invoiced, picked, dispatched, delivered.</p>
-      </div>
-      <div>
-        <span class="k" data-i18n="cmp.found">What the round showed</span>
-        <p data-i18n="k.cmp.b">Operators don't think in lifecycles. They think in what is about to hurt them: what leaves in the next hour, what is already late, what has nowhere to go. The first version made them translate.</p>
+    <span class="stage-label" id="s03"><b>03</b> &middot; <span data-i18n="k.ix.3">Decision: rebuild the board around the operator's day</span></span>
+    <div class="decision">
+      <div class="decision-head"><span class="dn">2</span><h3 data-i18n="k.d2.title">Operators don't think in lifecycles. They think in what's about to hurt them</h3></div>
+      <div class="decision-body">
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.problem">Problem</span><p class="dv" data-i18n="k.d2.problem">The first board mirrored the order's lifecycle, because that's how the system thinks about an order: received, invoiced, picked, dispatched, delivered.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.decision">Decision</span><p class="dv" data-i18n="k.d2.decision">Rebuild the board around the operator's sequence instead, and the card around their first question: &ldquo;is this one late?&rdquo; moved to the top-right corner in red, remaining SLA onto the pill, the carrier logo to where the eye lands last.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.why">Why</span><p class="dv" data-i18n="k.d2.why">You can't A/B test a warehouse. So the round happened at the counter, on real machines, with real orders, walking the operator's actual day instead of a task I had written &mdash; and AI-assisted concept prototypes let me walk stakeholders through three board directions in an afternoon instead of a sprint.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.evidence">What it caught</span><p class="dv" data-i18n="k.d2.evidence">Operators don't think in lifecycles. They think in what's about to hurt them: what leaves in the next hour, what's already late, what has nowhere to go. The lifecycle-shaped board made them translate.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="k.dk.result">Result</span><p class="dv" data-i18n="k.d2.result">The direction was agreed before a single production screen existed, and the rebuilt board is what shipped.</p></div>
       </div>
     </div>
-    <p data-i18n="k.s04.p2">So the board was rebuilt around their sequence rather than the system's, and the card was rebuilt around their first question. &ldquo;Is this one late?&rdquo; moved to the top-right corner in red. The remaining SLA moved onto the modality pill. The carrier logo moved to where the eye lands last, because it is the thing you need only after you have decided to act.</p>
   </div>
 
   <figure class="shot annot reveal">
@@ -773,10 +781,10 @@
   </figure>
 
   <div class="col reveal">
-    <span class="stage-label" id="s05"><b>05</b> &middot; <span data-i18n="k.ix.5">The screens, annotated</span></span>
-    <h2 data-i18n="k.h2.s05">The distribution centre: every store, and the numbers that say where the day is going wrong</h2>
-    <p data-i18n="k.s05.p1">The distribution centre sees all stores at once, so its first screen is not a queue but a set of counters: late, invoicing problems, transport problems, proof of delivery pending. Each one is a filter, not a chart. The job here is triage, and triage starts by clicking the number that hurts.</p>
-    <p data-i18n="k.s05.p2">Allocation was the other thing this role needed that a store did not. Several operators work the same queue, so every card says who owns it, and a card allocated to someone else fades back instead of disappearing: you can still see it is being handled, you just can't grab it by mistake.</p>
+    <span class="stage-label" id="s04"><b>04</b> &middot; <span data-i18n="k.ix.4">What shipped: the screens</span></span>
+    <h2 data-i18n="k.h2.shipped">What shipped: the screens</h2>
+    <h3 class="card-h" data-i18n="k.h2.s05">The distribution centre: every store, and the numbers that say where the day is going wrong</h3>
+    <p data-i18n="k.s05.p1">The distribution centre sees all stores at once, so its first screen is a set of counters, not a queue: late, invoicing problems, transport problems, proof pending. Each is a filter, not a chart &mdash; triage starts by clicking the number that hurts. Allocation was the other thing this role needed that a store did not: several operators work the same queue, every card says who owns it, and a card owned by someone else fades back instead of disappearing.</p>
   </div>
 
   <figure class="shot annot reveal">
@@ -797,8 +805,8 @@
   </figure>
 
   <div class="col reveal">
-    <h2 data-i18n="k.h2.s05b">The same queue as a table, when the question changes</h2>
-    <p data-i18n="k.s05.p3">A board answers &ldquo;what is the shape of my day.&rdquo; It does not answer &ldquo;which of these 104 orders has been sitting the longest,&rdquo; and that is the question the distribution centre asks every hour. So the same queue toggles into a table: one row per order, sortable, with dwell time as its own column and a severity dot before the order number. Same data, same statuses, same colours, a different first question.</p>
+    <h3 class="card-h" data-i18n="k.h2.s05b">The same queue as a table, when the question changes</h3>
+    <p data-i18n="k.s05.p3">A board answers &ldquo;what is the shape of my day.&rdquo; It doesn't answer &ldquo;which of these 104 orders has been sitting the longest,&rdquo; the question the distribution centre asks every hour. So the same queue toggles into a table: one row per order, sortable, dwell time as its own column, a severity dot before the order number. Same data, same statuses, same colours, a different first question.</p>
   </div>
 
   <figure class="shot annot reveal">
@@ -821,8 +829,8 @@
   </figure>
 
   <div class="col reveal">
-    <h2 data-i18n="k.h2.s05c">When an order becomes a phone call</h2>
-    <p data-i18n="k.s05.p4">When a customer calls, the person answering needs the whole story in seconds: how much of the SLA is left, where the order is, what has already been said. The order page puts the countdown first and in red when it is already breached, the history down the side in the order things happened, and a comment thread with attachments so that &ldquo;the customer said to leave it with the neighbour&rdquo; is on the order, not in someone's head.</p>
+    <h3 class="card-h" data-i18n="k.h2.s05c">When an order becomes a phone call</h3>
+    <p data-i18n="k.s05.p4">The person answering a customer call needs the whole story in seconds: how much SLA is left, where the order is, what's already been said. The order page puts the countdown first, red past the promise, history down the side in order, and a comment thread with attachments so &ldquo;the customer said leave it with the neighbour&rdquo; lives on the order, not in someone's head.</p>
   </div>
 
   <figure class="shot annot reveal">
@@ -843,8 +851,8 @@
   </figure>
 
   <div class="col reveal">
-    <h2 data-i18n="k.h2.s05d">The exceptions are the product</h2>
-    <p data-i18n="k.s05.p5">In logistics the happy path needs almost no design; it is the exceptions that decide whether an operator trusts the screen or works around it. These four states came out of the stall list and the rollout, not out of a design file. Each one replaces something that used to be a phone call.</p>
+    <h3 class="card-h" data-i18n="k.h2.s05d">The exceptions are the product</h3>
+    <p data-i18n="k.s05.p5">In logistics the happy path needs almost no design; the exceptions decide whether an operator trusts the screen or works around it. These four states came out of the stall list and the rollout, not a design file. Each one replaces something that used to be a phone call.</p>
   </div>
 
   <figure class="shot states reveal">
@@ -870,38 +878,29 @@
   </figure>
 
   <div class="col reveal">
-    <span class="stage-label" id="s06"><b>06</b> &middot; <span data-i18n="k.ix.6">Rollout, store by store</span></span>
+    <span class="stage-label" id="s05"><b>05</b> &middot; <span data-i18n="k.ix.5">Rollout, store by store</span></span>
     <h2 data-i18n="k.h2.s06">The release wasn't a date. It was a sequence</h2>
-    <p data-i18n="k.s06.p1">Fulfilment software fails in production in ways it never fails in a demo, so the flagship store went first, alone, watched daily with its operators and managers until a full week passed without a new corner case. After that, waves of about twenty stores every two weeks. It stayed close enough to the team that a problem could be watched instead of reported. Each wave carried what the previous one had taught, and the full three months &mdash; rollout plus daily hypercare from our support team &mdash; was the experiment. After that it dropped to occasional tickets.</p>
-    <p data-i18n="k.s06.p2">The exceptions did most of the teaching. A courier arriving before an order was packed. Orders scanned out of sequence. A delivery that failed with the address still marked valid. Each became either an interface state or a rule, and I stayed in engineering's reviews through every wave, because the difference between an operator trusting the screen and working around it is usually one unhandled case.</p>
-    <p data-i18n="k.s06.p3">&ldquo;Returning to store&rdquo; is the one I would point to. It did not exist in the first version. The first wave surfaced orders sitting in &ldquo;in transit&rdquo; with nowhere to go. The operators had a workaround for it but no name, which is why it had never been requested.</p>
+    <p data-i18n="k.s06.p1">Fulfilment software fails in production in ways it never fails in a demo, so the flagship store went first, alone, watched daily until a full week passed without a new corner case. After that, waves of about twenty stores every two weeks, close enough to the team that a problem could be watched instead of reported. The full three months &mdash; rollout plus daily hypercare &mdash; was the experiment; after that it dropped to occasional tickets.</p>
+    <p data-i18n="k.s06.p2">The exceptions did most of the teaching: a courier arriving before an order was packed, orders scanned out of sequence, a delivery that failed with the address still marked valid. Each became an interface state or a rule, and I stayed in engineering's reviews through every wave. &ldquo;Returning to store&rdquo; is the one I'd point to &mdash; it didn't exist in the first version. The first wave surfaced orders sitting in &ldquo;in transit&rdquo; with nowhere to go; operators had a workaround but no name for it, which is why it had never been requested.</p>
     <p class="takeaway" data-i18n="k.tk.s06">The difference between an operator trusting the screen and working around it is usually one unhandled case.</p>
   </div>
 
   <div class="col reveal">
-    <span class="stage-label" id="s07"><b>07</b> &middot; <span data-i18n="k.ix.7">What it changed, measured</span></span>
-    <h2 data-i18n="k.h2.s07">The rate did not go up. It refused to go down while the load went up</h2>
-    <p data-i18n="k.s07.p1">Three months after rollout, on-time delivery against the two-hour promise was around 81%, on roughly 38% more volume than the operation had ever handled. Both figures are my own reading of the operation and the operations leads' recollection, not a report pulled from the platform &mdash; I left the company and the dashboards stayed there. There is no before to hold them against either, because the operation had never measured itself &mdash; so read them as the first honest read this operation ever had about itself, not as a verified improvement over a known number. That is the whole claim, and it is worth stating carefully: in fulfilment, holding a rate while volume grows is the harder of the two outcomes.</p>
+    <span class="stage-label" id="s06"><b>06</b> &middot; <span data-i18n="k.ix.6">Impact</span></span>
+    <h2 data-i18n="k.h2.s07">The operation didn&rsquo;t slow down. Even as the load went up</h2>
+    <p data-i18n="k.s07.p1">Three months after rollout, the platform was running the two-hour promise across 80+ stores on more volume than the operation had ever handled, with the exceptions taxonomy catching failures that used to go unnoticed. There&rsquo;s no verified before-and-after here: the pre-platform operation never measured itself, so I have no baseline to hold a number against, and I&rsquo;d rather say that than manufacture one. What held up: operators stopped exporting to spreadsheets, and a failed delivery went from invisible to a status with a next step.</p>
     <div class="metrics-strip">
-      <div class="m"><div class="num">~81%</div><div class="label" data-i18n="k.m0">On-time against the two-hour promise, three months after rollout, while volume grew &mdash; my own estimate, not a platform export</div></div>
+      <div class="m"><div class="num">80+ stores</div><div class="label" data-i18n="k.m0">Rolled out in waves over three months, running the two-hour promise on top of Fast Shop&rsquo;s existing 22,000+ SKU catalogue</div></div>
       <div class="m"><div class="num">Chased &rarr; flagged</div><div class="label" data-i18n="k.m1">Time to detect an at-risk order: before, whenever someone happened to notice; after, the moment it enters &ldquo;Late&rdquo;</div></div>
       <div class="m"><div class="num">15</div><div class="label" data-i18n="k.m2">Statuses in the shipped taxonomy, four of them exceptions that replaced phone calls</div></div>
     </div>
-    <h3 class="sub" data-i18n="k.meas.h">How it was measured</h3>
-    <ul class="receipts">
-      <li><b data-i18n="k.meas.1b">Headline</b> <span data-i18n="k.meas.1t">On-time rate against the two-hour promise. This is my own estimate, read from memory about three months after rollout, not a figure I can still pull from the platform &mdash; I left the company and the dashboards with it. Baseline: none. The pre-platform operation produced no on-time figure, because it ran on WhatsApp, a courier app and spreadsheets. I present 81% as a first recalled measurement, not as a system-verified delta.</span></li>
-      <li><b data-i18n="k.meas.2b">Operational</b> <span data-i18n="k.meas.2t">Where orders sat and for how long, by status and by store. The platform measures this now; nothing measured it before, so there is no before-and-after to give. A rate says there is a problem; this says where to go.</span></li>
-      <li><b data-i18n="k.meas.3b">Adoption</b> <span data-i18n="k.meas.3t">Whether operators worked in the platform or around it. We never counted spreadsheet exports before and after, so I can only report what the team saw: the parallel spreadsheets stopped being maintained. A blunt signal, and an uncounted one.</span></li>
-      <li><b data-i18n="k.meas.4b">Not proven</b> <span data-i18n="k.meas.4t">Causality. The platform launched alongside a growing operation, and I cannot separate the design from the process changes Fast Shop made in the same months. The staged rollout is the closest thing to a control: stores on the platform versus stores not yet on it, over the same weeks.</span></li>
-    </ul>
-    <p class="note" data-i18n="k.note"><strong>Scope, for context, not as outcome:</strong> Pick &amp; Pack shipped as the Fulfilment module inside Fast Shop's order-management system, with a distinct store view and distribution-centre view across 100+ screens of states and behaviour. 80+ stores migrated onto the platform, 22,000+ SKUs flowing through it, three products delivered on the same foundation (Pick &amp; Pack, PIM, DevTools), all designed by one person with <a href="/compass/">Compass</a> as the system underneath. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em></p>
+    <p class="note" data-i18n="k.note"><strong>How it was measured, and what's not proven:</strong> the pre-platform operation never produced an on-time figure, so there's no verified baseline to compare against, and I'm not presenting an estimate as if it were one. The clearest adoption signal I can stand behind: the parallel spreadsheets operators used to keep stopped being maintained. Causality isn't proven either &mdash; the platform launched alongside a growing operation, and I can't fully separate the design from the process changes Fast Shop made in the same months; the staged rollout, stores on the platform versus stores not yet on it over the same weeks, is the closest thing to a control.</p>
   </div>
 
   <div class="col reveal">
-    <span class="stage-label" id="s08"><b>08</b> &middot; <span data-i18n="k.ix.8">What I'd do differently</span></span>
+    <span class="stage-label" id="s07"><b>07</b> &middot; <span data-i18n="k.ix.7">What I'd do differently</span></span>
     <h2 data-i18n="k.h2.s08">I designed the happy path first. In logistics, the exceptions are the product</h2>
-    <p data-i18n="k.s08.p1">I would have gone to the floor before drawing the first board, not after it fell short. The rework was cheap because it happened early, but it was avoidable: I built the first version from the system's model of an order because that was the model I had access to, and I mistook availability for accuracy. The wider version of that mistake is that I treated exceptions as a second pass, when three of the four states above are the reason operators use the tool at all.</p>
-    <p data-i18n="k.s08.p2">I would also have instrumented time-to-detect from day one. It was the pointer we agreed on, and for the first wave I could only read it off the stall list and the dwell times, not off a single number. The releases after that had it; the one people ask about most did not.</p>
+    <p data-i18n="k.s08.p1">I would have gone to the floor before drawing the first board, not after it fell short. The rework was cheap because it happened early, but avoidable: I built the first version from the system's model of an order because that was the model I had access to, and mistook availability for accuracy. The wider version of that mistake is that I treated exceptions as a second pass, when three of the four states above are the reason operators use the tool at all. I would also have instrumented time-to-detect from day one; the releases after the first had it, and the first is the one people ask about most.</p>
     <div class="callout-grid">
       <div class="callout">
         <h3 class="card-h" data-i18n="k.role.h">My role</h3>
@@ -912,17 +911,11 @@
         <p data-i18n="k.team.p">A product manager owned the roadmap and the OKRs with Fast Shop; Fast Shop's operations leads were the domain experts and the source of the stall list; one engineering team per product built it, with me in their reviews through every wave. Decisions that were mine: three roles instead of a primary user, the rebuilt board and card, the table toggle, the four exception states above, and &ldquo;returning to store.&rdquo;</p>
       </div>
     </div>
-    <div class="callout-grid">
-      <a class="callout" href="/compass/">
-        <h3 class="card-h" data-i18n="k.system.h">Compass: the system underneath</h3>
-        <p data-i18n="k.system.p">None of these screens were designed in isolation. A status pill means the same thing on the board, the table and the order page because the token layer says so. That work grew large enough to be its own case.</p>
-        <span class="go" data-i18n="k.system.cta">Read the Compass case &rarr;</span>
-      </a>
-      <div class="callout">
-        <h3 class="card-h" data-i18n="k.instrument.h">The instrument was chosen, not inherited</h3>
-        <p data-i18n="k.instrument.p1">Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a></p>
-      </div>
-    </div>
+    <a class="callout" href="/compass/">
+      <h3 class="card-h" data-i18n="k.system.h">Compass: the system underneath</h3>
+      <p data-i18n="k.system.p">None of these screens were designed in isolation. A status pill means the same thing on the board, the table and the order page because the token layer says so. That work grew large enough to be its own case.</p>
+      <span class="go" data-i18n="k.system.cta">Read the Compass case &rarr;</span>
+    </a>
   </div>
 </article>
 
@@ -966,6 +959,11 @@
       <a class="contact-option" href="mailto:cannalongadesign@gmail.com">
         <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="co-body"><span class="co-title" data-i18n="modal.email.title">Send an email</span><span class="co-sub">cannalongadesign@gmail.com</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a class="contact-option" href="mailto:cannalongadesign@gmail.com?subject=Resume%20request">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.resume.title">Request my r&eacute;sum&eacute;</span><span class="co-sub" data-i18n="modal.resume.sub">I&rsquo;ll send the PDF by email</span></span>
         <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </a>
       <a class="contact-option" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
@@ -1032,10 +1030,7 @@
         'meta.v.role':`Sole product designer`,
         'meta.v.team':`PM · Eng teams · Fast Shop ops`,
         'meta.v.time':`Sep 2024 – Feb 2026`,
-        'stage.build':`The build`,
-        'cmp.assumed':`What we assumed`,
-        'cmp.found':`What the round showed`,
-        'ix.time':'12 min read',
+        'ix.time':'8 min read',
         'ix.k':'In this case', 'tl.k':'The short version',
         'tl.problem.k':'Problem', 'tl.did.k':'What I did', 'tl.out.k':'Outcome',
         'nav.back':'Back to portfolio', 'nav.cta':`Let's talk`,
@@ -1051,57 +1046,53 @@
         'close.cta1':'Get in touch', 'close.cta2.kruzer':'See the other case',
         'footer.portfolio':'Portfolio', 'footer.email':'Email',
         'modal.label':`Let's talk`, 'modal.h3':'How would you like to connect?', 'modal.p':`Pick whichever's faster for you.`,
-        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, 5–7pm ET`,
+        'modal.email.title':'Send an email', 'modal.resume.title':'Request my résumé', 'modal.resume.sub':`I’ll send the PDF by email`, 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, 5–7pm ET`,
         'k.tl.problem':`Checkout promised delivery in two hours. Behind it, nobody could tell where an order was without a phone call, and a failed delivery had no defined next step.`,
         'k.tl.did':`Designed Pick &amp; Pack for three roles at once instead of one primary user, rebuilt the board after the floor rejected my first version, and rolled it out store by store, reading the operation's own records as the evidence.`,
-        'k.tl.out':`On-time delivery held at <b>~81%</b> (my estimate) against the two-hour promise while volume grew by roughly 38%; operators stopped exporting to spreadsheets; a class of failed deliveries that had no name got a status and a next step.`,
-        'k.ix.1':`The promise on the checkout page`,
-        'k.ix.2':`What the operation taught me`,
-        'k.ix.3':`Three roles, not a primary user`,
-        'k.ix.4':`The first board was wrong`,
-        'k.ix.5':`The screens, annotated`,
-        'k.ix.6':`Rollout, store by store`,
-        'k.ix.7':`What it changed, measured`,
-        'k.ix.8':`What I'd do differently`,
-        'k.h2.s01':`Two hours, promised before anyone in a store knows the order exists`,
-        'k.s01.p1':`Fast Shop is one of Brazil's largest electronics retailers: 80+ stores, 22,000+ SKUs and around 2,500 orders a day. Its checkout sells delivery in two hours. That promise is made before a single person in a store has seen the order, and it is the reason Kruzer's platform was funded at all. Every order that misses it costs twice: once in the delivery, once in the customer who stops believing the badge next time.`,
-        'k.s01.p2':`Before Pick &amp; Pack, the promise ran on people. A store found out about an order by phone. The distribution centre routed couriers from a spreadsheet. A driver got an address by message. Information fell into the gaps between those channels, and enough of it got lost that order cancellations ran high &mdash; customers giving up on a delivery they no longer trusted to arrive. When something stalled, whoever noticed first called whoever they thought was responsible, and nobody held a number for how often that ended on time. There is no on-time baseline to quote, and that is the point: nothing in the operation could produce one. It ran on WhatsApp threads, a courier app and spreadsheets. The absence of the number was the problem the project existed to solve.`,
-        'k.s01.p3':`So the number we set out to move was never &ldquo;a better fulfilment UI.&rdquo; It was the on-time rate, and underneath it the number that actually decides it: how long it takes an operator to find out an order is in trouble. Before the platform that was whenever an operator happened to notice, or whenever someone chased them about it. An operation only hits its SLA if the exceptions surface early enough to be fixed.`,
-        'k.tk.s01':`81% on time is a statement about the other 19% being findable.`,
-        'k.h2.s02':`The stall list is the requirements list`,
-        'k.s02.p1':`Fast Shop's operations people had run this process for years without software. Treating them as stakeholders to be informed, rather than as the source of the requirements, would have produced a beautiful tool for a process that doesn't exist. So before drawing a screen I spent time with eight operators across three stores, asking two questions on the floor, and looked at how a handful of other fulfilment platforms handled the same three-way handoff, mostly to confirm nobody had solved it cleanly either.`,
-        'k.q1.h':`Where does an order actually stop?`,
-        'k.q1.p':`Not in theory. The real stalls: waiting for a courier who arrived before the order was packed, a product not on the shelf where the system says it is, a customer who isn't home, an invoice rejected by the tax system. Each stall became a status, and each status became something an operator could act on instead of phone about.`,
-        'k.q2.h':`What happens when a delivery fails?`,
-        'k.q2.p':`The answer was uncomfortable and useful: nothing consistent. The order stayed &ldquo;in transit&rdquo; forever, the product came back to the store informally, and nobody was accountable. That gap is where the &ldquo;returning to store&rdquo; status came from later, and I only found it by asking about the ugly path instead of the happy one.`,
-        'k.s02.p2':`Two things could not change, and knowing them early kept the design from becoming an argument the operation would always win: the carrier integrations (Uber, Borzo and the store's own drivers) and the fiscal documents every order has to carry.`,
+        'k.tl.out':`The two-hour promise held across 80+ stores on more volume than the operation had ever handled; operators stopped exporting to spreadsheets; a class of failed deliveries that had no name got a status and a next step.`,
+        'k.demo.1':'Enterprise SaaS', 'k.demo.2':'0&rarr;1 platform', 'k.demo.3':'Logistics', 'k.demo.4':'Systems design',
+        'k.ix.1':`Why it was hard`,
+        'k.ix.2':`Decision: three roles, not one primary user`,
+        'k.ix.3':`Decision: rebuild the board around the operator's day`,
+        'k.ix.4':`What shipped: the screens`,
+        'k.ix.5':`Rollout, store by store`,
+        'k.ix.6':`Impact`,
+        'k.ix.7':`What I'd do differently`,
+        'k.h2.hard':`Two hours, promised before anyone in a store knows the order exists`,
+        'k.hard.1':`Fast Shop is one of Brazil's largest electronics retailers: 80+ stores, 22,000+ SKUs, around 2,500 orders a day. Checkout sells delivery in two hours before a single person in a store has seen the order. Before Pick &amp; Pack, that promise ran on phone calls, a courier app and spreadsheets. There was no on-time baseline to quote &mdash; nothing in the operation could produce one, and that absence was itself the problem the project existed to solve.`,
+        'k.hard.2':`The number worth moving was never &ldquo;a better fulfilment UI.&rdquo; It was time-to-detect: how long it takes an operator to find out an order is in trouble. Before the platform, that was whenever someone happened to notice, or whenever someone chased them about it. An operation only hits its SLA if exceptions surface early enough to fix.`,
+        'k.hard.3':`Fast Shop's operations people had run this process for years without software, so before drawing a screen I spent time with eight operators across three stores asking where an order actually stops (a courier arriving before the order was packed, a product not on the shelf, an invoice the tax system rejected &mdash; each became a status) and what happens when a delivery fails (the honest answer: nothing consistent, which is the gap the &ldquo;returning to store&rdquo; status later filled). Two things couldn't change: the carrier integrations and the fiscal documents every order has to carry.`,
+        'k.tk.s01':`The win wasn&rsquo;t a rate. It was that a failed delivery finally had a name and a next step.`,
+        'k.dk.problem':'Problem', 'k.dk.decision':'Decision', 'k.dk.why':'Why', 'k.dk.argument':`What won the argument`, 'k.dk.evidence':`What it caught`, 'k.dk.result':'Result',
+        'k.d1.title':`One platform, three homes, one order`,
+        'k.d1.problem':`&ldquo;Design it for the store operator and the rest will adapt&rdquo; was a perfectly reasonable default. Most fulfilment tools pick one job and make the other two adapt to it.`,
+        'k.d1.decision':`Design for three jobs at once. A store sees its own queue, the distribution centre sees every store plus where the day is going wrong, the driver gets one unambiguous stop. Same order, same statuses, same colours, different first screen.`,
+        'k.d1.why':`The store operator is hiring this to clear the queue before the courier arrives. The distribution centre is hiring it to route around what's about to breach. The driver is hiring it for an unambiguous next stop. Holding all three at once is what forced every interface decision: what goes first on a card, what earns an alert, what's allowed to be one click.`,
+        'k.d1.argument':`Not an opinion &mdash; the map below. Once the points where information fell between store, distribution centre and driver were visible on one page, nobody proposed picking a primary user again.`,
+        'k.d1.result':`One platform shipped with a different home per role, and no store, distribution centre or driver had to translate someone else's workflow into their own.`,
         'k.slot1.c':`One order, three lanes. The gaps between the lanes, where information fell on the floor, are where the arrows are.`,
-        'k.h2.s03':`Same order, three people, three definitions of &ldquo;done&rdquo;`,
-        'k.s03.p1':`The store operator is hiring this to clear the queue before the courier arrives. The distribution-centre operator is hiring it to know which orders are about to breach and route around them. The driver is hiring it to get an unambiguous next stop. Most fulfilment tools pick one of those jobs and make the other two adapt.`,
-        'k.s03.p2':`Designing for three roles costs more than designing for one, and it had to be argued for before anyone had seen a screen. &ldquo;Design it for the store operator and the rest will adapt&rdquo; was a perfectly reasonable position. What won the argument was not an opinion but the map above: once the points where information fell between store, distribution centre and driver were visible on one page, nobody proposed picking a primary user again.`,
-        'k.s03.p3':`In the interface that decision shows up as one platform with a different home per role: a store sees its own queue, the distribution centre sees every store plus the numbers that say where the day is going wrong, and the driver gets the stop. Same order, same statuses, same colours, different first screen.`,
-        'k.pull.s03':`Holding all three at once is what forced every interface decision: what goes first in a card, what earns an alert, what is allowed to be one click.`,
-        'k.h2.s04':`The round that rebuilt the board`,
-        'k.s04.p1':`You can't A/B test a warehouse, and I couldn't pull store operators off the floor for a lab session. So the round happened where the work is: at the counter, on their machine, with real orders in front of them, walking their actual day instead of a task I had written. Before committing engineering time to a rebuild, I used AI-assisted concept prototypes to walk stakeholders through three board directions in an afternoon instead of a sprint, so the direction was agreed before a single production screen existed.`,
-        'k.cmp.a':`That the board should mirror the order's lifecycle, because that is how the system thinks about an order: received, invoiced, picked, dispatched, delivered.`,
-        'k.cmp.b':`Operators don't think in lifecycles. They think in what is about to hurt them: what leaves in the next hour, what is already late, what has nowhere to go. The first version made them translate.`,
-        'k.s04.p2':`So the board was rebuilt around their sequence rather than the system's, and the card was rebuilt around their first question. &ldquo;Is this one late?&rdquo; moved to the top-right corner in red. The remaining SLA moved onto the modality pill. The carrier logo moved to where the eye lands last, because it is the thing you need only after you have decided to act.`,
+        'k.d2.title':`Operators don't think in lifecycles. They think in what's about to hurt them`,
+        'k.d2.problem':`The first board mirrored the order's lifecycle, because that's how the system thinks about an order: received, invoiced, picked, dispatched, delivered.`,
+        'k.d2.decision':`Rebuild the board around the operator's sequence instead, and the card around their first question: &ldquo;is this one late?&rdquo; moved to the top-right corner in red, remaining SLA onto the pill, the carrier logo to where the eye lands last.`,
+        'k.d2.why':`You can't A/B test a warehouse. So the round happened at the counter, on real machines, with real orders, walking the operator's actual day instead of a task I had written &mdash; and AI-assisted concept prototypes let me walk stakeholders through three board directions in an afternoon instead of a sprint.`,
+        'k.d2.evidence':`Operators don't think in lifecycles. They think in what's about to hurt them: what leaves in the next hour, what's already late, what has nowhere to go. The lifecycle-shaped board made them translate.`,
+        'k.d2.result':`The direction was agreed before a single production screen existed, and the rebuilt board is what shipped.`,
         'k.an1.1':`&ldquo;Late in this status&rdquo; is the first thing on the card, in red, because it is the first question an operator asks.`,
         'k.an1.2':`Two pills, two questions: what is happening to the order, and how much of the promise is left (UltraFast · 1h).`,
         'k.an1.3':`The carrier logo sits last. You only need it once you have decided to act.`,
         'k.an1.4':`Columns follow the operator's day, not the system's lifecycle: received, picking, ready for pickup, in transit.`,
         'k.an1.5':`Click &amp; Collect orders live on the same board with their own pill (&ldquo;Retira&rdquo;), so a store never runs two tools.`,
         'k.an1.c':`The store board, as shipped: what leaves in the next hour, what is already late, what has nowhere to go.`,
+        'k.h2.shipped':`What shipped: the screens`,
         'k.h2.s05':`The distribution centre: every store, and the numbers that say where the day is going wrong`,
-        'k.s05.p1':`The distribution centre sees all stores at once, so its first screen is not a queue but a set of counters: late, invoicing problems, transport problems, proof of delivery pending. Each one is a filter, not a chart. The job here is triage, and triage starts by clicking the number that hurts.`,
-        'k.s05.p2':`Allocation was the other thing this role needed that a store did not. Several operators work the same queue, so every card says who owns it, and a card allocated to someone else fades back instead of disappearing: you can still see it is being handled, you just can't grab it by mistake.`,
+        'k.s05.p1':`The distribution centre sees all stores at once, so its first screen is a set of counters, not a queue: late, invoicing problems, transport problems, proof pending. Each is a filter, not a chart &mdash; triage starts by clicking the number that hurts. Allocation was the other thing this role needed that a store did not: several operators work the same queue, every card says who owns it, and a card owned by someone else fades back instead of disappearing.`,
         'k.an2.1':`Counters, not charts. Late (23), invoicing (3), transport (7), proof pending (12): each is a filter, and the day starts by clicking the one that hurts.`,
         'k.an2.2':`Allocation actions live on the card, two clicks from anywhere: take it off someone, or hand it to someone else.`,
         'k.an2.3':`&ldquo;Allocated to&rdquo; on every card, because in a shared queue the question &ldquo;is anyone on this?&rdquo; used to be a shout across the floor.`,
         'k.an2.4':`A card owned by someone else fades back rather than vanishing: visible, not grabbable.`,
         'k.an2.c':`The distribution-centre board: same cards as the store, plus ownership, because here several people work one queue.`,
         'k.h2.s05b':`The same queue as a table, when the question changes`,
-        'k.s05.p3':`A board answers &ldquo;what is the shape of my day.&rdquo; It does not answer &ldquo;which of these 104 orders has been sitting the longest,&rdquo; and that is the question the distribution centre asks every hour. So the same queue toggles into a table: one row per order, sortable, with dwell time as its own column and a severity dot before the order number. Same data, same statuses, same colours, a different first question.`,
+        'k.s05.p3':`A board answers &ldquo;what is the shape of my day.&rdquo; It doesn't answer &ldquo;which of these 104 orders has been sitting the longest,&rdquo; the question the distribution centre asks every hour. So the same queue toggles into a table: one row per order, sortable, dwell time as its own column, a severity dot before the order number. Same data, same statuses, same colours, a different first question.`,
         'k.an3.1':`One toggle between board and table. Same filters, same selection, no re-learning.`,
         'k.an3.2':`A severity dot before the order number (red, amber, blue) so the eye can scan the column without reading a word.`,
         'k.an3.3':`&ldquo;Time in queue&rdquo; is its own sortable column: the one the distribution centre sorts by first, every hour.`,
@@ -1109,14 +1100,14 @@
         'k.an3.5':`Rows allocated to another operator fade, exactly as cards do on the board.`,
         'k.an3.c':`The table view: the question changes from &ldquo;what is my day&rdquo; to &ldquo;what has been waiting longest,&rdquo; and the layout follows.`,
         'k.h2.s05c':`When an order becomes a phone call`,
-        'k.s05.p4':`When a customer calls, the person answering needs the whole story in seconds: how much of the SLA is left, where the order is, what has already been said. The order page puts the countdown first and in red when it is already breached, the history down the side in the order things happened, and a comment thread with attachments so that &ldquo;the customer said to leave it with the neighbour&rdquo; is on the order, not in someone's head.`,
+        'k.s05.p4':`The person answering a customer call needs the whole story in seconds: how much SLA is left, where the order is, what's already been said. The order page puts the countdown first, red past the promise, history down the side in order, and a comment thread with attachments so &ldquo;the customer said leave it with the neighbour&rdquo; lives on the order, not in someone's head.`,
         'k.an4.1':`The SLA countdown is the biggest thing on the page and turns red past the promise, because it is the thing the customer is asking about.`,
         'k.an4.2':`&ldquo;Time in this status&rdquo; separates &ldquo;the order is late&rdquo; from &ldquo;this step is the one that is late.&rdquo;`,
         'k.an4.3':`History as a timeline, newest first, each step with a plain-language line an operator can read aloud on the phone.`,
         'k.an4.4':`Comments with attachments on the order itself, so a screenshot of the customer's message travels with the delivery.`,
         'k.an4.c':`The order page: built for the moment a delivery turns into a conversation.`,
         'k.h2.s05d':`The exceptions are the product`,
-        'k.s05.p5':`In logistics the happy path needs almost no design; it is the exceptions that decide whether an operator trusts the screen or works around it. These four states came out of the stall list and the rollout, not out of a design file. Each one replaces something that used to be a phone call.`,
+        'k.s05.p5':`In logistics the happy path needs almost no design; the exceptions decide whether an operator trusts the screen or works around it. These four states came out of the stall list and the rollout, not a design file. Each one replaces something that used to be a phone call.`,
         'k.st1.h':`The driver took the package and the ride never started`,
         'k.st1.p':`Who has it, what car, and a plain sentence saying the ride has not begun, with tracking one click away. This used to be a call to the carrier.`,
         'k.st2.h':`Delivered, but not closed until there is proof`,
@@ -1127,37 +1118,24 @@
         'k.st4.p':`Exports stayed, deliberately, with one guardrail: if nothing is selected, the dialog says out loud that all 104 orders are about to be exported. Falling export counts became our adoption signal.`,
         'k.states.c':`Four exception states. Fifteen statuses exist in the shipped platform; these are the ones that replaced the most phone calls.`,
         'k.h2.s06':`The release wasn't a date. It was a sequence`,
-        'k.s06.p1':`Fulfilment software fails in production in ways it never fails in a demo, so the flagship store went first, alone, watched daily with its operators and managers until a full week passed without a new corner case. After that, waves of about twenty stores every two weeks. It stayed close enough to the team that a problem could be watched instead of reported. Each wave carried what the previous one had taught, and the full three months &mdash; rollout plus daily hypercare from our support team &mdash; was the experiment. After that it dropped to occasional tickets.`,
-        'k.s06.p2':`The exceptions did most of the teaching. A courier arriving before an order was packed. Orders scanned out of sequence. A delivery that failed with the address still marked valid. Each became either an interface state or a rule, and I stayed in engineering's reviews through every wave, because the difference between an operator trusting the screen and working around it is usually one unhandled case.`,
-        'k.s06.p3':`&ldquo;Returning to store&rdquo; is the one I would point to. It did not exist in the first version. The first wave surfaced orders sitting in &ldquo;in transit&rdquo; with nowhere to go. The operators had a workaround for it but no name, which is why it had never been requested.`,
+        'k.s06.p1':`Fulfilment software fails in production in ways it never fails in a demo, so the flagship store went first, alone, watched daily until a full week passed without a new corner case. After that, waves of about twenty stores every two weeks, close enough to the team that a problem could be watched instead of reported. The full three months &mdash; rollout plus daily hypercare &mdash; was the experiment; after that it dropped to occasional tickets.`,
+        'k.s06.p2':`The exceptions did most of the teaching: a courier arriving before an order was packed, orders scanned out of sequence, a delivery that failed with the address still marked valid. Each became an interface state or a rule, and I stayed in engineering's reviews through every wave. &ldquo;Returning to store&rdquo; is the one I'd point to &mdash; it didn't exist in the first version. The first wave surfaced orders sitting in &ldquo;in transit&rdquo; with nowhere to go; operators had a workaround but no name for it, which is why it had never been requested.`,
         'k.tk.s06':`The difference between an operator trusting the screen and working around it is usually one unhandled case.`,
-        'k.h2.s07':`The rate did not go up. It refused to go down while the load went up`,
-        'k.s07.p1':`Three months after rollout, on-time delivery against the two-hour promise was around 81%, on roughly 38% more volume than the operation had ever handled. Both figures are my own reading of the operation and the operations leads' recollection, not a report pulled from the platform &mdash; I left the company and the dashboards stayed there. There is no before to hold them against either, because the operation had never measured itself &mdash; so read them as the first honest read this operation ever had about itself, not as a verified improvement over a known number. That is the whole claim, and it is worth stating carefully: in fulfilment, holding a rate while volume grows is the harder of the two outcomes.`,
-        'k.m0':`On-time against the two-hour promise, three months after rollout, while volume grew &mdash; my own estimate, not a platform export`,
+        'k.h2.s07':`The operation didn&rsquo;t slow down. Even as the load went up`,
+        'k.s07.p1':`Three months after rollout, the platform was running the two-hour promise across 80+ stores on more volume than the operation had ever handled, with the exceptions taxonomy catching failures that used to go unnoticed. There&rsquo;s no verified before-and-after here: the pre-platform operation never measured itself, so I have no baseline to hold a number against, and I&rsquo;d rather say that than manufacture one. What held up: operators stopped exporting to spreadsheets, and a failed delivery went from invisible to a status with a next step.`,
+        'k.m0':`Rolled out in waves over three months, running the two-hour promise on top of Fast Shop&rsquo;s existing 22,000+ SKU catalogue`,
         'k.m1':`Time to detect an at-risk order: before, whenever someone happened to notice; after, the moment it enters &ldquo;Late&rdquo;`,
         'k.m2':`Statuses in the shipped taxonomy, four of them exceptions that replaced phone calls`,
-        'k.meas.h':`How it was measured`,
-        'k.meas.1b':`Headline`,
-        'k.meas.1t':`On-time rate against the two-hour promise. This is my own estimate, read from memory about three months after rollout, not a figure I can still pull from the platform &mdash; I left the company and the dashboards with it. Baseline: none. The pre-platform operation produced no on-time figure, because it ran on WhatsApp, a courier app and spreadsheets. I present 81% as a first recalled measurement, not as a system-verified delta.`,
-        'k.meas.2b':`Operational`,
-        'k.meas.2t':`Where orders sat and for how long, by status and by store. The platform measures this now; nothing measured it before, so there is no before-and-after to give. A rate says there is a problem; this says where to go.`,
-        'k.meas.3b':`Adoption`,
-        'k.meas.3t':`Whether operators worked in the platform or around it. We never counted spreadsheet exports before and after, so I can only report what the team saw: the parallel spreadsheets stopped being maintained. A blunt signal, and an uncounted one.`,
-        'k.meas.4b':`Not proven`,
-        'k.meas.4t':`Causality. The platform launched alongside a growing operation, and I cannot separate the design from the process changes Fast Shop made in the same months. The staged rollout is the closest thing to a control: stores on the platform versus stores not yet on it, over the same weeks.`,
-        'k.note':`<strong>Scope, for context, not as outcome:</strong> Pick &amp; Pack shipped as the Fulfilment module inside Fast Shop's order-management system, with a distinct store view and distribution-centre view across 100+ screens of states and behaviour. 80+ stores migrated onto the platform, 22,000+ SKUs flowing through it, three products delivered on the same foundation (Pick &amp; Pack, PIM, DevTools), all designed by one person with <a href="/compass/">Compass</a> as the system underneath. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em>`,
+        'k.note':`<strong>How it was measured, and what's not proven:</strong> the pre-platform operation never produced an on-time figure, so there's no verified baseline to compare against, and I'm not presenting an estimate as if it were one. The clearest adoption signal I can stand behind: the parallel spreadsheets operators used to keep stopped being maintained. Causality isn't proven either &mdash; the platform launched alongside a growing operation, and I can't fully separate the design from the process changes Fast Shop made in the same months; the staged rollout, stores on the platform versus stores not yet on it over the same weeks, is the closest thing to a control.`,
         'k.h2.s08':`I designed the happy path first. In logistics, the exceptions are the product`,
-        'k.s08.p1':`I would have gone to the floor before drawing the first board, not after it fell short. The rework was cheap because it happened early, but it was avoidable: I built the first version from the system's model of an order because that was the model I had access to, and I mistook availability for accuracy. The wider version of that mistake is that I treated exceptions as a second pass, when three of the four states above are the reason operators use the tool at all.`,
-        'k.s08.p2':`I would also have instrumented time-to-detect from day one. It was the pointer we agreed on, and for the first wave I could only read it off the stall list and the dwell times, not off a single number. The releases after that had it; the one people ask about most did not.`,
+        'k.s08.p1':`I would have gone to the floor before drawing the first board, not after it fell short. The rework was cheap because it happened early, but avoidable: I built the first version from the system's model of an order because that was the model I had access to, and mistook availability for accuracy. The wider version of that mistake is that I treated exceptions as a second pass, when three of the four states above are the reason operators use the tool at all. I would also have instrumented time-to-detect from day one; the releases after the first had it, and the first is the one people ask about most.`,
         'k.role.h':`My role`,
         'k.role.p':`The only designer on the platform, Sep 2024 to Feb 2026. I owned Pick &amp; Pack from discovery through the store-by-store rollout, built and governed Compass, and designed PIM and DevTools on the same foundation. With no other designer to hand anything to, prioritising between the four products was part of the job: Pick &amp; Pack first, because it carried the two-hour promise.`,
         'k.team.h':`The team, and what was mine`,
         'k.team.p':`A product manager owned the roadmap and the OKRs with Fast Shop; Fast Shop's operations leads were the domain experts and the source of the stall list; one engineering team per product built it, with me in their reviews through every wave. Decisions that were mine: three roles instead of a primary user, the rebuilt board and card, the table toggle, the four exception states above, and &ldquo;returning to store.&rdquo;`,
         'k.system.h':`Compass: the system underneath`,
         'k.system.p':`None of these screens were designed in isolation. A status pill means the same thing on the board, the table and the order page because the token layer says so. That work grew large enough to be its own case.`,
-        'k.system.cta':`Read the Compass case &rarr;`,
-        'k.instrument.h':`The instrument was chosen, not inherited`,
-        'k.instrument.p1':`Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a>`
+        'k.system.cta':`Read the Compass case &rarr;`
       },
       pt: {
         'nav.back.genial':`Voltar ao Genial App`,
@@ -1169,10 +1147,7 @@
         'meta.v.role':`Designer único do produto`,
         'meta.v.team':`PM · Times de eng · Operações Fast Shop`,
         'meta.v.time':`Set 2024 – Fev 2026`,
-        'stage.build':`A construção`,
-        'cmp.assumed':`O que a gente supunha`,
-        'cmp.found':`O que a rodada mostrou`,
-        'ix.time':'12 min de leitura',
+        'ix.time':'8 min de leitura',
         'ix.k':'Neste case', 'tl.k':'A versão curta',
         'tl.problem.k':'Problema', 'tl.did.k':'O que eu fiz', 'tl.out.k':'Resultado',
         'nav.back':'Voltar ao portfólio', 'nav.cta':'Vamos conversar',
@@ -1188,57 +1163,53 @@
         'close.cta1':'Entrar em contato', 'close.cta2.kruzer':'Ver o outro case',
         'footer.portfolio':'Portfólio', 'footer.email':'Email',
         'modal.label':'Vamos conversar', 'modal.h3':'Como você prefere falar comigo?', 'modal.p':'Escolha o que for mais rápido pra você.',
-        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':`Dias úteis, 17h–19h (ET)`,
+        'modal.email.title':'Mandar um email', 'modal.resume.title':'Pedir meu currículo', 'modal.resume.sub':`Envio o PDF por email`, 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':`Dias úteis, 17h–19h (ET)`,
         'k.tl.problem':`O checkout prometia entrega em duas horas. Por trás, ninguém sabia onde um pedido estava sem um telefonema, e uma entrega que falhava não tinha próximo passo definido.`,
         'k.tl.did':`Desenhei o Pick &amp; Pack para três papéis ao mesmo tempo em vez de um usuário principal, reconstruí o board depois que o chão de loja rejeitou minha primeira versão, e fiz o rollout loja a loja, lendo os próprios registros da operação como evidência.`,
-        'k.tl.out':`Entregas no prazo mantidas em <b>~81%</b> (minha estimativa) contra a promessa de duas horas enquanto o volume crescia uns 38%; operadores pararam de exportar para planilhas; uma classe de entregas falhas que não tinha nome ganhou status e próximo passo.`,
-        'k.ix.1':`A promessa na página de checkout`,
-        'k.ix.2':`O que a operação me ensinou`,
-        'k.ix.3':`Três papéis, não um usuário principal`,
-        'k.ix.4':`O primeiro board estava errado`,
-        'k.ix.5':`As telas, anotadas`,
-        'k.ix.6':`Rollout, loja a loja`,
-        'k.ix.7':`O que mudou, medido`,
-        'k.ix.8':`O que eu faria diferente`,
-        'k.h2.s01':`Duas horas, prometidas antes de alguém na loja saber que o pedido existe`,
-        'k.s01.p1':`A Fast Shop é uma das maiores varejistas de eletrônicos do Brasil: 80+ lojas, 22.000+ SKUs e cerca de 2.500 pedidos por dia. O checkout vende entrega em duas horas. Essa promessa é feita antes de qualquer pessoa na loja ter visto o pedido, e é o motivo de a plataforma da Kruzer ter sido financiada. Cada pedido que perde a promessa custa duas vezes: uma na entrega, outra no cliente que deixa de acreditar no selo da próxima vez.`,
-        'k.s01.p2':`Antes do Pick &amp; Pack, a promessa rodava em pessoas. A loja descobria um pedido por telefone. O centro de distribuição roteava entregadores por planilha. O motorista recebia o endereço por mensagem. A informação caía nos vãos entre esses canais, e boa parte se perdia a ponto de o cancelamento de pedidos ficar alto &mdash; clientes desistindo de uma entrega em que já não confiavam. Quando algo travava, quem percebia primeiro ligava para quem achava que era responsável. Não existe uma linha de base de entrega no prazo para citar, e é justamente esse o ponto: nada na operação conseguia produzir uma. O trabalho rodava em conversas de WhatsApp, num app de entregador e em planilhas, então não havia sistema segurando um número para comparar. A ausência do número era o problema que o projeto existia para resolver.`,
-        'k.s01.p3':`Então o número que a gente quis mover nunca foi &ldquo;uma UI de fulfillment melhor&rdquo;. Foi a taxa de entregas no prazo, e por baixo dela o número que de fato a decide: quanto tempo um operador leva para descobrir que um pedido está em risco. Antes da plataforma, isso era quando o operador percebia o atraso, ou quando alguém vinha cobrar. Uma operação só cumpre o SLA se as exceções aparecem cedo o bastante para serem corrigidas.`,
-        'k.tk.s01':`81% no prazo é uma afirmação sobre os outros 19% serem encontráveis.`,
-        'k.h2.s02':`A lista de paradas é a lista de requisitos`,
-        'k.s02.p1':`O pessoal de operação da Fast Shop tinha rodado esse processo por anos sem software. Tratar essas pessoas como stakeholders a serem informados, e não como a fonte dos requisitos, produziria uma ferramenta bonita para um processo que não existe. Então, antes de desenhar uma tela, passei um tempo com oito operadores em três lojas, fazendo duas perguntas no chão de loja, e olhei como outras plataformas de fulfillment lidavam com a mesma passagem em três pontas, mais para confirmar que ninguém tinha resolvido isso de forma limpa também.`,
-        'k.q1.h':`Onde um pedido de fato para?`,
-        'k.q1.p':`Não na teoria. As paradas reais: esperar um entregador que chegou antes de o pedido estar embalado, um produto que não está na prateleira onde o sistema diz, um cliente que não está em casa, uma nota fiscal rejeitada. Cada parada virou um status, e cada status virou algo que o operador consegue agir em vez de ligar para alguém.`,
-        'k.q2.h':`O que acontece quando uma entrega falha?`,
-        'k.q2.p':`A resposta foi desconfortável e útil: nada consistente. O pedido ficava &ldquo;em transporte&rdquo; para sempre, o produto voltava para a loja informalmente e ninguém era responsável. É dessa lacuna que veio depois o status &ldquo;retornando à loja&rdquo;, e eu só o encontrei perguntando sobre o caminho feio, não sobre o feliz.`,
-        'k.s02.p2':`Duas coisas não podiam mudar, e saber disso cedo impediu que o design virasse uma discussão que a operação sempre venceria: as integrações com transportadoras (Uber, Borzo e os motoristas da própria loja) e os documentos fiscais que todo pedido precisa carregar.`,
+        'k.tl.out':`A promessa de duas horas se manteve em 80+ lojas, com mais volume do que a operação já tinha lidado; operadores pararam de exportar para planilhas; uma classe de entregas falhas que não tinha nome ganhou status e próximo passo.`,
+        'k.demo.1':'Enterprise SaaS', 'k.demo.2':'Plataforma 0&rarr;1', 'k.demo.3':'Logística', 'k.demo.4':'Design de sistemas',
+        'k.ix.1':`Por que era difícil`,
+        'k.ix.2':`Decisão: três papéis, não um usuário principal`,
+        'k.ix.3':`Decisão: reconstruir o board em torno do dia do operador`,
+        'k.ix.4':`O que foi entregue: as telas`,
+        'k.ix.5':`Rollout, loja a loja`,
+        'k.ix.6':`Impacto`,
+        'k.ix.7':`O que eu faria diferente`,
+        'k.h2.hard':`Duas horas, prometidas antes de alguém na loja saber que o pedido existe`,
+        'k.hard.1':`A Fast Shop é uma das maiores varejistas de eletrônicos do Brasil: 80+ lojas, 22.000+ SKUs, cerca de 2.500 pedidos por dia. O checkout vende entrega em duas horas antes de qualquer pessoa na loja ter visto o pedido. Antes do Pick &amp; Pack, essa promessa rodava em telefonemas, um app de entregador e planilhas. Não existia uma linha de base de entrega no prazo para citar &mdash; nada na operação conseguia produzir uma, e essa ausência era, em si, o problema que o projeto existia para resolver.`,
+        'k.hard.2':`O número que valia a pena mover nunca foi &ldquo;uma UI de fulfillment melhor&rdquo;. Foi o tempo de detecção: quanto tempo um operador leva para descobrir que um pedido está em risco. Antes da plataforma, isso era quando alguém percebia, ou quando alguém vinha cobrar. Uma operação só cumpre o SLA se as exceções aparecem cedo o bastante para serem corrigidas.`,
+        'k.hard.3':`O pessoal de operação da Fast Shop tinha rodado esse processo por anos sem software, então, antes de desenhar uma tela, passei um tempo com oito operadores em três lojas perguntando onde um pedido de fato para (um entregador chegando antes de o pedido estar embalado, um produto fora da prateleira, uma nota fiscal rejeitada &mdash; cada uma virou um status) e o que acontece quando uma entrega falha (a resposta honesta: nada consistente, a lacuna que o status &ldquo;retornando à loja&rdquo; depois preencheu). Duas coisas não podiam mudar: as integrações com transportadoras e os documentos fiscais que todo pedido precisa carregar.`,
+        'k.tk.s01':`O ganho não foi uma taxa. Foi uma entrega falha finalmente ter nome e próximo passo.`,
+        'k.dk.problem':'Problema', 'k.dk.decision':'Decisão', 'k.dk.why':'Por quê', 'k.dk.argument':`O que venceu a discussão`, 'k.dk.evidence':`O que a rodada pegou`, 'k.dk.result':'Resultado',
+        'k.d1.title':`Uma plataforma, três casas, um pedido`,
+        'k.d1.problem':`&ldquo;Desenha para o operador da loja e o resto se adapta&rdquo; era um padrão perfeitamente razoável. A maioria das ferramentas de fulfillment escolhe um trabalho e obriga os outros dois a se adaptar.`,
+        'k.d1.decision':`Desenhar para três trabalhos ao mesmo tempo. A loja vê a própria fila, o centro de distribuição vê todas as lojas mais onde o dia está dando errado, o motorista recebe uma única parada sem ambiguidade. Mesmo pedido, mesmos status, mesmas cores, primeira tela diferente.`,
+        'k.d1.why':`O operador da loja contrata isso para limpar a fila antes de o entregador chegar. O centro de distribuição contrata para desviar do que está prestes a estourar. O motorista contrata por um próximo destino sem ambiguidade. Segurar os três ao mesmo tempo é o que forçou cada decisão de interface: o que vem primeiro no card, o que merece um alerta, o que pode ser um clique só.`,
+        'k.d1.argument':`Não foi uma opinião &mdash; foi o mapa abaixo. Quando os pontos em que a informação caía entre loja, centro de distribuição e motorista ficaram visíveis em uma página, ninguém propôs escolher um usuário principal de novo.`,
+        'k.d1.result':`Uma plataforma foi ao ar com uma casa diferente por papel, e nem loja, nem centro de distribuição, nem motorista precisou traduzir o fluxo de outra pessoa para o próprio.`,
         'k.slot1.c':`Um pedido, três raias. Os vãos entre as raias, onde a informação caía no chão, são onde estão as setas.`,
-        'k.h2.s03':`Mesmo pedido, três pessoas, três definições de &ldquo;pronto&rdquo;`,
-        'k.s03.p1':`O operador da loja contrata isso para limpar a fila antes de o entregador chegar. O operador do centro de distribuição contrata para saber quais pedidos estão prestes a estourar e desviar deles. O motorista contrata para receber um próximo destino sem ambiguidade. A maioria das ferramentas de fulfillment escolhe um desses trabalhos e obriga os outros dois a se adaptarem.`,
-        'k.s03.p2':`Desenhar para três papéis custa mais do que desenhar para um, e precisou ser defendido antes de alguém ver uma tela. &ldquo;Desenha para o operador da loja e o resto se adapta&rdquo; era uma posição perfeitamente razoável. O que venceu a discussão não foi uma opinião, foi o mapa acima: quando os pontos em que a informação caía entre loja, centro de distribuição e motorista ficaram visíveis em uma página, ninguém propôs escolher um usuário principal de novo.`,
-        'k.s03.p3':`Na interface essa decisão aparece como uma plataforma com uma casa diferente por papel: a loja vê a própria fila, o centro de distribuição vê todas as lojas mais os números que dizem onde o dia está dando errado, e o motorista recebe a parada. Mesmo pedido, mesmos status, mesmas cores, primeira tela diferente.`,
-        'k.pull.s03':`Segurar os três ao mesmo tempo é o que forçou cada decisão de interface: o que vem primeiro no card, o que merece um alerta, o que pode ser um clique só.`,
-        'k.h2.s04':`A rodada que reconstruiu o board`,
-        'k.s04.p1':`Não dá para fazer teste A/B em um armazém, e eu não podia tirar operadores de loja do chão para uma sessão em laboratório. Então a rodada aconteceu onde o trabalho está: no balcão, na máquina deles, com pedidos reais na frente, percorrendo o dia de verdade em vez de uma tarefa que eu tinha escrito. Antes de comprometer tempo de engenharia numa reconstrução, usei protótipos conceituais com IA para levar os stakeholders por três direções de board numa tarde em vez de uma sprint, para a direção já estar acordada antes de existir uma tela de produção.`,
-        'k.cmp.a':`Que o board deveria espelhar o ciclo de vida do pedido, porque é assim que o sistema pensa um pedido: recebido, faturado, separado, despachado, entregue.`,
-        'k.cmp.b':`Operadores não pensam em ciclo de vida. Pensam no que está prestes a machucar: o que sai na próxima hora, o que já está atrasado, o que não tem para onde ir. A primeira versão obrigava a traduzir.`,
-        'k.s04.p2':`Então o board foi reconstruído na sequência deles e não na do sistema, e o card foi reconstruído em torno da primeira pergunta deles. &ldquo;Esse está atrasado?&rdquo; foi para o canto superior direito, em vermelho. O SLA restante foi para a pílula de modalidade. O logo da transportadora foi para onde o olho chega por último, porque é a coisa que você só precisa depois de decidir agir.`,
+        'k.d2.title':`Operadores não pensam em ciclo de vida. Pensam no que está prestes a machucar`,
+        'k.d2.problem':`O primeiro board espelhava o ciclo de vida do pedido, porque é assim que o sistema pensa um pedido: recebido, faturado, separado, despachado, entregue.`,
+        'k.d2.decision':`Reconstruir o board na sequência do operador, e o card em torno da primeira pergunta dele: &ldquo;esse está atrasado?&rdquo; foi para o canto superior direito em vermelho, o SLA restante para a pílula, o logo da transportadora para onde o olho chega por último.`,
+        'k.d2.why':`Não dá para fazer teste A/B em um armazém. Então a rodada aconteceu no balcão, em máquinas reais, com pedidos reais, percorrendo o dia real do operador em vez de uma tarefa que eu tinha escrito &mdash; e protótipos conceituais com IA deixaram levar os stakeholders por três direções de board numa tarde em vez de uma sprint.`,
+        'k.d2.evidence':`Operadores não pensam em ciclo de vida. Pensam no que está prestes a machucar: o que sai na próxima hora, o que já está atrasado, o que não tem para onde ir. O board em formato de ciclo de vida obrigava a traduzir.`,
+        'k.d2.result':`A direção foi acordada antes de existir uma única tela de produção, e o board reconstruído é o que foi entregue.`,
         'k.an1.1':`&ldquo;Atrasado no status&rdquo; é a primeira coisa no card, em vermelho, porque é a primeira pergunta que o operador faz.`,
         'k.an1.2':`Duas pílulas, duas perguntas: o que está acontecendo com o pedido e quanto da promessa ainda resta (UltraFast · 1h).`,
         'k.an1.3':`O logo da transportadora fica por último. Você só precisa dele depois de decidir agir.`,
         'k.an1.4':`As colunas seguem o dia do operador, não o ciclo de vida do sistema: recebido, em separação, pronto para retirada, em transporte.`,
         'k.an1.5':`Pedidos de Click &amp; Collect vivem no mesmo board com a própria pílula (&ldquo;Retira&rdquo;), para a loja nunca rodar duas ferramentas.`,
         'k.an1.c':`O board da loja, como foi entregue: o que sai na próxima hora, o que já está atrasado, o que não tem para onde ir.`,
+        'k.h2.shipped':`O que foi entregue: as telas`,
         'k.h2.s05':`O centro de distribuição: todas as lojas, e os números que dizem onde o dia está dando errado`,
-        'k.s05.p1':`O centro de distribuição vê todas as lojas de uma vez, então a primeira tela dele não é uma fila e sim um conjunto de contadores: atrasados, problemas de faturamento, problemas de transporte, comprovante pendente. Cada um é um filtro, não um gráfico. O trabalho aqui é triagem, e triagem começa clicando no número que dói.`,
-        'k.s05.p2':`Alocação era a outra coisa que esse papel precisava e a loja não. Vários operadores trabalham a mesma fila, então todo card diz quem é o dono, e um card alocado para outra pessoa recua em vez de sumir: dá para ver que está sendo tratado, só não dá para pegar por engano.`,
+        'k.s05.p1':`O centro de distribuição vê todas as lojas de uma vez, então a primeira tela é um conjunto de contadores, não uma fila: atrasados, faturamento, transporte, comprovante pendente. Cada um é um filtro, não um gráfico &mdash; triagem começa clicando no número que dói. Alocação era a outra coisa que esse papel precisava e a loja não: vários operadores trabalham a mesma fila, todo card diz quem é o dono, e um card de outra pessoa recua em vez de sumir.`,
         'k.an2.1':`Contadores, não gráficos. Atrasados (23), faturamento (3), transporte (7), comprovante pendente (12): cada um é um filtro, e o dia começa clicando no que dói.`,
         'k.an2.2':`As ações de alocação ficam no card, a dois cliques de qualquer lugar: tirar de alguém, ou passar para outra pessoa.`,
         'k.an2.3':`&ldquo;Alocado para&rdquo; em todo card, porque em uma fila compartilhada a pergunta &ldquo;alguém está nesse?&rdquo; costumava ser um grito pelo galpão.`,
         'k.an2.4':`Um card de outra pessoa recua em vez de sumir: visível, mas não agarrável.`,
         'k.an2.c':`O board do centro de distribuição: os mesmos cards da loja, mais dono, porque aqui várias pessoas trabalham uma fila só.`,
         'k.h2.s05b':`A mesma fila como tabela, quando a pergunta muda`,
-        'k.s05.p3':`Um board responde &ldquo;qual é a forma do meu dia&rdquo;. Ele não responde &ldquo;qual desses 104 pedidos está parado há mais tempo&rdquo;, e essa é a pergunta que o centro de distribuição faz toda hora. Então a mesma fila alterna para uma tabela: uma linha por pedido, ordenável, com tempo de espera como coluna própria e um ponto de severidade antes do número do pedido. Mesmos dados, mesmos status, mesmas cores, uma primeira pergunta diferente.`,
+        'k.s05.p3':`Um board responde &ldquo;qual é a forma do meu dia&rdquo;. Não responde &ldquo;qual desses 104 pedidos está parado há mais tempo&rdquo;, a pergunta que o centro de distribuição faz toda hora. Então a mesma fila alterna para uma tabela: uma linha por pedido, ordenável, tempo de espera como coluna própria, um ponto de severidade antes do número do pedido. Mesmos dados, mesmos status, mesmas cores, uma primeira pergunta diferente.`,
         'k.an3.1':`Um toggle entre board e tabela. Mesmos filtros, mesma seleção, nada para reaprender.`,
         'k.an3.2':`Um ponto de severidade antes do número do pedido (vermelho, âmbar, azul) para o olho varrer a coluna sem ler uma palavra.`,
         'k.an3.3':`&ldquo;Tempo do pedido&rdquo; é uma coluna própria e ordenável: a que o centro de distribuição ordena primeiro, toda hora.`,
@@ -1246,14 +1217,14 @@
         'k.an3.5':`Linhas alocadas para outro operador recuam, exatamente como os cards no board.`,
         'k.an3.c':`A visão em tabela: a pergunta muda de &ldquo;qual é o meu dia&rdquo; para &ldquo;o que está esperando há mais tempo&rdquo;, e o layout segue.`,
         'k.h2.s05c':`Quando um pedido vira um telefonema`,
-        'k.s05.p4':`Quando um cliente liga, quem atende precisa da história inteira em segundos: quanto do SLA resta, onde o pedido está, o que já foi dito. A página do pedido coloca a contagem regressiva primeiro e em vermelho quando já estourou, o histórico na lateral na ordem em que as coisas aconteceram, e uma conversa com anexos para que &ldquo;o cliente disse para deixar com o vizinho&rdquo; fique no pedido, não na cabeça de alguém.`,
+        'k.s05.p4':`Quem atende uma ligação de cliente precisa da história inteira em segundos: quanto do SLA resta, onde o pedido está, o que já foi dito. A página do pedido coloca a contagem regressiva primeiro, vermelha depois da promessa, histórico na lateral em ordem, e uma conversa com anexos para que &ldquo;o cliente disse para deixar com o vizinho&rdquo; fique no pedido, não na cabeça de alguém.`,
         'k.an4.1':`A contagem do SLA é a maior coisa da página e fica vermelha depois da promessa, porque é sobre isso que o cliente está perguntando.`,
         'k.an4.2':`&ldquo;Tempo nesse status&rdquo; separa &ldquo;o pedido está atrasado&rdquo; de &ldquo;essa etapa é a que está atrasada&rdquo;.`,
         'k.an4.3':`Histórico como linha do tempo, o mais recente primeiro, cada passo com uma frase simples que o operador consegue ler em voz alta no telefone.`,
         'k.an4.4':`Comentários com anexos no próprio pedido, para o print da mensagem do cliente viajar junto com a entrega.`,
         'k.an4.c':`A página do pedido: construída para o momento em que uma entrega vira uma conversa.`,
         'k.h2.s05d':`As exceções são o produto`,
-        'k.s05.p5':`Em logística o caminho feliz quase não precisa de design; são as exceções que decidem se o operador confia na tela ou trabalha por fora dela. Esses quatro estados saíram da lista de paradas e do rollout, não de um arquivo de design. Cada um substitui algo que antes era um telefonema.`,
+        'k.s05.p5':`Em logística o caminho feliz quase não precisa de design; as exceções decidem se o operador confia na tela ou trabalha por fora dela. Esses quatro estados saíram da lista de paradas e do rollout, não de um arquivo de design. Cada um substitui algo que antes era um telefonema.`,
         'k.st1.h':`O motorista pegou o pacote e a corrida nunca começou`,
         'k.st1.p':`Quem está com ele, qual carro, e uma frase simples dizendo que a corrida não começou, com o rastreio a um clique. Isso antes era uma ligação para a transportadora.`,
         'k.st2.h':`Entregue, mas não fechado até ter comprovante`,
@@ -1264,37 +1235,24 @@
         'k.st4.p':`As exportações ficaram, de propósito, com um guardrail: se nada estiver selecionado, o diálogo avisa em voz alta que os 104 pedidos estão prestes a ser exportados. A queda no número de exportações virou nosso sinal de adoção.`,
         'k.states.c':`Quatro estados de exceção. Quinze status existem na plataforma entregue; estes são os que substituíram mais telefonemas.`,
         'k.h2.s06':`O lançamento não foi uma data. Foi uma sequência`,
-        'k.s06.p1':`Software de fulfillment falha em produção de jeitos que nunca falha na demo, então a loja matriz foi primeiro, sozinha, acompanhada diariamente com operadores e gerentes até passar uma semana inteira sem um novo corner case. Depois disso, ondas de cerca de vinte lojas a cada quinze dias. Ficou perto o bastante do time para um problema ser observado em vez de reportado. Cada onda carregou o que a anterior ensinou, e os três meses completos &mdash; rollout mais hypercare diário do nosso time de sustentação &mdash; foram o experimento. Depois disso virou chamado esporádico.`,
-        'k.s06.p2':`As exceções fizeram a maior parte do ensino. Um entregador chegando antes de o pedido estar embalado. Pedidos escaneados fora de ordem. Uma entrega que falhou com o endereço ainda marcado como válido. Cada uma virou um estado de interface ou uma regra, e fiquei nas revisões de engenharia em todas as ondas, porque a diferença entre um operador confiar na tela e trabalhar por fora dela costuma ser um caso não tratado.`,
-        'k.s06.p3':`&ldquo;Retornando à loja&rdquo; é o que eu apontaria. Não existia na primeira versão. A primeira onda revelou pedidos parados em &ldquo;em transporte&rdquo; sem ter para onde ir. Os operadores tinham uma gambiarra para isso, mas não um nome, e por isso nunca tinha sido pedido.`,
+        'k.s06.p1':`Software de fulfillment falha em produção de jeitos que nunca falha na demo, então a loja matriz foi primeiro, sozinha, acompanhada diariamente até passar uma semana inteira sem um novo corner case. Depois, ondas de cerca de vinte lojas a cada quinze dias, perto o bastante do time para um problema ser observado em vez de reportado. Os três meses completos &mdash; rollout mais hypercare diário &mdash; foram o experimento; depois disso virou chamado esporádico.`,
+        'k.s06.p2':`As exceções fizeram a maior parte do ensino: um entregador chegando antes de o pedido estar embalado, pedidos escaneados fora de ordem, uma entrega que falhou com o endereço ainda marcado como válido. Cada uma virou um estado de interface ou uma regra, e fiquei nas revisões de engenharia em todas as ondas. &ldquo;Retornando à loja&rdquo; é o que eu apontaria &mdash; não existia na primeira versão. A primeira onda revelou pedidos parados em &ldquo;em transporte&rdquo; sem ter para onde ir; os operadores tinham uma gambiarra mas não um nome, e por isso nunca tinha sido pedido.`,
         'k.tk.s06':`A diferença entre um operador confiar na tela e trabalhar por fora dela costuma ser um caso não tratado.`,
-        'k.h2.s07':`A taxa não subiu. Ela se recusou a cair enquanto a carga subia`,
-        'k.s07.p1':`Três meses depois do rollout, a entrega no prazo contra a promessa de duas horas estava em torno de 81%, com uns 38% mais volume do que a operação já tinha lidado. Os dois números são minha leitura e a lembrança das lideranças de operação, não um relatório puxado da plataforma &mdash; saí da empresa e os dashboards ficaram lá. Também não existe um antes para colocar do lado, porque a operação nunca tinha se medido &mdash; então leia esses números como a primeira leitura honesta que essa operação teve sobre si mesma, não como uma melhora verificada sobre um número conhecido. Essa é a afirmação inteira, e vale dizer com cuidado: em fulfillment, manter uma taxa enquanto o volume cresce é o mais difícil dos dois resultados.`,
-        'k.m0':`No prazo contra a promessa de duas horas, três meses depois do rollout, com o volume crescendo &mdash; minha estimativa, não uma exportação da plataforma`,
+        'k.h2.s07':`A operação não desacelerou. Mesmo com a carga subindo`,
+        'k.s07.p1':`Três meses depois do rollout, a plataforma rodava a promessa de duas horas em 80+ lojas, com mais volume do que a operação já tinha lidado, e a taxonomia de exceções capturando falhas que antes passavam despercebidas. Não existe um antes e depois verificado aqui: a operação anterior à plataforma nunca se mediu, então não tenho uma linha de base para comparar, e prefiro dizer isso a inventar uma. O que se manteve: operadores pararam de exportar para planilhas, e uma entrega falha deixou de ser invisível para ganhar status e próximo passo.`,
+        'k.m0':`Lançado em ondas ao longo de três meses, rodando a promessa de duas horas sobre o catálogo de 22.000+ SKUs da Fast Shop`,
         'k.m1':`Tempo para detectar um pedido em risco: antes, quando alguém percebia; depois, no instante em que ele entra em &ldquo;Atrasado&rdquo;`,
         'k.m2':`Status na taxonomia entregue, quatro deles exceções que substituíram telefonemas`,
-        'k.meas.h':`Como foi medido`,
-        'k.meas.1b':`Principal`,
-        'k.meas.1t':`Taxa de entregas no prazo contra a promessa de duas horas. É minha própria estimativa, lida de memória cerca de três meses depois do rollout, não um número que eu ainda consiga puxar da plataforma &mdash; saí da empresa e os dashboards ficaram lá. Linha de base: nenhuma. A operação anterior à plataforma não produzia número de prazo, porque rodava em WhatsApp, app de entregador e planilha. Apresento os 81% como primeira medição lembrada, não como delta verificado pelo sistema.`,
-        'k.meas.2b':`Operacional`,
-        'k.meas.2t':`Onde os pedidos ficavam parados e por quanto tempo, por status e por loja. A plataforma mede isso hoje; nada media antes, então não existe antes-e-depois para dar. Uma taxa diz que existe um problema; isso diz para onde ir.`,
-        'k.meas.3b':`Adoção`,
-        'k.meas.3t':`Se os operadores trabalhavam na plataforma ou por fora dela. Nunca contamos as exportações para planilha antes e depois, então só posso relatar o que o time viu: as planilhas paralelas pararam de ser mantidas. Um sinal grosseiro, e não contado.`,
-        'k.meas.4b':`Não provado`,
-        'k.meas.4t':`Causalidade. A plataforma foi lançada junto com uma operação em crescimento, e não consigo separar o design das mudanças de processo que a Fast Shop fez nos mesmos meses. O rollout escalonado é o mais perto de um controle: lojas na plataforma contra lojas ainda fora dela, nas mesmas semanas.`,
-        'k.note':`<strong>Escopo, como contexto e não como resultado:</strong> O Pick &amp; Pack foi entregue como o módulo de Fulfillment dentro do sistema de gestão de pedidos (OMS) da Fast Shop, com uma visão de loja e uma visão de centro de distribuição distintas, em mais de 100 telas de estados e comportamento. 80+ lojas migradas para a plataforma, 22.000+ SKUs passando por ela, três produtos entregues sobre a mesma base (Pick &amp; Pack, PIM, DevTools), todos desenhados por uma pessoa com o <a href="/compass/">Compass</a> como sistema por baixo. <em>Sobre precisão: os números acima são o que eu e as pessoas donas deles lembram, não um relatório que eu ainda consiga puxar &mdash; saí da empresa e os dashboards ficaram lá. Trate as magnitudes como aproximadas e a direção como a afirmação. Onde um número nunca existiu, esta página diz isso em vez de reconstruir um.</em>`,
+        'k.note':`<strong>Como foi medido, e o que não está provado:</strong> a operação anterior à plataforma nunca produziu um número de prazo, então não existe uma linha de base verificada para comparar, e não vou apresentar uma estimativa como se fosse uma. O sinal de adoção mais claro que consigo sustentar: as planilhas paralelas que os operadores mantinham pararam de existir. Causalidade também não está provada &mdash; a plataforma foi lançada junto com uma operação em crescimento, e não consigo separar totalmente o design das mudanças de processo que a Fast Shop fez nos mesmos meses; o rollout escalonado, lojas na plataforma contra lojas ainda fora dela nas mesmas semanas, é o mais perto de um controle.`,
         'k.h2.s08':`Desenhei o caminho feliz primeiro. Em logística, as exceções são o produto`,
-        'k.s08.p1':`Eu teria ido ao chão de loja antes de desenhar o primeiro board, não depois de ele falhar. O retrabalho foi barato porque aconteceu cedo, mas era evitável: construí a primeira versão a partir do modelo que o sistema tem de um pedido porque era o modelo a que eu tinha acesso, e confundi disponibilidade com precisão. A versão maior desse erro é que tratei as exceções como segunda passada, quando três dos quatro estados acima são o motivo de os operadores usarem a ferramenta.`,
-        'k.s08.p2':`Eu também teria instrumentado o tempo de detecção desde o primeiro dia. Era o ponteiro que combinamos, e na primeira onda eu só conseguia lê-lo na lista de paradas e nos tempos de permanência, não em um número só. Os releases seguintes tiveram isso; o que as pessoas mais perguntam não teve.`,
+        'k.s08.p1':`Eu teria ido ao chão de loja antes de desenhar o primeiro board, não depois de ele falhar. O retrabalho foi barato porque aconteceu cedo, mas era evitável: construí a primeira versão a partir do modelo que o sistema tem de um pedido porque era o modelo a que eu tinha acesso, e confundi disponibilidade com precisão. A versão maior desse erro é que tratei as exceções como segunda passada, quando três dos quatro estados acima são o motivo de os operadores usarem a ferramenta. Eu também teria instrumentado o tempo de detecção desde o primeiro dia; os releases depois do primeiro tiveram isso, e o primeiro é o que as pessoas mais perguntam.`,
         'k.role.h':`Meu papel`,
         'k.role.p':`O único designer na plataforma, de setembro de 2024 a fevereiro de 2026. Fui dono do Pick &amp; Pack da descoberta ao rollout loja a loja, construí e governei o Compass, e desenhei o PIM e o DevTools sobre a mesma base. Sem outro designer para quem passar nada, priorizar entre os quatro produtos era parte do trabalho: Pick &amp; Pack primeiro, porque era ele que carregava a promessa de duas horas.`,
         'k.team.h':`O time, e o que foi meu`,
         'k.team.p':`Um product manager era dono do roadmap e dos OKRs com a Fast Shop; os líderes de operação da Fast Shop eram os especialistas de domínio e a fonte da lista de paradas; um time de engenharia por produto construiu, comigo nas revisões em cada onda. Decisões que foram minhas: três papéis em vez de um usuário principal, o board e o card reconstruídos, o toggle de tabela, os quatro estados de exceção acima e o &ldquo;retornando à loja&rdquo;.`,
         'k.system.h':`Compass: o sistema por baixo`,
         'k.system.p':`Nenhuma dessas telas foi desenhada isolada. Uma pílula de status significa a mesma coisa no board, na tabela e na página do pedido porque a camada de tokens diz isso. Esse trabalho cresceu o bastante para ser um case próprio.`,
-        'k.system.cta':`Ler o case do Compass &rarr;`,
-        'k.instrument.h':`O instrumento foi escolhido, não herdado`,
-        'k.instrument.p1':`Projeto diferente, instrumento diferente. <a href="/#method">Como escolhi o instrumento em cada projeto &rarr;</a>`
+        'k.system.cta':`Ler o case do Compass &rarr;`
       }
     };
 

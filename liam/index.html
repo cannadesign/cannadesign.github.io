@@ -388,6 +388,27 @@
   .callout h3{font-size:17px; line-height:1.3; margin-bottom:var(--sp-2);}
   .callout p{font-size:var(--fs-small); line-height:var(--lh-small); color:var(--ink-2); margin:0;}
 
+  /* DEMO TAGS — "what this case demonstrates", scanned in under a second */
+  .demo-tags{display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 0;}
+  .demo-tags span{
+    font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+    padding:6px 12px; border-radius:100px; border:1px solid var(--line-control); color:var(--ink-2);
+  }
+
+  /* DECISION CARD — problem/decision/why/result, made scannable instead of proseful. */
+  .decision{margin:var(--sp-7) 0; border:1px solid var(--line); border-radius:16px; overflow:hidden;}
+  .decision-head{display:flex; align-items:center; gap:12px; padding:18px 20px; background:var(--paper-2); border-bottom:1px solid var(--line);}
+  .decision-head .dn{
+    width:26px; height:26px; border-radius:50%; background:var(--acid); color:var(--ink);
+    font-weight:900; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .decision-head h3{font-size:17px; line-height:1.3; margin:0;}
+  .decision-body{padding:4px 20px 22px; display:grid; gap:0;}
+  .decision-row{display:grid; grid-template-columns:128px 1fr; gap:20px; padding:16px 0; border-top:1px solid var(--line);}
+  .decision-row:first-child{border-top:none;}
+  .decision-row .dk{font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-2); padding-top:2px;}
+  .decision-row .dv{font-size:15.5px; line-height:1.55; color:var(--ink); margin:0;}
+
   /* PROCESS STEPS */
   .process{list-style:none; counter-reset:step; margin:var(--sp-6) 0; display:grid; gap:var(--sp-2);}
   .process li{counter-increment:step; position:relative; padding:var(--sp-4) var(--sp-4) var(--sp-4) 64px; background:var(--paper-2); border-radius:14px;}
@@ -552,6 +573,7 @@
   @media (max-width:640px){ .index ol{grid-template-columns:1fr;} }
 
   @media (max-width:640px){ .receipts li{grid-template-columns:1fr; gap:4px;} }
+  @media (max-width:640px){ .decision-row{grid-template-columns:1fr; gap:6px;} }
 
   @media (max-width:640px){
     .compare{grid-template-columns:1fr;}
@@ -611,6 +633,7 @@
     .meta-item:nth-child(2n+1){border-left:none; padding-left:0;}
   }
 </style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="c3e64fd0-ec7d-4fdf-a35f-7e8f77208d02"></script>
 </head>
 <body class="js">
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
@@ -656,21 +679,19 @@
         <div><dt data-i18n="tl.did.k">What I did</dt><dd data-i18n="l.tl.did">Designed an AI assistant that lives inside the session screen: the therapist narrates, LIAM drafts, and the clinician reviews and signs. I spent the design time on the failure states, not the demo path.</dd></div>
         <div><dt data-i18n="tl.out.k">Outcome</dt><dd data-i18n="l.tl.out">Documentation went from <b>2 hours to a 25-minute review</b>, with an in-product feedback loop so quality drift shows up in usage instead of months later.</dd></div>
       </dl>
+      <div class="demo-tags"><span data-i18n="l.demo.1">AI product design</span><span data-i18n="l.demo.2">Human-in-the-loop</span><span data-i18n="l.demo.3">Healthcare</span><span data-i18n="l.demo.4">Trust &amp; safety</span></div>
     </div>
   </div>
 
   <div class="index reveal">
-    <span class="k"><span data-i18n="ix.k">In this case</span><span class="rt" data-i18n="ix.time">13 min read</span></span>
+    <span class="k"><span data-i18n="ix.k">In this case</span><span class="rt" data-i18n="ix.time">7 min read</span></span>
     <ol>
-      <li><a href="#s01" data-i18n="stage.pain">The pain</a></li>
-      <li><a href="#s02" data-i18n="stage.pointer">The pointer</a></li>
-      <li><a href="#s03" data-i18n="stage.questions">The questions</a></li>
-      <li><a href="#s04" data-i18n="stage.job">The job</a></li>
-      <li><a href="#s05" data-i18n="stage.bet">The bet</a></li>
-      <li><a href="#s06" data-i18n="stage.test">The test</a></li>
-      <li><a href="#s07" data-i18n="stage.evidence">What the evidence changed</a></li>
-      <li><a href="#s08" data-i18n="stage.build">The build</a></li>
-      <li><a href="#s09" data-i18n="stage.production">In production</a></li>
+      <li><a href="#s01" data-i18n="l.ix.1">Why it was hard</a></li>
+      <li><a href="#s02" data-i18n="l.ix.2">Decision: LIAM proposes, the clinician decides</a></li>
+      <li><a href="#s03" data-i18n="l.ix.3">Decision: how I read trust</a></li>
+      <li><a href="#s04" data-i18n="l.ix.4">What shipped</a></li>
+      <li><a href="#s05" data-i18n="l.ix.5">Impact</a></li>
+      <li><a href="#s06" data-i18n="l.ix.6">What I&rsquo;d do differently</a></li>
     </ol>
   </div>
 
@@ -682,39 +703,24 @@
   <div class="col reveal">
     <p class="lead" data-i18n="l.lead">Every session at Genial Care generates a clinical record: what was targeted, what the child did, what changed. Therapists were writing that record from memory, after the fact, on top of a full day of sessions, which is exactly the kind of task that gets rushed, delayed, or thinned out under pressure. LIAM's job was to move the record-keeping into the moment it actually happens, instead of the moment there's finally time for it.</p>
 
-    <span class="stage-label" id="s01"><b>01</b> &middot; <span data-i18n="stage.pain">The pain</span></span>
-    <h2 data-i18n="l.h2.pain">Two hours of reconstruction, on top of a full day of sessions</h2>
-    <p data-i18n="l.pain.p1">The paperwork wasn&rsquo;t hard, it was misplaced. A therapist finishes a session, moves to the next child, and writes the first record hours later from memory. What gets lost isn&rsquo;t effort, it&rsquo;s detail: the specific thing the child did at minute twelve, which is exactly the detail the record exists to capture.</p>
-    <p data-i18n="l.pain.p2">Everyone already knew documentation was heavy. What the team didn&rsquo;t have was a shared account of <em>where</em> the two hours went, which is a different question and the only one a design can act on.</p>
-
-    <span class="stage-label" id="s02"><b>02</b> &middot; <span data-i18n="stage.pointer">The pointer</span></span>
-    <h2 data-i18n="l.h2.pointer">The pointer: hours per therapist, and what those hours were costing</h2>
-    <p data-i18n="l.pointer.p1">The number we set out to move was documentation time per session. It matters because of what sits on the other side of it: a therapist&rsquo;s day has a fixed number of hours, and every hour spent reconstructing a session is an hour not spent in one. That caps how many sessions a therapist can realistically carry, which caps how fast the company can grow the care it delivers. Documentation load is a capacity constraint wearing an administrative costume, and it is also a retention risk. Unpaid evening paperwork is a reliable way to lose good clinicians.</p>
-    <p data-i18n="l.pointer.p2">There was a second pointer nobody writes down: record quality. Faster notes that say less would have moved the metric and damaged the product. So we agreed the clinical lead held a veto, and that a time saving bought with thinner records counted as a failure, not a win.</p>
+    <span class="stage-label" id="s01"><b>01</b> &middot; <span data-i18n="l.ix.1">Why it was hard</span></span>
+    <h2 data-i18n="l.h2.hard">Two hours of reconstruction, and the constraint underneath it</h2>
+    <p data-i18n="l.hard.1">The paperwork wasn&rsquo;t hard, it was misplaced. A therapist finishes a session, moves to the next child, and writes the record hours later from memory &mdash; losing the specific detail from minute twelve that the record exists to capture, on top of a full day of sessions.</p>
+    <p data-i18n="l.hard.2">The number worth moving was documentation time per session, because of what sits on the other side of it: a therapist&rsquo;s day has a fixed number of hours, and every hour spent reconstructing a session is an hour not spent in one. That caps how many sessions a therapist can carry, which caps how fast the company can grow the care it delivers. Documentation load is a capacity constraint wearing an administrative costume &mdash; and a retention risk, since unpaid evening paperwork wears clinicians down over time.</p>
+    <p data-i18n="l.hard.3">An AI feature in a clinical context fails on governance long before it fails on usability. Before I designed a screen, the team had to agree who signs the record, what the clinical record needed to contain, and how long a child&rsquo;s voice recording is retained. Faster notes that said less would have moved the metric and damaged the product, so the clinical lead held a veto: a time saving bought with thinner records counted as a failure, not a win.</p>
     <p class="takeaway" data-i18n="l.tk.pointer">A time saving bought with thinner clinical records counted as a failure, not a win.</p>
 
-    <span class="stage-label" id="s03"><b>03</b> &middot; <span data-i18n="stage.questions">The questions</span></span>
-    <h2 data-i18n="l.h2.questions">What I had to settle with stakeholders before designing anything</h2>
-    <p data-i18n="l.questions.p">An AI feature in a clinical context fails on governance long before it fails on usability. So the first round wasn&rsquo;t about screens.</p>
-    <ol class="process">
-      <li>
-        <h3 class="card-h" data-i18n="l.q1.h">Who signs the record?</h3>
-        <p data-i18n="l.q1.p">If LIAM drafts and a therapist submits, the therapist is still the author. That single answer set the whole interaction model: LIAM proposes, a human disposes, and nothing reaches the record without a person having read it.</p>
-      </li>
-      <li>
-        <h3 class="card-h" data-i18n="l.q2.h">What must a report contain, non-negotiably?</h3>
-        <p data-i18n="l.q2.p">The clinical team defined the fields that exist for regulatory and continuity-of-care reasons. Those became constraints on the output, not suggestions, and they are why the draft is structured rather than free prose.</p>
-      </li>
-      <li>
-        <h3 class="card-h" data-i18n="l.q3.h">Where does a child&rsquo;s voice recording live, and for how long?</h3>
-        <p data-i18n="l.q3.p">Audio of a session is sensitive data about a minor. Retention, access and deletion had to be answered before I designed a record button, because the answers change what the interface has to promise.</p>
-      </li>
-      <li>
-        <h3 class="card-h" data-i18n="l.q4.h">What happens the first time it is confidently wrong?</h3>
-        <p data-i18n="l.q4.p">Not <em>if</em>. I made the team answer for the case where a plausible-sounding draft contains something the session didn&rsquo;t contain, because the answer to that question is the difference between an assistant and a liability. The answer became four interface rules: every field is marked as a suggestion and copied in by hand, never pre-submitted; the source recording stays attached to the draft so a therapist can check a line against what was actually said; nothing reaches the record without a person having read it; and the in-flow prompt asks whether the suggestions are still good, so a drift in quality shows up as a falling answer rate.</p>
-      </li>
-    </ol>
-    <p data-i18n="l.questions.p2">Part of that round happened on a wall. Before deciding anything about the recording flow, we mapped the clinical panel as it already existed &mdash; every section, every tab, everything a therapist passes through in a session. The point was not to redesign the panel. It was to be able to point at a specific place and ask whether an audio note belonged there, which is a much harder question to dodge than &ldquo;where should this feature live?&rdquo;</p>
+    <span class="stage-label" id="s02"><b>02</b> &middot; <span data-i18n="l.ix.2">Decision: LIAM proposes, the clinician decides</span></span>
+    <div class="decision">
+      <div class="decision-head"><span class="dn">1</span><h3 data-i18n="l.d1.title">LIAM proposes. The clinician decides.</h3></div>
+      <div class="decision-body">
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.problem">Problem</span><p class="dv" data-i18n="l.d1.problem">If LIAM drafts and submits on its own, authorship blurs &mdash; and a wrong clinical record with no clear author is a liability, not a convenience.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.decision">Decision</span><p class="dv" data-i18n="l.d1.decision">LIAM drafts every required field as a suggestion. A therapist reads, corrects, and submits. Nothing reaches the record unread.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.why">Why</span><p class="dv" data-i18n="l.d1.why">The real design question wasn&rsquo;t whether it could draft well, it was what happens the first time it&rsquo;s confidently wrong. That produced four interface rules: every field is a suggestion copied in by hand, never pre-submitted; the source recording stays attached so a therapist can check a line against what was actually said; nothing reaches the record without a person reading it; and an in-flow prompt asks whether the suggestions are still good, so quality drift shows up as a falling answer rate instead of a habit that quietly dies.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.evidence">What it caught</span><p class="dv" data-i18n="l.d1.evidence">Before touching the recording flow, we mapped the existing clinical panel section by section on a wall &mdash; not to redesign it, but to argue concretely about where a voice note belongs inside a workspace therapists already use, instead of assuming it needed a place of its own.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.result">Result</span><p class="dv" data-i18n="l.d1.result">The interaction model held through launch: LIAM proposes, the clinician decides, and record quality stayed the clinical lead&rsquo;s to veto.</p></div>
+      </div>
+    </div>
     <p class="takeaway" data-i18n="l.tk.questions">&ldquo;What happens the first time it is confidently wrong&rdquo; is the question that separates an assistant from a liability.</p>
   </div>
 
@@ -725,54 +731,16 @@
 
   <div class="col reveal">
 
-    <span class="stage-label" id="s04"><b>04</b> &middot; <span data-i18n="stage.job">The job</span></span>
-    <h2 data-i18n="l.h2.job">What a therapist is hiring this for</h2>
-    <p data-i18n="l.job.p1">Not &ldquo;write my report.&rdquo; A therapist is hiring LIAM to <em>not lose what just happened</em>. To get the session out of their head while it is still accurate, and to get their evening back without lowering the standard of the record they sign.</p>
-    <p data-i18n="l.job.p2">That framing rules things out. It means the capture has to happen next to the child, in the minute after the session, on the device already in their hand. A better form, anywhere else, doesn&rsquo;t do the job.</p>
-    <p class="pull" data-i18n="l.job.pull">A therapist isn&rsquo;t hiring an AI to write. They&rsquo;re hiring it to not lose what just happened.</p>
-
-    <span class="stage-label" id="s05"><b>05</b> &middot; <span data-i18n="stage.bet">The bet</span></span>
-    <h2 data-i18n="l.h2.howworked">Designing an AI feature people can trust</h2>
-    <p data-i18n="l.howworked.p">The hard part of LIAM was never the model. It was earning the therapist's trust in something that drafts clinical language on their behalf. So the process was built around validating trust as much as usability.</p>
-    <div class="artifact-row reveal">
-      <div class="artifact-tile">
-        <div class="a-visual">
-          <div class="a-journey">
-            <div class="dot on"></div><div class="seg"></div>
-            <div class="dot"></div><div class="seg"></div>
-            <div class="dot"></div><div class="seg"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-        <span class="a-label" data-i18n="l.artifact1">Workflow shadowing</span>
-      </div>
-      <div class="artifact-tile">
-        <div class="a-visual">
-          <div class="a-wire">
-            <div class="row w45"></div>
-            <div class="block"></div>
-            <div class="row w100"></div>
-            <div class="row w70"></div>
-          </div>
-        </div>
-        <span class="a-label" data-i18n="l.artifact2">Prototyping risky states</span>
-      </div>
-      <div class="artifact-tile">
-        <div class="a-visual">
-          <div class="a-chat">
-            <div class="bub bub1"></div>
-            <div class="bub bub2"></div>
-            <div class="bub bub3"></div>
-          </div>
-        </div>
-        <span class="a-label" data-i18n="l.artifact3">Therapist &amp; clinical lead testing</span>
+    <span class="stage-label" id="s03"><b>03</b> &middot; <span data-i18n="l.ix.3">Decision: how I read trust</span></span>
+    <div class="decision">
+      <div class="decision-head"><span class="dn">2</span><h3 data-i18n="l.d2.title">Read trust through a population you can count, not a funnel</h3></div>
+      <div class="decision-body">
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.problem">Problem</span><p class="dv" data-i18n="l.d2.problem">On the family app, behavior showed up in a weekly funnel. Here the population is the ~80 therapists on staff, the event happens a handful of times a day, and the real risk &mdash; a therapist quietly losing trust in a draft &mdash; never shows up in a funnel at all.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.decision">Decision</span><p class="dv" data-i18n="l.d2.decision">Treat the therapists as a population you can count, not a sample. Test the risky states with all of them before launch, then read a quantitative signal after: an in-flow prompt asking whether each suggestion was still good.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.why">Why</span><p class="dv" data-i18n="l.d2.why">A therapist isn&rsquo;t hiring an AI to write, they&rsquo;re hiring it to not lose what just happened while it&rsquo;s still accurate. That framing made trust, not writing quality, the thing actually at risk &mdash; and small-n qualitative testing close to the real workflow was the only instrument that could see it before launch.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="l.dk.result">Result</span><p class="dv" data-i18n="l.d2.result">The interaction held through launch and stayed in daily use, with therapists answering the in-flow check instead of skipping it. I don&rsquo;t have a closed-out adoption number I can still pull, and I&rsquo;d rather say so than reconstruct one.</p></div>
       </div>
     </div>
-    <span class="stage-label" id="s06"><b>06</b> &middot; <span data-i18n="stage.test">The test</span></span>
-    <h2 data-i18n="l.h2.test">How I checked, with a population you can count and no funnel</h2>
-    <p data-i18n="l.test.p1">On the family app, a few hundred metres away in the same company, I read behaviour off a weekly curve. Here that instrument is useless. The population is the ~80 therapists on staff, the event happens a handful of times a day, and the thing at risk never appears in a funnel: whether a clinician trusts a draft enough to sign it. A therapist who quietly stops trusting LIAM still clicks every button.</p>
-    <p data-i18n="l.test.p2">So the evidence had to be qualitative and close: sitting with the documentation as it actually happens, testing the risky states rather than the demo path, and reading AI-drafted output line by line with the people who would have to sign it. Small n, but the right n. When you can count everyone who will use it, you are not sampling. You are asking all of them.</p>
-    <p data-i18n="l.test.p3">The quantitative part came after launch, and by design. An in-flow prompt asks whether the suggestion was still good, so that drift shows up as a falling answer rate rather than as a habit that quietly died months later. It has stayed around 70% positive, on a team that answers product prompts readily &mdash; these therapists turn up for interviews and tests when asked, which makes the signal easier to read here than it would be on a colder population. About 74% of sessions now go through LIAM. Both figures are internal readings I recall rather than a report I can produce, and I flag them as such.</p>
     <p class="takeaway" data-i18n="l.tk.test">When you can count everyone who will use it, that isn&rsquo;t a sample. That is everybody.</p>
   </div>
 
@@ -782,19 +750,13 @@
   </figure>
 
   <div class="col reveal">
-    <div class="callout-grid">
-      <div class="callout">
-        <h3 class="card-h" data-i18n="l.role.h">My role</h3>
-        <p data-i18n="l.role.p">Senior product designer end to end: workflow research, interaction and UI, prototype, and the trust-and-safety states that make an AI feature usable in a clinical context.</p>
-      </div>
-      <div class="callout">
-        <h3 class="card-h" data-i18n="l.team.h">The team</h3>
-        <p data-i18n="l.team.p">Partnered with a product manager, an engineering squad building the AI pipeline, and the clinical team as the domain authority on what a report must contain.</p>
-      </div>
-    </div>
+    <span class="stage-label" id="s04"><b>04</b> &middot; <span data-i18n="l.ix.4">What shipped</span></span>
+    <h2 data-i18n="l.h2.shipped">What shipped</h2>
+    <p data-i18n="l.shipped.intro">Three pieces carried the two decisions above into a working product.</p>
 
-    <h2 data-i18n="l.h2.recording">Recording lives inside the work, not next to it</h2>
-    <p data-i18n="l.recording.p">The intervention screen, with its programs, targets, and progress per skill, is where a therapist already spends the session. Adding LIAM meant putting the record button there, not in a separate "documentation" tool the therapist would have to remember to open afterward. A single mic control sits in the corner of the exact screen they're already using.</p>
+    <h3 class="card-h" data-i18n="l.ship1.h">Recording, inside the work already happening</h3>
+    <p data-i18n="l.recording.p">The intervention screen, with its programs, targets, and progress per skill, is where a therapist already spends the session. A single mic control sits in the corner of that exact screen, not in a separate &ldquo;documentation&rdquo; tool. Once recorded, the note surfaces as a waveform with an explicit send action, so the therapist can confirm the capture before moving on. And when an upload fails &mdash; clinics have bad wifi &mdash; the interface says so directly, &ldquo;your voice note wasn&rsquo;t sent,&rdquo; with an obvious retry, instead of a spinner that quietly gives up.</p>
+    <p class="pull" data-i18n="l.uploads.pull">Silent failure is worse than an ugly one, especially in a tool handling clinical documentation.</p>
   </div>
 
   <figure class="shot reveal">
@@ -805,35 +767,8 @@
   </figure>
 
   <div class="col reveal">
-    <h2 data-i18n="l.h2.confirm">Confirm the capture before asking the therapist to trust it</h2>
-    <p data-i18n="l.confirm.p">Once recorded, the note doesn't vanish into a black box. It surfaces as a waveform with its length, and an explicit send action. That pause matters more than it looks: a therapist just spoke clinical information out loud about a child, and the interface's next job is to prove it actually captured that before asking them to move on.</p>
-  </div>
-
-  <figure class="shot reveal">
-    <div class="frame">
-      <img src="/assets/liam-2.webp" alt="LIAM recorded voice note shown as a waveform with duration, plus discard and send controls" width="1200" height="1267">
-    </div>
-    <figcaption class="caption" data-i18n="l.cap2">The captured note before it's sent, length and waveform visible, with a clear way to discard and re-record.</figcaption>
-  </figure>
-
-  <div class="col reveal">
-    <h2 data-i18n="l.h2.uploads">Uploads fail. The interface has to say so, plainly</h2>
-    <p data-i18n="l.uploads.p">A voice note recorded in a clinic doesn't always make it to the server on the first try. I designed the failure state as a direct, specific statement, "your voice note wasn't sent," with an obvious retry, instead of a spinner that quietly gives up or an error code the therapist has to interpret. For a tool handling clinical documentation, silent failure is worse than an ugly one.</p>
-    <p class="pull" data-i18n="l.uploads.pull">Silent failure is worse than an ugly one, especially in a tool handling clinical documentation.</p>
-  </div>
-
-  <figure class="shot reveal">
-    <div class="frame">
-      <img src="/assets/liam-3.webp" alt="LIAM error state stating the voice note failed to send, with a retry control" width="1200" height="1267">
-    </div>
-    <figcaption class="caption" data-i18n="l.cap3">The failure state, stated plainly: what happened, and a direct way to fix it, no ambiguity about whether the recording is safe.</figcaption>
-  </figure>
-
-  <div class="col reveal">
-    <span class="stage-label" id="s07"><b>07</b> &middot; <span data-i18n="stage.evidence">What the evidence changed</span></span>
-    <h2 data-i18n="l.h2.payoff">The payoff: a draft, not a form</h2>
-    <p data-i18n="l.payoff.p1">This is what the two hours collapse into. LIAM turns the audio into a first draft of every required field: health check-in, reinforcers used, challenges observed, session summary, clinical discussion points, each one pre-filled and clearly marked as LIAM's suggestion, with a one-click copy into the real field. The therapist's job changes from writing the report to editing one: read, correct what's off, keep what's right, submit.</p>
-    <p data-i18n="l.payoff.p2">Nothing here submits itself. Every field stays editable, and the "Save" action stays with the therapist: LIAM proposes, the clinician decides.</p>
+    <h3 class="card-h" data-i18n="l.ship2.h">The draft: a form the therapist edits, not writes</h3>
+    <p data-i18n="l.payoff.p1">This is what the two hours collapse into. LIAM turns the audio into a first draft of every required field &mdash; health check-in, reinforcers used, challenges observed, session summary, clinical discussion points &mdash; each pre-filled and clearly marked as a suggestion, with a one-click copy into the real field. The therapist&rsquo;s job changes from writing the report to editing one: read, correct what&rsquo;s off, keep what&rsquo;s right, submit. Nothing submits itself; the &ldquo;Save&rdquo; action stays with the therapist.</p>
   </div>
 
   <figure class="shot reveal">
@@ -844,15 +779,8 @@
   </figure>
 
   <div class="col reveal">
-    <span class="stage-label" id="s08"><b>08</b> &middot; <span data-i18n="stage.build">The build</span></span>
-    <h2 data-i18n="l.h2.build">Shipping it with the AI squad, not next to them</h2>
-    <p data-i18n="l.build.p1">An AI feature has failure modes that don&rsquo;t exist in ordinary product work, and most of them only appear against the real pipeline. I worked inside the squad building it. That is where latency stopped being an abstraction. A therapist standing next to a child will not wait on a spinner, so the interface had to be honest about what was still processing, and let her leave the screen without losing the note.</p>
-    <p data-i18n="l.build.p2">The upload failure state came out of that phase, not out of a design file. Clinics have bad wifi, and the first implementation retried quietly and then gave up. We replaced it with a plain statement and a retry the therapist controls. I stayed on the review side after release too, reading drafts against the fields the clinical team had defined, because a model that drifts doesn&rsquo;t announce it.</p>
-    <p class="takeaway" data-i18n="l.tk.build">A model that drifts doesn&rsquo;t announce it. Someone has to keep reading the output.</p>
-
-    <span class="stage-label" id="s09"><b>09</b> &middot; <span data-i18n="stage.production">Into production</span></span>
-    <h2 data-i18n="l.h2.trustloop">Trust isn't a one-time decision. It's a loop</h2>
-    <p data-i18n="l.trustloop.p">An AI feature that quietly gets worse, or quietly gets better, teaches people to stop trusting it either way. I added a lightweight feedback prompt directly in the flow: are you happy with LIAM's suggestions right now, yes or no, with room to say why, so drift in suggestion quality surfaces from real usage instead of waiting for a support ticket or a churned habit.</p>
+    <h3 class="card-h" data-i18n="l.ship3.h">A feedback loop that keeps trust visible</h3>
+    <p data-i18n="l.trustloop.p">An AI feature that quietly gets worse, or quietly gets better, teaches people to stop trusting it either way. A lightweight prompt sits directly in the flow: are you happy with LIAM&rsquo;s suggestions right now, yes or no, with room to say why &mdash; so drift in suggestion quality surfaces from real usage instead of a support ticket or a churned habit months later. The decision underneath all three pieces is the same: an AI feature earns trust through visible mechanics, not through confidence.</p>
   </div>
 
   <figure class="shot reveal">
@@ -863,29 +791,19 @@
   </figure>
 
   <div class="col reveal">
-    <h2 data-i18n="l.h2.defend">What I'd defend in a design review</h2>
-    <p data-i18n="l.defend.p">The design decision underneath all five screens is the same: an AI feature earns trust through visible mechanics, not through confidence. Show the capture before asking for the record. State the failure instead of hiding it. Mark every suggestion as a suggestion.</p>
-
+    <span class="stage-label" id="s05"><b>05</b> &middot; <span data-i18n="l.ix.5">Impact</span></span>
+    <h2 data-i18n="l.h2.impact">Impact</h2>
     <div class="metrics-strip">
       <div class="m"><div class="num">~2h</div><div class="label" data-i18n="l.m0">Writing the record from memory after a full day, per session, before LIAM</div></div>
       <div class="m"><div class="num">~25min</div><div class="label" data-i18n="l.m1">Reviewing and submitting LIAM's draft, per session, after</div></div>
       <div class="m"><div class="num">0</div><div class="label" data-i18n="l.m2">Fields LIAM can submit on its own: every suggestion is copied in and signed by the therapist</div></div>
     </div>
-    <p class="note" data-i18n="l.note"><strong>How it was measured, and what the number leaves out:</strong> the two hours are the therapists&rsquo; own self-reported time to write a session report from memory before LIAM; the 25 minutes are their review-and-submit time with LIAM&rsquo;s draft in place, read one quarter after rollout. It is not a like-for-like total: narrating during the session adds a few minutes that the 25 does not include, and the population is the clinical team on staff, so this is a before-and-after with everyone, not a sample. Record quality was the guardrail and the clinical lead held the veto on it. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em></p>
+    <p class="note" data-i18n="l.note"><strong>How it was measured, and what the number leaves out:</strong> the two hours are the therapists&rsquo; own self-reported time to write a session report from memory before LIAM; the 25 minutes are their review-and-submit time with LIAM&rsquo;s draft in place, read one quarter after rollout. It is not a like-for-like total: narrating during the session adds a few minutes that the 25 does not include, and the population is the clinical team on staff, so this is a before-and-after with everyone, not a sample. The clinical lead&rsquo;s verdict after launch was that record quality improved rather than merely held &mdash; a record written minutes after the session carries detail that one written from memory at 9pm does not. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em></p>
+    <p class="pull" data-i18n="l.arg.p">The pressure on an AI feature is always to make it do more. The constraint I held was that LIAM proposes and never submits &mdash; even when the draft is good enough that signing it unread would be tempting. It cost us the most impressive version of the demo. It&rsquo;s the reason the clinical side allowed the feature to exist at all.</p>
 
-    <h3 class="sub" data-i18n="l.meas.h">How we measured it, and the number that could veto the win</h3>
-    <p data-i18n="l.meas.p">Time was the headline, but it was never allowed to be the only number.</p>
-    <ul class="receipts">
-      <li><b data-i18n="l.meas.1b">Headline</b> <span data-i18n="l.meas.1t">Documentation time per session, read against the therapists&rsquo; own before-and-after rather than against an estimate.</span></li>
-      <li><b data-i18n="l.meas.2b">Guardrail</b> <span data-i18n="l.meas.2t">Record quality, reviewed by the clinical lead. A faster note that said less counted as a failure, and the clinical side held the veto on that call. Their verdict after launch was that quality improved rather than held: a record written minutes after the session, from the session, carries detail that a record written from memory at 9pm does not.</span></li>
-      <li><b data-i18n="l.meas.3b">Drift alarm</b> <span data-i18n="l.meas.3t">The in-flow prompt asking whether LIAM&rsquo;s suggestions are still good, so decay shows up as a falling answer rate instead of as a support ticket months later.</span></li>
-    </ul>
-
-    <p data-i18n="l.arg.p">That was also the argument I had to win. The pressure on an AI feature is always to make it do more, and the constraint I held was that LIAM proposes and never submits &mdash; the therapist stays the author, even when the draft is good enough that signing it unread would be tempting. It cost us the most impressive version of the demo. It is the reason the clinical side allowed the feature to exist at all.</p>
-    <h3 class="sub" data-i18n="l.dif.h">What I&rsquo;d do differently</h3>
-    <p data-i18n="l.dif.p">I would have brought the clinical lead into the interface decisions, not only into the review of the output. The trust states were designed first and validated second; several of them would have been simpler if the person who owns the clinical standard had been in the room while they were being drawn. And I under-designed the moment a therapist disagrees with the draft: correcting is easy, but the interface never asks why, so the most valuable signal in the whole feature goes unrecorded.</p>
-
-    <p class="note" data-i18n="l.instrument.p1">Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a></p>
+    <span class="stage-label" id="s06"><b>06</b> &middot; <span data-i18n="l.ix.6">What I&rsquo;d do differently</span></span>
+    <h2 data-i18n="l.h2.dif">What I&rsquo;d do differently</h2>
+    <p data-i18n="l.dif.p">I would have brought the clinical lead into the interface decisions, not only the review of the output &mdash; several trust states would have been simpler if the person who owns the clinical standard had been in the room while they were being drawn. And I under-designed the moment a therapist disagrees with the draft: correcting is easy, but the interface never asks why, so the most valuable signal in the whole feature goes unrecorded.</p>
 
     <h2 data-i18n="l.h2.bigpicture">Where this sits in the bigger picture</h2>
     <p data-i18n="l.bigpicture.p">LIAM shipped after the family-facing app had already gone from 8% to 62% daily use. Once families were actually engaging, the constraint moved to the other side of the platform: the therapists producing the content families were now relying on. Same instinct, different audience: find where a person is spending effort on something that isn't the actual work, and compress it into a decision they can make quickly.</p>
@@ -933,6 +851,11 @@
       <a class="contact-option" href="mailto:cannalongadesign@gmail.com">
         <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="co-body"><span class="co-title" data-i18n="modal.email.title">Send an email</span><span class="co-sub">cannalongadesign@gmail.com</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a class="contact-option" href="mailto:cannalongadesign@gmail.com?subject=Resume%20request">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.resume.title">Request my r&eacute;sum&eacute;</span><span class="co-sub" data-i18n="modal.resume.sub">I&rsquo;ll send the PDF by email</span></span>
         <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </a>
       <a class="contact-option" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
@@ -989,10 +912,8 @@
   (function(){
     const I18N = {
       en: {
-        'l.questions.p2':`Part of that round happened on a wall. Before deciding anything about the recording flow, we mapped the clinical panel as it already existed &mdash; every section, every tab, everything a therapist passes through in a session. The point was not to redesign the panel. It was to be able to point at a specific place and ask whether an audio note belonged there, which is a much harder question to dodge than &ldquo;where should this feature live?&rdquo;`,
-        'l.arg.p':`That was also the argument I had to win. The pressure on an AI feature is always to make it do more, and the constraint I held was that LIAM proposes and never submits &mdash; the therapist stays the author, even when the draft is good enough that signing it unread would be tempting. It cost us the most impressive version of the demo. It is the reason the clinical side allowed the feature to exist at all.`,
-        'l.dif.h':`What I&rsquo;d do differently`,
-        'l.dif.p':`I would have brought the clinical lead into the interface decisions, not only into the review of the output. The trust states were designed first and validated second; several of them would have been simpler if the person who owns the clinical standard had been in the room while they were being drawn. And I under-designed the moment a therapist disagrees with the draft: correcting is easy, but the interface never asks why, so the most valuable signal in the whole feature goes unrecorded.`,
+        'l.arg.p':`The pressure on an AI feature is always to make it do more. The constraint I held was that LIAM proposes and never submits &mdash; even when the draft is good enough that signing it unread would be tempting. It cost us the most impressive version of the demo. It&rsquo;s the reason the clinical side allowed the feature to exist at all.`,
+        'l.dif.p':`I would have brought the clinical lead into the interface decisions, not only the review of the output &mdash; several trust states would have been simpler if the person who owns the clinical standard had been in the room while they were being drawn. And I under-designed the moment a therapist disagrees with the draft: correcting is easy, but the interface never asks why, so the most valuable signal in the whole feature goes unrecorded.`,
         'close.cta3.liam':`Read the Pick &amp; Pack case`,
         'nav.back.genial':`Back to Genial App`,
         'nav.back.liam':`Back to LIAM`,
@@ -1004,20 +925,7 @@
         'meta.v.role':`Senior Product Designer`,
         'meta.v.team':`PM · AI eng squad · Clinical`,
         'meta.v.out':`2h &rarr; 25min per session`,
-        'stage.build':`The build`,
-        'l.h2.build':`Shipping it with the AI squad, not next to them`,
-        'l.build.p1':`An AI feature has failure modes that don&rsquo;t exist in ordinary product work, and most of them only appear against the real pipeline. I worked inside the squad building it. That is where latency stopped being an abstraction. A therapist standing next to a child will not wait on a spinner, so the interface had to be honest about what was still processing, and let her leave the screen without losing the note.`,
-        'l.build.p2':`The upload failure state came out of that phase, not out of a design file. Clinics have bad wifi, and the first implementation retried quietly and then gave up. We replaced it with a plain statement and a retry the therapist controls. I stayed on the review side after release too, reading drafts against the fields the clinical team had defined, because a model that drifts doesn&rsquo;t announce it.`,
-        'l.tk.build':`A model that drifts doesn&rsquo;t announce it. Someone has to keep reading the output.`,
-        'l.meas.h':`How we measured it, and the number that could veto the win`,
-        'l.meas.p':`Time was the headline, but it was never allowed to be the only number.`,
-        'l.meas.1b':`Headline`,
-        'l.meas.1t':`Documentation time per session, read against the therapists&rsquo; own before-and-after rather than against an estimate.`,
-        'l.meas.2b':`Guardrail`,
-        'l.meas.2t':`Record quality, reviewed by the clinical lead. A faster note that said less counted as a failure, and the clinical side held the veto on that call. Their verdict after launch was that quality improved rather than held: a record written minutes after the session, from the session, carries detail that a record written from memory at 9pm does not.`,
-        'l.meas.3b':`Drift alarm`,
-        'l.meas.3t':`The in-flow prompt asking whether LIAM&rsquo;s suggestions are still good, so decay shows up as a falling answer rate instead of as a support ticket months later.`,
-        'ix.time':'13 min read',
+        'ix.time':'7 min read',
         'l.tk.pointer':`A time saving bought with thinner clinical records counted as a failure, not a win.`,
         'l.tk.questions':`&ldquo;What happens the first time it is confidently wrong&rdquo; is the question that separates an assistant from a liability.`,
         'l.tk.test':`When you can count everyone who will use it, that isn&rsquo;t a sample. That is everybody.`,
@@ -1028,6 +936,7 @@
         'l.tl.problem':`Therapists were losing up to two hours after every session reconstructing clinical records from memory, at the end of a full day.`,
         'l.tl.did':`Designed an AI assistant that lives inside the session screen: the therapist narrates, LIAM drafts, and the clinician reviews and signs. I spent the design time on the failure states, not the demo path.`,
         'l.tl.out':`Documentation went from <b>2 hours to a 25-minute review</b>, with an in-product feedback loop so quality drift shows up in usage instead of months later.`,
+        'l.demo.1':'AI product design', 'l.demo.2':'Human-in-the-loop', 'l.demo.3':'Healthcare', 'l.demo.4':'Trust &amp; safety',
         'nav.back':'Back to portfolio', 'nav.cta':`Let's talk`,
         'hero.kicker':'Case study · Healthcare · AI Design',
         'hero.h1':'LIAM: turning 2 hours of clinical paperwork into a 25-minute review',
@@ -1036,62 +945,40 @@
         'l.cover':`LIAM lives inside the screen therapists already use during a session, on the tablet they already have in their hand.`,
         'l.cover':`LIAM lives inside the screen therapists already use during a session, on the tablet they already have in their hand.`,
         'l.lead':`Every session at Genial Care generates a clinical record: what was targeted, what the child did, what changed. Therapists were writing that record from memory, after the fact, on top of a full day of sessions, which is exactly the kind of task that gets rushed, delayed, or thinned out under pressure. LIAM's job was to move the record-keeping into the moment it actually happens, instead of the moment there's finally time for it.`,
-        'stage.pain':'The pain', 'stage.pointer':'The pointer', 'stage.questions':'The questions',
-        'stage.job':'The job', 'stage.bet':'The bet', 'stage.test':'The test',
-        'stage.evidence':'What the evidence changed', 'stage.production':'Into production',
-        'l.h2.pain':`Two hours of reconstruction, on top of a full day of sessions`,
-        'l.pain.p1':`The paperwork wasn&rsquo;t hard, it was misplaced. A therapist finishes a session, moves to the next child, and writes the first record hours later from memory. What gets lost isn&rsquo;t effort, it&rsquo;s detail: the specific thing the child did at minute twelve, which is exactly the detail the record exists to capture.`,
-        'l.pain.p2':`Everyone already knew documentation was heavy. What the team didn&rsquo;t have was a shared account of <em>where</em> the two hours went, which is a different question and the only one a design can act on.`,
-        'l.h2.pointer':`The pointer: hours per therapist, and what those hours were costing`,
-        'l.pointer.p1':`The number we set out to move was documentation time per session. It matters because of what sits on the other side of it: a therapist&rsquo;s day has a fixed number of hours, and every hour spent reconstructing a session is an hour not spent in one. That caps how many sessions a therapist can realistically carry, which caps how fast the company can grow the care it delivers. Documentation load is a capacity constraint wearing an administrative costume, and it is also a retention risk. Unpaid evening paperwork is a reliable way to lose good clinicians.`,
-        'l.pointer.p2':`There was a second pointer nobody writes down: record quality. Faster notes that say less would have moved the metric and damaged the product. So we agreed the clinical lead held a veto, and that a time saving bought with thinner records counted as a failure, not a win.`,
-        'l.h2.questions':`What I had to settle with stakeholders before designing anything`,
-        'l.questions.p':`An AI feature in a clinical context fails on governance long before it fails on usability. So the first round wasn&rsquo;t about screens.`,
-        'l.q1.h':`Who signs the record?`,
-        'l.q1.p':`If LIAM drafts and a therapist submits, the therapist is still the author. That single answer set the whole interaction model: LIAM proposes, a human disposes, and nothing reaches the record without a person having read it.`,
-        'l.q2.h':`What must a report contain, non-negotiably?`,
-        'l.q2.p':`The clinical team defined the fields that exist for regulatory and continuity-of-care reasons. Those became constraints on the output, not suggestions, and they are why the draft is structured rather than free prose.`,
-        'l.q3.h':`Where does a child&rsquo;s voice recording live, and for how long?`,
-        'l.q3.p':`Audio of a session is sensitive data about a minor. Retention, access and deletion had to be answered before I designed a record button, because the answers change what the interface has to promise.`,
-        'l.q4.h':`What happens the first time it is confidently wrong?`,
-        'l.q4.p':`Not <em>if</em>. I made the team answer for the case where a plausible-sounding draft contains something the session didn&rsquo;t contain, because the answer to that question is the difference between an assistant and a liability. The answer became four interface rules: every field is marked as a suggestion and copied in by hand, never pre-submitted; the source recording stays attached to the draft so a therapist can check a line against what was actually said; nothing reaches the record without a person having read it; and the in-flow prompt asks whether the suggestions are still good, so a drift in quality shows up as a falling answer rate.`,
-        'l.h2.job':`What a therapist is hiring this for`,
-        'l.job.p1':`Not &ldquo;write my report.&rdquo; A therapist is hiring LIAM to <em>not lose what just happened</em>. To get the session out of their head while it is still accurate, and to get their evening back without lowering the standard of the record they sign.`,
-        'l.job.p2':`That framing rules things out. It means the capture has to happen next to the child, in the minute after the session, on the device already in their hand. A better form, anywhere else, doesn&rsquo;t do the job.`,
-        'l.job.pull':`A therapist isn&rsquo;t hiring an AI to write. They&rsquo;re hiring it to not lose what just happened.`,
-        'l.h2.test':`How I checked, with a population you can count and no funnel`,
-        'l.test.p1':`On the family app, a few hundred metres away in the same company, I read behaviour off a weekly curve. Here that instrument is useless. The population is the ~80 therapists on staff, the event happens a handful of times a day, and the thing at risk never appears in a funnel: whether a clinician trusts a draft enough to sign it. A therapist who quietly stops trusting LIAM still clicks every button.`,
-        'l.test.p2':`So the evidence had to be qualitative and close: sitting with the documentation as it actually happens, testing the risky states rather than the demo path, and reading AI-drafted output line by line with the people who would have to sign it. Small n, but the right n. When you can count everyone who will use it, you are not sampling. You are asking all of them.`,
-        'l.test.p3':`The quantitative part came after launch, and by design. An in-flow prompt asks whether the suggestion was still good, so that drift shows up as a falling answer rate rather than as a habit that quietly died months later. It has stayed around 70% positive, on a team that answers product prompts readily &mdash; these therapists turn up for interviews and tests when asked, which makes the signal easier to read here than it would be on a colder population. About 74% of sessions now go through LIAM. Both figures are internal readings I recall rather than a report I can produce, and I flag them as such.`,
-        'l.instrument.p1':`Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a>`,
-        'l.h2.howworked':'Designing an AI feature people can trust',
-        'l.howworked.p':`The hard part of LIAM was never the model. It was earning the therapist's trust in something that drafts clinical language on their behalf. So the process was built around validating trust as much as usability.`,
-        'l.artifact1':'Workflow shadowing', 'l.artifact2':'Prototyping risky states', 'l.artifact3':'Therapist &amp; clinical lead testing',
-        'l.role.h':'My role',
-        'l.role.p':`Senior product designer end to end and the only designer on LIAM: workflow research, interaction and UI, prototype, and the trust-and-safety states that make an AI feature usable in a clinical context. I did not build the model or write the prompts; I defined what the output had to look like, which fields it had to fill, how a suggestion is marked, and what happens when it is wrong.`,
-        'l.team.h':'The team',
-        'l.team.p':`A product manager owned scope and sequencing; an engineering squad built the AI pipeline and owned model and prompt choices, with me in their reviews reading output against the required fields; the clinical team was the domain authority on what a report must contain and held the veto on record quality.`,
-        'l.h2.recording':`Recording lives inside the work, not next to it`,
-        'l.recording.p':`The intervention screen, with its programs, targets, and progress per skill, is where a therapist already spends the session. Adding LIAM meant putting the record button there, not in a separate "documentation" tool the therapist would have to remember to open afterward. A single mic control sits in the corner of the exact screen they're already using.`,
+        'l.ix.1':`Why it was hard`, 'l.ix.2':`Decision: LIAM proposes, the clinician decides`, 'l.ix.3':`Decision: how I read trust`,
+        'l.ix.4':`What shipped`, 'l.ix.5':`Impact`, 'l.ix.6':`What I&rsquo;d do differently`,
+        'l.h2.hard':`Two hours of reconstruction, and the constraint underneath it`,
+        'l.hard.1':`The paperwork wasn&rsquo;t hard, it was misplaced. A therapist finishes a session, moves to the next child, and writes the record hours later from memory &mdash; losing the specific detail from minute twelve that the record exists to capture, on top of a full day of sessions.`,
+        'l.hard.2':`The number worth moving was documentation time per session, because of what sits on the other side of it: a therapist&rsquo;s day has a fixed number of hours, and every hour spent reconstructing a session is an hour not spent in one. That caps how many sessions a therapist can carry, which caps how fast the company can grow the care it delivers. Documentation load is a capacity constraint wearing an administrative costume &mdash; and a retention risk, since unpaid evening paperwork wears clinicians down over time.`,
+        'l.hard.3':`An AI feature in a clinical context fails on governance long before it fails on usability. Before I designed a screen, the team had to agree who signs the record, what the clinical record needed to contain, and how long a child&rsquo;s voice recording is retained. Faster notes that said less would have moved the metric and damaged the product, so the clinical lead held a veto: a time saving bought with thinner records counted as a failure, not a win.`,
+        'l.dk.problem':'Problem', 'l.dk.decision':'Decision', 'l.dk.why':'Why', 'l.dk.evidence':`What it caught`, 'l.dk.result':'Result',
+        'l.d1.title':`LIAM proposes. The clinician decides.`,
+        'l.d1.problem':`If LIAM drafts and submits on its own, authorship blurs &mdash; and a wrong clinical record with no clear author is a liability, not a convenience.`,
+        'l.d1.decision':`LIAM drafts every required field as a suggestion. A therapist reads, corrects, and submits. Nothing reaches the record unread.`,
+        'l.d1.why':`The real design question wasn&rsquo;t whether it could draft well, it was what happens the first time it&rsquo;s confidently wrong. That produced four interface rules: every field is a suggestion copied in by hand, never pre-submitted; the source recording stays attached so a therapist can check a line against what was actually said; nothing reaches the record without a person reading it; and an in-flow prompt asks whether the suggestions are still good, so quality drift shows up as a falling answer rate instead of a habit that quietly dies.`,
+        'l.d1.evidence':`Before touching the recording flow, we mapped the existing clinical panel section by section on a wall &mdash; not to redesign it, but to argue concretely about where a voice note belongs inside a workspace therapists already use, instead of assuming it needed a place of its own.`,
+        'l.d1.result':`The interaction model held through launch: LIAM proposes, the clinician decides, and record quality stayed the clinical lead&rsquo;s to veto.`,
+        'l.d2.title':`Read trust through a population you can count, not a funnel`,
+        'l.d2.problem':`On the family app, behavior showed up in a weekly funnel. Here the population is the ~80 therapists on staff, the event happens a handful of times a day, and the real risk &mdash; a therapist quietly losing trust in a draft &mdash; never shows up in a funnel at all.`,
+        'l.d2.decision':`Treat the therapists as a population you can count, not a sample. Test the risky states with all of them before launch, then read a quantitative signal after: an in-flow prompt asking whether each suggestion was still good.`,
+        'l.d2.why':`A therapist isn&rsquo;t hiring an AI to write, they&rsquo;re hiring it to not lose what just happened while it&rsquo;s still accurate. That framing made trust, not writing quality, the thing actually at risk &mdash; and small-n qualitative testing close to the real workflow was the only instrument that could see it before launch.`,
+        'l.d2.result':`The interaction held through launch and stayed in daily use, with therapists answering the in-flow check instead of skipping it. I don&rsquo;t have a closed-out adoption number I can still pull, and I&rsquo;d rather say so than reconstruct one.`,
+        'l.h2.shipped':`What shipped`,
+        'l.shipped.intro':`Three pieces carried the two decisions above into a working product.`,
+        'l.ship1.h':`Recording, inside the work already happening`,
+        'l.recording.p':`The intervention screen, with its programs, targets, and progress per skill, is where a therapist already spends the session. A single mic control sits in the corner of that exact screen, not in a separate &ldquo;documentation&rdquo; tool. Once recorded, the note surfaces as a waveform with an explicit send action, so the therapist can confirm the capture before moving on. And when an upload fails &mdash; clinics have bad wifi &mdash; the interface says so directly, &ldquo;your voice note wasn&rsquo;t sent,&rdquo; with an obvious retry, instead of a spinner that quietly gives up.`,
         'l.cap1':`The intervention screen the therapist is already working in: recording starts from a single control here, not a separate tool.`,
-        'l.h2.confirm':'Confirm the capture before asking the therapist to trust it',
-        'l.confirm.p':`Once recorded, the note doesn't vanish into a black box. It surfaces as a waveform with its length, and an explicit send action. That pause matters more than it looks: a therapist just spoke clinical information out loud about a child, and the interface's next job is to prove it actually captured that before asking them to move on.`,
-        'l.cap2':`The captured note before it's sent, length and waveform visible, with a clear way to discard and re-record.`,
-        'l.h2.uploads':'Uploads fail. The interface has to say so, plainly',
-        'l.uploads.p':`A voice note recorded in a clinic doesn't always make it to the server on the first try. I designed the failure state as a direct, specific statement, "your voice note wasn't sent," with an obvious retry, instead of a spinner that quietly gives up or an error code the therapist has to interpret. For a tool handling clinical documentation, silent failure is worse than an ugly one.`,
         'l.uploads.pull':'Silent failure is worse than an ugly one, especially in a tool handling clinical documentation.',
-        'l.cap3':`The failure state, stated plainly: what happened, and a direct way to fix it, no ambiguity about whether the recording is safe.`,
-        'l.h2.payoff':'The payoff: a draft, not a form',
-        'l.payoff.p1':`This is what the two hours collapse into. LIAM turns the audio into a first draft of every required field: health check-in, reinforcers used, challenges observed, session summary, clinical discussion points, each one pre-filled and clearly marked as LIAM's suggestion, with a one-click copy into the real field. The therapist's job changes from writing the report to editing one: read, correct what's off, keep what's right, submit.`,
-        'l.payoff.p2':`Nothing here submits itself. Every field stays editable, and the "Save" action stays with the therapist: LIAM proposes, the clinician decides.`,
+        'l.ship2.h':`The draft: a form the therapist edits, not writes`,
+        'l.payoff.p1':`This is what the two hours collapse into. LIAM turns the audio into a first draft of every required field &mdash; health check-in, reinforcers used, challenges observed, session summary, clinical discussion points &mdash; each pre-filled and clearly marked as a suggestion, with a one-click copy into the real field. The therapist&rsquo;s job changes from writing the report to editing one: read, correct what&rsquo;s off, keep what&rsquo;s right, submit. Nothing submits itself; the &ldquo;Save&rdquo; action stays with the therapist.`,
         'l.cap4':`The session-note form: every field carries a LIAM-drafted suggestion the therapist reviews and copies in, never submitted on their behalf.`,
-        'l.h2.trustloop':`Trust isn't a one-time decision. It's a loop`,
-        'l.trustloop.p':`An AI feature that quietly gets worse, or quietly gets better, teaches people to stop trusting it either way. I added a lightweight feedback prompt directly in the flow: are you happy with LIAM's suggestions right now, yes or no, with room to say why, so drift in suggestion quality surfaces from real usage instead of waiting for a support ticket or a churned habit.`,
+        'l.ship3.h':`A feedback loop that keeps trust visible`,
+        'l.trustloop.p':`An AI feature that quietly gets worse, or quietly gets better, teaches people to stop trusting it either way. A lightweight prompt sits directly in the flow: are you happy with LIAM&rsquo;s suggestions right now, yes or no, with room to say why &mdash; so drift in suggestion quality surfaces from real usage instead of a support ticket or a churned habit months later. The decision underneath all three pieces is the same: an AI feature earns trust through visible mechanics, not through confidence.`,
         'l.cap5':`A direct feedback loop on the suggestions themselves: the mechanism that lets LIAM's output quality stay visible instead of assumed.`,
-        'l.h2.defend':`What I'd defend in a design review`,
-        'l.defend.p':`The design decision underneath all five screens is the same: an AI feature earns trust through visible mechanics, not through confidence. Show the capture before asking for the record. State the failure instead of hiding it. Mark every suggestion as a suggestion.`,
+        'l.h2.impact':'Impact',
         'l.m0':`Writing the record from memory after a full day, per session, before LIAM`, 'l.m1':`Reviewing and submitting LIAM's draft, per session, after`, 'l.m2':`Fields LIAM can submit on its own: every suggestion is copied in and signed by the therapist`,
-        'l.note':`<strong>How it was measured, and what the number leaves out:</strong> the two hours are the therapists&rsquo; own self-reported time to write a session report from memory before LIAM; the 25 minutes are their review-and-submit time with LIAM&rsquo;s draft in place, read one quarter after rollout. It is not a like-for-like total: narrating during the session adds a few minutes that the 25 does not include, and the population is the clinical team on staff, so this is a before-and-after with everyone, not a sample. Record quality was the guardrail and the clinical lead held the veto on it. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em>`,
+        'l.note':`<strong>How it was measured, and what the number leaves out:</strong> the two hours are the therapists&rsquo; own self-reported time to write a session report from memory before LIAM; the 25 minutes are their review-and-submit time with LIAM&rsquo;s draft in place, read one quarter after rollout. It is not a like-for-like total: narrating during the session adds a few minutes that the 25 does not include, and the population is the clinical team on staff, so this is a before-and-after with everyone, not a sample. The clinical lead&rsquo;s verdict after launch was that record quality improved rather than merely held &mdash; a record written minutes after the session carries detail that one written from memory at 9pm does not. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em>`,
+        'l.h2.dif':`What I&rsquo;d do differently`,
         'l.h2.bigpicture':'Where this sits in the bigger picture',
         'l.bigpicture.p':`LIAM shipped after the family-facing app had already gone from 8% to 62% daily use. Once families were actually engaging, the constraint moved to the other side of the platform: the therapists producing the content families were now relying on. Same instinct, different audience: find where a person is spending effort on something that isn't the actual work, and compress it into a decision they can make quickly.`,
         'close.h2':`Questions this page doesn't answer?`,
@@ -1099,13 +986,11 @@
         'close.cta1':'Get in touch', 'close.cta2.liam':'Read the Genial App case',
         'footer.portfolio':'Portfolio', 'footer.email':'Email',
         'modal.label':`Let's talk`, 'modal.h3':'How would you like to connect?', 'modal.p':`Pick whichever's faster for you.`,
-        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, 5–7pm ET`
+        'modal.email.title':'Send an email', 'modal.resume.title':'Request my résumé', 'modal.resume.sub':`I’ll send the PDF by email`, 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, 5–7pm ET`
       },
       pt: {
-        'l.questions.p2':`Parte dessa rodada aconteceu numa parede. Antes de decidir qualquer coisa sobre o fluxo de gravação, mapeamos o painel clínico como ele já existia &mdash; cada seção, cada aba, tudo por onde uma terapeuta passa numa sessão. O objetivo não era redesenhar o painel. Era poder apontar para um lugar específico e perguntar se uma anotação por áudio pertencia ali, que é uma pergunta bem mais difícil de desviar do que &ldquo;onde essa feature deveria morar?&rdquo;`,
-        'l.arg.p':`Esse também foi o argumento que eu precisei vencer. A pressão sobre uma feature de IA é sempre para ela fazer mais, e a restrição que eu segurei foi que o LIAM propõe e nunca envia &mdash; a terapeuta continua sendo a autora, mesmo quando o rascunho está bom o bastante para ser assinado sem leitura. Custou a versão mais impressionante da demo. É a razão de o lado clínico ter permitido a feature existir.`,
-        'l.dif.h':`O que eu faria diferente`,
-        'l.dif.p':`Eu teria trazido a liderança clínica para as decisões de interface, não só para a revisão da saída. Os estados de confiança foram desenhados primeiro e validados depois; vários deles teriam ficado mais simples se quem é dono do padrão clínico estivesse na sala enquanto eles eram desenhados. E eu subdesenhei o momento em que a terapeuta discorda do rascunho: corrigir é fácil, mas a interface nunca pergunta por quê, então o sinal mais valioso da feature inteira não é registrado.`,
+        'l.arg.p':`A pressão sobre uma feature de IA é sempre para ela fazer mais. A restrição que eu segurei foi que o LIAM propõe e nunca envia &mdash; mesmo quando o rascunho está bom o bastante para ser assinado sem leitura. Custou a versão mais impressionante da demo. É a razão de o lado clínico ter permitido a feature existir.`,
+        'l.dif.p':`Eu teria trazido a liderança clínica para as decisões de interface, não só para a revisão da saída &mdash; vários estados de confiança teriam ficado mais simples se quem é dono do padrão clínico estivesse na sala enquanto eram desenhados. E eu subdesenhei o momento em que a terapeuta discorda do rascunho: corrigir é fácil, mas a interface nunca pergunta por quê, então o sinal mais valioso da feature inteira não é registrado.`,
         'close.cta3.liam':`Ler o case do Pick &amp; Pack`,
         'nav.back.genial':`Voltar ao Genial App`,
         'nav.back.liam':`Voltar ao LIAM`,
@@ -1117,20 +1002,7 @@
         'meta.v.role':`Product Designer Sênior`,
         'meta.v.team':`PM · Squad de eng de IA · Clínica`,
         'meta.v.out':`2h &rarr; 25min por sessão`,
-        'stage.build':`A construção`,
-        'l.h2.build':`Subindo junto com o squad de IA, não ao lado dele`,
-        'l.build.p1':`Uma feature de IA tem modos de falha que não existem em produto comum, e a maior parte só aparece contra o pipeline real. Trabalhei dentro do squad que construía. É ali que latência deixou de ser abstração. Uma terapeuta em pé ao lado de uma criança não espera spinner, então a interface tinha que ser honesta sobre o que ainda estava processando, e deixar ela sair da tela sem perder a nota.`,
-        'l.build.p2':`O estado de falha de upload saiu dessa fase, não de um arquivo de design. Clínica tem wifi ruim, e a primeira implementação tentava de novo em silêncio e depois desistia. Trocamos por uma frase direta e um retry que a terapeuta controla. Também fiquei do lado da revisão depois do release, lendo rascunhos contra os campos que o time clínico definiu, porque um modelo que degrada não avisa.`,
-        'l.tk.build':`Um modelo que degrada não avisa. Alguém precisa continuar lendo a saída.`,
-        'l.meas.h':`Como medimos, e o número que podia vetar a vitória`,
-        'l.meas.p':`Tempo era a manchete, mas nunca teve permissão de ser o único número.`,
-        'l.meas.1b':`Principal`,
-        'l.meas.1t':`Tempo de documentação por sessão, lido contra o antes-e-depois das próprias terapeutas, não contra uma estimativa.`,
-        'l.meas.2b':`Proteção`,
-        'l.meas.2t':`Qualidade do registro, revisada pela liderança clínica. Uma nota mais rápida que dizia menos contava como fracasso, e o lado clínico tinha o veto nessa decisão. O veredito depois do lançamento foi que a qualidade melhorou, não apenas se manteve: um registro escrito minutos depois da sessão, a partir da sessão, carrega detalhe que um registro escrito de memória às 21h não tem.`,
-        'l.meas.3b':`Alarme de degradação`,
-        'l.meas.3t':`O prompt no fluxo perguntando se as sugestões do LIAM continuam boas, para a degradação aparecer como taxa de resposta caindo, e não como um ticket de suporte meses depois.`,
-        'ix.time':'13 min de leitura',
+        'ix.time':'7 min de leitura',
         'l.tk.pointer':`Economia de tempo comprada com registro clínico mais raso contava como fracasso, não como ganho.`,
         'l.tk.questions':`&ldquo;O que acontece na primeira vez que ele errar com confiança&rdquo; é a pergunta que separa um assistente de um passivo.`,
         'l.tk.test':`Quando dá para contar todo mundo que vai usar, aquilo não é amostra. É todo mundo.`,
@@ -1141,6 +1013,7 @@
         'l.tl.problem':`Terapeutas perdiam até duas horas depois de cada sessão reconstruindo registros clínicos de memória, no fim de um dia inteiro.`,
         'l.tl.did':`Desenhei um assistente de IA que vive dentro da tela da sessão: a terapeuta narra, o LIAM rascunha, e a clínica revisa e assina. Gastei o tempo de design nos estados de falha, não no caminho de demo.`,
         'l.tl.out':`A documentação foi de <b>2 horas para uma revisão de 25 minutos</b>, com um ciclo de feedback dentro do produto para que a queda de qualidade apareça no uso, e não meses depois.`,
+        'l.demo.1':'Design de produto de IA', 'l.demo.2':'Humano no loop', 'l.demo.3':'Saúde', 'l.demo.4':'Confiança e segurança',
         'nav.back':'Voltar ao portfólio', 'nav.cta':'Vamos conversar',
         'hero.kicker':'Case study · Saúde · Design de IA',
         'hero.h1':'LIAM: transformando 2 horas de papelada clínica em uma revisão de 25 minutos',
@@ -1148,62 +1021,40 @@
         'meta.role':'Papel', 'meta.team':'Time', 'meta.company':'Empresa', 'meta.timeline':'Período', 'meta.outcome':'Resultado',
         'l.cover':`O LIAM vive dentro da tela que o terapeuta já usa durante a sessão, no tablet que ele já tem na mão.`,
         'l.lead':`Toda sessão na Genial Care gera um registro clínico: o que foi trabalhado, o que a criança fez, o que mudou. Terapeutas escreviam esse registro de memória, depois do fato, em cima de um dia cheio de sessões, exatamente o tipo de tarefa que se faz correndo, atrasada ou rasa sob pressão. O trabalho do LIAM era mover o registro para o momento em que ele realmente acontece, em vez do momento em que finalmente sobra tempo.`,
-        'stage.pain':'A dor', 'stage.pointer':'O ponteiro', 'stage.questions':'As perguntas',
-        'stage.job':'O job', 'stage.bet':'A aposta', 'stage.test':'O teste',
-        'stage.evidence':'O que a evidência mudou', 'stage.production':'Para produção',
-        'l.h2.pain':`Duas horas de reconstrução, em cima de um dia inteiro de sessões`,
-        'l.pain.p1':`O registro não era difícil, estava no lugar errado. A terapeuta termina a sessão, vai para a próxima criança e escreve o primeiro registro horas depois, de memória. O que se perde não é esforço, é detalhe: a coisa específica que a criança fez no minuto doze, que é exatamente o detalhe para o qual o registro existe.`,
-        'l.pain.p2':`Todo mundo já sabia que a documentação era pesada. O que o time não tinha era um relato compartilhado de <em>onde</em> as duas horas iam, que é outra pergunta e a única sobre a qual design consegue agir.`,
-        'l.h2.pointer':`O ponteiro: horas por terapeuta, e o que essas horas custavam`,
-        'l.pointer.p1':`O número que a gente resolveu mover foi o tempo de documentação por sessão. Ele importa pelo que está do outro lado: o dia de uma terapeuta tem um número fixo de horas, e cada hora reconstruindo uma sessão é uma hora que não foi em sessão. Isso limita quantas sessões cada terapeuta consegue carregar, o que limita a velocidade com que a empresa consegue crescer o cuidado que entrega. Carga de documentação é restrição de capacidade fantasiada de tarefa administrativa, e também é risco de retenção. Papelada não paga à noite é jeito garantido de perder boas clínicas.`,
-        'l.pointer.p2':`Havia um segundo ponteiro que ninguém escreve: qualidade do registro. Notas mais rápidas que dizem menos moveriam a métrica e estragariam o produto. Então combinamos que a liderança clínica tinha veto, e que economia de tempo comprada com registro mais raso contava como fracasso, não como ganho.`,
-        'l.h2.questions':`O que eu precisava resolver com os stakeholders antes de desenhar qualquer coisa`,
-        'l.questions.p':`Uma feature de IA em contexto clínico falha em governança muito antes de falhar em usabilidade. Então a primeira rodada não foi sobre telas.`,
-        'l.q1.h':`Quem assina o registro?`,
-        'l.q1.p':`Se o LIAM rascunha e a terapeuta envia, a autoria continua sendo dela. Essa única resposta definiu o modelo de interação inteiro: o LIAM propõe, a pessoa dispõe, e nada chega ao registro sem alguém ter lido.`,
-        'l.q2.h':`O que um relatório precisa conter, sem negociação?`,
-        'l.q2.p':`O time clínico definiu os campos que existem por razão regulatória e de continuidade do cuidado. Eles viraram restrição da saída, não sugestão, e são o motivo de o rascunho ser estruturado em vez de texto livre.`,
-        'l.q3.h':`Onde fica o áudio de uma criança, e por quanto tempo?`,
-        'l.q3.p':`Áudio de sessão é dado sensível sobre um menor. Retenção, acesso e exclusão tinham que estar respondidos antes de eu desenhar um botão de gravar, porque as respostas mudam o que a interface precisa prometer.`,
-        'l.q4.h':`O que acontece na primeira vez que ele errar com confiança?`,
-        'l.q4.p':`Não <em>se</em>. Obriguei o time a responder pelo caso em que um rascunho plausível contém algo que a sessão não teve, porque a resposta a essa pergunta é a diferença entre um assistente e um passivo. A resposta virou quatro regras de interface: cada campo é marcado como sugestão e copiado à mão, nunca pré-enviado; a gravação de origem fica anexada ao rascunho para o terapeuta conferir uma linha contra o que foi dito; nada chega ao prontuário sem uma pessoa ter lido; e o prompt no fluxo pergunta se as sugestões continuam boas, para que uma queda de qualidade apareça como queda na taxa de resposta.`,
-        'l.h2.job':`Para que uma terapeuta está contratando isso`,
-        'l.job.p1':`Não é &ldquo;escreva meu relatório&rdquo;. A terapeuta está contratando o LIAM para <em>não perder o que acabou de acontecer</em>. Tirar a sessão da cabeça enquanto ainda está precisa, e recuperar a noite dela sem baixar o padrão do registro que assina.`,
-        'l.job.p2':`Esse enquadramento elimina coisas. Significa que a captura tem que acontecer ao lado da criança, no minuto seguinte à sessão, no aparelho que já está na mão. Um formulário melhor, em qualquer outro lugar, não faz o serviço.`,
-        'l.job.pull':`Uma terapeuta não contrata uma IA para escrever. Contrata para não perder o que acabou de acontecer.`,
-        'l.h2.test':`Como eu conferi, com uma população que cabe numa sala`,
-        'l.test.p1':`No app das famílias, a poucos metros dali na mesma empresa, eu lia comportamento numa curva semanal. Aqui esse instrumento é inútil. A população são os cerca de 80 terapeutas do time, o evento acontece poucas vezes por dia, e o que está em risco nunca aparece num funil: se uma clínica confia num rascunho a ponto de assinar. Uma terapeuta que silenciosamente parou de confiar no LIAM continua clicando em todos os botões.`,
-        'l.test.p2':`Então a evidência tinha que ser qualitativa e próxima: sentar com a documentação como ela acontece de verdade, testar os estados de risco em vez do caminho de demo, e ler a saída rascunhada pela IA linha a linha com quem teria que assinar. N pequeno, mas o N certo. Quando dá para contar todo mundo que vai usar, você não está amostrando. Está perguntando para todos.`,
-        'l.test.p3':`A parte quantitativa veio depois do lançamento, e de propósito. Um prompt no próprio fluxo pergunta se a sugestão continuava boa, para que a degradação apareça como taxa de resposta caindo, e não como um hábito que morreu em silêncio meses depois. Ele se manteve por volta de 70% de respostas positivas, num time que responde prompt de produto de boa vontade &mdash; essas terapeutas aparecem para entrevista e teste quando a gente pede, o que torna o sinal mais fácil de ler aqui do que seria numa população mais fria. Cerca de 74% das sessões passam pelo LIAM hoje. Os dois números são leituras internas que eu lembro, não um relatório que eu consiga produzir, e sinalizo assim.`,
-        'l.instrument.p1':`Projeto diferente, instrumento diferente. <a href="/#method">Como escolhi o instrumento em cada projeto &rarr;</a>`,
-        'l.h2.howworked':'Desenhando uma funcionalidade de IA em que as pessoas confiam',
-        'l.howworked.p':`A parte difícil do LIAM nunca foi o modelo. Foi conquistar a confiança do terapeuta em algo que rascunha linguagem clínica em nome dele. Então o processo foi construído em torno de validar confiança tanto quanto usabilidade.`,
-        'l.artifact1':'Observação do fluxo de trabalho', 'l.artifact2':'Prototipagem dos estados de risco', 'l.artifact3':'Testes com terapeutas e líderes clínicos',
-        'l.role.h':'Meu papel',
-        'l.role.p':`Senior product designer ponta a ponta e o único designer no LIAM: pesquisa de fluxo, interação e UI, protótipo, e os estados de confiança e segurança que tornam uma funcionalidade de IA usável em contexto clínico. Não construí o modelo nem escrevi os prompts; defini como a saída precisava ser, quais campos tinha que preencher, como uma sugestão é marcada e o que acontece quando ela está errada.`,
-        'l.team.h':'O time',
-        'l.team.p':`Um product manager era dono do escopo e da sequência; um squad de engenharia construiu o pipeline de IA e era dono das escolhas de modelo e prompt, comigo nas revisões lendo a saída contra os campos obrigatórios; o time clínico era a autoridade sobre o que um relatório precisa conter e tinha o veto sobre a qualidade do registro.`,
-        'l.h2.recording':'A gravação vive dentro do trabalho, não ao lado dele',
-        'l.recording.p':`A tela de intervenção, com seus programas, metas e progresso por habilidade, é onde o terapeuta já passa a sessão. Adicionar o LIAM significou colocar o botão de gravação ali, não numa ferramenta separada de "documentação" que o terapeuta teria que lembrar de abrir depois. Um único controle de microfone fica no canto da tela exata que ele já está usando.`,
+        'l.ix.1':`Por que era difícil`, 'l.ix.2':`Decisão: o LIAM propõe, a clínica decide`, 'l.ix.3':`Decisão: como eu li a confiança`,
+        'l.ix.4':`O que foi lançado`, 'l.ix.5':`Impacto`, 'l.ix.6':`O que eu faria diferente`,
+        'l.h2.hard':`Duas horas de reconstrução, e a restrição por trás disso`,
+        'l.hard.1':`O registro não era difícil, estava no lugar errado. A terapeuta termina a sessão, vai para a próxima criança e escreve o registro horas depois, de memória &mdash; perdendo o detalhe específico do minuto doze que é exatamente o detalhe para o qual o registro existe, em cima de um dia inteiro de sessões.`,
+        'l.hard.2':`O número que valia a pena mover era o tempo de documentação por sessão, pelo que está do outro lado: o dia de uma terapeuta tem um número fixo de horas, e cada hora reconstruindo uma sessão é uma hora que não foi em sessão. Isso limita quantas sessões cada terapeuta consegue carregar, o que limita a velocidade com que a empresa consegue crescer o cuidado que entrega. Carga de documentação é restrição de capacidade fantasiada de tarefa administrativa &mdash; e risco de retenção, já que papelada não paga à noite desgasta as clínicas com o tempo.`,
+        'l.hard.3':`Uma feature de IA em contexto clínico falha em governança muito antes de falhar em usabilidade. Antes de desenhar uma tela, o time precisava concordar quem assina o registro, o que o registro clínico precisava conter, e por quanto tempo o áudio de uma criança fica retido. Notas mais rápidas que diziam menos moveriam a métrica e estragariam o produto, então a liderança clínica tinha veto: economia de tempo comprada com registro mais raso contava como fracasso, não como ganho.`,
+        'l.dk.problem':'Problema', 'l.dk.decision':'Decisão', 'l.dk.why':'Por quê', 'l.dk.evidence':`O que a rodada pegou`, 'l.dk.result':'Resultado',
+        'l.d1.title':`O LIAM propõe. A clínica decide.`,
+        'l.d1.problem':`Se o LIAM rascunha e envia sozinho, a autoria se embaça &mdash; e um registro clínico errado sem autor definido é um passivo, não uma conveniência.`,
+        'l.d1.decision':`O LIAM rascunha cada campo obrigatório como sugestão. A terapeuta lê, corrige e envia. Nada chega ao registro sem leitura.`,
+        'l.d1.why':`A pergunta de design de verdade não era se ele conseguia rascunhar bem, era o que acontece na primeira vez que ele erra com confiança. Disso saíram quatro regras de interface: cada campo é sugestão copiada à mão, nunca pré-enviada; a gravação de origem fica anexada para o terapeuta conferir uma linha contra o que foi dito; nada chega ao registro sem alguém ler; e um prompt no fluxo pergunta se as sugestões continuam boas, para a degradação aparecer como queda na taxa de resposta em vez de um hábito que morre em silêncio.`,
+        'l.d1.evidence':`Antes de tocar no fluxo de gravação, mapeamos o painel clínico existente seção por seção numa parede &mdash; não para redesenhá-lo, mas para discutir concretamente onde uma anotação por áudio se encaixa dentro de um espaço que os terapeutas já usam, em vez de assumir que precisava de um lugar novo.`,
+        'l.d1.result':`O modelo de interação se manteve até o lançamento: o LIAM propõe, a clínica decide, e a qualidade do registro seguiu sendo veto da liderança clínica.`,
+        'l.d2.title':`Ler a confiança por uma população que dá para contar, não por um funil`,
+        'l.d2.problem':`No app das famílias, comportamento aparecia num funil semanal. Aqui a população são os cerca de 80 terapeutas do time, o evento acontece poucas vezes por dia, e o risco de verdade &mdash; uma terapeuta perdendo confiança num rascunho em silêncio &mdash; nunca aparece num funil.`,
+        'l.d2.decision':`Tratar as terapeutas como população que dá para contar, não como amostra. Testar os estados de risco com todas elas antes do lançamento, e depois ler um sinal quantitativo: um prompt no fluxo perguntando se cada sugestão continuava boa.`,
+        'l.d2.why':`Uma terapeuta não contrata uma IA para escrever, contrata para não perder o que acabou de acontecer enquanto ainda está preciso. Esse enquadramento tornou a confiança, não a qualidade da escrita, o que estava de fato em risco &mdash; e teste qualitativo de N pequeno, próximo do fluxo real, era o único instrumento capaz de enxergar isso antes do lançamento.`,
+        'l.d2.result':`A interação se manteve desde o lançamento e ficou no uso diário, com terapeutas respondendo a checagem no fluxo em vez de pular. Não tenho um número de adoção fechado que ainda consigo puxar, e prefiro dizer isso a reconstruir um.`,
+        'l.h2.shipped':`O que foi lançado`,
+        'l.shipped.intro':`Três peças levaram as duas decisões acima para um produto funcionando.`,
+        'l.ship1.h':`Gravação, dentro do trabalho que já acontece`,
+        'l.recording.p':`A tela de intervenção, com seus programas, metas e progresso por habilidade, é onde o terapeuta já passa a sessão. Um único controle de microfone fica no canto dessa tela exata, não numa ferramenta separada de &ldquo;documentação&rdquo;. Depois de gravada, a nota aparece como onda sonora com uma ação explícita de enviar, para o terapeuta confirmar a captura antes de seguir. E quando um upload falha &mdash; clínica tem wifi ruim &mdash; a interface diz isso diretamente, &ldquo;sua nota de voz não foi enviada,&rdquo; com um retry óbvio, em vez de um spinner que desiste em silêncio.`,
         'l.cap1':'A tela de intervenção onde o terapeuta já está trabalhando: a gravação começa por um único controle aqui, não uma ferramenta separada.',
-        'l.h2.confirm':'Confirme a captura antes de pedir que o terapeuta confie nela',
-        'l.confirm.p':`Depois de gravada, a nota não desaparece numa caixa preta. Ela aparece como uma onda sonora com sua duração, e uma ação explícita de enviar. Essa pausa importa mais do que parece: o terapeuta acabou de falar informação clínica em voz alta sobre uma criança, e o próximo trabalho da interface é provar que capturou aquilo antes de deixá-lo seguir em frente.`,
-        'l.cap2':'A nota capturada antes de ser enviada, duração e onda sonora visíveis, com uma forma clara de descartar e regravar.',
-        'l.h2.uploads':'Uploads falham. A interface precisa dizer isso, claramente',
-        'l.uploads.p':`Uma nota de voz gravada numa clínica nem sempre chega ao servidor na primeira tentativa. Desenhei o estado de falha como uma afirmação direta e específica, "sua nota de voz não foi enviada," com um retry óbvio, em vez de um spinner que desiste silenciosamente ou um código de erro que o terapeuta precisa interpretar. Para uma ferramenta que lida com documentação clínica, falha silenciosa é pior que falha feia.`,
         'l.uploads.pull':'Falha silenciosa é pior que falha feia, especialmente numa ferramenta que lida com documentação clínica.',
-        'l.cap3':'O estado de falha, dito claramente: o que aconteceu, e uma forma direta de corrigir, sem ambiguidade sobre se a gravação está segura.',
-        'l.h2.payoff':'O resultado: um rascunho, não um formulário',
-        'l.payoff.p1':'É nisso que as duas horas colapsam. O LIAM transforma o áudio num primeiro rascunho de cada campo obrigatório: check-in de saúde, reforçadores usados, desafios observados, resumo da sessão, pontos de discussão clínica, cada um pré-preenchido e claramente marcado como sugestão do LIAM, com uma cópia de um clique para o campo real. O trabalho do terapeuta muda de escrever o relatório para editar um: ler, corrigir o que está errado, manter o que está certo, enviar.',
-        'l.payoff.p2':`Nada aqui se envia sozinho. Todo campo continua editável, e a ação de "Salvar" fica com o terapeuta: o LIAM propõe, o clínico decide.`,
+        'l.ship2.h':`O rascunho: um formulário que o terapeuta edita, não escreve`,
+        'l.payoff.p1':`É nisso que as duas horas colapsam. O LIAM transforma o áudio num primeiro rascunho de cada campo obrigatório &mdash; check-in de saúde, reforçadores usados, desafios observados, resumo da sessão, pontos de discussão clínica &mdash; cada um pré-preenchido e claramente marcado como sugestão, com cópia de um clique para o campo real. O trabalho do terapeuta muda de escrever o relatório para editar um: ler, corrigir o que está errado, manter o que está certo, enviar. Nada se envia sozinho; a ação de &ldquo;Salvar&rdquo; fica com o terapeuta.`,
         'l.cap4':'O formulário de nota de sessão: todo campo carrega uma sugestão rascunhada pelo LIAM que o terapeuta revisa e copia, nunca enviada em nome dele.',
-        'l.h2.trustloop':'Confiança não é uma decisão única. É um loop',
-        'l.trustloop.p':'Uma funcionalidade de IA que piora silenciosamente, ou melhora silenciosamente, ensina as pessoas a parar de confiar de qualquer jeito. Adicionei um prompt leve de feedback direto no fluxo: você está satisfeito com as sugestões do LIAM agora, sim ou não, com espaço para dizer por quê, para o desvio na qualidade das sugestões aparecer no uso real em vez de esperar um chamado de suporte ou um hábito abandonado.',
+        'l.ship3.h':`Um loop de feedback que mantém a confiança visível`,
+        'l.trustloop.p':`Uma funcionalidade de IA que piora silenciosamente, ou melhora silenciosamente, ensina as pessoas a parar de confiar de qualquer jeito. Um prompt leve fica direto no fluxo: você está satisfeito com as sugestões do LIAM agora, sim ou não, com espaço para dizer por quê &mdash; para o desvio na qualidade das sugestões aparecer no uso real em vez de um chamado de suporte ou um hábito abandonado meses depois. A decisão por trás das três peças é a mesma: uma funcionalidade de IA conquista confiança por mecânica visível, não por autoconfiança.`,
         'l.cap5':'Um loop de feedback direto sobre as próprias sugestões: o mecanismo que mantém a qualidade do output do LIAM visível em vez de assumida.',
-        'l.h2.defend':'O que eu defenderia numa design review',
-        'l.defend.p':`A decisão de design por trás das cinco telas é a mesma: uma funcionalidade de IA conquista confiança por mecânica visível, não por autoconfiança. Mostre a captura antes de pedir o registro. Declare a falha em vez de escondê-la. Marque toda sugestão como sugestão.`,
+        'l.h2.impact':'Impacto',
         'l.m0':`Escrever o registro de memória depois de um dia inteiro, por sessão, antes do LIAM`, 'l.m1':`Revisar e enviar o rascunho do LIAM, por sessão, depois`, 'l.m2':`Campos que o LIAM pode enviar sozinho: toda sugestão é copiada e assinada pelo terapeuta`,
-        'l.note':`<strong>Como foi medido, e o que o número deixa de fora:</strong> as duas horas são o tempo auto-relatado pelos terapeutas para escrever o relatório de sessão de memória antes do LIAM; os 25 minutos são o tempo de revisar e enviar com o rascunho do LIAM pronto, lido um trimestre depois do rollout. Não é um total comparável um a um: narrar durante a sessão adiciona alguns minutos que os 25 não incluem, e a população é o time clínico inteiro, então é um antes-e-depois com todo mundo, não uma amostra. Qualidade do registro era o guardrail e a líder clínica tinha o veto. <em>Sobre precisão: os números acima são o que eu e as pessoas donas deles lembram, não um relatório que eu ainda consiga puxar &mdash; saí da empresa e os dashboards ficaram lá. Trate as magnitudes como aproximadas e a direção como a afirmação. Onde um número nunca existiu, esta página diz isso em vez de reconstruir um.</em>`,
+        'l.note':`<strong>Como foi medido, e o que o número deixa de fora:</strong> as duas horas são o tempo auto-relatado pelos terapeutas para escrever o relatório de sessão de memória antes do LIAM; os 25 minutos são o tempo de revisar e enviar com o rascunho do LIAM pronto, lido um trimestre depois do rollout. Não é um total comparável um a um: narrar durante a sessão adiciona alguns minutos que os 25 não incluem, e a população é o time clínico inteiro, então é um antes-e-depois com todo mundo, não uma amostra. O veredito da liderança clínica depois do lançamento foi que a qualidade do registro melhorou, não apenas se manteve &mdash; um registro escrito minutos depois da sessão carrega detalhe que um registro de memória às 21h não tem. <em>Sobre precisão: os números acima são o que eu e as pessoas donas deles lembram, não um relatório que eu ainda consiga puxar &mdash; saí da empresa e os dashboards ficaram lá. Trate as magnitudes como aproximadas e a direção como a afirmação. Onde um número nunca existiu, esta página diz isso em vez de reconstruir um.</em>`,
+        'l.h2.dif':`O que eu faria diferente`,
         'l.h2.bigpicture':'Onde isso se encaixa no quadro geral',
         'l.bigpicture.p':'O LIAM foi lançado depois que o app das famílias já tinha ido de 8% para 62% de uso diário. Com as famílias realmente engajadas, a restrição se moveu para o outro lado da plataforma: os terapeutas produzindo o conteúdo em que as famílias agora confiavam. Mesmo instinto, público diferente: achar onde alguém está gastando esforço em algo que não é o trabalho real, e comprimir isso numa decisão que a pessoa consegue tomar rápido.',
         'close.h2':`Ficou alguma pergunta?`,
@@ -1211,7 +1062,7 @@
         'close.cta1':'Entrar em contato', 'close.cta2.liam':'Ler o case do app Genial',
         'footer.portfolio':'Portfólio', 'footer.email':'Email',
         'modal.label':'Vamos conversar', 'modal.h3':'Como você prefere falar comigo?', 'modal.p':'Escolha o que for mais rápido pra você.',
-        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':`Dias úteis, 17h–19h (ET)`
+        'modal.email.title':'Mandar um email', 'modal.resume.title':'Pedir meu currículo', 'modal.resume.sub':`Envio o PDF por email`, 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':`Dias úteis, 17h–19h (ET)`
       }
     };
 

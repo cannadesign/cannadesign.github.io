@@ -360,6 +360,29 @@
   .callout h3{font-size:17px; line-height:1.3; margin-bottom:var(--sp-2);}
   .callout p{font-size:var(--fs-small); line-height:var(--lh-small); color:var(--ink-2); margin:0;}
 
+  /* DEMO TAGS — "what this case demonstrates", scanned in under a second */
+  .demo-tags{display:flex; flex-wrap:wrap; gap:8px; margin:20px 0 0;}
+  .demo-tags span{
+    font-size:11px; font-weight:700; letter-spacing:.07em; text-transform:uppercase;
+    padding:6px 12px; border-radius:100px; border:1px solid var(--line-control); color:var(--ink-2);
+  }
+
+  /* DECISION CARD — problem/decision/why/result, made scannable instead of proseful.
+     Reuses paper-2 + line tokens so it reads as part of the system, not a bolted-on
+     component. The row grid collapses to one column on mobile (see breakpoints). */
+  .decision{margin:var(--sp-7) 0; border:1px solid var(--line); border-radius:16px; overflow:hidden;}
+  .decision-head{display:flex; align-items:center; gap:12px; padding:18px 20px; background:var(--paper-2); border-bottom:1px solid var(--line);}
+  .decision-head .dn{
+    width:26px; height:26px; border-radius:50%; background:var(--acid); color:var(--ink);
+    font-weight:900; font-size:12px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .decision-head h3{font-size:17px; line-height:1.3; margin:0;}
+  .decision-body{padding:4px 20px 22px; display:grid; gap:0;}
+  .decision-row{display:grid; grid-template-columns:128px 1fr; gap:20px; padding:16px 0; border-top:1px solid var(--line);}
+  .decision-row:first-child{border-top:none;}
+  .decision-row .dk{font-size:10.5px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-2); padding-top:2px;}
+  .decision-row .dv{font-size:15.5px; line-height:1.55; color:var(--ink); margin:0;}
+
   /* PROCESS STEPS */
   .process{list-style:none; counter-reset:step; margin:var(--sp-6) 0; display:grid; gap:var(--sp-2);}
   .process li{counter-increment:step; position:relative; padding:var(--sp-4) var(--sp-4) var(--sp-4) 64px; background:var(--paper-2); border-radius:14px;}
@@ -524,6 +547,7 @@
   @media (max-width:640px){ .index ol{grid-template-columns:1fr;} }
 
   @media (max-width:640px){ .receipts li{grid-template-columns:1fr; gap:4px;} }
+  @media (max-width:640px){ .decision-row{grid-template-columns:1fr; gap:6px;} }
 
   @media (max-width:640px){
     .compare{grid-template-columns:1fr;}
@@ -580,6 +604,7 @@
     .meta-item:nth-child(2n+1){border-left:none; padding-left:0;}
   }
 </style>
+<script defer src="https://cloud.umami.is/script.js" data-website-id="c3e64fd0-ec7d-4fdf-a35f-7e8f77208d02"></script>
 </head>
 <body class="js">
 <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
@@ -623,66 +648,34 @@
       <dl>
         <div><dt data-i18n="tl.problem.k">Problem</dt><dd data-i18n="g.tl.problem">A content app almost nobody opened, on top of an operations team building every family's weekly schedule by hand.</dd></div>
         <div><dt data-i18n="tl.did.k">What I did</dt><dd data-i18n="g.tl.did">Found the real bottleneck in scheduling, shipped a one-month MVP that let families see and cancel sessions, then ran a continuous loop of small bets read against a weekly behaviour curve.</dd></div>
-        <div><dt data-i18n="tl.out.k">Outcome</dt><dd data-i18n="g.tl.out">Daily active families went from <b>8.59% to 62.3%</b> in 13 months, a 675% jump year over year, in a staircase that tracks releases rather than one redesign spike.</dd></div>
+        <div><dt data-i18n="tl.out.k">Outcome</dt><dd data-i18n="g.tl.out">Daily active families went from <b>8.59% to 62.3%</b> in 13 months, in a staircase that tracks releases rather than one redesign spike.</dd></div>
       </dl>
+      <div class="demo-tags"><span data-i18n="g.demo.1">Product strategy</span><span data-i18n="g.demo.2">0&rarr;1</span><span data-i18n="g.demo.3">Consumer healthcare</span><span data-i18n="g.demo.4">Growth</span></div>
     </div>
   </div>
 
   <div class="index reveal">
-    <span class="k"><span data-i18n="ix.k">In this case</span><span class="rt" data-i18n="ix.time">14 min read</span></span>
+    <span class="k"><span data-i18n="ix.k">In this case</span><span class="rt" data-i18n="ix.time">7 min read</span></span>
     <ol>
-      <li><a href="#s01" data-i18n="stage.pain">The pain</a></li>
-      <li><a href="#s02" data-i18n="stage.pointer">The pointer</a></li>
-      <li><a href="#s03" data-i18n="stage.questions">The questions</a></li>
-      <li><a href="#s04" data-i18n="stage.job">The job</a></li>
-      <li><a href="#s05" data-i18n="stage.bet">The bet</a></li>
-      <li><a href="#s06" data-i18n="stage.test">The test</a></li>
-      <li><a href="#s07" data-i18n="stage.evidence">What the evidence changed</a></li>
-      <li><a href="#s08" data-i18n="stage.build">The build</a></li>
-      <li><a href="#s09" data-i18n="stage.production">In production</a></li>
+      <li><a href="#s01" data-i18n="g.ix.1">Why it was hard</a></li>
+      <li><a href="#s02" data-i18n="g.ix.2">Decision: scope the MVP</a></li>
+      <li><a href="#s03" data-i18n="g.ix.3">Decision: skip the A/B test</a></li>
+      <li><a href="#s04" data-i18n="g.ix.4">What shipped</a></li>
+      <li><a href="#s05" data-i18n="g.ix.5">Impact</a></li>
+      <li><a href="#s06" data-i18n="g.ix.6">What I&rsquo;d do differently</a></li>
     </ol>
   </div>
 
   <div class="col reveal">
-    <p class="lead" data-i18n="g.lead1">I joined Genial Care, Brazil's leading platform for autism care, as its first Senior Product Designer, brought in to build the Atípico design system from scratch, improve the family-facing app, and stand up the clinical panel therapists use to run sessions (the same panel LIAM would later live inside). This case is about the app half of that mandate.</p>
-    <p data-i18n="g.lead2">When I joined, the app was a one-way channel: articles and content cards to read, with no direct interaction of any kind. You couldn't do anything in it. You could only look at things. About 8% of families opened it on a given day, which is roughly what you'd expect from a digital pamphlet. There were around 30 families on the platform then; by the time I left there were about 500.</p>
+    <p class="lead" data-i18n="g.lead1">I joined Genial Care, an ABA therapy platform for autism care, as its first Senior Product Designer &mdash; brought in to build the At&iacute;pico design system, improve the family-facing app, and stand up the clinical panel therapists use to run sessions. This case is the app half of that mandate. About 8% of families opened it on a given day when I joined: a one-way channel of articles and content cards, nothing you could act on.</p>
 
-    <span class="stage-label" id="s01"><b>01</b> &middot; <span data-i18n="stage.pain">The pain</span></span>
+    <span class="stage-label" id="s01"><b>01</b> &middot; <span data-i18n="g.ix.1">Why it was hard</span></span>
     <h2 data-i18n="g.h2.bottleneck">The bottleneck wasn't the app. It was scheduling.</h2>
-    <p data-i18n="g.bottleneck.p1">Instead of starting from the app, we started by mapping the biggest process gaps across Genial Care as a whole. One stood out immediately: session scheduling. Every family's weekly schedule, dozens of therapists and dozens of time slots, was built by hand by the operations team. The moment anything changed, a reschedule, a cancellation, that manual process broke. Information about who knew what lived across phone calls and spreadsheets, nothing was centralized, and keeping everyone aligned consumed a disproportionate share of the team's time every single week.</p>
-    <p data-i18n="g.bottleneck.p2">That was the actual opportunity: not a content problem, but an operations problem wearing a UX costume.</p>
-    <p class="pull" data-i18n="g.bottleneck.pull">It wasn't a content problem. It was an operations problem wearing a UX costume.</p>
-  </div>
-
-  <div class="col reveal">
-    <span class="stage-label" id="s02"><b>02</b> &middot; <span data-i18n="stage.pointer">The pointer</span></span>
-    <h2 data-i18n="g.h2.pointer">The pointer we agreed to move, before I drew a screen</h2>
-    <p data-i18n="g.pointer.p1">Daily engagement was the metric, but a metric is not a reason. The reason was capacity. At a care company the number of families you can serve is capped by how many hours the operations team spends holding the schedule together, and every reschedule absorbed by phone is an hour that doesn&rsquo;t go to onboarding the next family.</p>
-    <p data-i18n="g.pointer.p2">So the agreement with the PM and the operations lead was explicit. We would judge this work by two things: whether a family opened the app on an ordinary day, and whether operations stopped being the switchboard for schedule changes. Two pointers, one mechanism. An idea that couldn&rsquo;t plausibly move either one didn&rsquo;t get built, however good it looked. The first pointer is the 8.59% &rarr; 62.3% below. The second moved too: the operations lead put the hand-built scheduling work at roughly six hours a week before the MVP and around one after it. Those two figures are her recollection, not a time study, and I label them that way because the direction is the claim, not the precision.</p>
+    <p data-i18n="g.hard.1"><strong>It wasn&rsquo;t a content problem.</strong> The app was full of good material about autism care and almost nobody opened it. Underneath, the actual work &mdash; building every family&rsquo;s weekly therapy schedule, dozens of therapists and time slots &mdash; was happening by hand. Nothing was centralised; every reschedule was a phone call.</p>
+    <p data-i18n="g.hard.2"><strong>Growth was capped by operations, not by engagement.</strong> Every hour the operations team spent rescheduling by phone was an hour not spent onboarding the next family. Daily use was the metric everyone watched. Operations capacity was the actual ceiling.</p>
     <p class="takeaway" data-i18n="g.tk.pointer">A metric is not a reason. The reason was capacity: hours the operations team never got back.</p>
-
-    <span class="stage-label" id="s03"><b>03</b> &middot; <span data-i18n="stage.questions">The questions</span></span>
-    <h2 data-i18n="g.h2.questions">The questions I had to answer before design was useful</h2>
-    <p data-i18n="g.questions.p">Before any wireframe I ran a round with the people who owned the pieces: PM, operations lead, clinical lead, engineering. Not a workshop with sticky notes: a list of questions I could not answer myself, answered on the record, because each answer changed what was designable at all.</p>
-    <ol class="process">
-      <li>
-        <h3 class="card-h" data-i18n="g.q1.h">Who actually owns the schedule?</h3>
-        <p data-i18n="g.q1.p">If a family cancels in the app, whose calendar is the source of truth, and what happens to the therapist&rsquo;s slot? That answer decided whether cancelling could be one tap or needed a confirmation loop.</p>
-      </li>
-      <li>
-        <h3 class="card-h" data-i18n="g.q2.h">What is a family allowed to see?</h3>
-        <p data-i18n="g.q2.p">Clinical documentation has rules. I needed the clinical lead to draw the line between a family&rsquo;s information and a professional&rsquo;s working note before I designed anything that displayed either.</p>
-      </li>
-      <li>
-        <h3 class="card-h" data-i18n="g.q3.h">What can we change without touching scheduling?</h3>
-        <p data-i18n="g.q3.p">Engineering told me which parts of the backend were safe to build on in a month and which weren&rsquo;t. That is what made a one-month MVP a plan instead of an ambition.</p>
-      </li>
-      <li>
-        <h3 class="card-h" data-i18n="g.q4.h">What breaks if this works?</h3>
-        <p data-i18n="g.q4.p">If cancelling gets easier, does cancelling get more frequent? Operations took that risk deliberately, and we agreed up front that a cancellation rate above roughly 10% would mean we had made things worse. I don&rsquo;t have the closed-out figure for that guardrail, and I&rsquo;d rather say so than reconstruct one. Naming the failure condition before launch is still what let us read the rest of the result honestly.</p>
-      </li>
-    </ol>
-    <p class="takeaway" data-i18n="g.tk.questions">Naming the failure condition before launch is what let us read the result honestly afterwards.</p>
+    <p data-i18n="g.hard.3"><strong>No safe base to A/B test.</strong> Genial Care served families in the hundreds, not millions &mdash; too small to split traffic without each experiment costing weeks it didn&rsquo;t have.</p>
+    <p class="pull" data-i18n="g.bottleneck.pull">It wasn't a content problem. It was an operations problem wearing a UX costume.</p>
   </div>
 
   <figure class="shot narrow reveal">
@@ -691,108 +684,43 @@
   </figure>
 
   <div class="col reveal">
-
-    <span class="stage-label" id="s04"><b>04</b> &middot; <span data-i18n="stage.job">The job</span></span>
-    <h2 data-i18n="g.h2.job">What a family was actually hiring the app for</h2>
-    <p data-i18n="g.job.p1">The app was full of good material about autism care and almost nobody opened it. That is not a content-quality problem, it is a job problem. Nobody wakes up wanting to read about autism. What a parent wants on a Tuesday morning is to know what happens with their child this week, and to be able to change it without making a phone call.</p>
-    <p data-i18n="g.job.p2">Operations had a job too, and it was the same one seen from the other end: stop being the person who has to know everything and tell everyone.</p>
-    <p class="pull" data-i18n="g.job.pull">Nobody opens an app to read about autism. They open it to find out what happens with their child on Thursday.</p>
-
-    <span class="stage-label" id="s05"><b>05</b> &middot; <span data-i18n="stage.bet">The bet</span></span>
-    <h2 data-i18n="g.h2.howworked">Continuous discovery, not a big-bang redesign</h2>
-    <p data-i18n="g.howworked.p">I didn&rsquo;t run this as a single project with a launch date. I ran it as a loop: talk to people, ship the smallest useful thing, watch what they actually do, decide the next bet from that. That is the reason the app kept climbing instead of spiking once and flattening.</p>
-    <p data-i18n="g.howworked.p2">The loop was not only mine. Product designers and marketing sat in the same room on a recurring basis, in person, to find where the ecosystem was getting stuck &mdash; not just the app, but how product and brand were failing to say the same thing. Some of the best bets came out of those sessions rather than out of a research round: the person who owns the brand voice notices a gap that someone looking at a funnel never will.</p>
-
-    <div class="artifact-row reveal">
-      <div class="artifact-tile">
-        <div class="a-visual">
-          <div class="a-journey">
-            <div class="dot on"></div><div class="seg"></div>
-            <div class="dot"></div><div class="seg"></div>
-            <div class="dot"></div><div class="seg"></div>
-            <div class="dot"></div>
-          </div>
-        </div>
-        <span class="a-label" data-i18n="g.artifact1">Journey mapping</span>
-      </div>
-      <div class="artifact-tile">
-        <div class="a-visual">
-          <div class="a-wire">
-            <div class="row w45"></div>
-            <div class="block"></div>
-            <div class="row w100"></div>
-            <div class="row w70"></div>
-          </div>
-        </div>
-        <span class="a-label" data-i18n="g.artifact2">Wireframes &amp; prototypes</span>
-      </div>
-      <div class="artifact-tile">
-        <div class="a-visual">
-          <div class="a-chat">
-            <div class="bub bub1"></div>
-            <div class="bub bub2"></div>
-            <div class="bub bub3"></div>
-          </div>
-        </div>
-        <span class="a-label" data-i18n="g.artifact3">User interviews</span>
+    <span class="stage-label" id="s02"><b>02</b> &middot; <span data-i18n="g.ix.2">Decision: scope the MVP</span></span>
+    <h2 data-i18n="g.h2.d1">Scope the MVP around two actions, not a redesign</h2>
+    <div class="decision">
+      <div class="decision-head"><span class="dn">1</span><h3 data-i18n="g.d1.title">Give families a reason to act, not just read</h3></div>
+      <div class="decision-body">
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.problem">Problem</span><p class="dv" data-i18n="g.d1.problem">A full redesign was the obvious ask. Defending three weeks of mapping the operations team&rsquo;s week &mdash; with nothing visible shipping &mdash; was hard.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.decision">Decision</span><p class="dv" data-i18n="g.d1.decision">I scoped the first release around exactly two actions: showing each child&rsquo;s upcoming sessions, and letting a family cancel one themselves instead of calling. Shipped in one month, discovery to build.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.why">Why</span><p class="dv" data-i18n="g.d1.why">Those two actions were driving most of the manual back-and-forth between families and operations. Nobody opens a healthcare app to read about autism &mdash; they open it to find out what happens with their child on Thursday.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.argument">What won the argument</span><p class="dv" data-i18n="g.d1.argument">Not a better opinion &mdash; a map. Once the team could see the hours a single reschedule cost, nobody wanted to talk about the content grid anymore.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.result">Result</span><p class="dv" data-i18n="g.d1.result">Families used it immediately, and cancellations started arriving through the app instead of by phone within a few months. Proved the actual lever: give families a reason to act, not just read.</p></div>
       </div>
     </div>
-
-
   </div>
 
-  <figure class="shot narrow reveal">
-    <div class="frame"><img src="/assets/genial-workshop.webp" alt="A cross-functional working session: product designers and marketing around a flipchart covered in notes, discussing where the product ecosystem was getting stuck" loading="lazy" width="1264" height="843"></div>
-    <figcaption class="caption" data-i18n="g.ws.cap">A recurring cross-functional session with product design and marketing. The app was one surface of a larger ecosystem, and the gaps between product and brand only showed up when both were in the room.</figcaption>
-  </figure>
-
   <div class="col reveal">
-    <span class="stage-label" id="s06"><b>06</b> &middot; <span data-i18n="stage.test">The test</span></span>
-    <h2 data-i18n="g.h2.test">How I checked, and why I didn&rsquo;t A/B test this</h2>
-    <p data-i18n="g.test.p1">Every feature started as a clickable prototype run past a handful of real families, which is where you catch the confusing parts of a flow before engineering spends a sprint on them. But a prototype tells you whether someone <em>can</em> use something. It doesn&rsquo;t tell you whether they <em>will</em>.</p>
-    <p data-i18n="g.test.p2">The textbook answer would be to split traffic and A/B test each release. I didn&rsquo;t, and the reason is the math. Genial Care served families in the hundreds, not the millions. An experiment on a daily-open rate at that base needs weeks to say anything, and splitting the base in half doubles the wait. We would have bought statistical comfort at the price of learning speed, on a product whose whole advantage was learning fast.</p>
-    <p data-i18n="g.test.p3">So the instrument was the weekly curve with the funnel underneath it: who came in, what they opened, where they stopped, what they never touched once. Each release became its own before-and-after, marked on the chart. The funnel said what changed; the interviews said why. When the two disagreed, the disagreement was the finding worth chasing.</p>
+    <span class="stage-label" id="s03"><b>03</b> &middot; <span data-i18n="g.ix.3">Decision: skip the A/B test</span></span>
+    <h2 data-i18n="g.h2.d2">Read behaviour against a weekly curve, not an A/B test</h2>
+    <div class="decision">
+      <div class="decision-head"><span class="dn">2</span><h3 data-i18n="g.d2.title">The funnel said what changed. Interviews said why.</h3></div>
+      <div class="decision-body">
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.problem">Problem</span><p class="dv" data-i18n="g.d2.problem">The textbook answer is to split traffic and A/B test each release.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.decision">Decision</span><p class="dv" data-i18n="g.d2.decision">I didn&rsquo;t. Every release became its own before/after against a weekly funnel-and-curve instead: who came in, what they opened, where they stopped.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.why">Why</span><p class="dv" data-i18n="g.d2.why">At this scale, splitting the base in half doubles the wait for a result that already needs weeks. That's not worth it on a product whose whole advantage was learning fast.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.evidence">What it caught</span><p class="dv" data-i18n="g.d2.evidence">Before building the cancel flow, I tested it with five families on their own phones. The assumption was that cancelling would be the sensitive moment. It wasn&rsquo;t &mdash; parents hesitated because they weren&rsquo;t sure the schedule was <em>live</em>, not because cancelling felt risky. The fix moved from &ldquo;make confirmation feel safe&rdquo; to &ldquo;make the schedule read as current.&rdquo; The same round killed the label &ldquo;Agenda,&rdquo; which meant the clinic&rsquo;s calendar to operations and the child&rsquo;s week to a parent &mdash; the parent&rsquo;s reading won.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.result">Result</span><p class="dv" data-i18n="g.d2.result">When the funnel and the interviews disagreed, that disagreement was the finding worth chasing &mdash; a signal an A/B test alone would never have surfaced.</p></div>
+      </div>
+    </div>
     <p class="takeaway" data-i18n="g.tk.test">The funnel said what changed. The interviews said why. The disagreement between them was the finding.</p>
-    <h3 class="sub" data-i18n="g.usab.h">The round that changed the cancellation flow</h3>
-    <p data-i18n="g.usab.p1">Before build, I ran the flow with five families on their own phones, remote, each asked to do one thing: find out when their child&rsquo;s next session is, then cancel it. No script beyond that, because the point was to watch where they hesitated, not to confirm that the buttons worked.</p>
-    <div class="compare">
-      <div>
-        <span class="k" data-i18n="cmp.assumed">What we assumed</span>
-        <p data-i18n="g.usab.assumed">That cancelling would be the sensitive moment, so the design effort belonged in making the confirmation feel safe.</p>
-      </div>
-      <div>
-        <span class="k" data-i18n="cmp.found">What the round showed</span>
-        <p data-i18n="g.usab.found">The hesitation came earlier. Parents weren&rsquo;t sure the schedule in front of them was live. Two of them refreshed before touching anything. Cancelling itself they did without pausing.</p>
-      </div>
-    </div>
-    <p data-i18n="g.usab.p2">So the confirmation stayed, but the work moved to the state before it: making the schedule read as current rather than as a stored copy. The same round killed a label. &ldquo;Agenda&rdquo; meant the clinic&rsquo;s calendar to the operations team and the child&rsquo;s week to a parent, and the parents&rsquo; reading won.</p>
-  </div>
-
-  <figure class="shot narrow reveal">
-    <div class="frame"><img src="/assets/slot-genial-06.webp" alt="A monitor on a desk showing an analytics view: a four-step funnel narrowing on the left and a line chart climbing in visible steps on the right. Values are not legible; the image illustrates the kind of behavioural data that decided each release" loading="lazy" width="1264" height="843"></div>
-    <figcaption class="caption" data-i18n="g.slot2.c">The funnel underneath the curve: where families entered, what they opened, where they stopped.</figcaption>
-  </figure>
-
-  <div class="col reveal">
-    <div class="callout-grid">
-      <div class="callout">
-        <h3 class="card-h" data-i18n="g.role.h">My role</h3>
-        <p data-i18n="g.role.p">Senior product designer end to end: discovery, research, interaction and UI, prototype, and working alongside engineering through launch, across iOS, Android, and web.</p>
-      </div>
-      <div class="callout">
-        <h3 class="card-h" data-i18n="g.team.h">The team</h3>
-        <p data-i18n="g.team.p">Worked directly with a product manager, the operations lead, and a small engineering squad, plus the clinical team as domain experts on what families needed to see.</p>
-      </div>
-    </div>
   </div>
 
   <div class="col reveal">
-    <h2 data-i18n="g.h2.opening">The opening move: let families act, not just read</h2>
-    <p data-i18n="g.opening.p1">We scoped an MVP around the two actions responsible for most of the manual back-and-forth: showing each child's upcoming sessions inside the app, and letting families cancel a session themselves instead of routing it through a phone call. Discovery, prototype, and build: one month, start to finish, deliberately small so we'd get a real answer fast instead of a better guess slowly.</p>
-    <p data-i18n="g.opening.p2">It launched, and the result wasn't ambiguous. Families used it immediately, and within a few months cancellations were arriving through the app instead of over the phone. I never had that split counted, so I&rsquo;ll leave it as what it is: a change operations felt rather than one I can size. They felt the relief right away: the manual, repetitive core of their week had a real alternative.</p>
-    <p data-i18n="g.opening.p3">That first release proved something bigger than the feature itself: give families a reason to <em>act</em>, not just read, and they'll show up. From there, we kept adding to it, each new feature earning its place by giving someone another reason to open the app, and each one pulling another manual task off operations so the team could focus on higher-value work instead of rebuilding the same schedule by hand every week.</p>
+    <span class="stage-label" id="s04"><b>04</b> &middot; <span data-i18n="g.ix.4">What shipped</span></span>
+    <h2 data-i18n="g.h2.shipped">What shipped, once the mechanism was proven</h2>
+    <p data-i18n="g.shipped.intro">Each addition earned its place the same way: does this give someone a reason to come back, measured before the next bet started.</p>
   </div>
 
+  <div class="col reveal"><h3 class="sub" data-i18n="g.ship1.h">Sessions + cancel &mdash; the MVP</h3></div>
   <figure class="shot shot-phone reveal">
     <div class="phone-row">
       <img src="/assets/genial-sessions.webp" alt="Genial Care app home screen with upcoming sessions, and session detail showing therapists and the child's evolution note" width="1500" height="1944">
@@ -801,10 +729,8 @@
   </figure>
 
   <div class="col reveal">
-    <span class="stage-label" id="s07"><b>07</b> &middot; <span data-i18n="stage.evidence">What the evidence changed</span></span>
-    <h2 data-i18n="g.h2.longterm">Then: make the long-term visible, not just the next appointment</h2>
-    <p data-i18n="g.longterm.p1">Sessions answer "what happened this week." They don't answer the question underneath every parent's week, which is "is my child actually progressing?" The PEI, the individualized education plan, already existed as a clinical document, but it lived where families couldn't see it. I brought it into the app as a plain-language list of the skills being worked on, each with a start date: <em>Gabriel will play with different toys. Gabriel will be able to climb the ball pit.</em></p>
-    <p data-i18n="g.longterm.p2">This is a different kind of move than the scheduling MVP: not a new capability, but taking something the clinical side already produces and putting it where the family can see their child inside it.</p>
+    <h3 class="sub" data-i18n="g.ship2.h">The PEI, translated</h3>
+    <p data-i18n="g.longterm.p1">Sessions answer &ldquo;what happened this week.&rdquo; They don&rsquo;t answer &ldquo;is my child actually progressing?&rdquo; The PEI, the individualized education plan, already existed as a clinical document families couldn&rsquo;t see. I brought it into the app as a plain-language list of skills in progress, each with a start date: <em>Gabriel will play with different toys.</em> Not a new capability &mdash; an existing document moved to where a family could see their child inside it.</p>
   </div>
 
   <figure class="shot shot-phone reveal">
@@ -815,9 +741,9 @@
   </figure>
 
   <div class="col reveal">
-    <h2 data-i18n="g.h2.between">And then: the moment between sessions</h2>
-    <p data-i18n="g.between.p1">The hardest moments for these families don't happen during a session. They happen at 8pm on a Tuesday when a child bites someone and a parent has no idea what to do. <em>Genial Junto</em> opened a chat run by the therapists themselves for exactly that: describe the difficult situation, get a real, specific answer back within a stated response window.</p>
-    <p data-i18n="g.between.p2">Design-wise, the decision I care about here is the visible response-time badge. An open-ended "we'll get back to you" invites people to check obsessively and then lose trust. Stating "up to 2 business days" up front sets the expectation once, honestly, and lets the parent put the phone down.</p>
+    <h3 class="sub" data-i18n="g.ship3.h">Genial Junto &mdash; support between sessions</h3>
+    <p data-i18n="g.between.p1">The hardest moments don&rsquo;t happen during a session. They happen at 8pm on a Tuesday when a child bites someone and a parent has no idea what to do. <em>Genial Junto</em> opened a chat run by the therapists themselves for exactly that.</p>
+    <p data-i18n="g.between.p2">The decision I&rsquo;d defend here: a visible response-time badge. An open-ended &ldquo;we&rsquo;ll get back to you&rdquo; invites obsessive checking and erodes trust. Stating &ldquo;up to 2 business days&rdquo; up front sets the expectation once, honestly, and lets the parent put the phone down.</p>
   </div>
 
   <figure class="shot shot-phone reveal">
@@ -828,14 +754,8 @@
   </figure>
 
   <div class="col reveal">
-    <span class="stage-label" id="s08"><b>08</b> &middot; <span data-i18n="stage.build">The build</span></span>
-    <h2 data-i18n="g.h2.build">What changed between handoff and production</h2>
-    <p data-i18n="g.build.p1">I didn&rsquo;t hand off a file and leave. The MVP was one month end to end, and I sat in the same squad rituals as engineering through it. That is where the questions a Figma file can&rsquo;t answer got decided. What happens if a family cancels a session that starts in twenty minutes. What the screen shows when the schedule hasn&rsquo;t synced yet. What an empty week looks like for a family that joined yesterday.</p>
-    <p data-i18n="g.build.p2">The cancellation window is the one I&rsquo;d call out. It only surfaced during build, because the rule lived in the scheduling backend and nobody had written it down. Rather than hide it, we surfaced it: past the cutoff the action stays visible but explains itself, instead of disappearing and leaving a parent to guess whether the app is broken. I ran design QA on the real build across iOS, Android and web before release, because a state that is correct in Figma and wrong in the client is still wrong.</p>
-    <p class="takeaway" data-i18n="g.tk.build">A state that is correct in Figma and wrong in the client is still wrong.</p>
-
-    <span class="stage-label" id="s09"><b>09</b> &middot; <span data-i18n="stage.production">Into production</span></span>
-    <p data-i18n="g.curve.p1">None of the above launched as one release. Each was a small bet against the same bar (<em>does this give someone a reason to come back?</em>), shipped narrow, then measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn't a hockey stick, it's a staircase with visible dips, where each step up follows a release and each dip taught us something before the next one.</p>
+    <span class="stage-label" id="s05"><b>05</b> &middot; <span data-i18n="g.ix.5">Impact</span></span>
+    <p data-i18n="g.curve.p1">Each addition shipped narrow, then was measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn&rsquo;t a hockey stick, it&rsquo;s a staircase with visible dips, where each step up follows a release.</p>
     <p class="pull" data-i18n="g.curve.pull">It isn't one redesign that worked. It's a staircase, each step a bet that had to prove itself before the next one started.</p>
   </div>
 
@@ -857,24 +777,13 @@
       <div class="m"><div class="num">62.3%</div><div class="label" data-i18n="g.m1">Families opening the app on a given day, July 2024, weekly average</div></div>
       <div class="m"><div class="num" data-i18n="g.m3n">1 month</div><div class="label" data-i18n="g.m3">Discovery, prototype and build for the first release</div></div>
     </div>
-    <p class="note" data-i18n="g.note"><strong>How it was measured:</strong> the share of families on the platform opening the app on a given day, tracked in Metabase and read as a weekly average across the 13 months from the June 2023 baseline to July 2024. The chart above is the raw weekly series (its axis labels are in Portuguese: <em>Semana</em> is week, <em>Meta</em> is the target line). Two things it does not show, stated on purpose. The first is that the base moved underneath the rate: around 30 families when I joined, around 500 when I left. The share climbed while the denominator grew roughly sixteen times, which makes the rise harder to achieve, not easier &mdash; but it does mean the 8.59% baseline sits on a much smaller base than the 62.3%. The second is that the operations-hours saving, the other pointer, was never instrumented; the six-hours-to-one figure is the operations lead&rsquo;s recollection, and I present it as that. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em></p>
+    <p class="note" data-i18n="g.note"><strong>How it was measured:</strong> the share of families on the platform opening the app on a given day, tracked in Metabase and read as a weekly average across the 13 months from the June 2023 baseline to July 2024. The chart above is the raw weekly series (its axis labels are in Portuguese: <em>Semana</em> is week, <em>Meta</em> is the target line). Two things it does not show, stated on purpose. The first is that the base moved underneath the rate: around 30 families when I joined, around 500 when I left. The share climbed while the denominator grew roughly sixteen times, which makes the rise harder to achieve, not easier &mdash; but it does mean the 8.59% baseline sits on a much smaller base than the 62.3%. The second is that the operations-hours saving, the other pointer, was never instrumented; the six-hours-to-one figure is the operations lead&rsquo;s recollection, and I present it as that. One guardrail we agreed before launch: a cancellation rate above roughly 10% would have meant the change made things worse. I don&rsquo;t have the closed-out reading, and I say so rather than produce one. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em></p>
   </div>
 
   <div class="col reveal">
-    <h2 data-i18n="g.h2.defend">What I'd defend in a design review</h2>
-    <p data-i18n="g.defend.p2">The decision I would defend hardest is scoping the MVP around actions, not features. Showing a schedule and letting a family cancel are unglamorous next to a full engagement suite, but they were the two things driving operations&rsquo; manual workload &mdash; so they were the two worth building first, in a month, to get a real answer instead of a better guess.</p>
-    <p data-i18n="g.defend.p3">That was also the argument I had to win. A redesign was the obvious ask, and spending the first weeks mapping how the operations team&rsquo;s week actually went is hard to defend when nothing visible is being produced. What made it land was not a better opinion, it was the map: once you could see the hours a single reschedule cost, nobody wanted to talk about the content grid any more.</p>
-
-    <h3 class="sub" data-i18n="g.meas.h">How we measured it, and what would have counted as failure</h3>
-    <p data-i18n="g.meas.p">The scoreboard was agreed before the first release, so nobody could move the goalposts afterwards.</p>
-    <ul class="receipts">
-      <li><b data-i18n="g.meas.1b">North star</b> <span data-i18n="g.meas.1t">Weekly average of unique families opening the app, tracked in Metabase. The chart above is that raw series, release markers included.</span></li>
-      <li><b data-i18n="g.meas.2b">Guardrail</b> <span data-i18n="g.meas.2t">Cancellation rate. If making cancellation easy made cancelling more frequent, the product win would have been an operational loss. We agreed on the line before launch, not after: roughly 10%. I don&rsquo;t have the closed-out reading, and I say so rather than produce one.</span></li>
-      <li><b data-i18n="g.meas.3b">Read cadence</b> <span data-i18n="g.meas.3t">Weekly, with each release marked on the curve, so a step could be attributed to a specific bet instead of to the month it happened in.</span></li>
-    </ul>
-
-    <h3 class="sub" data-i18n="g.dif.h">What I&rsquo;d do differently</h3>
-    <p data-i18n="g.dif.p">I would instrument before shipping, not alongside it. The releases after the MVP each had a clean before-and-after because the events were already in place; the first one did not, and it is the one people ask about most. I also spent longer than I should have making the content section work before accepting that content was not the problem &mdash; the evidence for that was available weeks earlier than I acted on it.</p>
+    <span class="stage-label" id="s06"><b>06</b> &middot; <span data-i18n="g.ix.6">What I&rsquo;d do differently</span></span>
+    <h2 data-i18n="g.h2.dif">Instrument before shipping, not alongside it</h2>
+    <p data-i18n="g.dif.p">The releases after the MVP each had a clean before-and-after because the events were already in place; the first one did not, and it is the one people ask about most. I also spent longer than I should have making the content section work before accepting that content was not the problem &mdash; the evidence for that was available weeks earlier than I acted on it.</p>
 
     <p class="note" data-i18n="g.instrument.p1">Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a></p>
 
@@ -930,6 +839,11 @@
       <a class="contact-option" href="mailto:cannalongadesign@gmail.com">
         <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 6h16v12H4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         <span class="co-body"><span class="co-title" data-i18n="modal.email.title">Send an email</span><span class="co-sub">cannalongadesign@gmail.com</span></span>
+        <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </a>
+      <a class="contact-option" href="mailto:cannalongadesign@gmail.com?subject=Resume%20request">
+        <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="co-body"><span class="co-title" data-i18n="modal.resume.title">Request my r&eacute;sum&eacute;</span><span class="co-sub" data-i18n="modal.resume.sub">I&rsquo;ll send the PDF by email</span></span>
         <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </a>
       <a class="contact-option" href="https://calendar.app.google/ud4eadh3CyBDhbUQ9" target="_blank" rel="noopener">
@@ -1033,7 +947,7 @@
         'g.howworked.p2':`The loop was not only mine. Product designers and marketing sat in the same room on a recurring basis, in person, to find where the ecosystem was getting stuck &mdash; not just the app, but how product and brand were failing to say the same thing. Some of the best bets came out of those sessions rather than out of a research round: the person who owns the brand voice notices a gap that someone looking at a funnel never will.`,
         'g.ws.cap':`A recurring cross-functional session with product design and marketing. The app was one surface of a larger ecosystem, and the gaps between product and brand only showed up when both were in the room.`,
         'g.dif.h':`What I&rsquo;d do differently`,
-        'g.dif.p':`I would instrument before shipping, not alongside it. The releases after the MVP each had a clean before-and-after because the events were already in place; the first one did not, and it is the one people ask about most. I also spent longer than I should have making the content section work before accepting that content was not the problem &mdash; the evidence for that was available weeks earlier than I acted on it.`,
+        'g.dif.p':`The releases after the MVP each had a clean before-and-after because the events were already in place; the first one did not, and it is the one people ask about most. I also spent longer than I should have making the content section work before accepting that content was not the problem &mdash; the evidence for that was available weeks earlier than I acted on it.`,
         'nav.back.genial':`Back to Genial App`,
         'nav.back.liam':`Back to LIAM`,
         'nav.back.kruzer':`Back to Pick &amp; Pack`,
@@ -1066,7 +980,34 @@
         'g.meas.2t':`Cancellation rate. If making cancellation easy made cancelling more frequent, the product win would have been an operational loss. We agreed on the line before launch, not after: roughly 10%. I don&rsquo;t have the closed-out reading, and I say so rather than produce one.`,
         'g.meas.3b':`Read cadence`,
         'g.meas.3t':`Weekly, with each release marked on the curve, so a step could be attributed to a specific bet instead of to the month it happened in.`,
-        'ix.time':'14 min read',
+        'ix.time':'7 min read',
+        'g.demo.1':'Product strategy', 'g.demo.2':'0&rarr;1', 'g.demo.3':'Consumer healthcare', 'g.demo.4':'Growth',
+        'g.ix.1':'Why it was hard', 'g.ix.2':'Decision: scope the MVP', 'g.ix.3':'Decision: skip the A/B test',
+        'g.ix.4':'What shipped', 'g.ix.5':'Impact', 'g.ix.6':`What I&rsquo;d do differently`,
+        'g.hard.1':`<strong>It wasn&rsquo;t a content problem.</strong> The app was full of good material about autism care and almost nobody opened it. Underneath, the actual work &mdash; building every family&rsquo;s weekly therapy schedule, dozens of therapists and time slots &mdash; was happening by hand. Nothing was centralised; every reschedule was a phone call.`,
+        'g.hard.2':`<strong>Growth was capped by operations, not by engagement.</strong> Every hour the operations team spent rescheduling by phone was an hour not spent onboarding the next family. Daily use was the metric everyone watched. Operations capacity was the actual ceiling.`,
+        'g.hard.3':`<strong>No safe base to A/B test.</strong> Genial Care served families in the hundreds, not millions &mdash; too small to split traffic without each experiment costing weeks it didn&rsquo;t have.`,
+        'g.h2.d1':'Scope the MVP around two actions, not a redesign',
+        'g.d1.title':'Give families a reason to act, not just read',
+        'g.dk.problem':'Problem', 'g.dk.decision':'Decision', 'g.dk.why':'Why', 'g.dk.argument':`What won the argument`, 'g.dk.result':'Result', 'g.dk.evidence':`What it caught`,
+        'g.d1.problem':`A full redesign was the obvious ask. Defending three weeks of mapping the operations team&rsquo;s week &mdash; with nothing visible shipping &mdash; was hard.`,
+        'g.d1.decision':`I scoped the first release around exactly two actions: showing each child&rsquo;s upcoming sessions, and letting a family cancel one themselves instead of calling. Shipped in one month, discovery to build.`,
+        'g.d1.why':`Those two actions were driving most of the manual back-and-forth between families and operations. Nobody opens a healthcare app to read about autism &mdash; they open it to find out what happens with their child on Thursday.`,
+        'g.d1.argument':`Not a better opinion &mdash; a map. Once the team could see the hours a single reschedule cost, nobody wanted to talk about the content grid anymore.`,
+        'g.d1.result':`Families used it immediately, and cancellations started arriving through the app instead of by phone within a few months. Proved the actual lever: give families a reason to act, not just read.`,
+        'g.h2.d2':'Read behaviour against a weekly curve, not an A/B test',
+        'g.d2.title':`The funnel said what changed. Interviews said why.`,
+        'g.d2.problem':`The textbook answer is to split traffic and A/B test each release.`,
+        'g.d2.decision':`I didn&rsquo;t. Every release became its own before/after against a weekly funnel-and-curve instead: who came in, what they opened, where they stopped.`,
+        'g.d2.why':`At this scale, splitting the base in half doubles the wait for a result that already needs weeks. That's not worth it on a product whose whole advantage was learning fast.`,
+        'g.d2.evidence':`Before building the cancel flow, I tested it with five families on their own phones. The assumption was that cancelling would be the sensitive moment. It wasn&rsquo;t &mdash; parents hesitated because they weren&rsquo;t sure the schedule was <em>live</em>, not because cancelling felt risky. The fix moved from &ldquo;make confirmation feel safe&rdquo; to &ldquo;make the schedule read as current.&rdquo; The same round killed the label &ldquo;Agenda,&rdquo; which meant the clinic&rsquo;s calendar to operations and the child&rsquo;s week to a parent &mdash; the parent&rsquo;s reading won.`,
+        'g.d2.result':`When the funnel and the interviews disagreed, that disagreement was the finding worth chasing &mdash; a signal an A/B test alone would never have surfaced.`,
+        'g.h2.shipped':'What shipped, once the mechanism was proven',
+        'g.shipped.intro':`Each addition earned its place the same way: does this give someone a reason to come back, measured before the next bet started.`,
+        'g.ship1.h':`Sessions + cancel &mdash; the MVP`,
+        'g.ship2.h':'The PEI, translated',
+        'g.ship3.h':`Genial Junto &mdash; support between sessions`,
+        'g.h2.dif':'Instrument before shipping, not alongside it',
         'g.tk.pointer':`A metric is not a reason. The reason was capacity: hours the operations team never got back.`,
         'g.tk.questions':`Naming the failure condition before launch is what let us read the result honestly afterwards.`,
         'g.tk.test':`The funnel said what changed. The interviews said why. The disagreement between them was the finding.`,
@@ -1076,13 +1017,13 @@
         'tl.problem.k':'Problem', 'tl.did.k':'What I did', 'tl.out.k':'Outcome',
         'g.tl.problem':`A content app almost nobody opened, on top of an operations team building every family's weekly schedule by hand.`,
         'g.tl.did':`Found the real bottleneck in scheduling, shipped a one-month MVP that let families see and cancel sessions, then ran a continuous loop of small bets read against a weekly behaviour curve.`,
-        'g.tl.out':`Daily active families went from <b>8.59% to 62.3%</b> in 13 months, a 675% jump year over year, in a staircase that tracks releases rather than one redesign spike.`,
+        'g.tl.out':`Daily active families went from <b>8.59% to 62.3%</b> in 13 months, in a staircase that tracks releases rather than one redesign spike.`,
         'nav.back':'Back to portfolio', 'nav.cta':`Let's talk`,
         'hero.kicker':'Case study · Healthcare · Product Growth',
         'hero.h1':'Turning a forgotten app into the tool 62% of families open every day',
         'hero.dek':`The Genial Care family app went from an 8% daily-active rate to 62% in a year, not through a redesign, but by fixing a scheduling bottleneck that was overloading operations, then letting usage decide what came next.`,
         'meta.role':'Role', 'meta.team':'Team', 'meta.company':'Company', 'meta.timeline':'Timeline', 'meta.outcome':'Outcome',
-        'g.lead1':`I joined Genial Care, Brazil's leading platform for autism care, as its first Senior Product Designer, brought in to build the Atípico design system from scratch, improve the family-facing app, and stand up the clinical panel therapists use to run sessions (the same panel LIAM would later live inside). This case is about the app half of that mandate.`,
+        'g.lead1':`I joined Genial Care, an ABA therapy platform for autism care, as its first Senior Product Designer, brought in to build the Atípico design system from scratch, improve the family-facing app, and stand up the clinical panel therapists use to run sessions (the same panel LIAM would later live inside). This case is about the app half of that mandate.`,
         'g.lead2':`When I joined, the app was a one-way channel: articles and content cards to read, with no direct interaction of any kind. You couldn't do anything in it. You could only look at things. About 8% of families opened it on a given day, which is roughly what you'd expect from a digital pamphlet. There were around 30 families on the platform then; by the time I left there were about 500.`,
         'g.h2.bottleneck':`The bottleneck wasn't the app. It was scheduling.`,
         'g.bottleneck.p1':`Instead of starting from the app, we started by mapping the biggest process gaps across Genial Care as a whole. One stood out immediately: session scheduling. Every family's weekly schedule, dozens of therapists and dozens of time slots, was built by hand by the operations team. The moment anything changed, a reschedule, a cancellation, that manual process broke. Information about who knew what lived across phone calls and spreadsheets, nothing was centralized, and keeping everyone aligned consumed a disproportionate share of the team's time every single week.`,
@@ -1110,7 +1051,7 @@
         'g.job.pull':`Nobody opens an app to read about autism. They open it to find out what happens with their child on Thursday.`,
         'g.h2.test':`How I checked, and why I didn&rsquo;t A/B test this`,
         'g.test.p1':`Every feature started as a clickable prototype run past a handful of real families, which is where you catch the confusing parts of a flow before engineering spends a sprint on them. But a prototype tells you whether someone <em>can</em> use something. It doesn&rsquo;t tell you whether they <em>will</em>.`,
-        'g.test.p2':`The textbook answer would be to split traffic and A/B test each release. I didn&rsquo;t, and the reason is the math. Genial Care served families in the hundreds, not the millions. An experiment on a daily-open rate at that base needs weeks to say anything, and splitting the base in half doubles the wait. We would have bought statistical comfort at the price of learning speed, on a product whose whole advantage was learning fast.`,
+        'g.test.p2':`The textbook answer would be to split traffic and A/B test each release. I didn&rsquo;t, and the reason is the math. Genial Care served families in the hundreds, not the millions. An experiment on a daily-open rate at that base needs weeks to say anything, and splitting the base in half doubles the wait. Not worth it on a product whose whole advantage was learning fast.`,
         'g.test.p3':`So the instrument was the weekly curve with the funnel underneath it: who came in, what they opened, where they stopped, what they never touched once. Each release became its own before-and-after, marked on the chart. The funnel said what changed; the interviews said why. When the two disagreed, the disagreement was the finding worth chasing.`,
         'g.instrument.p1':`Different project, different instrument. <a href="/#method">How I chose the instrument on each project &rarr;</a>`,
         'g.h2.howworked':`Continuous discovery, not a big-bang redesign`,
@@ -1126,19 +1067,19 @@
         'g.opening.p3':`That first release proved something bigger than the feature itself: give families a reason to <em>act</em>, not just read, and they'll show up. From there, we kept adding to it, each new feature earning its place by giving someone another reason to open the app, and each one pulling another manual task off operations so the team could focus on higher-value work instead of rebuilding the same schedule by hand every week.`,
         'g.cap1':`The result of that first MVP: upcoming sessions and a therapist's note on the home screen, with cancellation now handled in-app instead of by phone.`,
         'g.h2.longterm':`Then: make the long-term visible, not just the next appointment`,
-        'g.longterm.p1':`Sessions answer "what happened this week." They don't answer the question underneath every parent's week, which is "is my child actually progressing?" The PEI, the individualized education plan, already existed as a clinical document, but it lived where families couldn't see it. I brought it into the app as a plain-language list of the skills being worked on, each with a start date: <em>Gabriel will play with different toys. Gabriel will be able to climb the ball pit.</em>`,
+        'g.longterm.p1':`Sessions answer &ldquo;what happened this week.&rdquo; They don&rsquo;t answer &ldquo;is my child actually progressing?&rdquo; The PEI, the individualized education plan, already existed as a clinical document families couldn&rsquo;t see. I brought it into the app as a plain-language list of skills in progress, each with a start date: <em>Gabriel will play with different toys.</em> Not a new capability &mdash; an existing document moved to where a family could see their child inside it.`,
         'g.longterm.p2':`This is a different kind of move than the scheduling MVP: not a new capability, but taking something the clinical side already produces and putting it where the family can see their child inside it.`,
         'g.cap2':`The PEI, translated from clinical document into something a parent can read: concrete skills, in plain language, with dates.`,
         'g.h2.between':`And then: the moment between sessions`,
-        'g.between.p1':`The hardest moments for these families don't happen during a session. They happen at 8pm on a Tuesday when a child bites someone and a parent has no idea what to do. <em>Genial Junto</em> opened a chat run by the therapists themselves for exactly that: describe the difficult situation, get a real, specific answer back within a stated response window.`,
-        'g.between.p2':`Design-wise, the decision I care about here is the visible response-time badge. An open-ended "we'll get back to you" invites people to check obsessively and then lose trust. Stating "up to 2 business days" up front sets the expectation once, honestly, and lets the parent put the phone down.`,
+        'g.between.p1':`The hardest moments don&rsquo;t happen during a session. They happen at 8pm on a Tuesday when a child bites someone and a parent has no idea what to do. <em>Genial Junto</em> opened a chat run by the therapists themselves for exactly that.`,
+        'g.between.p2':`The decision I&rsquo;d defend here: a visible response-time badge. An open-ended &ldquo;we&rsquo;ll get back to you&rdquo; invites obsessive checking and erodes trust. Stating &ldquo;up to 2 business days&rdquo; up front sets the expectation once, honestly, and lets the parent put the phone down.`,
         'g.cap3':`Genial Junto: support for the moments between sessions, with the response-time expectation stated before the parent writes anything.`,
-        'g.curve.p1':`None of the above launched as one release. Each was a small bet against the same bar (<em>does this give someone a reason to come back?</em>), shipped narrow, then measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn't a hockey stick, it's a staircase with visible dips, where each step up follows a release and each dip taught us something before the next one.`,
+        'g.curve.p1':`Each addition shipped narrow, then was measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn&rsquo;t a hockey stick, it&rsquo;s a staircase with visible dips, where each step up follows a release.`,
         'g.curve.pull':`It isn't one redesign that worked. It's a staircase, each step a bet that had to prove itself before the next one started.`,
         'g.growth.label':'weekly average daily active users',
         'g.growth.caption':`Weekly average share of families opening the app on a given day, Jun 2023 → Jul 2024: 8.59% to 62.3%. Star markers are releases: the growth tracks them, which is the point.`,
         'g.m0':`Families opening the app on a given day, June 2023 baseline`, 'g.m1':`Families opening the app on a given day, July 2024, weekly average`, 'g.m3':`Discovery, prototype and build for the first release`,
-        'g.note':`<strong>How it was measured:</strong> the share of families on the platform opening the app on a given day, tracked in Metabase and read as a weekly average across the 13 months from the June 2023 baseline to July 2024. The chart above is the raw weekly series (its axis labels are in Portuguese: <em>Semana</em> is week, <em>Meta</em> is the target line). Two things it does not show, stated on purpose. The first is that the base moved underneath the rate: around 30 families when I joined, around 500 when I left. The share climbed while the denominator grew roughly sixteen times, which makes the rise harder to achieve, not easier &mdash; but it does mean the 8.59% baseline sits on a much smaller base than the 62.3%. The second is that the operations-hours saving, the other pointer, was never instrumented; the six-hours-to-one figure is the operations lead&rsquo;s recollection, and I present it as that. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em>`,
+        'g.note':`<strong>How it was measured:</strong> the share of families on the platform opening the app on a given day, tracked in Metabase and read as a weekly average across the 13 months from the June 2023 baseline to July 2024. The chart above is the raw weekly series (its axis labels are in Portuguese: <em>Semana</em> is week, <em>Meta</em> is the target line). Two things it does not show, stated on purpose. The first is that the base moved underneath the rate: around 30 families when I joined, around 500 when I left. The share climbed while the denominator grew roughly sixteen times, which makes the rise harder to achieve, not easier &mdash; but it does mean the 8.59% baseline sits on a much smaller base than the 62.3%. The second is that the operations-hours saving, the other pointer, was never instrumented; the six-hours-to-one figure is the operations lead&rsquo;s recollection, and I present it as that. One guardrail we agreed before launch: a cancellation rate above roughly 10% would have meant the change made things worse. I don&rsquo;t have the closed-out reading, and I say so rather than produce one. <em>On precision: the figures above are what I and the people who owned the numbers recall, not a report I can still pull &mdash; I left the company and the dashboards with it. Treat the magnitudes as approximate and the direction as the claim. Where a number never existed, this page says so rather than reconstructing one.</em>`,
         'g.h2.defend':`What I'd defend in a design review`,
         'g.defend.p2':`The decision I would defend hardest is scoping the MVP around actions, not features. Showing a schedule and letting a family cancel are unglamorous next to a full engagement suite, but they were the two things driving operations&rsquo; manual workload &mdash; so they were the two worth building first, in a month, to get a real answer instead of a better guess.`,
         'g.defend.p3':`That was also the argument I had to win. A redesign was the obvious ask, and spending the first weeks mapping how the operations team&rsquo;s week actually went is hard to defend when nothing visible is being produced. What made it land was not a better opinion, it was the map: once you could see the hours a single reschedule cost, nobody wanted to talk about the content grid any more.`,
@@ -1151,13 +1092,13 @@
         'close.cta1':'Get in touch', 'close.cta2.genial':'Read the Kruzer case',
         'footer.portfolio':'Portfolio', 'footer.email':'Email',
         'modal.label':`Let's talk`, 'modal.h3':'How would you like to connect?', 'modal.p':`Pick whichever's faster for you.`,
-        'modal.email.title':'Send an email', 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, 5–7pm ET`
+        'modal.email.title':'Send an email', 'modal.resume.title':'Request my résumé', 'modal.resume.sub':`I’ll send the PDF by email`, 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, 5–7pm ET`
       },
       pt: {
         'g.howworked.p2':`O loop não era só meu. Designers de produto e marketing sentavam na mesma sala de forma recorrente, presencialmente, para achar onde o ecossistema estava travando &mdash; não só o app, mas onde produto e marca não estavam dizendo a mesma coisa. Algumas das melhores apostas saíram dessas sessões, e não de uma rodada de pesquisa: quem é dono da voz da marca enxerga uma lacuna que quem está olhando funil nunca vai ver.`,
         'g.ws.cap':`Uma sessão recorrente entre design de produto e marketing. O app era uma superfície de um ecossistema maior, e as lacunas entre produto e marca só apareciam com os dois na sala.`,
         'g.dif.h':`O que eu faria diferente`,
-        'g.dif.p':`Eu instrumentaria antes de subir, não em paralelo. Os releases depois do MVP tiveram um antes-e-depois limpo porque os eventos já estavam no lugar; o primeiro não teve, e é justamente sobre ele que mais me perguntam. Também gastei mais tempo do que deveria tentando fazer a seção de conteúdo funcionar antes de aceitar que conteúdo não era o problema &mdash; a evidência disso estava disponível semanas antes de eu agir sobre ela.`,
+        'g.dif.p':`Os releases depois do MVP tiveram um antes-e-depois limpo porque os eventos já estavam no lugar; o primeiro não teve, e é justamente sobre ele que mais me perguntam. Também gastei mais tempo do que deveria tentando fazer a seção de conteúdo funcionar antes de aceitar que conteúdo não era o problema &mdash; a evidência disso estava disponível semanas antes de eu agir sobre ela.`,
         'nav.back.genial':`Voltar ao Genial App`,
         'nav.back.liam':`Voltar ao LIAM`,
         'nav.back.kruzer':`Voltar ao Pick &amp; Pack`,
@@ -1190,7 +1131,34 @@
         'g.meas.2t':`Taxa de cancelamento. Se facilitar o cancelamento tornasse cancelar mais frequente, a vitória de produto seria uma perda operacional &mdash; combinamos a linha antes do lançamento, não depois: uns 10%. Não tenho a leitura fechada, e digo isso em vez de produzir uma.`,
         'g.meas.3b':`Cadência de leitura`,
         'g.meas.3t':`Semanal, com cada release marcado na curva, para um degrau poder ser atribuído a uma aposta específica em vez de ao mês em que aconteceu.`,
-        'ix.time':'14 min de leitura',
+        'ix.time':'7 min de leitura',
+        'g.demo.1':'Estratégia de produto', 'g.demo.2':'0&rarr;1', 'g.demo.3':'Saúde para o consumidor', 'g.demo.4':'Crescimento',
+        'g.ix.1':'Por que era difícil', 'g.ix.2':'Decisão: escopo do MVP', 'g.ix.3':'Decisão: sem teste A/B',
+        'g.ix.4':'O que foi lançado', 'g.ix.5':'Impacto', 'g.ix.6':'O que eu faria diferente',
+        'g.hard.1':`<strong>Não era um problema de conteúdo.</strong> O app estava cheio de bom material sobre autismo e quase ninguém abria. Por baixo, o trabalho de verdade &mdash; montar a agenda semanal de terapia de cada família, dezenas de terapeutas e horários &mdash; acontecia à mão. Nada era centralizado; cada reagendamento era um telefonema.`,
+        'g.hard.2':`<strong>O crescimento era limitado pela operação, não pelo engajamento.</strong> Cada hora que a operação gastava reagendando por telefone era uma hora a menos para receber a próxima família. Uso diário era a métrica que todo mundo olhava. A capacidade da operação era o teto de verdade.`,
+        'g.hard.3':`<strong>Sem base segura para teste A/B.</strong> A Genial Care atendia famílias na casa das centenas, não milhões &mdash; base pequena demais para dividir tráfego sem cada experimento custar semanas que não sobravam.`,
+        'g.h2.d1':'Escopar o MVP em torno de duas ações, não um redesign',
+        'g.d1.title':'Dar às famílias um motivo para agir, não só ler',
+        'g.dk.problem':'Problema', 'g.dk.decision':'Decisão', 'g.dk.why':'Por quê', 'g.dk.argument':'O que venceu a discussão', 'g.dk.result':'Resultado', 'g.dk.evidence':'O que a rodada pegou',
+        'g.d1.problem':`O redesign era o pedido óbvio. Defender três semanas mapeando a semana da operação &mdash; sem nada visível sendo entregue &mdash; era difícil.`,
+        'g.d1.decision':`Escopei o primeiro release em torno de exatamente duas ações: mostrar as próximas sessões de cada criança, e deixar a família cancelar uma sessão sozinha em vez de ligar. Lançado em um mês, da descoberta ao build.`,
+        'g.d1.why':`Essas duas ações sustentavam a maior parte da troca manual entre famílias e operação. Ninguém abre um app de saúde para ler sobre autismo &mdash; abre para saber o que acontece com o filho na quinta-feira.`,
+        'g.d1.argument':`Não foi uma opinião melhor &mdash; foi um mapa. Quando o time viu quantas horas um único reagendamento custava, ninguém mais quis falar da grade de conteúdo.`,
+        'g.d1.result':`As famílias usaram na hora, e os cancelamentos passaram a chegar pelo app em vez de por telefone em poucos meses. Provou a alavanca de verdade: dar às famílias um motivo para agir, não só ler.`,
+        'g.h2.d2':'Ler o comportamento contra uma curva semanal, não um teste A/B',
+        'g.d2.title':'O funil dizia o que mudou. As entrevistas diziam por quê.',
+        'g.d2.problem':`A resposta de livro-texto é dividir o tráfego e testar A/B cada release.`,
+        'g.d2.decision':`Eu não fiz isso. Cada release virou seu próprio antes/depois contra um funil-e-curva semanal: quem entrou, o que abriu, onde parou.`,
+        'g.d2.why':`Nessa escala, dividir a base ao meio dobra a espera por um resultado que já precisa de semanas. Não vale a pena, num produto cuja vantagem inteira era aprender rápido.`,
+        'g.d2.evidence':`Antes de construir o fluxo de cancelamento, testei com cinco famílias em seus próprios celulares. A suposição era que cancelar seria o momento sensível. Não era &mdash; os pais hesitavam porque não tinham certeza de que a agenda na tela estava <em>ao vivo</em>, não porque cancelar parecesse arriscado. O ajuste saiu de &ldquo;deixar a confirmação parecer segura&rdquo; para &ldquo;fazer a agenda parecer atual.&rdquo; A mesma rodada matou o rótulo &ldquo;Agenda&rdquo;, que significava o calendário da clínica para a operação e a semana da criança para um pai &mdash; a leitura do pai venceu.`,
+        'g.d2.result':`Quando o funil e as entrevistas discordavam, essa discordância era o achado que valia perseguir &mdash; um sinal que um teste A/B sozinho nunca teria mostrado.`,
+        'g.h2.shipped':'O que foi lançado, depois que o mecanismo provou seu valor',
+        'g.shipped.intro':`Cada adição ganhou seu lugar da mesma forma: isso dá a alguém um motivo para voltar, medido antes da próxima aposta começar.`,
+        'g.ship1.h':'Sessões + cancelamento &mdash; o MVP',
+        'g.ship2.h':'O PEI, traduzido',
+        'g.ship3.h':'Genial Junto &mdash; suporte entre sessões',
+        'g.h2.dif':'Instrumentar antes de lançar, não em paralelo',
         'g.tk.pointer':`Métrica não é motivo. O motivo era capacidade: horas que a operação nunca recuperava.`,
         'g.tk.questions':`Nomear a condição de fracasso antes do lançamento é o que permitiu ler o resultado com honestidade depois.`,
         'g.tk.test':`O funil dizia o que mudou. As entrevistas diziam por quê. A discordância entre os dois era o achado.`,
@@ -1200,13 +1168,13 @@
         'tl.problem.k':'Problema', 'tl.did.k':'O que eu fiz', 'tl.out.k':'Resultado',
         'g.tl.problem':`Um app de conteúdo que quase ninguém abria, em cima de uma operação que montava a agenda semanal de cada família na mão.`,
         'g.tl.did':`Achei o gargalo real na agenda, entreguei um MVP de um mês que deixou as famílias verem e cancelarem sessões, e rodei um ciclo contínuo de apostas pequenas lidas contra uma curva semanal de comportamento.`,
-        'g.tl.out':`As famílias ativas por dia foram de <b>8,59% para 62,3%</b> em 13 meses, um salto de 675% ano a ano, numa escada que acompanha os releases em vez de um pico de redesenho.`,
+        'g.tl.out':`As famílias ativas por dia foram de <b>8,59% para 62,3%</b> em 13 meses, numa escada que acompanha os releases em vez de um pico de redesenho.`,
         'nav.back':'Voltar ao portfólio', 'nav.cta':'Vamos conversar',
         'hero.kicker':'Case study · Saúde · Crescimento de Produto',
         'hero.h1':'Transformando um app esquecido na ferramenta que 62% das famílias abrem todo dia',
         'hero.dek':`O app das famílias na Genial Care foi de 8% de uso diário para 62% em um ano, não com um redesign, mas corrigindo um gargalo de agendamento que sobrecarregava a operação, e deixando o uso real decidir o próximo passo.`,
         'meta.role':'Papel', 'meta.team':'Time', 'meta.company':'Empresa', 'meta.timeline':'Período', 'meta.outcome':'Resultado',
-        'g.lead1':`Entrei na Genial Care, maior plataforma de cuidado com autismo do Brasil, como o primeiro Senior Product Designer, trazido para construir o design system Atípico do zero, melhorar o app das famílias e estruturar o painel clínico que os terapeutas usam para conduzir sessões (o mesmo painel onde o LIAM viveria depois). Este case é sobre a metade do mandato ligada ao app.`,
+        'g.lead1':`Entrei na Genial Care, uma plataforma de terapia ABA para cuidado com autismo, como o primeiro Senior Product Designer, trazido para construir o design system Atípico do zero, melhorar o app das famílias e estruturar o painel clínico que os terapeutas usam para conduzir sessões (o mesmo painel onde o LIAM viveria depois). Este case é sobre a metade do mandato ligada ao app.`,
         'g.lead2':`Quando entrei, o app era um canal de mão única: artigos e cards de conteúdo pra rolar a tela, sem interação direta de nenhum tipo. Não dava pra fazer nada nele, só olhar. Cerca de 8% das famílias abriam por dia, o que é mais ou menos o que se espera de um panfleto digital. Eram por volta de 30 famílias na plataforma naquele momento; quando saí, eram cerca de 500.`,
         'g.h2.bottleneck':'O gargalo não era o app. Era o agendamento.',
         'g.bottleneck.p1':`Em vez de começar pelo app, começamos mapeando os maiores gargalos de processo na Genial Care como um todo. Um se destacou na hora: o agendamento de sessões. A agenda semanal de cada família, dezenas de terapeutas e dezenas de horários, era montada à mão pela equipe de operações. No momento em que algo mudava, um reagendamento, um cancelamento, esse processo manual quebrava. A informação sobre quem sabia o quê vivia espalhada em ligações e planilhas, nada era centralizado, e manter todo mundo alinhado consumia uma fatia desproporcional do tempo do time toda semana.`,
@@ -1234,7 +1202,7 @@
         'g.job.pull':`Ninguém abre um app para ler sobre autismo. Abre para descobrir o que acontece com o filho na quinta.`,
         'g.h2.test':`Como eu conferi, e por que não fiz teste A/B aqui`,
         'g.test.p1':`Toda feature começava como protótipo clicável rodado com um punhado de famílias reais, que é onde você pega as partes confusas de um fluxo antes de engenharia gastar uma sprint nelas. Mas protótipo te diz se a pessoa <em>consegue</em> usar. Não te diz se ela <em>vai</em> usar.`,
-        'g.test.p2':`A resposta de manual seria dividir tráfego e testar cada release em A/B. Não fiz, e o motivo é aritmética. A Genial Care atendia famílias na casa das centenas, não dos milhões. Um experimento sobre taxa de abertura diária nessa base leva semanas para dizer alguma coisa, e dividir a base no meio dobra a espera. Compraríamos conforto estatístico ao preço da velocidade de aprendizado, num produto cuja vantagem inteira era aprender rápido.`,
+        'g.test.p2':`A resposta de manual seria dividir tráfego e testar cada release em A/B. Não fiz, e o motivo é aritmética. A Genial Care atendia famílias na casa das centenas, não dos milhões. Um experimento sobre taxa de abertura diária nessa base leva semanas para dizer alguma coisa, e dividir a base no meio dobra a espera. Não valia a pena, num produto cuja vantagem inteira era aprender rápido.`,
         'g.test.p3':`Então o instrumento foi a curva semanal com o funil embaixo dela: quem entrou, o que abriu, onde parou, o que nunca tocou. Cada release virou seu próprio antes-e-depois, marcado no gráfico. O funil dizia o que mudou; as entrevistas diziam por quê. Quando os dois discordavam, a discordância era o achado que valia perseguir.`,
         'g.instrument.p1':`Projeto diferente, instrumento diferente. <a href="/#method">Como escolhi o instrumento em cada projeto &rarr;</a>`,
         'g.h2.howworked':'Descoberta contínua, não um redesign de uma vez só',
@@ -1250,19 +1218,19 @@
         'g.opening.p3':`Aquele primeiro lançamento provou algo maior que a funcionalidade em si: dê às famílias um motivo pra <em>agir</em>, não só ler, e elas aparecem. A partir daí, continuamos adicionando, cada nova funcionalidade conquistando seu espaço ao dar a alguém mais um motivo pra abrir o app, e cada uma tirando mais uma tarefa manual da operação pro time focar em trabalho de maior valor em vez de remontar a mesma agenda à mão toda semana.`,
         'g.cap1':'O resultado daquele primeiro MVP: próximas sessões e a nota de um terapeuta na tela inicial, com cancelamento agora tratado dentro do app em vez de por telefone.',
         'g.h2.longterm':'Depois: tornar o longo prazo visível, não só a próxima consulta',
-        'g.longterm.p1':`As sessões respondem "o que aconteceu essa semana". Elas não respondem a pergunta por trás da semana de todo pai e mãe, que é "meu filho está progredindo de verdade?" O PEI, o plano educacional individualizado, já existia como documento clínico, mas vivia num lugar que as famílias não viam. Eu o trouxe pro app como uma lista das habilidades trabalhadas em linguagem simples, cada uma com data de início: <em>Gabriel vai brincar com brinquedos diferentes. Gabriel vai conseguir subir na piscina de bolinhas.</em>`,
+        'g.longterm.p1':`As sessões respondem &ldquo;o que aconteceu essa semana&rdquo;. Não respondem &ldquo;meu filho está progredindo de verdade?&rdquo; O PEI, o plano educacional individualizado, já existia como documento clínico que as famílias não viam. Eu o trouxe pro app como uma lista de habilidades em andamento, em linguagem simples, cada uma com data de início: <em>Gabriel vai brincar com brinquedos diferentes.</em> Não é uma capacidade nova &mdash; é um documento que já existia, movido para onde a família consegue ver o filho dentro dele.`,
         'g.longterm.p2':'Esse é um tipo de movimento diferente do MVP de agendamento: não uma capacidade nova, mas pegar algo que o time clínico já produzia e colocar onde a família consegue ver o filho dentro dele.',
         'g.cap2':'O PEI, traduzido de documento clínico para algo que um pai ou mãe consegue ler: habilidades concretas, em linguagem simples, com datas.',
         'g.h2.between':'E depois: o momento entre as sessões',
-        'g.between.p1':`Os momentos mais difíceis para essas famílias não acontecem durante uma sessão. Acontecem às 20h de uma terça quando uma criança morde alguém e o pai ou mãe não sabe o que fazer. O <em>Genial Junto</em> abriu um chat conduzido pelas próprias terapeutas exatamente pra isso: descrever a situação difícil, receber uma resposta real e específica dentro de uma janela de tempo declarada.`,
-        'g.between.p2':`No design, a decisão que mais importa aqui é o selo visível de tempo de resposta. Um "a gente te retorna" em aberto convida a pessoa a checar obsessivamente e depois perder a confiança. Declarar "até 2 dias úteis" de antemão define a expectativa uma vez, com honestidade, e deixa o pai ou mãe largar o celular.`,
+        'g.between.p1':`Os momentos mais difíceis não acontecem durante uma sessão. Acontecem às 20h de uma terça quando uma criança morde alguém e o pai ou mãe não sabe o que fazer. O <em>Genial Junto</em> abriu um chat conduzido pelas próprias terapeutas exatamente pra isso.`,
+        'g.between.p2':`A decisão que eu defenderia aqui: o selo visível de tempo de resposta. Um &ldquo;a gente te retorna&rdquo; em aberto convida a checar obsessivamente e corrói a confiança. Declarar &ldquo;até 2 dias úteis&rdquo; de antemão define a expectativa uma vez, com honestidade, e deixa o pai ou mãe largar o celular.`,
         'g.cap3':'Genial Junto: suporte para os momentos entre sessões, com a expectativa de tempo de resposta declarada antes mesmo do pai ou mãe escrever qualquer coisa.',
-        'g.curve.p1':`Nada disso foi lançado como um release só. Cada um foi uma aposta pequena contra a mesma régua (<em>isso dá a alguém um motivo pra voltar?</em>), lançado estreito, depois medido antes do próximo começar. O gráfico de usuários ativos semanais abaixo é a versão honesta dessa história, com marcadores de release e tudo: não é um hockey stick, é uma escada com quedas visíveis, onde cada degrau segue um release e cada queda ensinou algo antes do próximo.`,
+        'g.curve.p1':`Cada adição foi lançada estreita, depois medida antes da próxima começar. O gráfico de usuários ativos semanais abaixo é a versão honesta dessa história, com marcadores de release e tudo: não é um hockey stick, é uma escada com quedas visíveis, onde cada degrau segue um release.`,
         'g.curve.pull':'Não foi um redesign que funcionou. Foi uma escada, cada degrau uma aposta que precisava se provar antes da próxima começar.',
         'g.growth.label':'média semanal de usuários ativos diários',
         'g.growth.caption':`Média semanal da parcela de famílias que abre o app em um dia qualquer, jun/2023 → jul/2024: 8,59% a 62,3%. As estrelas marcam releases: o crescimento acompanha eles, e esse é o ponto.`,
         'g.m0':`Famílias abrindo o app em um dia qualquer, linha de base de junho de 2023`, 'g.m1':`Famílias abrindo o app em um dia qualquer, julho de 2024, média semanal`, 'g.m3':`Descoberta, protótipo e build do primeiro release`,
-        'g.note':`<strong>Como foi medido:</strong> a parcela de famílias na plataforma que abre o app em um dia qualquer, rastreada no Metabase e lida como média semanal ao longo dos 13 meses, da linha de base de junho de 2023 a julho de 2024. O gráfico acima é a série semanal bruta. Duas coisas que ele não mostra, de propósito. A primeira é que a base se mexeu debaixo da taxa: por volta de 30 famílias quando entrei, cerca de 500 quando saí. A proporção subiu enquanto o denominador crescia umas dezesseis vezes, o que torna a alta mais difícil, não mais fácil &mdash; mas significa que o 8,59% da linha de base está sobre uma base bem menor que a do 62,3%. A segunda é que a economia de horas da operação, o outro ponteiro, nunca foi instrumentada; o seis-para-uma-hora é lembrança da líder de operações, e eu apresento assim. <em>Sobre precisão: os números acima são o que eu e as pessoas donas deles lembram, não um relatório que eu ainda consiga puxar &mdash; saí da empresa e os dashboards ficaram lá. Trate as magnitudes como aproximadas e a direção como a afirmação. Onde um número nunca existiu, esta página diz isso em vez de reconstruir um.</em>`,
+        'g.note':`<strong>Como foi medido:</strong> a parcela de famílias na plataforma que abre o app em um dia qualquer, rastreada no Metabase e lida como média semanal ao longo dos 13 meses, da linha de base de junho de 2023 a julho de 2024. O gráfico acima é a série semanal bruta. Duas coisas que ele não mostra, de propósito. A primeira é que a base se mexeu debaixo da taxa: por volta de 30 famílias quando entrei, cerca de 500 quando saí. A proporção subiu enquanto o denominador crescia umas dezesseis vezes, o que torna a alta mais difícil, não mais fácil &mdash; mas significa que o 8,59% da linha de base está sobre uma base bem menor que a do 62,3%. A segunda é que a economia de horas da operação, o outro ponteiro, nunca foi instrumentada; o seis-para-uma-hora é lembrança da líder de operações, e eu apresento assim. Um guardrail combinado antes do lançamento: uma taxa de cancelamento acima de uns 10% teria significado que a mudança piorou as coisas. Não tenho a leitura fechada disso, e prefiro dizer isso a inventar uma. <em>Sobre precisão: os números acima são o que eu e as pessoas donas deles lembram, não um relatório que eu ainda consiga puxar &mdash; saí da empresa e os dashboards ficaram lá. Trate as magnitudes como aproximadas e a direção como a afirmação. Onde um número nunca existiu, esta página diz isso em vez de reconstruir um.</em>`,
         'g.h2.defend':'O que eu defenderia numa design review',
         'g.defend.p2':`A decisão que eu defenderia com mais convicção é ter escopado o MVP em torno de ações, não de funcionalidades. Mostrar a agenda e deixar a família cancelar é pouco glamouroso perto de uma suíte de engajamento, mas eram as duas coisas que sustentavam o trabalho manual da operação &mdash; então eram as duas que valia construir primeiro, em um mês, para ter uma resposta real em vez de um palpite melhor.`,
         'g.defend.p3':`Esse também foi o argumento que eu precisei vencer. O redesenho era o pedido óbvio, e passar as primeiras semanas mapeando como a semana da operação acontecia de verdade é difícil de defender quando nada visível está sendo produzido. O que fez isso passar não foi uma opinião melhor, foi o mapa: quando dava para ver quantas horas uma única remarcação custava, ninguém queria mais falar da grade de conteúdo.`,
@@ -1275,7 +1243,7 @@
         'close.cta1':'Entrar em contato', 'close.cta2.genial':'Ler o case do Kruzer',
         'footer.portfolio':'Portfólio', 'footer.email':'Email',
         'modal.label':'Vamos conversar', 'modal.h3':'Como você prefere falar comigo?', 'modal.p':'Escolha o que for mais rápido pra você.',
-        'modal.email.title':'Mandar um email', 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':`Dias úteis, 17h–19h (ET)`
+        'modal.email.title':'Mandar um email', 'modal.resume.title':'Pedir meu currículo', 'modal.resume.sub':`Envio o PDF por email`, 'modal.call.title':'Agendar uma call de 30 min', 'modal.call.sub':`Dias úteis, 17h–19h (ET)`
       }
     };
 
