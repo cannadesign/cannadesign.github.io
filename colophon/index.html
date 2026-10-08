@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How this site is built for AI search · Guilherme Cannalonga</title>
+<meta name="author" content="Guilherme Cannalonga">
+<meta name="description" content="How Guilherme Cannalonga&#39;s portfolio is built to be read accurately by AI assistants and answer engines: schema.org JSON-LD, llms.txt, crawlable text and consistent entity data.">
+<link rel="canonical" href="https://cannadesign.github.io/colophon/">
+
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#f7f6f1">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700;9..40,900&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     canna design — colophon
+     Same paper, same ink, same acid as every other page.
+     A 404 is a navigation failure, so it does the one thing a dead
+     end can do well: hand back the four real destinations instead
+     of a single "go home".
+     ============================================================ */
+  :root{
+    --paper:#f7f6f1;
+    --paper-2:#eeebe4;
+    --ink:#14140f;
+    --ink-2:#605e56;
+    --acid:#d9f24b;
+    --peri:#c9cbf5;    /* Genial */
+    --sky:#d3e9ff;     /* LIAM */
+    --coral:#ff8d8f;   /* Pick & Pack */
+    --indigo:#8ea5ff;  /* Compass */
+    --line:rgba(20,20,15,0.12);
+    --line-control:rgba(20,20,15,0.48);
+    --max:1180px;
+    --pad:32px;
+    --s1:8px; --s2:16px; --s3:24px; --s4:40px; --s5:64px; --s6:96px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'DM Sans', system-ui, -apple-system, sans-serif;
+    font-size:16px; line-height:1.55; -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility; overflow-x:hidden;
+    min-height:100vh; display:flex; flex-direction:column;
+  }
+  h1,h2,h3{font-weight:900; letter-spacing:-0.05em; line-height:0.9;}
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--pad); width:100%;}
+  ::selection{background:var(--acid); color:var(--ink);}
+  :focus-visible{outline:3px solid var(--ink); outline-offset:3px; border-radius:4px;}
+
+  /* 2.4.1 Bypass Blocks */
+  .skip-link{
+    position:absolute; left:16px; top:-64px; z-index:200;
+    background:var(--ink); color:var(--paper); font-size:14px; font-weight:700;
+    padding:12px 20px; border-radius:100px; transition:top .16s ease;
+  }
+  .skip-link:focus{top:16px;}
+  /* 2.5.5 Target Size — the visible pill stays small; the hit area does not. */
+  .lang button{position:relative;}
+  .lang button::after{
+    content:''; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:44px; height:44px;
+  }
+  .label{display:block; font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-2);}
+
+  /* ================= NAV ================= */
+  nav{padding:22px var(--pad) 0; position:relative;}
+  .nav-mark{display:block; text-align:center; font-weight:900; font-size:19px; letter-spacing:-0.06em; line-height:1;}
+  .nav-mark sup{font-size:9px; font-weight:500; letter-spacing:0;}
+  .nav-side{position:absolute; top:22px; right:var(--pad);}
+  .lang{display:flex; background:var(--paper-2); border-radius:100px; padding:4px;}
+  .lang button{
+    /* 1.4.3 — o idioma nao selecionado ficava em 2,7:1. Nao e um controle
+       desabilitado, e a outra opcao do par, entao precisa ser legivel. */
+    font-family:inherit; font-size:11px; font-weight:700; letter-spacing:.03em;
+    padding:8px 8px; border:none; border-radius:100px; background:transparent;
+    color:var(--ink); opacity:.62; cursor:pointer; transition:opacity .2s, background .2s;
+  }
+  .lang button.active{background:var(--ink); color:var(--paper); opacity:1;}
+
+  /* ================= BUTTONS ================= */
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    font-family:inherit; font-size:15px; font-weight:500; padding:16px 28px;
+    border-radius:100px; border:1px solid transparent; cursor:pointer;
+    transition:background .2s ease, border-color .2s ease; white-space:nowrap;
+  }
+  /* On paper, exactly one action is primary and it is always the contact one. */
+  .btn-primary{background:var(--acid); color:var(--ink);}
+  .btn-primary:hover{background:#cbe63d;}
+  .btn-ghost{border-color:var(--line-control); color:var(--ink);}
+  .btn-ghost:hover{background:var(--paper-2);}
+
+  /* ================= BODY ================= */
+  main{flex:1; display:flex; align-items:center; padding:var(--s6) 0;}
+  .err{display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); align-items:start;}
+  .err .label{margin-bottom:var(--s3);}
+  .err h1{font-size:clamp(44px,8.4vw,104px); margin-bottom:var(--s3);}
+  .err p{font-size:18px; line-height:1.55; color:var(--ink-2); max-width:34ch; margin-bottom:var(--s4);}
+  .ctas{display:flex; gap:12px; flex-wrap:wrap;}
+
+  /* the recovery list: the four cases, in field colour */
+  .recover{border-top:1px solid var(--line); padding-top:var(--s3);}
+  .recover .label{margin-bottom:var(--s2);}
+  .recover a{
+    display:flex; align-items:center; gap:14px;
+    padding:16px 0; border-bottom:1px solid var(--line);
+    transition:padding-left .2s ease;
+  }
+  .recover a:hover{padding-left:8px;}
+  .swatch{width:22px; height:22px; border-radius:6px; flex:none;}
+  .recover .n{font-size:17px; font-weight:700; letter-spacing:-0.02em;}
+  .recover .t{font-size:13px; color:var(--ink-2); margin-left:auto; text-align:right;}
+  .recover a .arw{font-size:15px; color:var(--ink-2);}
+
+  footer{border-top:1px solid var(--line); padding:var(--s3) 0 var(--s4);}
+  .foot{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; font-size:13px; color:var(--ink-2);}
+  .foot-links{display:flex; gap:24px;}
+  .foot-links a:hover{color:var(--ink);}
+
+  @media (max-width:900px){
+    .err{grid-template-columns:1fr; gap:var(--s4);}
+    main{padding:var(--s5) 0;}
+  }
+
+  @media (max-width:560px){
+    :root{--pad:20px;}
+    .err p{font-size:16px;}
+    .ctas{flex-direction:column; align-items:stretch;}
+    .recover .t{display:none;}
+    .recover a .arw{margin-left:auto;}   /* .t carried the auto margin; it is gone here */
+  }
+  @media (prefers-reduced-motion:reduce){
+    *, *::before, *::after{transition-duration:0.01ms !important; animation-duration:0.01ms !important;}
+  }
+
+
+
+  .colo{max-width:760px;}
+  .colo .label{margin-bottom:var(--s3);}
+  .colo h1{font-size:clamp(36px,6vw,72px); margin-bottom:var(--s4); text-wrap:balance;}
+  .colo .intro{font-size:19px; line-height:1.6; color:var(--ink-2); margin-bottom:var(--s5); max-width:60ch;}
+  .colo ol{list-style:none; counter-reset:c; border-top:1px solid var(--line); margin-bottom:var(--s5);}
+  .colo li{counter-increment:c; display:grid; grid-template-columns:48px 1fr; gap:var(--s2); padding:var(--s3) 0; border-bottom:1px solid var(--line);}
+  .colo li::before{content:'0' counter(c); font-weight:900; font-size:13px; padding-top:3px;}
+  .colo li h2{font-size:18px; letter-spacing:-0.02em; margin-bottom:6px;}
+  .colo li p{font-size:15.5px; line-height:1.6; color:var(--ink-2); margin:0;}
+  .colo li a, .colo .intro a{text-decoration:underline; text-underline-offset:3px;}
+  .colo code{font-size:.92em; background:var(--paper-2); padding:1px 6px; border-radius:4px;}
+</style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "WebPage",
+   "@id": "https://cannadesign.github.io/colophon/#webpage",
+   "url": "https://cannadesign.github.io/colophon/",
+   "name": "How this site is built for AI search",
+   "description": "How this portfolio is built to be read accurately by AI assistants and answer engines.",
+   "isPartOf": {
+    "@id": "https://cannadesign.github.io/#website"
+   },
+   "author": {
+    "@id": "https://cannadesign.github.io/#person"
+   },
+   "about": {
+    "@id": "https://cannadesign.github.io/#person"
+   },
+   "inLanguage": "en",
+   "dateModified": "2026-10-08"
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Guilherme Cannalonga · Portfolio",
+     "item": "https://cannadesign.github.io/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Colophon",
+     "item": "https://cannadesign.github.io/colophon/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+<link rel="alternate" type="text/markdown" href="/llms.txt" title="Summary for AI assistants (llms.txt)">
+<script defer src="https://cloud.umami.is/script.js" data-website-id="c3e64fd0-ec7d-4fdf-a35f-7e8f77208d02"></script>
+</head>
+<body>
+<a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
+
+<nav>
+  <a class="nav-mark" href="/">canna</a>
+  <div class="nav-side">
+    <div class="lang" role="group" aria-label="Language" data-i18n-aria="a11y.lang">
+      <button type="button" data-lang="en" aria-pressed="true" lang="en">EN</button>
+      <button type="button" data-lang="pt" aria-pressed="false" lang="pt-BR">PT</button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+  <div class="wrap">
+    <article class="colo">
+      <span class="label" data-i18n="co.eyebrow">Colophon</span>
+      <h1 data-i18n="co.h1">Built for people, and for the AI that reads on their behalf.</h1>
+      <p class="intro" data-i18n="co.intro">Recruiters increasingly ask an AI assistant about a candidate before they open a portfolio. This site is designed so that answer is accurate, specific and points back here. It is the same principle as the work: decide what the reader needs, then make it impossible to miss.</p>
+      <ol>
+      <li><div><h2 data-i18n="co.1h">One entity, everywhere</h2><p data-i18n="co.1p">Guilherme Cannalonga, Senior Product Designer, Greater Boston: the same name, title and location on this site, the résumé and LinkedIn, tied together with schema.org <code>sameAs</code> so a model doesn&rsquo;t merge me with someone else.</p></div></li>
+      <li><div><h2 data-i18n="co.2h">Structured data on every page</h2><p data-i18n="co.2p">A JSON-LD graph: a <code>Person</code> with occupation, location, skills and education; a <code>ProfilePage</code> and <code>WebSite</code> on the home page; an <code>Article</code> with author, subject and outcome on each case study, plus breadcrumbs.</p></div></li>
+      <li><div><h2 data-i18n="co.3h">Answers in the first lines</h2><p data-i18n="co.3p">Every case opens with a short version (problem, what I did, outcome) and states its numbers in plain sentences, so a model can quote them without reconstructing context.</p></div></li>
+      <li><div><h2 data-i18n="co.4h">Readable without JavaScript</h2><p data-i18n="co.4p">The full English text is in the HTML itself; the language toggle only swaps it. Crawlers that don&rsquo;t run scripts read the same page you do.</p></div></li>
+      <li><div><h2 data-i18n="co.5h">An llms.txt</h2><p data-i18n="co.5p"><a href="/llms.txt">/llms.txt</a> is a plain-text summary written for language models, and <a href="/llms-full.txt">/llms-full.txt</a> carries the full text of every case study.</p></div></li>
+      <li><div><h2 data-i18n="co.6h">AI crawlers welcome</h2><p data-i18n="co.6p"><code>robots.txt</code> explicitly allows search and assistant crawlers (OpenAI, Anthropic, Perplexity, Google, Apple, Microsoft), and a sitemap lists every page with its last update.</p></div></li>
+      <li><div><h2 data-i18n="co.7h">Claims a model can repeat safely</h2><p data-i18n="co.7p">Every number says how it was measured and what it leaves out, and anything I couldn&rsquo;t verify is not on the site. An answer engine repeats what it finds, so the page has to be right first.</p></div></li>
+      </ol>
+      <a class="btn btn-ghost" href="/" data-i18n="co.cta">Back to the portfolio</a>
+    </article>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <span>© 2026 · <span data-i18n="foot.made">Made by Guilherme Cannalonga</span></span>
+      <div class="foot-links">
+        <a href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="mailto:cannalongadesign@gmail.com" data-i18n="footer.email">Email</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    const I18N = {
+      en: {
+        'a11y.skip':`Skip to content`,
+        'a11y.lang':`Language`,
+        'co.eyebrow':`Colophon`,
+        'co.h1':`Built for people, and for the AI that reads on their behalf.`,
+        'co.intro':`Recruiters increasingly ask an AI assistant about a candidate before they open a portfolio. This site is designed so that answer is accurate, specific and points back here. It is the same principle as the work: decide what the reader needs, then make it impossible to miss.`,
+        'co.1h':`One entity, everywhere`,
+        'co.1p':`Guilherme Cannalonga, Senior Product Designer, Greater Boston: the same name, title and location on this site, the résumé and LinkedIn, tied together with schema.org <code>sameAs</code> so a model doesn&rsquo;t merge me with someone else.`,
+        'co.2h':`Structured data on every page`,
+        'co.2p':`A JSON-LD graph: a <code>Person</code> with occupation, location, skills and education; a <code>ProfilePage</code> and <code>WebSite</code> on the home page; an <code>Article</code> with author, subject and outcome on each case study, plus breadcrumbs.`,
+        'co.3h':`Answers in the first lines`,
+        'co.3p':`Every case opens with a short version (problem, what I did, outcome) and states its numbers in plain sentences, so a model can quote them without reconstructing context.`,
+        'co.4h':`Readable without JavaScript`,
+        'co.4p':`The full English text is in the HTML itself; the language toggle only swaps it. Crawlers that don&rsquo;t run scripts read the same page you do.`,
+        'co.5h':`An llms.txt`,
+        'co.5p':`<a href="/llms.txt">/llms.txt</a> is a plain-text summary written for language models, and <a href="/llms-full.txt">/llms-full.txt</a> carries the full text of every case study.`,
+        'co.6h':`AI crawlers welcome`,
+        'co.6p':`<code>robots.txt</code> explicitly allows search and assistant crawlers (OpenAI, Anthropic, Perplexity, Google, Apple, Microsoft), and a sitemap lists every page with its last update.`,
+        'co.7h':`Claims a model can repeat safely`,
+        'co.7p':`Every number says how it was measured and what it leaves out, and anything I couldn&rsquo;t verify is not on the site. An answer engine repeats what it finds, so the page has to be right first.`,
+        'co.cta':`Back to the portfolio`,
+        'foot.made':`Made by Guilherme Cannalonga`,
+        'footer.email':`Email`
+      },
+      pt: {
+        'a11y.skip':`Pular para o conteúdo`,
+        'a11y.lang':`Idioma`,
+        'co.eyebrow':`Colofão`,
+        'co.h1':`Feito para pessoas, e para a IA que lê por elas.`,
+        'co.intro':`Recrutadores cada vez mais perguntam a um assistente de IA sobre um candidato antes de abrir o portfólio. Este site foi desenhado para que essa resposta seja precisa, específica e aponte para cá. É o mesmo princípio do trabalho: decidir do que o leitor precisa e tornar impossível não ver.`,
+        'co.1h':`Uma entidade, em todo lugar`,
+        'co.1p':`Guilherme Cannalonga, Senior Product Designer, Greater Boston: o mesmo nome, cargo e local neste site, no currículo e no LinkedIn, ligados pelo <code>sameAs</code> do schema.org para que um modelo não me confunda com outra pessoa.`,
+        'co.2h':`Dados estruturados em toda página`,
+        'co.2p':`Um grafo JSON-LD: uma <code>Person</code> com ocupação, local, habilidades e formação; <code>ProfilePage</code> e <code>WebSite</code> na home; um <code>Article</code> com autor, assunto e resultado em cada case, mais breadcrumbs.`,
+        'co.3h':`Respostas nas primeiras linhas`,
+        'co.3p':`Cada case abre com uma versão curta (problema, o que fiz, resultado) e diz seus números em frases simples, para um modelo citar sem reconstruir contexto.`,
+        'co.4h':`Legível sem JavaScript`,
+        'co.4p':`O texto completo em inglês está no próprio HTML; o seletor de idioma só troca o texto. Robôs que não rodam scripts leem a mesma página que você.`,
+        'co.5h':`Um llms.txt`,
+        'co.5p':`<a href="/llms.txt">/llms.txt</a> é um resumo em texto escrito para modelos de linguagem, e <a href="/llms-full.txt">/llms-full.txt</a> traz o texto completo de cada case.`,
+        'co.6h':`Robôs de IA são bem-vindos`,
+        'co.6p':`O <code>robots.txt</code> libera explicitamente robôs de busca e de assistentes (OpenAI, Anthropic, Perplexity, Google, Apple, Microsoft), e um sitemap lista cada página com a data da última atualização.`,
+        'co.7h':`Afirmações que um modelo pode repetir`,
+        'co.7p':`Cada número diz como foi medido e o que deixa de fora, e o que eu não consegui verificar não está no site. Um motor de respostas repete o que encontra, então a página precisa estar certa primeiro.`,
+        'co.cta':`Voltar para o portfólio`,
+        'foot.made':`Feito por Guilherme Cannalonga`,
+        'footer.email':`Email`
+      }
+    };
+    function apply(lang){
+      document.documentElement.lang = lang==='pt' ? 'pt-BR' : 'en';
+      const d = I18N[lang] || I18N.en;
+      document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
+        const v = d[el.dataset.i18nAria];
+        if(v !== undefined) el.setAttribute('aria-label', v);
+      });
+      document.querySelectorAll('[data-i18n]').forEach(el=>{
+        const v = d[el.dataset.i18n]; if(v !== undefined) el.innerHTML = v;
+      });
+      document.querySelectorAll('.lang button').forEach(b=>{
+        const on = b.dataset.lang===lang;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');   /* 4.1.2 state, not just style */
+      });
+    }
+    /* same key as every other page, so the choice survives landing here */
+    document.querySelectorAll('.lang button').forEach(b=>{
+      b.addEventListener('click',()=>{ localStorage.setItem('site-lang', b.dataset.lang); apply(b.dataset.lang); });
+    });
+    apply(localStorage.getItem('site-lang')==='pt' ? 'pt' : 'en');
+  })();
+</script>
+
+</body>
+</html>

@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canna Design · Compass design system case study</title>
-<meta name="description" content="Building Compass, a design system from scratch at Kruzer: a semantic token scale, real governance, and a design-ticket cycle time cut from 4.2 to 2.5 days, measured in Jira.">
+<title>Compass design system case study · Guilherme Cannalonga</title>
+<meta name="author" content="Guilherme Cannalonga">
+<meta name="description" content="Case study by Guilherme Cannalonga, Senior Product Designer: Compass, a design system built from scratch at Kruzer, with a semantic token scale and governance. Design-ticket cycle time dropped from 4.2 to 2.5 days.">
 
 <link rel="icon" type="image/png" href="/assets/favicon.png">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
@@ -640,6 +641,69 @@
     .meta-item:nth-child(2n+1){border-left:none; padding-left:0;}
   }
 </style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://cannadesign.github.io/compass/#article",
+   "headline": "Compass: from one-off screens to a system three teams could build on",
+   "description": "Compass, a design system built from scratch at Kruzer, with a three-layer semantic token scale and governance. Design-ticket cycle time dropped from 4.2 to 2.5 days, measured in Jira.",
+   "url": "https://cannadesign.github.io/compass/",
+   "mainEntityOfPage": "https://cannadesign.github.io/compass/",
+   "author": {
+    "@type": "Person",
+    "@id": "https://cannadesign.github.io/#person",
+    "name": "Guilherme Cannalonga",
+    "url": "https://cannadesign.github.io/",
+    "sameAs": [
+     "https://www.linkedin.com/in/guilhermecannalonga"
+    ]
+   },
+   "publisher": {
+    "@id": "https://cannadesign.github.io/#person"
+   },
+   "isPartOf": {
+    "@id": "https://cannadesign.github.io/#website"
+   },
+   "inLanguage": "en",
+   "dateModified": "2026-10-08",
+   "image": "https://cannadesign.github.io/assets/card-compass.webp",
+   "about": {
+    "@type": "CreativeWork",
+    "name": "Compass design system"
+   },
+   "keywords": "design systems, design tokens, governance, DesignOps, component library",
+   "genre": "Product design case study",
+   "mentions": [
+    {
+     "@type": "Organization",
+     "name": "Kruzer"
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Guilherme Cannalonga · Portfolio",
+     "item": "https://cannadesign.github.io/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "Compass",
+     "item": "https://cannadesign.github.io/compass/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+<link rel="alternate" type="text/markdown" href="/llms.txt" title="Summary for AI assistants (llms.txt)">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="c3e64fd0-ec7d-4fdf-a35f-7e8f77208d02"></script>
 </head>
 <body class="js">
@@ -845,7 +909,7 @@
 <section class="article-close reveal">
   <div class="col">
     <h2 data-i18n="close.h2">Questions this page doesn't answer?</h2>
-    <p data-i18n="close.p">Happy to walk through the token naming decisions, the audit that started it, or how I handled the components teams did not want to give up.</p>
+    <p data-i18n="close.p">The token naming decisions, the audit that started it, how long Compass took and what it displaced, and how I handled the components teams did not want to give up: all of it is a 30-minute call away.</p>
     <div class="close-ctas">
       <a class="btn btn-primary" href="/#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
       <a class="btn btn-ghost" href="/pick-and-pack/" data-i18n="close.cta2">Read the Pick &amp; Pack case</a>
@@ -860,11 +924,12 @@
 <footer>
   <div class="wrap">
     <div class="foot-bottom">
-      <span><span data-i18n="footer.rights">© 2026 Guilherme Cannalonga.</span></span>
+      <span><span data-i18n="footer.rights">© 2026 Guilherme Cannalonga. All rights reserved.</span></span>
       <div class="foot-links">
         <a href="/" data-i18n="footer.portfolio">Portfolio</a>
         <a href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn</a>
         <a href="mailto:cannalongadesign@gmail.com" data-contact-trigger data-i18n="footer.email">Email</a>
+        <a href="/colophon/" data-i18n="footer.colophon">How this site is built</a>
       </div>
     </div>
   </div>
@@ -946,6 +1011,7 @@
   (function(){
     const I18N = {
       en: {
+        'footer.colophon':`How this site is built`,
         'c.hint':`Drag to see the whole page`,
         'c.build.p3':`Composition is where the atom-and-molecule distinction stops being vocabulary. A select is not one component; it is a field, a label, a tooltip, a chip, a list and an error state composed together. Getting the composition right is what made a new select variant cost minutes instead of an afternoon.`,
         'c.fig.tokens':`The semantic layer, and the only one published to design files. <code>$typography.h1.medium</code> carries intent; <code>60px</code> carries appearance. A designer who reaches for the second one is guessing, and the guessing is where inconsistency comes back in.`,
@@ -1029,6 +1095,7 @@
         'modal.email.title':'Send an email', 'modal.resume.title':`Request my résumé`, 'modal.resume.sub':`I&rsquo;ll send the PDF by email`, 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, flexible hours (ET)`
       },
       pt: {
+        'footer.colophon':`Como este site foi feito`,
         'c.hint':`Arraste para ver a página inteira`,
         'c.build.p3':`A composição é onde a distinção entre átomo e molécula deixa de ser vocabulário. Um select não é um componente; é campo, rótulo, tooltip, chip, lista e estado de erro compostos juntos. Acertar a composição é o que fez uma variante nova de select custar minutos em vez de uma tarde.`,
         'c.fig.tokens':`A camada semântica, e a única publicada para os arquivos de design. <code>$typography.h1.medium</code> carrega intenção; <code>60px</code> carrega aparência. Um designer que pega o segundo está adivinhando, e é na adivinhação que a inconsistência volta.`,

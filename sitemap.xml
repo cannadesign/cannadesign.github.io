@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://cannadesign.github.io/</loc></url>
-  <url><loc>https://cannadesign.github.io/genial/</loc></url>
-  <url><loc>https://cannadesign.github.io/liam/</loc></url>
-  <url><loc>https://cannadesign.github.io/pick-and-pack/</loc></url>
-  <url><loc>https://cannadesign.github.io/compass/</loc></url>
+  <url><loc>https://cannadesign.github.io/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cannadesign.github.io/genial/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cannadesign.github.io/liam/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cannadesign.github.io/pick-and-pack/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cannadesign.github.io/compass/</loc><lastmod>2026-10-08</lastmod></url>
+  <url><loc>https://cannadesign.github.io/colophon/</loc><lastmod>2026-10-08</lastmod></url>
 </urlset>

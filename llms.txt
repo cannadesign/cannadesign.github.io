@@ -1,0 +1,35 @@
+# Guilherme Cannalonga
+
+> Guilherme Cannalonga is a Senior Product Designer based in Greater Boston, Massachusetts, authorized to work in the United States. He designs products where the wrong screen is expensive: AI clinical documentation, consumer healthcare, enterprise logistics and design systems. Six-plus years in product design, after five years in enterprise support and front-end development. Open to Senior Product Designer roles in the US.
+
+Key facts:
+- Name: Guilherme Cannalonga (also "Gui Cannalonga"; portfolio brand "canna")
+- Role: Senior Product Designer, currently at Reclame Aqui (consumer reviews and trust platform, Brazil)
+- Location: Greater Boston, MA, USA; authorized to work in the US
+- Previously: Senior Product Designer at Kruzer (enterprise commerce platform; sole designer for four products) and Genial Care (autism therapy platform; first Senior Product Designer); Staff Product Designer (freelance) at Shock Tecnologia
+- Strengths: product strategy and discovery, AI product design with human-in-the-loop, complex B2B workflows, design systems and tokens
+- Languages: English, Portuguese
+- LinkedIn: https://www.linkedin.com/in/guilhermecannalonga
+- Contact: cannalongadesign@gmail.com
+
+Selected outcomes (each explained, with how it was measured, on the case pages):
+- Genial App: daily active families from 8.59% to 62.3% in 13 months
+- LIAM (AI clinical documentation): from up to 2 hours to about 25 minutes per session
+- Pick & Pack: fulfillment platform rolled out to 80+ stores in 3 months
+- Compass design system: design-ticket cycle time from 4.2 to 2.5 days
+
+## Case studies
+
+- [Genial App](https://cannadesign.github.io/genial/): How the Genial Care family app went from 8.59% to 62.3% daily active families in 13 months by fixing a scheduling bottleneck instead of redesigning content.
+- [LIAM](https://cannadesign.github.io/liam/): A human-in-the-loop AI assistant that drafts clinical records from a therapist's narration; documentation went from up to 2 hours to about 25 minutes per session, as reported by the clinical team.
+- [Pick & Pack](https://cannadesign.github.io/pick-and-pack/): The fulfillment platform behind Fast Shop's 2-hour delivery, designed for store, distribution centre and driver at once, rolled out to 80+ stores in 3 months.
+- [Compass](https://cannadesign.github.io/compass/): A design system built from scratch at Kruzer: semantic token scale and governance; design-ticket cycle time dropped from 4.2 to 2.5 days, measured in Jira.
+
+## About this site
+
+- [Portfolio home](https://cannadesign.github.io/): positioning, outcomes, how he decides, testimonials, career timeline
+- [How this site is built](https://cannadesign.github.io/colophon/): structured data and AI-search practices used on this site
+
+## Optional
+
+- [Full text of all case studies](https://cannadesign.github.io/llms-full.txt)

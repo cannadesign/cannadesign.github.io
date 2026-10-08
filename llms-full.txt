@@ -1,0 +1,874 @@
+# Guilherme Cannalonga · Portfolio (full text)
+
+Source: https://cannadesign.github.io/ · Last updated: 2026-10-08
+
+Guilherme Cannalonga · Senior Product Designer · Greater Boston, MA
+
+# Product design for systems where the wrong screen is expensive.
+
+I design the tools clinicians, operators and families use to decide fast when the stakes are real: from an AI assistant that drafts clinical records to a fulfillment platform across 80+ stores. Six-plus years in product design.
+
+Open to Senior Product Designer roles in the US · Authorized to work in the US
+
+See the work ↓
+LinkedIn ↗
+
+8.6% → 62.3%
+Families opening the app daily, as the base grew to ~500 · Genial Care
+
+2h → 25min
+Documentation per session, from up to 2h · LIAM
+
+4.2d → 2.5d
+Design-ticket cycle time · Compass design system
+
+Selected work
+
+## Four products where the failure states mattered more than the demo.
+
+Healthcare, logistics and fintech. Same job every time: find the real constraint, name the number that could veto the win, design the exceptions first.
+
+[Image: Genial Care family app on two iPhones: home with upcoming sessions, and a session detail with the child's evolution note]
+
+### Genial App
+
+Consumer healthcare · Genial Care, autism therapy (Brazil)
+
+Fixed scheduling, not content. A one-month MVP, then a year of small bets.
+
+Families opening the app daily 8.6% → 62.3%
+
+[Image: LIAM running on a tablet held in one hand: the intervention screen a therapist works in during a session]
+
+### LIAM
+
+AI clinical documentation · Genial Care, autism therapy (Brazil)
+
+Drafts the clinical record from the therapist's narration. Never signs it.
+
+Documentation per session 2h → 25min
+
+[Image: Pick & Pack order queue on a desktop monitor: every order with status, carrier and waiting time]
+
+### Pick & Pack
+
+Enterprise logistics · Kruzer, commerce platform, for retailer Fast Shop
+
+One order, three people, one screen each. Designed around the exceptions.
+
+Stores live, rolled out in waves over 3 months 80+
+
+[Image: Compass design system documentation on a desktop monitor: the colour palette page with primitive and semantic tokens]
+
+### Compass
+
+Design system · Kruzer, commerce platform (Brazil)
+
+Twenty blues in production to one semantic token layer, with governance.
+
+Design-ticket cycle time 4.2d → 2.5d
+
+Also shipped · and now
+
+[Image: Matri Bank app screens on nine phones: account home with the credit card, Pix area, statement, Pix limits, support and the welcome screen]
+
+### Matri Bank
+
+Fintech · Shock Tecnologia, white-label banking (Brazil)
+
+Redesigned the credit journey for a regulated product. Full case on request.
+
+Credit-journey completion 18% → 63%
+
+[Image: Compra Confiável on a desktop monitor: the Reclame Aqui search and reputation homepage]
+
+### Compra Confiável Now
+
+Consumer trust · Reclame Aqui, Brazil’s closest equivalent to Trustpilot
+
+Senior Product Designer on the trust layer shoppers check before buying from a company. Under NDA.
+
+Since 2026
+
+How I decide
+
+## The instrument is chosen, not inherited.
+
+A decision doesn't reach production until something outside my own taste has argued for it. What changes is which evidence is the cheapest that could still prove me wrong.
+
+- Genial App A weekly behaviour curve with release markers. Hundreds of families, so an A/B test would have bought comfort at the price of learning speed.
+
+- LIAM About 80 therapists, a few documentation events a day each. They tested the first version, and the fix it revealed was readable drafts, not more features. After launch, the trust signal lived inside the flow, because a funnel can't see who stops trusting but keeps clicking.
+
+- Pick & Pack A store that went first. You can't split traffic in a warehouse, and the operation already records what it does.
+
+- Compass The engineering team's own tracker. A metric I invent to prove my own project is worth nothing in a review.
+
+What people say
+
+## Words from people I've built with.
+
+As his design manager at Genial Care, I watched Guilherme's work grow **increasingly strategic**, always aligned to product and business goals, with a high bar for quality.
+Romulo Lebre
+Product Design Manager · Genial Care
+
+Guilherme has a sharp critical and creative eye, and a real commitment to what he ships. **Watching him work live in Figma was mesmerizing**, the speed of his vision and execution.
+Lívia Bomfim
+Product Manager · Genial Care
+
+Working with Canna was incredible. He has an exceptional ability to **translate user pain into effective solutions**, backing the team with concrete deliverables at every step.
+Arthur Togni
+Developer · Modal project
+
+[Image: Guilherme Cannalonga]
+
+Greater Boston, Massachusetts
+
+About
+I came to design through the machine room: enterprise support, then front-end development, before my first screen. UX is where I found the work I wanted, and I went at it deliberately: two postgraduate specialisations, then product, strategy and business. The origin still shows: I read the API before the wireframe, ask what the backend does past the cutoff, and stay in the squad through release.
+
+I have been the first or only designer more often than not: first Senior Product Designer at Genial Care, later leading design across two teams; sole designer for four products at Kruzer; now on Reclame Aqui's consumer-trust platform.
+
+I use LLMs and agents daily for research and for pressure-testing concepts before they cost engineering time, and I ship experiments with Claude Code, this site among them. It is also built to be read accurately by AI assistants: structured data, an llms.txt and crawlable text on every page. How it works.
+
+**2026 –:** Senior Product Designer · Reclame Aqui · consumer reviews and trust, Brazil’s closest equivalent to Trustpilot
+
+**2024 – 26:** Senior Product Designer · Kruzer · enterprise logistics platform for Fast Shop, sole designer for four products
+
+**2023 – 25:** Staff Product Designer (freelance) · Shock Tecnologia · white-label banking (Matri), alongside full-time roles
+
+**2022 – 24:** Senior Product Designer · Genial Care · first designer, then leading design across two teams
+
+**five years:** 7COMm · support intern to Senior UX/UI Designer, by way of front-end
+
+Hiring a Senior Product Designer?
+
+## Let's talk.
+
+cannalongadesign@gmail.com ↗
+
+
+---
+
+URL: https://cannadesign.github.io/genial/
+
+Case study · Healthcare · Product Growth
+
+# Turning a forgotten app into the tool 62% of families open every day
+
+The Genial Care family app went from an 8% daily-active rate to 62% in a year, not through a redesign, but by fixing a scheduling bottleneck that was overloading operations, then letting usage decide what came next.
+
+Role
+Senior Product Designer
+
+Team
+PM · Ops lead · Eng squad · Clinical
+
+Company
+Genial Care
+
+Timeline
+2022 – 2024
+
+Outcome
+8% → 62% DAU
+
+The short version
+
+**Problem:** A content app almost nobody opened, on top of an operations team building every family's weekly schedule by hand.
+
+**What I did:** Found the real bottleneck in scheduling, shipped a one-month MVP that let families see and cancel sessions, then ran a continuous loop of small bets read against a weekly behaviour curve.
+
+**Outcome:** Daily active families went from **8.59% to 62.3%** in 13 months, in a staircase that tracks releases rather than one redesign spike.
+
+Product strategy 0→1 Consumer healthcare Growth
+
+In this case 6 min read
+
+- Why it was hard
+
+- Decision: scope the MVP
+
+- Decision: skip the A/B test
+
+- What shipped
+
+- Impact
+
+- What I’d do differently
+
+I joined Genial Care, an ABA therapy platform for autism care, as its first Senior Product Designer, brought in to build the Atípico design system from scratch, improve the family-facing app, and stand up the clinical panel therapists use to run sessions (the same panel LIAM would later live inside). This case is about the app half of that mandate.
+
+**01** · Why it was hard
+
+## The bottleneck wasn't the app. It was scheduling.
+
+**Good content, almost no opens.** The app was full of good material about autism care and almost nobody opened it. Underneath, the actual work (building every family’s weekly therapy schedule, dozens of therapists and time slots) was happening by hand. Nothing was centralised; every reschedule was a phone call.
+
+**Growth was capped by operations, not by engagement.** Every hour the operations team spent rescheduling by phone was an hour not spent onboarding the next family. Daily use was the metric everyone watched. Operations capacity was the actual ceiling.
+
+**No safe base to A/B test.** Genial Care served families in the hundreds, not millions: too small to split traffic without each experiment costing weeks it didn’t have.
+
+It wasn't a content problem. It was an operations problem wearing a UX costume.
+
+**02** · Decision: scope the MVP
+
+## Scope the MVP around two actions, not a redesign
+
+### Give families a reason to act, not just read
+
+**Problem:** A full redesign was the obvious ask. Defending three weeks of mapping the operations team’s week (with nothing visible shipping) was hard.
+
+**Decision:** I scoped the first release around exactly two actions: showing each child’s upcoming sessions, and letting a family cancel one themselves instead of calling. Shipped in one month, discovery to build.
+
+**Why:** Those two actions were driving most of the manual back-and-forth between families and operations. Nobody opens a healthcare app to read about autism: they open it to find out what happens with their child on Thursday.
+
+**What won the argument:** A map of the operations team’s week. Once the team could see the hours a single reschedule cost, nobody wanted to talk about the content grid anymore.
+
+**Result:** Families used it immediately, and cancellations started arriving through the app instead of by phone within a few months. Proved the actual lever: give families a reason to act, not just read.
+
+**03** · Decision: skip the A/B test
+
+## Read behaviour against a weekly curve, not an A/B test
+
+### The funnel said what changed. Interviews said why.
+
+**Problem:** The textbook answer is to split traffic and A/B test each release.
+
+**Decision:** I didn’t. Every release became its own before/after against a weekly funnel-and-curve instead: who came in, what they opened, where they stopped.
+
+**Why:** At this scale, splitting the base in half doubles the wait for a result that already needs weeks. That's not worth it on a product whose whole advantage was learning fast.
+
+**What it caught:** What the interviews kept returning to was rescheduling. Booking and rebooking was hard, calendars kept falling out of sync, and sometimes a therapist travelled to a session a parent had tried to cancel at the last minute, because the cancellation never reached them in time. That reframed cancelling as a scheduling-sync problem, not a convenience feature.
+
+**Result:** When the funnel and the interviews disagreed, that disagreement was the finding worth chasing: a signal an A/B test alone would never have surfaced.
+
+**04** · What shipped
+
+## What shipped, once the mechanism was proven
+
+Each addition earned its place the same way: does this give someone a reason to come back, measured before the next bet started.
+
+### Sessions + cancel: the MVP
+
+[Image: Genial Care app home screen with upcoming sessions, and session detail showing therapists and the child's evolution note]
+
+The result of that first MVP: upcoming sessions and a therapist's note on the home screen, with cancellation now handled in-app instead of by phone.
+
+### The PEI, translated
+
+Sessions answer “what happened this week.” They don’t answer “is my child actually progressing?” The PEI, the individualized education plan, already existed as a clinical document families couldn’t see. I brought it into the app as a plain-language list of skills in progress, each with a start date. Not a new capability: an existing document moved to where a family could see their child inside it.
+
+[Image: Genial Care app, PEI screen showing the child's individualized plan and the specific skills being worked on in sessions]
+
+The PEI, translated from clinical document into something a parent can read: concrete skills, in plain language, with dates. Illustrative data.
+
+### Genial Junto: support between sessions
+
+The hardest moments don’t happen during a session. They happen at 8pm on a Tuesday when a child bites someone and a parent has no idea what to do. Genial Junto opened a chat run by the therapists themselves for exactly that.
+
+The decision I’d defend here: a visible response-time badge. An open-ended “we’ll get back to you” invites obsessive checking and erodes trust. Stating “up to 2 business days” up front sets the expectation once, honestly, and lets the parent put the phone down.
+
+[Image: Genial Junto support request flow and a conversation with a Genial advisor about a challenging behavior situation]
+
+Genial Junto: support for the moments between sessions, with the response-time expectation stated before the parent writes anything.
+
+**05** · Impact
+Each addition shipped narrow, then was measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn’t a hockey stick, it’s a staircase with visible dips, where each step up follows a release.
+
+8.59%
+weekly average daily active users
+
+[Image: Weekly average daily-active-user chart for the Genial Care app, rising from 8.59% in June 2023 to 62.3% in July 2024, with release markers along the timeline]
+
+Weekly average share of families opening the app on a given day, Jun 2023 → Jul 2024: 8.59% to 62.3%. Star markers are releases: the growth tracks them, which is the point.
+
+8.59%
+Families opening the app on a given day, June 2023 baseline
+
+62.3%
+Families opening the app on a given day, July 2024, weekly average
+
+1 month
+Discovery, prototype and build for the first release
+
+**How it was measured:** the share of families on the platform opening the app on a given day, tracked in Metabase and read as a weekly average across the 13 months from the June 2023 baseline to July 2024. The chart above is the raw weekly series (its axis labels are in Portuguese: Semana is week, Meta is the target line). Two things it does not show, stated on purpose. The first is that the base moved underneath the rate: around 30 families when I joined, around 500 when I left. The share climbed while the denominator grew roughly sixteen times, which makes the rise harder to achieve, not easier, but it does mean the 8.59% baseline sits on a much smaller base than the 62.3%. The second is that the operations-hours saving, the other pointer, was never instrumented; the six-hours-to-one figure is the operations lead’s recollection, and I present it as that. One guardrail we agreed before launch: a cancellation rate above roughly 10% would have meant the change made things worse. I don’t have the closed-out reading.
+
+**06** · What I’d do differently
+
+## Act on the evidence sooner
+
+I spent longer than I should have trying to make the content section work before accepting that content was not the problem. The evidence for that was available weeks before I acted on it.
+
+Different project, different instrument. How I chose the instrument on each project →
+
+## What came next
+
+Once families were opening the app daily, the constraint moved to the other side of the platform: the therapists. Their bottleneck was documentation: up to two hours after every session, reconstructing what happened from memory for mandatory clinical reports. That became the next project, LIAM.
+
+### LIAM: AI clinical documentation
+
+An assistant that lets therapists narrate a session out loud as it happens, then drafts the required report fields for review. Session documentation went from up to 2 hours to about 25 minutes, as reported by the clinical team after rollout.
+
+Read the case →
+
+## Questions this page doesn't answer?
+
+The interview findings, the features that didn't work, the guardrail numbers and how I argued against the redesign everyone wanted: all of it is a 30-minute call away.
+
+Get in touch
+Read the Kruzer case
+
+
+---
+
+URL: https://cannadesign.github.io/liam/
+
+Case study · Healthcare · AI Design
+
+# LIAM: turning up to 2 hours of clinical paperwork into a 25-minute review
+
+Therapists at Genial Care were losing up to two hours after every session reconstructing it from memory for mandatory clinical reports. LIAM lets them narrate instead, and hands back a draft they review and sign.
+
+Role
+Senior Product Designer
+
+Team
+PM · AI eng squad · Clinical
+
+Company
+Genial Care
+
+Timeline
+2023 – 2024
+
+Outcome
+Up to 2h → 25min per session
+
+The short version
+
+**Problem:** Therapists were losing up to two hours after every session reconstructing clinical records from memory, at the end of a full day.
+
+**What I did:** Designed an AI assistant that lives inside the session screen: the therapist narrates, LIAM drafts, and the clinician reviews and signs. I spent the design time on the failure states, not the demo path.
+
+**Outcome:** Documentation went from **up to 2 hours to a 25-minute review** per session, as reported by the clinical team a quarter after rollout, with an in-product feedback loop so quality drift shows up in usage instead of months later.
+
+AI product design Human-in-the-loop Healthcare Trust & safety
+
+In this case 7 min read
+
+- Why it was hard
+
+- Decision: LIAM proposes, the clinician decides
+
+- Decision: how I read trust
+
+- What shipped
+
+- Impact
+
+- What I’d do differently
+
+[Image: LIAM running on a tablet: the intervention screen a therapist works in during a session]
+
+LIAM lives inside the screen therapists already use during a session, on the tablet they already have in their hand. Screens show illustrative data.
+
+Every session at Genial Care generates a clinical record: what was targeted, what the child did, what changed. Therapists were writing that record from memory, after the fact, on top of a full day of sessions, which is exactly the kind of task that gets rushed, delayed, or thinned out under pressure. LIAM's job was to move the record-keeping into the moment it actually happens, instead of the moment there's finally time for it.
+
+**01** · Why it was hard
+
+## Two hours of reconstruction, and the constraint underneath it
+
+The paperwork happened at the wrong time. A therapist finishes a session, moves to the next child, and writes the record hours later from memory, losing the specific detail from minute twelve that the record exists to capture, on top of a full day of sessions.
+
+The number worth moving was documentation time per session, because of what sits on the other side of it: a therapist’s day has a fixed number of hours, and every hour spent reconstructing a session is an hour not spent in one. That caps how many sessions a therapist can carry, which caps how fast the company can grow the care it delivers. So documentation load limits capacity. It is also a retention risk, since unpaid evening paperwork wears clinicians down over time.
+
+An AI feature in a clinical context fails on governance long before it fails on usability. Before I designed a screen, the team had to agree who signs the record, what the clinical record needed to contain, and how long a session recording is retained. Faster notes that said less would have moved the metric and damaged the product, so the clinical lead held a veto: a time saving bought with thinner records counted as a failure, not a win.
+
+**02** · Decision: LIAM proposes, the clinician decides
+
+### LIAM proposes. The clinician decides.
+
+**Problem:** If LIAM drafts and submits on its own, authorship blurs, and a wrong clinical record with no clear author is a liability, not a convenience.
+
+**Decision:** LIAM drafts every required field as a suggestion. A therapist reads, corrects, and submits. Nothing reaches the record unread.
+
+**Why:** The real design question wasn’t whether it could draft well, it was what happens the first time it’s confidently wrong. That produced four interface rules: every field is a suggestion copied in by hand, never pre-submitted; the source recording stays attached so a therapist can check a line against what was actually said; nothing reaches the record without a person reading it; and an in-flow prompt asks whether the suggestions are still good, so quality drift shows up as a falling answer rate instead of a habit that quietly dies.
+
+**What it caught:** Before touching the recording flow, we mapped the existing clinical panel section by section on a wall, not to redesign it, but to argue concretely about where a voice note belongs inside a workspace therapists already use, instead of assuming it needed a place of its own.
+
+**Result:** The interaction model held through launch: LIAM proposes, the clinician decides, and record quality stayed the clinical lead’s to veto.
+
+[Image: A wall covered in paper notes mapping the existing clinical panel: every section of the therapist's workspace laid out so the team could decide where a voice note belongs inside it]
+
+Mapping the clinical panel as it existed, section by section, so we could argue about where an audio note belongs inside a workspace therapists already use, instead of assuming it needed a new place of its own.
+
+**03** · Decision: how I read trust
+
+### Put the trust signal inside the flow
+
+**Problem:** On the family app, behavior showed up in a weekly funnel. Here the population is the ~80 therapists on staff, the event happens a handful of times a day, and the real risk (a therapist quietly losing trust in a draft) never shows up in a funnel at all.
+
+**Decision:** Put a lightweight prompt in the flow itself, asking whether LIAM’s suggestions are still good, so suggestion quality could be read from real usage after launch.
+
+**Why:** What a therapist needs from an AI here is to keep what just happened while it’s still accurate. That made trust the thing actually at risk, more than writing quality, and a funnel can’t see a therapist who quietly stops trusting a draft but keeps clicking.
+
+**What it caught:** Therapists tested the first version and the response was positive, with one consistent problem: LIAM transcribed the narration literally, so some passages read as fragments that didn’t make sense in a clinical record. We added a step that restructures the narration into cohesive sentences that fit the context of the session before it reaches the form, so therapists stopped rewriting the wording by hand.
+
+**Result:** The prompt shipped with LIAM. I left Genial Care before there was a quarter of data to read, so I don’t claim what it showed.
+
+**04** · What shipped
+
+## What shipped
+
+Three pieces carried the two decisions above into a working product.
+
+### Recording, inside the work already happening
+
+The intervention screen, with its programs, targets, and progress per skill, is where a therapist already spends the session. A single mic control sits in the corner of that exact screen, not in a separate “documentation” tool. Only the therapist is recorded: they narrate what they are doing and how the child responds. The child is never the input. Once recorded, the note surfaces as a waveform with an explicit send action, so the therapist can confirm the capture before moving on. And when an upload fails (clinics have bad wifi), the interface says so directly, “your voice note wasn’t sent,” with an obvious retry, instead of a spinner that quietly gives up.
+
+[Image: LIAM intervention screen with progress-tracking targets and an idle voice-recording control in the corner]
+
+The intervention screen the therapist is already working in: recording starts from a single control here, not a separate tool.
+
+### The draft: a form the therapist edits, not writes
+
+This is what the two hours collapse into. LIAM turns the audio into a first draft of every required field (health check-in, reinforcers used, challenges observed, session summary, clinical discussion points) each pre-filled and clearly marked as a suggestion, with a one-click copy into the real field. The therapist’s job changes from writing the report to editing one: read, correct what’s off, keep what’s right, submit. Nothing submits itself; the “Save” action stays with the therapist.
+
+[Image: LIAM session note form with each field pre-filled with an AI-drafted suggestion and a copy action]
+
+The session-note form: every field carries a LIAM-drafted suggestion the therapist reviews and copies in, never submitted on their behalf.
+
+### A feedback loop that keeps trust visible
+
+An AI feature that quietly gets worse, or quietly gets better, teaches people to stop trusting it either way. A lightweight prompt sits directly in the flow: are you happy with LIAM’s suggestions right now, yes or no, with room to say why, so drift in suggestion quality surfaces from real usage instead of a support ticket or a churned habit months later. The decision underneath all three pieces is the same: an AI feature earns trust through visible mechanics, not through confidence.
+
+[Image: LIAM feedback modal asking whether the therapist likes the suggestions LIAM is generating, with a comment field]
+
+A direct feedback loop on the suggestions themselves: the mechanism that lets LIAM's output quality stay visible instead of assumed.
+
+**05** · Impact
+
+## Impact
+
+Up to 2h
+Writing the record from memory after a full day, per session, before LIAM (self-reported)
+
+~25min
+Reviewing and submitting LIAM's draft, per session, after
+
+~80
+Therapists on the clinical team: the before-and-after covers all of them, not a sample
+
+**How it was measured, and what the number leaves out:** the two hours are the therapists’ own self-reported time to write a session report from memory before LIAM; the 25 minutes are their review-and-submit time with LIAM’s draft in place, read by the team one quarter after rollout. I had left Genial Care by then: I designed and shipped LIAM, and the 25-minute figure is what the clinical team reported back. It is not a like-for-like total: narrating during the session adds a few minutes that the 25 does not include, and the population is the clinical team on staff, so this is a before-and-after with everyone, not a sample. The clinical lead’s verdict after launch was that record quality improved rather than merely held: a record written minutes after the session carries detail that one written from memory at 9pm does not.
+
+The pressure on an AI feature is always to make it do more. The constraint I held was that LIAM proposes and never submits, even when the draft is good enough that signing it unread would be tempting. It cost us the most impressive version of the demo. It’s the reason the clinical side allowed the feature to exist at all.
+
+**06** · What I’d do differently
+
+## What I’d do differently
+
+I would have brought the clinical lead into the interface decisions, not only the review of the output: several trust states would have been simpler if the person who owns the clinical standard had been in the room while they were being drawn. And I under-designed the moment a therapist disagrees with the draft: correcting is easy, but the interface never asks why, so the most valuable signal in the whole feature goes unrecorded.
+
+## Where this sits in the bigger picture
+
+LIAM shipped after the family-facing app had already gone from 8% to 62% daily use. Once families were actually engaging, the constraint moved to the other side of the platform: the therapists producing the content families were now relying on. Same instinct, different audience: find where a person is spending effort on something that isn't the actual work, and compress it into a decision they can make quickly.
+
+## Questions this page doesn't answer?
+
+How the model was chosen, how we handled clinical-language accuracy, how many therapists ran sessions through it and what the feedback loop has surfaced since launch: all of it is a 30-minute call away.
+
+Get in touch
+Read the Genial App case
+Read the Pick & Pack case
+
+
+---
+
+URL: https://cannadesign.github.io/pick-and-pack/
+
+Case study · Enterprise logistics · B2B
+
+# Pick & Pack: one order, three people, one screen each
+
+Fast Shop sells two-hour delivery. The tool behind that promise ran on phone calls and spreadsheets. This is how I designed the platform that replaced them, for the store, the distribution centre and the driver at once, and why the exceptions got designed before the happy path.
+
+Role
+Sole product designer
+
+Team
+PM · Eng teams · Fast Shop ops
+
+Client
+Fast Shop
+
+Timeline
+Sep 2024 – Feb 2026
+
+Scope
+80+ stores · 22,000+ SKUs · web
+
+The short version
+
+**Problem:** Checkout promised delivery in two hours. Behind it, nobody could tell where an order was without a phone call, and a failed delivery had no defined next step.
+
+**What I did:** Designed Pick & Pack for three roles at once instead of one primary user, treated the exception states as first-class screens, and rolled it out store by store.
+
+**Outcome:** The two-hour promise held across 80+ stores on more volume than the operation had ever handled; operators stopped exporting to spreadsheets; a class of failed deliveries that had no name got a status and a next step.
+
+Enterprise SaaS 0→1 platform Logistics Systems design
+
+In this case 10 min read
+
+- Why it was hard
+
+- Decision: three roles, not one primary user
+
+- The store board
+
+- What shipped: the screens
+
+- Rollout, store by store
+
+- Impact
+
+- What I'd do differently
+
+**01** · Why it was hard
+
+## Two hours, promised before anyone in a store knows the order exists
+
+Fast Shop is one of Brazil's largest electronics retailers: 80+ stores, 22,000+ SKUs, around 2,500 orders a day. Checkout sells delivery in two hours before a single person in a store has seen the order. Before Pick & Pack, that promise ran on phone calls, a courier app and spreadsheets. There was no on-time baseline to quote: nothing in the operation could produce one, and that absence was itself the problem the project existed to solve.
+
+The number worth moving was never “a better fulfilment UI.” It was time-to-detect: how long it takes an operator to find out an order is in trouble. Before the platform, that was whenever someone happened to notice, or whenever someone chased them about it. An operation only hits its SLA if exceptions surface early enough to fix.
+
+Fast Shop's operations people had run this process for years without software, so I spent time with store operators asking where an order actually stops and what happens when a delivery fails (the honest answer: a manual loop of cancelling the ride in the courier app, requesting a new one and tracking the driver by hand, the gap “returning to store” later closed). Two things couldn't change: the carrier integrations and the fiscal documents every order has to carry.
+
+**02** · Decision: three roles, not one primary user
+
+### One platform, three homes, one order
+
+**Problem:** “Design it for the store operator and the rest will adapt” was a perfectly reasonable default. Most fulfilment tools pick one job and make the other two adapt to it.
+
+**Decision:** Design for three jobs at once. A store sees its own queue, the distribution centre sees every store plus where the day is going wrong, the driver gets one unambiguous stop. Same order, same statuses, same colours, different first screen.
+
+**Why:** The store operator needs to clear the queue before the courier arrives. The distribution centre needs to route around what's about to breach. The driver needs an unambiguous next stop. Holding all three at once is what forced every interface decision: what goes first on a card, what earns an alert, what's allowed to be one click.
+
+**What won the argument:** The map below settled it. Once the points where information fell between store, distribution centre and driver were visible on one page, nobody proposed picking a primary user again.
+
+**Result:** One platform shipped with a different home per role, and no store, distribution centre or driver had to translate someone else's workflow into their own.
+
+**03** · The store board
+
+## The store board, shaped by the first delivery round
+
+After the first round of deliveries, store operators came back with two requests that reshaped the card. The first: “I need to see the invoice number on the card, fast, so I can move my process along.” The fiscal invoice was what they looked up most, and it lived a screen away, so it moved onto the card. The second: “I need the most-late orders at the top, shouting on the screen, so I know what to prioritise.” Lateness became the sort order and the loudest thing on the card: time in the current status in red at the top, the remaining SLA on the pill, the carrier logo last.
+
+[Image: Pick & Pack store board: four columns (order received, picking, ready for pickup, in transit) with order cards showing late flags, status pills with the remaining SLA, and the carrier logo]
+
+- **1**“Late in this status” is the first thing on the card, in red, because it is the first question an operator asks.
+
+- **2**Two pills, two questions: what is happening to the order, and how much of the promise is left (UltraFast · 1h).
+
+- **3**The carrier logo sits last. You only need it once you have decided to act.
+
+- **4**Columns follow the store’s own steps: received, picking, ready for pickup, in transit.
+
+- **5**Click & Collect orders live on the same board with their own pill (“Retira”), so a store never runs two tools.
+
+The store board, as shipped: what leaves in the next hour, what is already late, what has nowhere to go.
+
+**04** · What shipped: the screens
+
+## What shipped: the screens
+
+### The distribution centre: every store, and the numbers that say where the day is going wrong
+
+The distribution centre sees all stores at once, so its first screen is a set of counters, not a queue: late, invoicing problems, transport problems, proof pending. Each is a filter, not a chart: triage starts by clicking the number that hurts. Allocation was the other thing this role needed that a store did not: several operators work the same queue, every card says who owns it, and a card owned by someone else fades back instead of disappearing.
+
+[Image: Pick & Pack distribution-centre board with counters for late, invoicing, transport and proof-of-delivery problems across the top, cards showing who each order is allocated to, and a menu to unallocate or allocate to another user]
+
+- **1**Four counters at the top: late (23), invoicing (3), transport (7), proof pending (12). Each is a filter, and the day starts by clicking the one that hurts.
+
+- **2**Allocation actions live on the card, two clicks from anywhere: take it off someone, or hand it to someone else.
+
+- **3**“Allocated to” on every card, because in a shared queue the question “is anyone on this?” used to be a shout across the floor.
+
+- **4**A card owned by someone else fades back rather than vanishing: visible, not grabbable.
+
+The distribution-centre board: same cards as the store, plus ownership, because here several people work one queue.
+
+### The same queue as a table, when the question changes
+
+A board answers “what is the shape of my day.” It doesn't answer “which of these 104 orders has been sitting the longest,” the question the distribution centre asks every hour. So the same queue toggles into a table: one row per order, sortable, dwell time as its own column, a severity dot before the order number. Same data, same statuses, same colours, a different first question.
+
+[Image: Pick & Pack distribution-centre table view: one row per order with a severity dot, store, modality, stage, status pill, carrier, creation time and time in queue, sortable by any column]
+
+- **1**One toggle between board and table. Same filters, same selection, no re-learning.
+
+- **2**A severity dot before the order number (red, amber, blue) so the eye can scan the column without reading a word.
+
+- **3**“Time in queue” is its own sortable column: the one the distribution centre sorts by first, every hour.
+
+- **4**Status pills carry the same colour semantics as the board: red needs a person, amber needs a step, blue is moving, green is done.
+
+- **5**Rows allocated to another operator fade, exactly as cards do on the board.
+
+The table view: the question changes from “what is my day” to “what has been waiting longest,” and the layout follows.
+
+### When an order becomes a phone call
+
+The person answering a customer call needs the whole story in seconds: how much SLA is left, where the order is, what's already been said. The order page puts the countdown first, red past the promise, history down the side in order, and a comment thread with attachments so “the customer said leave it with the neighbour” lives on the order, not in someone's head.
+
+[Image: Pick & Pack order detail page: SLA countdown in red, time in current status flagged as late, customer and delivery data, order summary with products, a status history timeline and a comment thread with an attachment]
+
+- **1**The SLA countdown is the biggest thing on the page and turns red past the promise, because it is the thing the customer is asking about.
+
+- **2**“Time in this status” separates “the order is late” from “this step is the one that is late.”
+
+- **3**History as a timeline, newest first, each step with a plain-language line an operator can read aloud on the phone.
+
+- **4**Comments with attachments on the order itself, so a screenshot of the customer's message travels with the delivery.
+
+The order page: built for the moment a delivery turns into a conversation.
+
+### The exceptions are the product
+
+In logistics the happy path needs almost no design; the exceptions decide whether an operator trusts the screen or works around it. These four states came out of the stall list and the rollout, not a design file. Each one replaces something that used to be a phone call.
+
+[Image: Modal for an order ready for pickup, flagged late: driver name, ID and plate, and a state saying the ride has not started with a tracking link]
+
+The driver took the package and the ride never started Who has it, what car, and a plain sentence saying the ride has not begun, with tracking one click away. This used to be a call to the carrier.
+
+[Image: Modal for a delivered order awaiting proof of delivery: a file upload area accepting images and documents, an uploaded screenshot, and a Complete order button]
+
+Delivered, but not closed until there is proof An order is not done when the driver says so; it is done when a photo or signature is attached. “Proof pending” is a counter on the distribution-centre home for exactly this reason.
+
+[Image: Modal for a click-and-collect order awaiting pickup: a QR code the customer scans to open a form with their data and a signature before taking the order]
+
+Someone is at the counter to collect A QR code opens a form with the buyer's data and a signature, so the store hands over the product to the right person and keeps the record without a printer.
+
+[Image: Export dialog for an order report with a warning that no orders were selected so all 104 will be exported, a name field and a Generating button]
+
+Someone still needs a spreadsheet Exports stayed, deliberately, with one guardrail: if nothing is selected, the dialog says out loud that all 104 orders are about to be exported. The parallel spreadsheets falling out of use became our adoption signal.
+
+Four exception states. Fifteen statuses exist in the shipped platform; these are the ones that replaced the most phone calls.
+
+**05** · Rollout, store by store
+
+## The release wasn't a date. It was a sequence
+
+Fulfilment software fails in production in ways it never fails in a demo, so the flagship store went first, alone, watched daily until a full week passed without a new corner case. After that, waves of about twenty stores every two weeks, close enough to the team that a problem could be watched instead of reported. The full three months (rollout plus daily hypercare) was the experiment; after that it dropped to occasional tickets.
+
+Each wave surfaced cases the first version didn’t handle, and each became an interface state or a rule, worked through with engineering wave by wave. “Returning to store” is the one I’d point to. When a driver couldn’t complete a delivery, the operator had to cancel the ride in the Uber app, request a new one so the package could come back, and keep checking the app to see where the driver was, all by hand. We designed and built that return into the platform: when a delivery fails, the return trip is set up automatically and the operator follows it on the panel, without requesting anything.
+
+The difference between an operator trusting the screen and working around it is usually one unhandled case.
+
+**06** · Impact
+
+## The operation didn’t slow down. Even as the load went up
+
+Three months after rollout, the platform was running the two-hour promise across 80+ stores on more volume than the operation had ever handled, with the exceptions taxonomy catching failures that used to go unnoticed. There’s no verified before-and-after here: the pre-platform operation never measured itself, so I have no baseline to hold a number against, and I’d rather say that than manufacture one. What held up: operators stopped exporting to spreadsheets, and a failed delivery went from invisible to a status with a next step.
+
+80+ stores
+Rolled out in waves over three months, running the two-hour promise on top of Fast Shop’s existing 22,000+ SKU catalogue
+
+Chased → flagged
+Time to detect an at-risk order: before, whenever someone happened to notice; after, the moment it enters “Late”
+
+Statuses in the shipped taxonomy, four of them exceptions that replaced phone calls
+
+**How it was measured, and what's not proven:** the pre-platform operation never produced an on-time figure, so there's no verified baseline to compare against, and I'm not presenting an estimate as if it were one. The clearest adoption signal I can stand behind: the parallel spreadsheets operators used to keep stopped being maintained. Causality isn't proven either: the platform launched alongside a growing operation, and I can't fully separate the design from the process changes Fast Shop made in the same months; the staged rollout, stores on the platform versus stores not yet on it over the same weeks, is the closest thing to a control.
+
+**07** · What I'd do differently
+
+## Instrument before the first store
+
+Time-to-detect was the number the whole project existed to move, and it never got a measured before-and-after. I would have made capturing it part of the first release, so this page could show a number instead of a qualitative shift.
+
+### My role
+
+The only designer on the platform, Sep 2024 to Feb 2026. I owned Pick & Pack from discovery through the store-by-store rollout, built and governed Compass, and designed PIM and DevTools on the same foundation. With no other designer to hand anything to, prioritising between the four products was part of the job: Pick & Pack first, because it carried the two-hour promise.
+
+### The team, and what was mine
+
+A product manager owned the roadmap and the OKRs with Fast Shop; Fast Shop's operations leads were the domain experts and the source of the stall list; one engineering team per product built it, and I worked with them through every wave. Decisions that were mine: three roles instead of a primary user, the store board and card, the table toggle, the four exception states above, and “returning to store.”
+
+### Compass: the system underneath
+
+None of these screens were designed in isolation. A status pill means the same thing on the board, the table and the order page because the token layer says so. That work grew large enough to be its own case.
+
+Read the Compass case →
+
+## Questions this page doesn't answer?
+
+The research, the driver’s screen, how the rollout waves were sequenced and how we prioritised against Fast Shop’s OKRs: all of it is a 30-minute call away.
+
+Get in touch
+See the other case
+
+
+---
+
+URL: https://cannadesign.github.io/compass/
+
+Case study · Design Systems · Enterprise platform
+
+# Compass: from one-off screens to a system three teams could build on
+
+Before Compass, every screen at Kruzer was rebuilt from zero and nothing quite agreed with anything else. Building the system, and the semantic token scale underneath it, cut the cycle time on a design ticket from 4.2 to 2.5 days, measured in Jira.
+
+Role
+Senior Product Designer
+
+Team
+PM · Eng teams · Design
+
+Client
+Kruzer · Fast Shop
+
+Timeline
+Sep 2024 – Feb 2026
+
+Outcome
+4.2d → 2.5d cycle time, measured in Jira
+
+The short version
+
+**Problem:** Every screen started from an empty frame, so the same component was redrawn with small differences nobody had decided on.
+
+**What I did:** Built the system from scratch: an audit with real counts, a three-layer semantic token scale where only the middle layer is allowed in design files, then migration and governance rules.
+
+**Outcome:** Design-ticket cycle time dropped from **4.2 to 2.5 days**, measured in the Jira the engineering team already used.
+
+Design systems Design tokens Platform design Governance
+
+In this case 7 min read
+
+- Why it was hard
+
+- Decision: only the semantic layer ships
+
+- Decision: governance is part of the deliverable
+
+- What shipped
+
+- Impact
+
+- What I'd do differently
+
+Compass is the design system I built from scratch at Kruzer, the platform behind Fast Shop's fulfillment operation. It started as a way to stop rebuilding the same status pill for the third time, and ended up as the layer that let three products stay coherent while the platform scaled to 80+ stores.
+
+**01** · Why it was hard
+
+## Before: everything took longer than it should
+
+There was no shared foundation. Every new screen started from an empty frame, so the same components were redrawn over and over with small differences nobody had decided on: the primary button was one shade of blue in the queue and another in the order detail. Design took longer because nothing could be reused, engineering took longer because every handoff described a slightly new component, and review cycles took longer because most comments were about inconsistencies, not whether the solution was right.
+
+No one funds tidiness, so the pointer I argued for was delivery speed: how long a change takes to get from decision to production, across three products on the same platform. That framing can be proven wrong (if cycle time didn’t move, Compass was an expensive preference), and tying it to a number engineering already tracked meant I was accountable to their measurement, not my own.
+
+A design system that designers love and engineers route around is a failed one, so the founding conversation was with the people who would consume it: who owns a component once it exists, what a handoff needs to contain to stop being re-negotiated, and who is allowed to say no to a new variant. Settling those before the library had anything in it was the only moment that conversation was cheap.
+
+“Consistency” is not a business case. Delivery speed is, and it can be proven wrong.
+
+**02** · Decision: only the semantic layer ships
+
+### Only the semantic layer is allowed in a design file
+
+**Problem:** Naming tokens after what they look like (blue-500) tells you nothing about when to use them. People guess, and the guessing is where inconsistency comes back in.
+
+**Decision:** Split three layers. Primitive: raw values like blue-500, space-4, referenced but never designed with directly. Semantic: what a value means (action-primary, status-success), the only layer a designer or engineer touches. Component: rare, purpose-built overrides.
+
+**Why:** Asking “what breaks if we rebrand, or add dark mode” early is what forced the token layer to exist before the components. A system that can’t survive a colour change was never a system.
+
+**Result:** Changing the meaning of “success” across three products became one edit. Adding a density mode became a token set, not a redesign. A new designer can read a file and understand why a colour is there.
+
+**03** · Decision: governance is part of the deliverable
+
+### A library without governance is just a folder
+
+**Problem:** The part teams skip is the part that decides whether the system is alive in a year. A component nobody owns rots; a library with no rule against “just one more variant” drifts back into a folder.
+
+**Decision:** Ship rules with the files, not after them: a new component has to prove it appears in at least two products, a change to a semantic token goes through review because it moves everything downstream, and anything deprecated gets a removal date instead of sitting there forever. Documentation counts as part of the component: a “use this when” that doesn’t exist is a component that will be misused.
+
+**Why:** I asked engineers what they were actually missing when a spec arrived, and the answers shaped the documentation more than any design-system article did.
+
+**Result:** Componentisation is where the rules stop being a document and start being enforced. A button is one component with variants for hierarchy, size, state and icon, spaced by token, not by hand: an engineer opening it receives a rule, not a rectangle.
+
+**04** · What shipped
+
+## The user here is the team, and the job is confidence
+
+Compass has no end user. Its users are designers and engineers, and what they need from it is the ability to make a decision once and not argue it again. Framed that way, the measure of success stops being how many components exist and becomes how few decisions each screen requires.
+
+Compass · token playground
+
+Accent
+
+Radius 10px
+
+Density
+
+Order #48213
+In transit
+
+Distribution center · SLA 1h 42m remaining
+
+Order #48219
+Returning to store
+
+Failed delivery · needs a next step
+
+A live slice of Compass. Every component here reads from the same three tokens, so changing one keeps the whole set coherent.
+
+[Image: Compass semantic token tables: each token named for its meaning, with the primitive value it resolves to]
+
+The semantic layer, and the only one published to design files. $typography.h1.medium carries intent; 60px carries appearance. A designer who reaches for the second one is guessing, and the guessing is where inconsistency comes back in.
+
+The component engineering questioned hardest was the data table. These products carry huge volumes of data, so advanced filters and user-customisable columns were a constant challenge, and the first versions didn’t serve every product. Getting to the right model took benchmarking against mature data-heavy products and testing several component variants until one worked for all three.
+
+Composition is where the atom-and-molecule distinction stops being vocabulary. A select is not one component; it is a field, a label, a tooltip, a chip, a list and an error state composed together. Getting the composition right is what made a new select variant cost minutes instead of an afternoon.
+
+[Image: The Compass select documentation: multi-select variants composed from field, label, tooltip, chips, list and error state]
+
+Molecules: the select composed from smaller pieces: field, label, tooltip, chip, list, error. Composing instead of redrawing is what makes a new variant cost minutes.
+
+**05** · Impact
+
+## What it changed
+
+There's no usability test for a design system, and no funnel: the evidence came from three places instead. The audit gave a hard before: around twenty blues, seven paddings and four button heights live in production, counted rather than estimated. Pick & Pack was the first consumer, proving the system against a real product before anyone else adopted it. And Jira, which the team already used to track demand, gave the after: the same class of work, measured before and after adoption. A metric I invent to prove my own project is worth roughly nothing in a review; a metric engineering already trusts is much harder to wave away.
+
+The clearest signal came from the tracker, not from opinion: once teams were building from Compass instead of from scratch, Jira throughput on design demands rose sharply, and review comments shifted from spacing and colour to whether the flow was right. What that number can't prove, and I'd say so before anyone asked: ticket throughput is confounded (the team also grew and the sprint cadence changed once), so the 40% is the delta engineering leads read from their own board over the same class of work, the best number available, not a controlled one. The review-comment shift is the softer signal, and honestly the one I trust more, because nobody can game what a colleague chooses to argue about.
+
+4.2d → 2.5d
+Cycle time on the same class of design ticket, before and after adoption: the harder number, found late
+
+40%
+Design-ticket throughput in Jira after adoption, same class of work; a tracker delta, not a controlled experiment
+
+Products on one shared foundation
+
+~20
+Near-identical blues counted live in production before the audit, the baseline that turned a feeling into a number
+
+**How it was measured:** both numbers come from the Jira board engineering already used to track demand, comparing the same class of design ticket before and after adoption: 40% on throughput, 4.2 days down to 2.5 on cycle time. Neither is a controlled experiment, and both are readings I recall rather than a report I can still pull. The measurement had to belong to someone other than me, or it would have been marketing; the confounds above are named on purpose, not buried.
+
+**06** · What I'd do differently
+
+### What I’d do differently
+
+I would have led with a different number. Throughput was the easy metric to reach for; cycle time, roughly 4.2 days down to 2.5, is the harder one to argue with, and I only went looking for it after 40% was already the headline.
+
+## What I'd defend in a design review
+
+The decision I would defend hardest is refusing to let the component layer grow. Every one-off override was a signal that the semantic layer had a gap, and fixing the gap is slower in the moment and cheaper for everyone after. I also count governance as part of the deliverable: a system nobody owns drifts back to where it started.
+
+The argument I had to win was with engineering, not design, because a system is adopted by people who didn't ask for it, and this one was about taking something away: only the semantic layer would be published, meaning giving up a naming convention they were comfortable with. What made it land was the audit: twenty near-identical blues live in production is not an opinion, and it moved the conversation from taste to cost in one meeting.
+
+## Questions this page doesn't answer?
+
+The token naming decisions, the audit that started it, how long Compass took and what it displaced, and how I handled the components teams did not want to give up: all of it is a 30-minute call away.
+
+Get in touch
+Read the Pick & Pack case

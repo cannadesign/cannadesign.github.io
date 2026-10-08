@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Canna Design · LIAM case study</title>
-<meta name="description" content="How I designed LIAM, an AI assistant that turned two hours of clinical paperwork into a 25-minute review for Genial Care's therapists.">
+<title>LIAM: AI clinical documentation case study · Guilherme Cannalonga</title>
+<meta name="author" content="Guilherme Cannalonga">
+<meta name="description" content="Case study by Guilherme Cannalonga, Senior Product Designer: LIAM, a human-in-the-loop AI assistant that drafts clinical records from a therapist&#39;s narration, cutting documentation from up to 2 hours to about 25 minutes per session.">
 
 <!-- Favicon -->
 <link rel="icon" type="image/png" href="/assets/favicon.png">
@@ -14,7 +15,7 @@
 <!-- Social preview. NOTE: replace https://cannadesign.github.io with your real deployed URL after publishing. -->
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Guilherme Cannalonga">
-<meta property="og:title" content="LIAM case study · 2 hours of clinical paperwork into a 25-minute review">
+<meta property="og:title" content="LIAM case study · up to 2 hours of clinical paperwork into a 25-minute review">
 <meta property="og:description" content="Designing an AI documentation assistant therapists can actually trust, one that drafts the report and leaves the decision with the clinician.">
 <meta property="og:url" content="https://cannadesign.github.io/liam/">
 <link rel="canonical" href="https://cannadesign.github.io/liam/">
@@ -22,7 +23,7 @@
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="LIAM case study · 2 hours of clinical paperwork into a 25-minute review">
+<meta name="twitter:title" content="LIAM case study · up to 2 hours of clinical paperwork into a 25-minute review">
 <meta name="twitter:description" content="Designing an AI documentation assistant therapists can actually trust.">
 <meta name="twitter:image" content="https://cannadesign.github.io/assets/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -633,6 +634,71 @@
     .meta-item:nth-child(2n+1){border-left:none; padding-left:0;}
   }
 </style>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@graph": [
+  {
+   "@type": "Article",
+   "@id": "https://cannadesign.github.io/liam/#article",
+   "headline": "LIAM: turning up to 2 hours of clinical paperwork into a 25-minute review",
+   "description": "LIAM, a human-in-the-loop AI assistant that drafts clinical session records from a therapist's narration. The clinician reviews and signs every field. Documentation went from up to 2 hours to about 25 minutes per session.",
+   "url": "https://cannadesign.github.io/liam/",
+   "mainEntityOfPage": "https://cannadesign.github.io/liam/",
+   "author": {
+    "@type": "Person",
+    "@id": "https://cannadesign.github.io/#person",
+    "name": "Guilherme Cannalonga",
+    "url": "https://cannadesign.github.io/",
+    "sameAs": [
+     "https://www.linkedin.com/in/guilhermecannalonga"
+    ]
+   },
+   "publisher": {
+    "@id": "https://cannadesign.github.io/#person"
+   },
+   "isPartOf": {
+    "@id": "https://cannadesign.github.io/#website"
+   },
+   "inLanguage": "en",
+   "dateModified": "2026-10-08",
+   "image": "https://cannadesign.github.io/assets/card-liam.webp",
+   "about": {
+    "@type": "SoftwareApplication",
+    "name": "LIAM",
+    "applicationCategory": "HealthApplication",
+    "description": "AI assistant that drafts clinical records from a therapist's narration for review and signature."
+   },
+   "keywords": "AI product design, human-in-the-loop, LLM, clinical documentation, healthcare, trust and safety",
+   "genre": "Product design case study",
+   "mentions": [
+    {
+     "@type": "Organization",
+     "name": "Genial Care"
+    }
+   ]
+  },
+  {
+   "@type": "BreadcrumbList",
+   "itemListElement": [
+    {
+     "@type": "ListItem",
+     "position": 1,
+     "name": "Guilherme Cannalonga · Portfolio",
+     "item": "https://cannadesign.github.io/"
+    },
+    {
+     "@type": "ListItem",
+     "position": 2,
+     "name": "LIAM",
+     "item": "https://cannadesign.github.io/liam/"
+    }
+   ]
+  }
+ ]
+}
+</script>
+<link rel="alternate" type="text/markdown" href="/llms.txt" title="Summary for AI assistants (llms.txt)">
 <script defer src="https://cloud.umami.is/script.js" data-website-id="c3e64fd0-ec7d-4fdf-a35f-7e8f77208d02"></script>
 </head>
 <body class="js">
@@ -658,14 +724,14 @@
 <header class="article-hero">
   <div class="col">
     <span class="kicker" data-i18n="hero.kicker">Case study · Healthcare · AI Design</span>
-    <h1 data-i18n="hero.h1">LIAM: turning 2 hours of clinical paperwork into a 25-minute review</h1>
+    <h1 data-i18n="hero.h1">LIAM: turning up to 2 hours of clinical paperwork into a 25-minute review</h1>
     <p class="dek" data-i18n="hero.dek">Therapists at Genial Care were losing up to two hours after every session reconstructing it from memory for mandatory clinical reports. LIAM lets them narrate instead, and hands back a draft they review and sign.</p>
     <div class="meta-row">
       <div class="meta-item"><div class="k" data-i18n="meta.role">Role</div><div class="v" data-i18n="meta.v.role">Senior Product Designer</div></div>
       <div class="meta-item"><div class="k" data-i18n="meta.team">Team</div><div class="v" data-i18n="meta.v.team">PM · AI eng squad · Clinical</div></div>
       <div class="meta-item"><div class="k" data-i18n="meta.company">Company</div><div class="v">Genial Care</div></div>
       <div class="meta-item"><div class="k" data-i18n="meta.timeline">Timeline</div><div class="v">2023 – 2024</div></div>
-      <div class="meta-item"><div class="k" data-i18n="meta.outcome">Outcome</div><div class="v" data-i18n="meta.v.out">2h → 25min per session</div></div>
+      <div class="meta-item"><div class="k" data-i18n="meta.outcome">Outcome</div><div class="v" data-i18n="meta.v.out">Up to 2h &rarr; 25min per session</div></div>
     </div>
   </div>
 </header>
@@ -805,7 +871,7 @@
 <section class="article-close reveal">
   <div class="col">
     <h2 data-i18n="close.h2">Questions this page doesn't answer?</h2>
-    <p data-i18n="close.p.liam">Happy to walk through the model choices, how we handled clinical-language accuracy, or what the feedback loop has surfaced so far.</p>
+    <p data-i18n="close.p.liam">How the model was chosen, how we handled clinical-language accuracy, how many therapists ran sessions through it and what the feedback loop has surfaced since launch: all of it is a 30-minute call away.</p>
     <div class="close-ctas">
       <a class="btn btn-primary" href="/#contact" data-contact-trigger data-i18n="close.cta1">Get in touch</a>
       <a class="btn btn-ghost" href="/genial/" data-i18n="close.cta2.liam">Read the Genial App case</a>
@@ -821,11 +887,12 @@
 <footer>
   <div class="wrap">
     <div class="foot-bottom">
-      <span><span data-i18n="footer.rights">© 2026 Guilherme Cannalonga.</span></span>
+      <span><span data-i18n="footer.rights">© 2026 Guilherme Cannalonga. All rights reserved.</span></span>
       <div class="foot-links">
         <a href="/" data-i18n="footer.portfolio">Portfolio</a>
         <a href="https://www.linkedin.com/in/guilhermecannalonga" target="_blank" rel="noopener">LinkedIn</a>
         <a href="mailto:cannalongadesign@gmail.com" data-contact-trigger data-i18n="footer.email">Email</a>
+        <a href="/colophon/" data-i18n="footer.colophon">How this site is built</a>
       </div>
     </div>
   </div>
@@ -904,6 +971,7 @@
   (function(){
     const I18N = {
       en: {
+        'footer.colophon':`How this site is built`,
         'l.d2.evidence':`Therapists tested the first version and the response was positive, with one consistent problem: LIAM transcribed the narration literally, so some passages read as fragments that didn&rsquo;t make sense in a clinical record. We added a step that restructures the narration into cohesive sentences that fit the context of the session before it reaches the form, so therapists stopped rewriting the wording by hand.`,
         'l.arg.p':`The pressure on an AI feature is always to make it do more. The constraint I held was that LIAM proposes and never submits, even when the draft is good enough that signing it unread would be tempting. It cost us the most impressive version of the demo. It&rsquo;s the reason the clinical side allowed the feature to exist at all.`,
         'l.dif.p':`I would have brought the clinical lead into the interface decisions, not only the review of the output: several trust states would have been simpler if the person who owns the clinical standard had been in the room while they were being drawn. And I under-designed the moment a therapist disagrees with the draft: correcting is easy, but the interface never asks why, so the most valuable signal in the whole feature goes unrecorded.`,
@@ -914,10 +982,10 @@
         'nav.back.compass':`Back to Compass`,
         'a11y.skip':`Skip to content`, 'a11y.lang':`Language`,
         'footer.rights':`© 2026 Guilherme Cannalonga. All rights reserved.`,
-        'meta.v.out':`2h → 25min per session`,
+        'meta.v.out':`Up to 2h → 25min per session`,
         'meta.v.role':`Senior Product Designer`,
         'meta.v.team':`PM · AI eng squad · Clinical`,
-        'meta.v.out':`2h &rarr; 25min per session`,
+        'meta.v.out':`Up to 2h &rarr; 25min per session`,
         'ix.time':`7 min read`,
         'l.tk.pointer':`A time saving bought with thinner clinical records counted as a failure, not a win.`,
         'l.tk.questions':`&ldquo;What happens the first time it is confidently wrong&rdquo; is the question that separates an assistant from a liability.`,
@@ -932,7 +1000,7 @@
         'l.demo.1':'AI product design', 'l.demo.2':'Human-in-the-loop', 'l.demo.3':'Healthcare', 'l.demo.4':'Trust &amp; safety',
         'nav.back':'Back to portfolio', 'nav.cta':`Let's talk`,
         'hero.kicker':'Case study · Healthcare · AI Design',
-        'hero.h1':'LIAM: turning 2 hours of clinical paperwork into a 25-minute review',
+        'hero.h1':`LIAM: turning up to 2 hours of clinical paperwork into a 25-minute review`,
         'hero.dek':`Therapists at Genial Care were losing up to two hours after every session reconstructing it from memory for mandatory clinical reports. LIAM lets them narrate instead, and hands back a draft they review and sign.`,
         'meta.role':'Role', 'meta.team':'Team', 'meta.company':'Company', 'meta.timeline':'Timeline', 'meta.outcome':'Outcome',
         'l.cover':`LIAM lives inside the screen therapists already use during a session, on the tablet they already have in their hand. Screens show illustrative data.`,
@@ -982,6 +1050,7 @@
         'modal.email.title':'Send an email', 'modal.resume.title':`Request my résumé`, 'modal.resume.sub':`I&rsquo;ll send the PDF by email`, 'modal.call.title':'Book a 30-min call', 'modal.call.sub':`Weekdays, flexible hours (ET)`
       },
       pt: {
+        'footer.colophon':`Como este site foi feito`,
         'l.d2.evidence':`As terapeutas testaram a primeira versão e o retorno foi positivo, com um problema recorrente: o LIAM transcrevia a narração ao pé da letra, então alguns trechos viravam fragmentos sem sentido num registro clínico. Adicionamos uma etapa que reestrutura a narração em frases coesas, de acordo com o contexto da sessão, antes de chegar ao formulário, e as terapeutas pararam de reescrever o texto na mão.`,
         'l.arg.p':`A pressão sobre uma feature de IA é sempre para ela fazer mais. A restrição que eu segurei foi que o LIAM propõe e nunca envia, mesmo quando o rascunho está bom o bastante para ser assinado sem leitura. Custou a versão mais impressionante da demo. É a razão de o lado clínico ter permitido a feature existir.`,
         'l.dif.p':`Eu teria trazido a liderança clínica para as decisões de interface, não só para a revisão da saída: vários estados de confiança teriam ficado mais simples se quem é dono do padrão clínico estivesse na sala enquanto eram desenhados. E eu subdesenhei o momento em que a terapeuta discorda do rascunho: corrigir é fácil, mas a interface nunca pergunta por quê, então o sinal mais valioso da feature inteira não é registrado.`,
@@ -992,10 +1061,10 @@
         'nav.back.compass':`Voltar ao Compass`,
         'a11y.skip':`Pular para o conteúdo`, 'a11y.lang':`Idioma`,
         'footer.rights':`© 2026 Guilherme Cannalonga. Todos os direitos reservados.`,
-        'meta.v.out':`2h → 25min por sessão`,
+        'meta.v.out':`Até 2h → 25min por sessão`,
         'meta.v.role':`Product Designer Sênior`,
         'meta.v.team':`PM · Squad de eng de IA · Clínica`,
-        'meta.v.out':`2h &rarr; 25min por sessão`,
+        'meta.v.out':`Até 2h &rarr; 25min por sessão`,
         'ix.time':`7 min de leitura`,
         'l.tk.pointer':`Economia de tempo comprada com registro clínico mais raso contava como fracasso, não como ganho.`,
         'l.tk.questions':`&ldquo;O que acontece na primeira vez que ele errar com confiança&rdquo; é a pergunta que separa um assistente de um passivo.`,
@@ -1010,7 +1079,7 @@
         'l.demo.1':'Design de produto de IA', 'l.demo.2':'Humano no loop', 'l.demo.3':'Saúde', 'l.demo.4':'Confiança e segurança',
         'nav.back':'Voltar ao portfólio', 'nav.cta':'Vamos conversar',
         'hero.kicker':'Case study · Saúde · Design de IA',
-        'hero.h1':'LIAM: transformando 2 horas de papelada clínica em uma revisão de 25 minutos',
+        'hero.h1':`LIAM: transformando até 2 horas de papelada clínica em uma revisão de 25 minutos`,
         'hero.dek':`Terapeutas na Genial Care perdiam até duas horas depois de cada sessão reconstruindo tudo de memória para relatórios clínicos obrigatórios. O LIAM deixa eles narrarem em vez disso, e devolve um rascunho que eles revisam e assinam.`,
         'meta.role':'Papel', 'meta.team':'Time', 'meta.company':'Empresa', 'meta.timeline':'Período', 'meta.outcome':'Resultado',
         'l.cover':`O LIAM vive dentro da tela que o terapeuta já usa durante a sessão, no tablet que ele já tem na mão. As telas mostram dados ilustrativos.`,
