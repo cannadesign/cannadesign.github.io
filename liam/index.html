@@ -845,7 +845,7 @@
         <span class="co-body"><span class="co-title" data-i18n="modal.email.title">Send an email</span><span class="co-sub">cannalongadesign@gmail.com</span></span>
         <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
       </a>
-      <a class="contact-option" href="mailto:cannalongadesign@gmail.com?subject=Resume%20request">
+      <a class="contact-option" href="mailto:cannalongadesign@gmail.com?subject=R%C3%A9sum%C3%A9%20request%3A%20Senior%20Product%20Designer&amp;body=Hi%20Guilherme%2C%0D%0A%0D%0AI%20came%20across%20your%20portfolio%20and%20would%20like%20to%20receive%20your%20r%C3%A9sum%C3%A9.%0D%0A%0D%0ARole%20%2F%20company%20%28optional%29%3A%20%0D%0A%0D%0AThanks%2C" data-resume-mail>
         <span class="co-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M7 3h7l5 5v12a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M14 3v5h5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 13h6M9 17h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
         <span class="co-body"><span class="co-title" data-i18n="modal.resume.title">Request my résumé</span><span class="co-sub" data-i18n="modal.resume.sub">I&rsquo;ll send the PDF by email</span></span>
         <svg class="co-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
@@ -1112,5 +1112,21 @@
   })();
 </script>
 
+<script>
+  /* ---- résumé request: pre-filled email (to, subject, body) in the visitor's language ---- */
+  (function(){
+    const MAIL={
+      en:{s:`Résumé request: Senior Product Designer`, b:`Hi Guilherme,\n\nI came across your portfolio and would like to receive your résumé.\n\nRole / company (optional): \n\nThanks,`},
+      pt:{s:`Pedido de currículo: Senior Product Designer`, b:`Olá, Guilherme,\n\nVi seu portfólio e gostaria de receber seu currículo.\n\nVaga / empresa (opcional): \n\nAbraço,`}
+    };
+    function set(lang){
+      const m=MAIL[lang]||MAIL.en;
+      const href='mailto:cannalongadesign@gmail.com?subject='+encodeURIComponent(m.s)+'&body='+encodeURIComponent(m.b.replace(/\n/g,'\r\n'));
+      document.querySelectorAll('[data-resume-mail]').forEach(a=>a.setAttribute('href',href));
+    }
+    set(window.currentLang ? window.currentLang() : 'en');
+    document.addEventListener('langchange', e=>set(e.detail && e.detail.lang));
+  })();
+</script>
 </body>
 </html>
