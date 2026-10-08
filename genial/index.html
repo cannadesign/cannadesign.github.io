@@ -696,7 +696,7 @@
   <div class="col">
     <span class="kicker" data-i18n="hero.kicker">Case study · Healthcare · Product Growth</span>
     <h1 data-i18n="hero.h1">Turning a forgotten app into the tool 62% of families open every day</h1>
-    <p class="dek" data-i18n="hero.dek">The Genial Care family app went from an 8% daily-active rate to 62% in a year, not through a redesign, but by fixing a scheduling bottleneck that was overloading operations, then letting usage decide what came next.</p>
+    <p class="dek" data-i18n="hero.dek">The Genial Care family app went from an 8% daily-active rate to 62% in a year by fixing a scheduling bottleneck that was overloading operations, then letting usage decide what came next.</p>
     <div class="meta-row">
       <div class="meta-item"><div class="k" data-i18n="meta.role">Role</div><div class="v" data-i18n="meta.v.role">Senior Product Designer</div></div>
       <div class="meta-item"><div class="k" data-i18n="meta.team">Team</div><div class="v" data-i18n="meta.v.team">PM · Ops lead · Eng squad · Clinical</div></div>
@@ -738,9 +738,8 @@
     <span class="stage-label" id="s01"><b>01</b> &middot; <span data-i18n="g.ix.1">Why it was hard</span></span>
     <h2 data-i18n="g.h2.bottleneck">The bottleneck wasn't the app. It was scheduling.</h2>
     <p data-i18n="g.hard.1"><strong>Good content, almost no opens.</strong> The app was full of good material about autism care and almost nobody opened it. Underneath, the actual work (building every family&rsquo;s weekly therapy schedule, dozens of therapists and time slots) was happening by hand. Nothing was centralised; every reschedule was a phone call.</p>
-    <p data-i18n="g.hard.2"><strong>Growth was capped by operations, not by engagement.</strong> Every hour the operations team spent rescheduling by phone was an hour not spent onboarding the next family. Daily use was the metric everyone watched. Operations capacity was the actual ceiling.</p>
+    <p data-i18n="g.hard.2"><strong>Growth was capped by operations capacity.</strong> Every hour the operations team spent rescheduling by phone was an hour not spent onboarding the next family. Daily use was the metric everyone watched. Operations capacity was the actual ceiling.</p>
     <p data-i18n="g.hard.3"><strong>No safe base to A/B test.</strong> Genial Care served families in the hundreds, not millions: too small to split traffic without each experiment costing weeks it didn&rsquo;t have.</p>
-    <p class="pull" data-i18n="g.bottleneck.pull">It wasn't a content problem. It was an operations problem wearing a UX costume.</p>
   </div>
 
   <div class="col reveal">
@@ -767,8 +766,8 @@
         <div class="decision-row"><span class="dk" data-i18n="g.dk.problem">Problem</span><p class="dv" data-i18n="g.d2.problem">The textbook answer is to split traffic and A/B test each release.</p></div>
         <div class="decision-row"><span class="dk" data-i18n="g.dk.decision">Decision</span><p class="dv" data-i18n="g.d2.decision">I didn&rsquo;t. Every release became its own before/after against a weekly funnel-and-curve instead: who came in, what they opened, where they stopped.</p></div>
         <div class="decision-row"><span class="dk" data-i18n="g.dk.why">Why</span><p class="dv" data-i18n="g.d2.why">At this scale, splitting the base in half doubles the wait for a result that already needs weeks. That's not worth it on a product whose whole advantage was learning fast.</p></div>
-        <div class="decision-row"><span class="dk" data-i18n="g.dk.evidence">What it caught</span><p class="dv" data-i18n="g.d2.evidence">What the interviews kept returning to was rescheduling. Booking and rebooking was hard, calendars kept falling out of sync, and sometimes a therapist travelled to a session a parent had tried to cancel at the last minute, because the cancellation never reached them in time. That reframed cancelling as a scheduling-sync problem, not a convenience feature.</p></div>
-        <div class="decision-row"><span class="dk" data-i18n="g.dk.result">Result</span><p class="dv" data-i18n="g.d2.result">When the funnel and the interviews disagreed, that disagreement was the finding worth chasing: a signal an A/B test alone would never have surfaced.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.evidence">What it caught</span><p class="dv" data-i18n="g.d2.evidence">What the interviews kept returning to was rescheduling. Booking and rebooking was hard, calendars kept falling out of sync, and sometimes a therapist travelled to a session a parent had tried to cancel at the last minute, because the cancellation never reached them in time. That made cancelling a scheduling-sync problem first.</p></div>
+        <div class="decision-row"><span class="dk" data-i18n="g.dk.result">Result</span><p class="dv" data-i18n="g.d2.result">The funnel showed which releases moved daily use; the interviews explained why. Families came back for the schedule, and every release after the MVP was chosen against that.</p></div>
       </div>
     </div>
   </div>
@@ -814,7 +813,7 @@
 
   <div class="col reveal">
     <span class="stage-label" id="s05"><b>05</b> &middot; <span data-i18n="g.ix.5">Impact</span></span>
-    <p data-i18n="g.curve.p1">Each addition shipped narrow, then was measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn&rsquo;t a hockey stick, it&rsquo;s a staircase with visible dips, where each step up follows a release.</p>
+    <p data-i18n="g.curve.p1">Each addition shipped narrow, then was measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it is a staircase with visible dips, where each step up follows a release.</p>
   </div>
 
   <figure class="shot reveal" id="growthShot">
@@ -1045,7 +1044,7 @@
         'g.ix.1':'Why it was hard', 'g.ix.2':'Decision: scope the MVP', 'g.ix.3':'Decision: skip the A/B test',
         'g.ix.4':'What shipped', 'g.ix.5':'Impact', 'g.ix.6':`What I&rsquo;d do differently`,
         'g.hard.1':`<strong>Good content, almost no opens.</strong> The app was full of good material about autism care and almost nobody opened it. Underneath, the actual work (building every family&rsquo;s weekly therapy schedule, dozens of therapists and time slots) was happening by hand. Nothing was centralised; every reschedule was a phone call.`,
-        'g.hard.2':`<strong>Growth was capped by operations, not by engagement.</strong> Every hour the operations team spent rescheduling by phone was an hour not spent onboarding the next family. Daily use was the metric everyone watched. Operations capacity was the actual ceiling.`,
+        'g.hard.2':`<strong>Growth was capped by operations capacity.</strong> Every hour the operations team spent rescheduling by phone was an hour not spent onboarding the next family. Daily use was the metric everyone watched. Operations capacity was the actual ceiling.`,
         'g.hard.3':`<strong>No safe base to A/B test.</strong> Genial Care served families in the hundreds, not millions: too small to split traffic without each experiment costing weeks it didn&rsquo;t have.`,
         'g.h2.d1':'Scope the MVP around two actions, not a redesign',
         'g.d1.title':'Give families a reason to act, not just read',
@@ -1060,8 +1059,8 @@
         'g.d2.problem':`The textbook answer is to split traffic and A/B test each release.`,
         'g.d2.decision':`I didn&rsquo;t. Every release became its own before/after against a weekly funnel-and-curve instead: who came in, what they opened, where they stopped.`,
         'g.d2.why':`At this scale, splitting the base in half doubles the wait for a result that already needs weeks. That's not worth it on a product whose whole advantage was learning fast.`,
-        'g.d2.evidence':`What the interviews kept returning to was rescheduling. Booking and rebooking was hard, calendars kept falling out of sync, and sometimes a therapist travelled to a session a parent had tried to cancel at the last minute, because the cancellation never reached them in time. That reframed cancelling as a scheduling-sync problem, not a convenience feature.`,
-        'g.d2.result':`When the funnel and the interviews disagreed, that disagreement was the finding worth chasing: a signal an A/B test alone would never have surfaced.`,
+        'g.d2.evidence':`What the interviews kept returning to was rescheduling. Booking and rebooking was hard, calendars kept falling out of sync, and sometimes a therapist travelled to a session a parent had tried to cancel at the last minute, because the cancellation never reached them in time. That made cancelling a scheduling-sync problem first.`,
+        'g.d2.result':`The funnel showed which releases moved daily use; the interviews explained why. Families came back for the schedule, and every release after the MVP was chosen against that.`,
         'g.h2.shipped':'What shipped, once the mechanism was proven',
         'g.shipped.intro':`Each addition earned its place the same way: does this give someone a reason to come back, measured before the next bet started.`,
         'g.ship1.h':`Sessions + cancel: the MVP`,
@@ -1081,7 +1080,7 @@
         'nav.back':'Back to portfolio', 'nav.cta':`Let's talk`,
         'hero.kicker':'Case study · Healthcare · Product Growth',
         'hero.h1':'Turning a forgotten app into the tool 62% of families open every day',
-        'hero.dek':`The Genial Care family app went from an 8% daily-active rate to 62% in a year, not through a redesign, but by fixing a scheduling bottleneck that was overloading operations, then letting usage decide what came next.`,
+        'hero.dek':`The Genial Care family app went from an 8% daily-active rate to 62% in a year by fixing a scheduling bottleneck that was overloading operations, then letting usage decide what came next.`,
         'meta.role':'Role', 'meta.team':'Team', 'meta.company':'Company', 'meta.timeline':'Timeline', 'meta.outcome':'Outcome',
         'g.lead1':`I joined Genial Care, an ABA therapy platform for autism care, as its first Senior Product Designer, brought in to build the Atípico design system from scratch, improve the family-facing app, and stand up the clinical panel therapists use to run sessions (the same panel LIAM would later live inside). This case is about the app half of that mandate.`,
         'g.lead2':`When I joined, the app was a one-way channel: articles and content cards to read, with no direct interaction of any kind. You couldn't do anything in it. You could only look at things. About 8% of families opened it on a given day, which is roughly what you'd expect from a digital pamphlet. There were around 30 families on the platform then; by the time I left there were about 500.`,
@@ -1134,7 +1133,7 @@
         'g.between.p1':`The hardest moments don&rsquo;t happen during a session. They happen at 8pm on a Tuesday when a child bites someone and a parent has no idea what to do. <em>Genial Junto</em> opened a chat run by the therapists themselves for exactly that.`,
         'g.between.p2':`The decision I&rsquo;d defend here: a visible response-time badge. An open-ended &ldquo;we&rsquo;ll get back to you&rdquo; invites obsessive checking and erodes trust. Stating &ldquo;up to 2 business days&rdquo; up front sets the expectation once, honestly, and lets the parent put the phone down.`,
         'g.cap3':`Genial Junto: support for the moments between sessions, with the response-time expectation stated before the parent writes anything.`,
-        'g.curve.p1':`Each addition shipped narrow, then was measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it isn&rsquo;t a hockey stick, it&rsquo;s a staircase with visible dips, where each step up follows a release.`,
+        'g.curve.p1':`Each addition shipped narrow, then was measured before the next one started. The weekly active-user chart below is the honest version of that story, release markers and all: it is a staircase with visible dips, where each step up follows a release.`,
         'g.curve.pull':`A staircase of small bets, each one earning the next.`,
         'g.growth.label':'weekly average daily active users',
         'g.growth.caption':`Weekly average share of families opening the app on a given day, Jun 2023 → Jul 2024: 8.59% to 62.3%. Star markers are releases: the growth tracks them, which is the point.`,
@@ -1197,7 +1196,7 @@
         'g.ix.1':'Por que era difícil', 'g.ix.2':'Decisão: escopo do MVP', 'g.ix.3':'Decisão: sem teste A/B',
         'g.ix.4':'O que foi lançado', 'g.ix.5':'Impacto', 'g.ix.6':'O que eu faria diferente',
         'g.hard.1':`<strong>Bom conteúdo, quase nenhuma abertura.</strong> O app estava cheio de bom material sobre autismo e quase ninguém abria. Por baixo, o trabalho de verdade (montar a agenda semanal de terapia de cada família, dezenas de terapeutas e horários) acontecia à mão. Nada era centralizado; cada reagendamento era um telefonema.`,
-        'g.hard.2':`<strong>O crescimento era limitado pela operação, não pelo engajamento.</strong> Cada hora que a operação gastava reagendando por telefone era uma hora a menos para receber a próxima família. Uso diário era a métrica que todo mundo olhava. A capacidade da operação era o teto de verdade.`,
+        'g.hard.2':`<strong>O crescimento era limitado pela capacidade da operação.</strong> Cada hora que a operação gastava reagendando por telefone era uma hora a menos para receber a próxima família. Uso diário era a métrica que todo mundo olhava. A capacidade da operação era o teto de verdade.`,
         'g.hard.3':`<strong>Sem base segura para teste A/B.</strong> A Genial Care atendia famílias na casa das centenas, não milhões: base pequena demais para dividir tráfego sem cada experimento custar semanas que não sobravam.`,
         'g.h2.d1':'Escopar o MVP em torno de duas ações, não um redesign',
         'g.d1.title':'Dar às famílias um motivo para agir, não só ler',
@@ -1212,8 +1211,8 @@
         'g.d2.problem':`A resposta de livro-texto é dividir o tráfego e testar A/B cada release.`,
         'g.d2.decision':`Eu não fiz isso. Cada release virou seu próprio antes/depois contra um funil-e-curva semanal: quem entrou, o que abriu, onde parou.`,
         'g.d2.why':`Nessa escala, dividir a base ao meio dobra a espera por um resultado que já precisa de semanas. Não vale a pena, num produto cuja vantagem inteira era aprender rápido.`,
-        'g.d2.evidence':`O que as entrevistas repetiam era reagendamento. Marcar e remarcar era difícil, as agendas viviam fora de sincronia, e às vezes um terapeuta se deslocava para uma sessão que os pais tinham tentado cancelar em cima da hora, porque o cancelamento não chegava a tempo. Isso transformou cancelar num problema de sincronia de agenda, não numa conveniência.`,
-        'g.d2.result':`Quando o funil e as entrevistas discordavam, essa discordância era o achado que valia perseguir: um sinal que um teste A/B sozinho nunca teria mostrado.`,
+        'g.d2.evidence':`O que as entrevistas repetiam era reagendamento. Marcar e remarcar era difícil, as agendas viviam fora de sincronia, e às vezes um terapeuta se deslocava para uma sessão que os pais tinham tentado cancelar em cima da hora, porque o cancelamento não chegava a tempo. Isso fez de cancelar, antes de tudo, um problema de sincronia de agenda.`,
+        'g.d2.result':`O funil mostrou quais releases moveram o uso diário; as entrevistas explicaram por quê. As famílias voltavam pela agenda, e cada release depois do MVP foi escolhido com base nisso.`,
         'g.h2.shipped':'O que foi lançado, depois que o mecanismo provou seu valor',
         'g.shipped.intro':`Cada adição ganhou seu lugar da mesma forma: isso dá a alguém um motivo para voltar, medido antes da próxima aposta começar.`,
         'g.ship1.h':`Sessões + cancelamento: o MVP`,
@@ -1233,7 +1232,7 @@
         'nav.back':'Voltar ao portfólio', 'nav.cta':'Vamos conversar',
         'hero.kicker':'Case study · Saúde · Crescimento de Produto',
         'hero.h1':'Transformando um app esquecido na ferramenta que 62% das famílias abrem todo dia',
-        'hero.dek':`O app das famílias na Genial Care foi de 8% de uso diário para 62% em um ano, não com um redesign, mas corrigindo um gargalo de agendamento que sobrecarregava a operação, e deixando o uso real decidir o próximo passo.`,
+        'hero.dek':`O app das famílias na Genial Care foi de 8% de uso diário para 62% em um ano corrigindo um gargalo de agendamento que sobrecarregava a operação, e deixando o uso real decidir o próximo passo.`,
         'meta.role':'Papel', 'meta.team':'Time', 'meta.company':'Empresa', 'meta.timeline':'Período', 'meta.outcome':'Resultado',
         'g.lead1':`Entrei na Genial Care, uma plataforma de terapia ABA para cuidado com autismo, como o primeiro Senior Product Designer, trazido para construir o design system Atípico do zero, melhorar o app das famílias e estruturar o painel clínico que os terapeutas usam para conduzir sessões (o mesmo painel onde o LIAM viveria depois). Este case é sobre a metade do mandato ligada ao app.`,
         'g.lead2':`Quando entrei, o app era um canal de mão única: artigos e cards de conteúdo pra rolar a tela, sem interação direta de nenhum tipo. Não dava pra fazer nada nele, só olhar. Cerca de 8% das famílias abriam por dia, o que é mais ou menos o que se espera de um panfleto digital. Eram por volta de 30 famílias na plataforma naquele momento; quando saí, eram cerca de 500.`,
@@ -1286,7 +1285,7 @@
         'g.between.p1':`Os momentos mais difíceis não acontecem durante uma sessão. Acontecem às 20h de uma terça quando uma criança morde alguém e o pai ou mãe não sabe o que fazer. O <em>Genial Junto</em> abriu um chat conduzido pelas próprias terapeutas exatamente pra isso.`,
         'g.between.p2':`A decisão que eu defenderia aqui: o selo visível de tempo de resposta. Um &ldquo;a gente te retorna&rdquo; em aberto convida a checar obsessivamente e corrói a confiança. Declarar &ldquo;até 2 dias úteis&rdquo; de antemão define a expectativa uma vez, com honestidade, e deixa o pai ou mãe largar o celular.`,
         'g.cap3':'Genial Junto: suporte para os momentos entre sessões, com a expectativa de tempo de resposta declarada antes mesmo do pai ou mãe escrever qualquer coisa.',
-        'g.curve.p1':`Cada adição foi lançada estreita, depois medida antes da próxima começar. O gráfico de usuários ativos semanais abaixo é a versão honesta dessa história, com marcadores de release e tudo: não é um hockey stick, é uma escada com quedas visíveis, onde cada degrau segue um release.`,
+        'g.curve.p1':`Cada adição foi lançada estreita, depois medida antes da próxima começar. O gráfico de usuários ativos semanais abaixo é a versão honesta dessa história, com marcadores de release e tudo: é uma escada com quedas visíveis, onde cada degrau segue um release.`,
         'g.curve.pull':`Uma escada de apostas pequenas, cada uma conquistando a próxima.`,
         'g.growth.label':'média semanal de usuários ativos diários',
         'g.growth.caption':`Média semanal da parcela de famílias que abre o app em um dia qualquer, jun/2023 → jul/2024: 8,59% a 62,3%. As estrelas marcam releases: o crescimento acompanha eles, e esse é o ponto.`,
